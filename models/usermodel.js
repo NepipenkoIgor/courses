@@ -6,7 +6,9 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var userSchema=new Schema({
-  id:Number,
+  fid:Number,
+  gid:Number,
+  lid:Number,
   username:String,
   password:String,
   userlevel:String,
