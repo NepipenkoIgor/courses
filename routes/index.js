@@ -16,7 +16,9 @@ function router(app) {
   var local = require('./local')(app);
   var user = require('./user')(app,hasUser);
   var main = require('./main')(app,hasUser);
-  var autorization=require('./autorization')(app,hasUser);
+  var autorization=require('./autorization')(app);
+  //var all=require('./all')(app);
+  var logout=require('./logout')(app);
 }
 
 module.exports = router

@@ -1,10 +1,10 @@
 /**
  * Created by Игорь on 17.06.2014.
  */
-function router(app,hasUser) {
+function router(app) {
 
 
-  app.get('/',hasUser ,function (req, res) {
+  app.get('/' ,function (req, res) {
     res.sendfile('public/index.html');
   });
 }
