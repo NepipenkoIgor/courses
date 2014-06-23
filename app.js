@@ -23,6 +23,6 @@ db.on('open', function () {
   console.log('iam connect test db');
 });
 
-
-app.listen(4000);
-console.log("start server 4000");
+var port = Number(process.env.PORT || 4000);
+app.listen(port);
+console.log("start server"+port);
