@@ -17,7 +17,11 @@ require('./controller')(app);
 
 
 var mongoose = app.get('config').mongoose
-mongoose.connect('mongodb://localhost/test');
+var mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/test';
+
+mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('open', function () {
   console.log('iam connect test db');

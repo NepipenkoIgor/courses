@@ -15,6 +15,19 @@
       "passport-facebook":"*",
       "passport-google-oauth":"*",
       "passport-local":"*",
-      "moongose":"*"
-  }
+      "mongoose":"*"
+  },
+    "engines": {
+        "node": "*",
+        "npm": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/NepipenkoIgor/courses.git"
+    },
+    "author": "Igor Nepipenko",
+    "license": "valor",
+    "bugs": {
+        "url": "https://github.com/NepipenkoIgor/courses/issues"
+    }
 }
