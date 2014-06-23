@@ -23,11 +23,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
+    var mongoUri = process.env.MONGOLAB_URI ||
+        process.env.MONGOHQ_URL ||
+        'mongodb://localhost/test';
+
 app.use(session({
   secret: 'keyboard cat',
   proxy: true,
   store: new MongoStore({
-    url: "mongodb://localhost/test/users"
+    url: mongoUri
   })
 }));
 app.use(passport.initialize());
@@ -39,7 +43,8 @@ app.use(passport.session());
     'LocalStrategy':LocalStrategy,
     'FacebookStrategy':FacebookStrategy,
     'TwitterStrategy':TwitterStrategy,
-    'GoogleStrategy':GoogleStrategy
+    'GoogleStrategy':GoogleStrategy,
+      'mongoUri':mongoUri
   }
   app.set('config',config);
 

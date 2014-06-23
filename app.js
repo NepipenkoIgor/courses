@@ -16,12 +16,10 @@ require('./routes')(app);
 require('./controller')(app);
 
 
-var mongoose = app.get('config').mongoose
-var mongoUri = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/test';
+var mongoose = app.get('config').mongoose;
 
-mongoose.connect(mongoUri);
+
+mongoose.connect(app.get('config').mongoUri);
 var db = mongoose.connection;
 db.on('open', function () {
   console.log('iam connect test db');
