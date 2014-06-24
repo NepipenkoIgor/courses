@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+.dropdown-submenu {
+    /* position: relative;*/
+}
+
+.dropdown-submenu>.dropdown-menu {
+    position: fixed;
+    top: 99px;
+    left: 516px;
+    height: 284px ;
+    width: 280px;
+    -webkit-border-radius: 0 6px 6px 0px;
+    -moz-border-radius: 0 6px 0px;
+    border-radius: 0 6px 6px 0px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+

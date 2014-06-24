@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
     <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -27,29 +28,34 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Learn <b class="caret"></b></a>
+                <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu as menuitem">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Knowledge Map</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li ng-repeat="menu in menuitem.menus" class="dropdown-submenu"><a  href="#">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
+                        <ul class="dropdown-menu" ng-style="menu.color">
+                            <li><a  href="#"><h4>{{menu.menuName}}</h4></a></li>
+                            <li class="divider"></li>
+                            <li> <a href="#">More..</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Other</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li><a href="#">Browse all</a></li>
                 </ul>
             </li>
         </ul>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>-->
+        <!--  <form class="navbar-form navbar-left" role="search">
+             <div class="form-group">
+                 <input type="text" class="form-control" placeholder="Search">
+             </div>
+             <button type="submit" class="btn btn-default">Submit</button>
+         </form>-->
       <ul class="nav navbar-nav navbar-right">
           <!-- <li><a href="#">Link</a></li>-->
             <li class="dropdown">
@@ -85,5 +91,28 @@
     </div>
     <button type="button" class="btn btn-success " ng-click="prof.postProfile(prof.userdata)" >Save profile</button>
 </div>
+
+<div ng-controller="maintab as tab" style="margin-left:30%;width: 30%">
+    <div style=""><h3>What do you want to learn</h3></div>
+<ul class="nav nav-pills nav-stacked" style="width: 200px;float:left">
+    <li ng-class="tab.classActive(1)" ng-click="tab.showTab(1)"><a href="#">Math</a></li>
+    <li ng-class="tab.classActive(2)" ng-click="tab.showTab(2)"><a href="#">Science</a></li>
+    <li ng-class="tab.classActive(3)" ng-click="tab.showTab(3)"><a href="#">Humanties</a></li>
+    <li ng-class="tab.classActive(4)" ng-click="tab.showTab(4)"><a href="#">Economics and Finance</a></li>
+    <li ng-class="tab.classActive(5)" ng-click="tab.showTab(5)"><a href="#">Computing</a></li>
+    <li ng-class="tab.classActive(6)" ng-click="tab.showTab(6)"><a href="#">Other</a></li>
+</ul>
+
+<div style="margin-left:30px">
+    <div ng-show="tab.activeTab(1)">1</div>
+    <div ng-show="tab.activeTab(2)">2</div>
+    <div ng-show="tab.activeTab(3)">3</div>
+    <div ng-show="tab.activeTab(4)">4</div>
+    <div ng-show="tab.activeTab(5)">5</div>
+    <div ng-show="tab.activeTab(6)">6</div>
+</div>
+</div>
+
+
 </body>
 </html>

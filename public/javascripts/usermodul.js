@@ -44,3 +44,73 @@ app.controller('profile',function($http){
   };
 
 });
+
+
+app.controller('maintab',function(){
+
+    this.tab=1;
+
+    this.showTab=function(num){
+        this.tab=num;
+    };
+
+    this.activeTab=function(num){
+        if(num===this.tab){
+            return true
+        };
+        return false
+    };
+
+    this.classActive=function(num){
+        if(num===this.tab){
+            return "active";
+        };
+        return;
+    }
+
+});
+
+app.controller('mainMenu',function(){
+
+    this.menus=[
+        {
+            menuName:'Math',
+            color:{
+                'background-color':'olive'
+}
+        },
+        {
+            menuName:'Science',
+                color:{
+                    'background-color':'green'
+                }
+
+        },
+        {
+            menuName:'Humanties',
+                color:{
+                    'background-color':'teal'
+}
+
+        },
+        {
+            menuName:'Economics and Finance',
+                color:{
+                    'background-color':'grey'
+}
+
+        },
+        {
+            menuName:'Computing',
+                color:{
+                    'background-color':'gold'
+}
+
+        }
+
+    ]
+
+
+
+
+})
