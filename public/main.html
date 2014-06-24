@@ -39,9 +39,13 @@
                     <li class="divider"></li>
                     <li ng-repeat="menu in menuitem.menus" class="dropdown-submenu"><a  href="#">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
                         <ul class="dropdown-menu" ng-style="menu.color">
-                            <li><a  href="#"><h4>{{menu.menuName}}</h4></a></li>
+                            <li style="height: 52px"><a  href="#"><h4>{{menu.menuName}}</h4></a></li>
                             <li class="divider"></li>
-                            <li> <a href="#">More..</a></li>
+                            <ul>Subject
+                                <li ng-repeat="subject in menu.subjects"> <a href="#">{{subject}}</a></li>
+
+                            </ul>
+
                         </ul>
                     </li>
                     <li><a href="#">Other</a></li>
