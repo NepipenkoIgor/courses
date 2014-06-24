@@ -2,7 +2,8 @@
  * Created by Игорь on 17.06.2014.
  */
 function session(app){
-  var passport = app.get('config').passport;
+    var config = app.get('config');
+  var passport = config.passport;
   var LocalStrategy = app.get('config').LocalStrategy;
   var FacebookStrategy = app.get('config').FacebookStrategy;
   var TwitterStrategy = app.get('config').TwitterStrategy;
