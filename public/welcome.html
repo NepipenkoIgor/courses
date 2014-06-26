@@ -1,0 +1,32 @@
+<div style="margin: 100px 100px;" ng-hide="userdata">
+    <div class="jumbotron text-center">
+        <p>Login or Register with:</p>
+        <a href="#/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+        <a href="#/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span>Sign in with Google</a>
+        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span>Sign in with Twitter</a>
+        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span>Sign in with Facebook</a>
+    </div>
+
+</div>
+
+
+
+<div ng-controller="maintab as tab" class="TabContainer" ng-show="userdata">
+    <div style="width: 220px;float:left">
+        <div class="menuTab"  ng-repeat="menu in tab.menus" ng-mouseenter="tab.hover(menu.color['background-color'])"
+             ng-style="tab.color(tab.colorTab,menu.color['background-color'],tab.changTabColor)" ng-click="tab.showTab(menu.num)"
+             ng-mouseleave="tab.hover()">
+            <div class="linkTab" ng-style="menu.color"></div>
+            <div class="Tab" >{{menu.menuName}}</div>
+        </div>
+    </div>
+    <div ng-repeat="menu in tab.menus" class="TabContent">
+        <div>
+            <div ng-repeat="subject in menu.subjects" ng-show="tab.activeTab(menu.num)">
+                <a href="#" ng-style="{'color':menu.color['background-color']}">Learn {{subject}}
+                    <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+
+        </div>
+    </div>
+</div>
