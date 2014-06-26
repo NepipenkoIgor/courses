@@ -20,4 +20,4 @@ var userSchema=new Schema({
   preferences:String
 });
 
-module.exports=mongoose.model('Users',userSchema);
+mongoose.model('Users',userSchema);

@@ -1,21 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+
+    <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+    <script  src="javascripts/angular.min.js"></script>
+    <script  src="javascripts/angular-ui-router.min.js"></script>
+    <script  src="javascripts/usermodul.js"></script>
+
     <title></title>
 </head>
-<body>
-<div style="margin: 100px 100px;">
-    <div class="jumbotron text-center">
-        <p>Login or Register with:</p>
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span>Sign in with Google</a>
-        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span>Sign in with Twitter</a>
-        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span>Sign in with Facebook</a>
-    </div>
+<body ng-app="academy" ng-controller="profile">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Academy</a>
+        </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+            <ul class="nav navbar-nav">
+             <li class="" ng-hide="userdata"><a href="#/about">About</a></li>
+                <li class="" ng-show="userdata"><a href="#/welcome">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Learn <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu as menuitem">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Knowledge Map</a></li>
+                        <li class="divider"></li>
+                        <li ng-repeat="menu in menuitem.menus" class="dropdown-submenu"><a  href="#">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
+                            <ul class="dropdown-menu" ng-style="menu.color">
+                                <li style="height: 52px"><a  href="#"><h4>{{menu.menuName}}</h4></a></li>
+                                <li class="divider"></li>
+                                <ul>Subject
+                                    <li ng-repeat="subject in menu.subjects"> <a href="#">{{subject}}</a></li>
+
+                                </ul>
+
+                            </ul>
+                        </li>
+                        <li><a href="#">Other</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Browse all</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!--  <form class="navbar-form navbar-left" role="search">
+                 <div class="form-group">
+                     <input type="text" class="form-control" placeholder="Search">
+                 </div>
+                 <button type="submit" class="btn btn-default">Submit</button>
+             </form>-->
+            <ul class="nav navbar-nav navbar-right" >
+                <li ng-hide="userdata"><a href="#/login">Login In</a></li>
+                <li class="dropdown" ng-show="userdata">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi, {{userdata.username}}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li ><a ui-sref="editprofile" >Edit Profile</a></li>
+                        <li ><a href="/logout" >logout</a></li>
+                        <!-- <li><a href="#">Another action</a></li>
+                         <li><a href="#">Something else here</a></li>
+                         <li class="divider"></li>
+                         <li><a href="#">Separated link</a></li>-->
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+
+<div ui-view></div>
 </div>
 </body>
 </html>

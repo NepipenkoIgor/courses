@@ -8,12 +8,14 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <script  src="javascripts/angular.min.js"></script>
+
+   <script  src="javascripts/angular.min.js"></script>
+    <script  src="javascripts/angular-ui-router.min.js"></script>
     <script  src="javascripts/usermodul.js"></script>
 
     <title></title>
 </head>
-<body ng-app="userprofile" ng-controller='profile as prof'>
+<body ng-app="academy" >
 <nav class="navbar navbar-default" role="navigation">
      <div class="container-fluid">
          <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,9 +32,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class=""><a href="#">Home</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Learn <b class="caret"></b></a>
+                <a class="dropdown-toggle" data-toggle="dropdown">Learn <b class="caret"></b></a>
                 <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu as menuitem">
                     <li><a href="#">Dashboard</a></li>
                     <li><a href="#">Knowledge Map</a></li>
@@ -60,13 +62,13 @@
              </div>
              <button type="submit" class="btn btn-default">Submit</button>
          </form>-->
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" ng-controller="profile">
           <!-- <li><a href="#">Link</a></li>-->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">You are : {{prof.userdata.username}}<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi, {{userdata.username}}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li ng-click="prof.editProfile()"><a href="#" >Edit Profile</a></li>
-                    <li ng-click="prof.editProfile()"><a href="/logout" >logout</a></li>
+                    <li ><a ui-sref="editprofile" >Edit Profile</a></li>
+                    <li ><a href="/logout" >logout</a></li>
                    <!-- <li><a href="#">Another action</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li class="divider"></li>
@@ -77,45 +79,30 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div  style="width: 30%" ng-show="prof.flag">
-    <div class="input-group" >
-        <h3>Username :</h2><input type="text" class="form-control" ng-model="prof.userdata.username" name="username">
+
+<!--<div ng-controller="maintab as tab" class="TabContainer">
+    <div style="width: 220px;float:left">
+<div class="menuTab"  ng-repeat="menu in tab.menus" ng-mouseenter="tab.hover(menu.color['background-color'])"
+     ng-style="tab.color(tab.colorTab,menu.color['background-color'],tab.changTabColor)" ng-click="tab.showTab(menu.num)"
+         ng-mouseleave="tab.hover()">
+<div class="linkTab" ng-style="menu.color"></div>
+<div class="Tab" >{{menu.menuName}}</div>
+</div>
     </div>
-    <div class="input-group" >
-        <h3>Firatname :</h2><input type="text" class="form-control" ng-model="prof.userdata.firstname" name="firstname">
-    </div>
-    <div class="input-group" >
-        <h3>Lastname :</h2><input type="text" class="form-control" ng-model="prof.userdata.lastname" name="lastname">
-    </div>
-    <div class="input-group" >
-        <h3>Email :</h2><input type="text" class="form-control" ng-model="prof.userdata.email" name="email">
-    </div>
-    <div class="input-group" >
-        <h3>Phone :</h2><input type="text" class="form-control" ng-model="prof.userdata.phone" name="phone">
-    </div>
-    <button type="button" class="btn btn-success " ng-click="prof.postProfile(prof.userdata)" >Save profile</button>
+    <div ng-repeat="menu in tab.menus" class="TabContent">
+        <div>
+        <div ng-repeat="subject in menu.subjects" ng-show="tab.activeTab(menu.num)">
+            <a href="#" ng-style="{'color':menu.color['background-color']}">Learn {{subject}}
+                <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+
+        </div>
+        </div>
+</div>-->
+
+
+<div ui-view></div>
 </div>
 
-<div ng-controller="maintab as tab" style="margin-left:30%;width: 30%">
-    <div style=""><h3>What do you want to learn</h3></div>
-<ul class="nav nav-pills nav-stacked" style="width: 200px;float:left">
-    <li ng-class="tab.classActive(1)" ng-click="tab.showTab(1)"><a href="#">Math</a></li>
-    <li ng-class="tab.classActive(2)" ng-click="tab.showTab(2)"><a href="#">Science</a></li>
-    <li ng-class="tab.classActive(3)" ng-click="tab.showTab(3)"><a href="#">Humanties</a></li>
-    <li ng-class="tab.classActive(4)" ng-click="tab.showTab(4)"><a href="#">Economics and Finance</a></li>
-    <li ng-class="tab.classActive(5)" ng-click="tab.showTab(5)"><a href="#">Computing</a></li>
-    <li ng-class="tab.classActive(6)" ng-click="tab.showTab(6)"><a href="#">Other</a></li>
-</ul>
-
-<div style="margin-left:30px">
-    <div ng-show="tab.activeTab(1)">1</div>
-    <div ng-show="tab.activeTab(2)">2</div>
-    <div ng-show="tab.activeTab(3)">3</div>
-    <div ng-show="tab.activeTab(4)">4</div>
-    <div ng-show="tab.activeTab(5)">5</div>
-    <div ng-show="tab.activeTab(6)">6</div>
-</div>
-</div>
 
 
 </body>

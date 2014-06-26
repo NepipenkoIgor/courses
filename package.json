@@ -1,8 +1,8 @@
 {
   "name": "TODO",
   "version": "0.0.1",
-    "description": "This example app is so cool.",
-    "main": "app.js",
+  "description": "This example app is so cool.",
+  "main": "app.js",
   "dependencies": {
     "express": "~4.2.0",
     "static-favicon": "~1.0.0",
@@ -10,24 +10,25 @@
     "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
-      "express-session":"*",
-      "passport":"*",
-      "passport-facebook":"*",
-      "passport-google-oauth":"*",
-      "passport-local":"*",
-      "mongoose":"*"
+    "express-session": "*",
+    "passport": "*",
+    "passport-facebook": "*",
+    "passport-google-oauth": "*",
+    "passport-local": "*",
+    "mongoose": "*",
+    "underscore": "~1.6.0"
   },
-    "engines": {
-        "node": "*",
-        "npm": "*"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/NepipenkoIgor/courses.git"
-    },
-    "author": "Igor Nepipenko",
-    "license": "valor",
-    "bugs": {
-        "url": "https://github.com/NepipenkoIgor/courses/issues"
-    }
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NepipenkoIgor/courses.git"
+  },
+  "author": "Igor Nepipenko",
+  "license": "valor",
+  "bugs": {
+    "url": "https://github.com/NepipenkoIgor/courses/issues"
+  }
 }

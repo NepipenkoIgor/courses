@@ -7,19 +7,26 @@ function router(app) {
 
   function hasUser(req, res, next) {
     if (req.isAuthenticated()) return next();
-    res.redirect("/");
+    res.redirect("/#/welcome");
   };
+ function hasAccess(req,res,next){
+     console.log(req.isAuthenticated());
+     if (!req.isAuthenticated()) {
+         return next();
+     }
+     res.redirect("/#/welcome");
 
+ }
   var google = require('./google')(app);
   var facebook = require('./facebook')(app);
   var twitter = require('./twitter')(app);
-  var local = require('./local')(app);
+  var local = require('./local')(app,hasAccess);
   var user = require('./user')(app,hasUser);
   var main = require('./main')(app,hasUser);
-  var autorization=require('./autorization')(app);
+  var autorization=require('./autorization')(app,hasAccess);
   //var all=require('./all')(app);
   var logout=require('./logout')(app);
 }
 
-module.exports = router
+module.exports = router;
 

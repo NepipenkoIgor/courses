@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -13,8 +12,8 @@ a {
 
 .dropdown-submenu>.dropdown-menu {
     position: fixed;
-    top: 99px;
-    left: 516px;
+    top: 49px;
+    left: 460px;
     height: 284px ;
     width: 280px;
     -webkit-border-radius: 0 6px 6px 0px;
@@ -26,3 +25,30 @@ a {
     display: block;
 }
 
+.TabContainer{
+    position:relative;
+    top:100px;
+    left:30%;
+    width: 700px;
+}
+.TabContent{
+width: 500px;
+}
+
+.menuTab {
+    cursor: pointer;
+    width: 220px;
+    height: 85px;
+    background-color: ghostwhite;
+    margin-bottom: 5px;
+}
+.linkTab {
+    width: 15px;
+    height: 85px;
+    background-color: greenyellow;
+}
+.Tab {
+    position:relative;
+    top:-48px;
+    left:50px;
+}

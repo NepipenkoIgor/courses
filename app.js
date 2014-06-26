@@ -16,10 +16,12 @@ require('./routes')(app);
 require('./controller')(app);
 
 
-var mongoose = app.get('config').mongoose;
+var mongoose =require('mongoose');
 
-
-mongoose.connect(app.get('config').mongoUri);
+var mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/test';
+mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('open', function () {
   console.log('iam connect test db');
@@ -28,3 +30,4 @@ db.on('open', function () {
 var port = Number(process.env.PORT || 4000);
 app.listen(port);
 console.log("start server"+port);
+console.log(process.env.GOOGLEID)
