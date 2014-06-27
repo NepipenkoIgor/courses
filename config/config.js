@@ -15,9 +15,9 @@ module.exports = function (app) {
 
         SOCKET_IO_LOG_LEVEL: process.env.SOCKET_IO_LOG_LEVEL,
 
-        GOOGLE_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
-        GOOGLE_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
-        GOOGLE_CALLBACK_URL: process.env.FACEBOOK_CALLBACK_URL,
+        GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+        GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+        GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL,
 
         FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
         FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,

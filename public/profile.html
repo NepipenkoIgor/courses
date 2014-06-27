@@ -1,18 +1,19 @@
-<div  style="width: 30%" > <!--ng-show="this.flag"-->
-    <div class="input-group" >
-        <h3>Username :</h2><input type="text" class="form-control" ng-model="userdata.username" name="username">
+<form name="userForm" style="width: 30%;margin-left: 40%" > <!--ng-show="this.flag"-->
+    <div class="input-group"  >
+        <h3>Username :</h2><input type="text" class="form-control" ng-model="userdata.username" name="username" >
     </div>
-    <div class="input-group" >
+    <div class="input-group" style="float: left;margin-right: 20px">
         <h3>Firstname :</h2><input type="text" class="form-control" ng-model="userdata.firstname" name="firstname">
     </div>
     <div class="input-group" >
         <h3>Lastname :</h2><input type="text" class="form-control" ng-model="userdata.lastname" name="lastname">
     </div>
-    <div class="input-group" >
+    <div class="input-group" style="float: left;margin-right: 20px">
         <h3>Email :</h2><input type="text" class="form-control" ng-model="userdata.email" name="email">
     </div>
     <div class="input-group" >
         <h3>Phone :</h2><input type="text" class="form-control" ng-model="userdata.phone" name="phone">
     </div>
-    <button type="button" class="btn btn-success " ng-click="postProfile(userdata)" >Save profile</button>
-</div>
+    <button type="button" class="btn btn-success " ng-click="postProfile(userdata)"
+            style="margin-top: 25px;margin-left: 23%">Save profile</button>
+</form>

@@ -126,7 +126,9 @@ app.controller('maintab', function () {
         }
 
     ]
-
+var vertical=this.menus.length*90+'px';
+    this.tabheight={height:vertical};
+    console.log(this.tabheight);
 
     this.showTab = function (num) {
         this.tab = num;

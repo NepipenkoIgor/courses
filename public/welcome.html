@@ -12,7 +12,7 @@
 
 
 
-<div ng-controller="maintab as tab" class="TabContainer" ng-show="userdata">
+<div ng-controller="maintab as tab" class="TabContainer" ng-show="userdata" ng-style="tab.tabheight">
     <div style="width: 220px;float:left">
         <div class="menuTab"  ng-repeat="menu in tab.menus" ng-mouseenter="tab.hover(menu.color['background-color'])"
              ng-style="tab.color(tab.colorTab,menu.color['background-color'],tab.changTabColor)" ng-click="tab.showTab(menu.num)"
@@ -21,7 +21,7 @@
             <div class="Tab" >{{menu.menuName}}</div>
         </div>
     </div>
-    <div ng-repeat="menu in tab.menus" class="TabContent">
+    <div ng-repeat="menu in tab.menus" class="TabContent" ng-style="">
         <div>
             <div ng-repeat="subject in menu.subjects" ng-show="tab.activeTab(menu.num)">
                 <a href="#" ng-style="{'color':menu.color['background-color']}">Learn {{subject}}

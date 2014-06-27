@@ -1,8 +1,11 @@
 /**
  * Created by Игорь on 17.06.2014.
  */
+
+var mongoose = require('mongoose');
+var User = mongoose.model('Users');
 function router(app, hasUser) {
-  var User = app.get('User');
+
   app.get('/main', hasUser, function (req, res) {
     console.log(req.user);
     //if(req.user.name) return  res.send( "hellow: " +'<h1>'+req.user.name+'</h1>');

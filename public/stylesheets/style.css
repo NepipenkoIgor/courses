@@ -1,5 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: whitesmoke;
 }
 
 a {
@@ -25,14 +26,18 @@ a {
     display: block;
 }
 
-.TabContainer{
-    position:relative;
-    top:100px;
-    left:30%;
+.TabContainer {
+    background-color: white;
+    position: relative;
+    top: 100px;
+    left: 30%;
     width: 700px;
+
 }
 .TabContent{
-width: 500px;
+
+width: 1000px;
+
 }
 
 .menuTab {
