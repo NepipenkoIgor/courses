@@ -8,34 +8,37 @@ app.controller('profile', function ($scope, $http) {
     'user strict';
     var self = this;
 
-    $http.get('/user').success(function (data) {
-        if (!data.username) {
-            data.username = 'guest';
-        }
+    function reqUser() {
+        $http.get('/user').success(function (data) {
+            if (!data.username) {
+                data.username = 'guest';
+            }
 
-        console.log(data.username);
-        if (!data.firstname) {
-            data.firstname = '';
-        }
-        if (!data.lastname) {
-            data.lastname = '';
-        }
-        if (!data.phone) {
-            data.phone = '';
-        }
+            console.log(data.username);
+            if (!data.firstname) {
+                data.firstname = '';
+            }
+            if (!data.lastname) {
+                data.lastname = '';
+            }
+            if (!data.phone) {
+                data.phone = '';
+            }
 
-        $scope.userdata = data;
-        if(typeof $scope.userdata==='string'){
-            $scope.userdata=false;
-        }
-        console.log($scope.userdata);
-    });
-
+            $scope.userdata = data;
+            if (typeof $scope.userdata === 'string') {
+                $scope.userdata = false;
+            }
+            console.log($scope.userdata);
+        });
+    };
+reqUser();
     $scope.postProfile = function (data) {
 
         $http.post('/main', data).success(function (data) {
             console.log("my callback data =", data.data);
             console.log("good request");
+
         });
 
     };

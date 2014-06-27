@@ -37,7 +37,7 @@
              <li class="" ng-hide="userdata"><a href="#/about">About</a></li>
                 <li class="" ng-show="userdata"><a href="#/welcome">Home</a></li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Learn <b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer">Learn <b class="caret"></b></a>
                     <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu as menuitem">
                         <li><a href="#">About</a></li>
                         <li><a href="#">Knowledge Map</a></li>
@@ -68,7 +68,7 @@
             <ul class="nav navbar-nav navbar-right" >
                 <li ng-hide="userdata"><a href="#/login">Login In</a></li>
                 <li class="dropdown" ng-show="userdata">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi, {{userdata.username}}<b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer">Hi, {{userdata.username}}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li ><a ui-sref="editprofile" >Edit Profile</a></li>
                         <li ><a href="/logout" >logout</a></li>
