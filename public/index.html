@@ -13,11 +13,15 @@
 
     <script  src="javascripts/angular.min.js"></script>
     <script  src="javascripts/angular-ui-router.min.js"></script>
-    <script  src="javascripts/usermodul.js"></script>
-
+    <!--<script  src="javascripts/usermodul.js"></script>-->
+    <!--<script  src="js/controllers/userController.js"></script>
+    <script  src="js/controllers/tabController.js"></script>
+    <script  src="js/controllers/menuController.js"></script>
+    <script  src="js/configView.js"></script>-->
+    <script  src="javascripts/front.js"></script>
     <title></title>
 </head>
-<body ng-app="academy" ng-controller="profile">
+<body ng-app="academy" ng-controller="profile as prof">
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -36,13 +40,14 @@
             <ul class="nav navbar-nav">
              <li class="" ng-hide="userdata"><a href="#/about">About</a></li>
                 <li class="" ng-show="userdata"><a href="#/welcome">Home</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer">Learn <b class="caret"></b></a>
+                <li class="dropdown" style="cursor:pointer">
+                    <a class="dropdown-toggle" data-toggle="dropdown" >Learn <b class="caret"></b></a>
                     <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu as menuitem">
                         <li><a href="#">About</a></li>
                         <li><a href="#">Knowledge Map</a></li>
                         <li class="divider"></li>
-                        <li ng-repeat="menu in menuitem.menus" class="dropdown-submenu"><a  href="#">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
+                        <li ng-repeat="menu in menuitem.menus" class="dropdown-submenu">
+                            <a  href="#">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
                             <ul class="dropdown-menu" ng-style="menu.color">
                                 <li style="height: 52px"><a  href="#"><h4>{{menu.menuName}}</h4></a></li>
                                 <li class="divider"></li>

@@ -11,13 +11,16 @@ var userSchema=new Schema({
   lid:Number,
   username:String,
   password:String,
-  userlevel:String,
+  userlevel:Number,
   firstname:String,
   lastname:String,
   birth:Date,
   email:String,
-  phone:Number,
-  preferences:String
+  phone:String,
+  settings:Boolean,
+  courses:[
+      {id:String}
+  ]
 });
 
 mongoose.model('Users',userSchema);

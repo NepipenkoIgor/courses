@@ -2,7 +2,7 @@
 var express=require('express');
 var app=express();
 
-
+require('./Gruntfile.js');
 // configuration
 require('./config')(app);
 
@@ -30,4 +30,4 @@ db.on('open', function () {
 var port = Number(process.env.PORT || 4000);
 app.listen(port);
 console.log("start server"+port);
-console.log(process.env.GOOGLEID)
+

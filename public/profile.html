@@ -2,11 +2,20 @@
     <div class="input-group"  >
         <h3>Username :</h2><input type="text" class="form-control" ng-model="userdata.username" name="username" >
     </div>
+    <div class="input-group" style="float: left;margin-right: 20px; ">
+        <h3>Password :</h2><input type="text" class="form-control" ng-model="userdata.password" name="firstname">
+    </div>
+    <div class="input-group" style="margin-right: 20px;margin-bottom:20px">
+        <h3>Userlevel : {{userdata.userlevel}}</h2>
+    </div>
     <div class="input-group" style="float: left;margin-right: 20px">
         <h3>Firstname :</h2><input type="text" class="form-control" ng-model="userdata.firstname" name="firstname">
     </div>
     <div class="input-group" >
         <h3>Lastname :</h2><input type="text" class="form-control" ng-model="userdata.lastname" name="lastname">
+    </div>
+    <div class="input-group" style="float: left;margin-right: 20px">
+        <h3>birth :</h2><input type="text" class="form-control" ng-model="userdata.birth" name="firstname">
     </div>
     <div class="input-group" style="float: left;margin-right: 20px">
         <h3>Email :</h2><input type="text" class="form-control" ng-model="userdata.email" name="email">
@@ -15,5 +24,5 @@
         <h3>Phone :</h2><input type="text" class="form-control" ng-model="userdata.phone" name="phone">
     </div>
     <button type="button" class="btn btn-success " ng-click="postProfile(userdata)"
-            style="margin-top: 25px;margin-left: 23%">Save profile</button>
+            style="margin-left:40%;margin-top: 20px">Save profile</button>
 </form>
