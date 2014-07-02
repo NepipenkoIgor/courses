@@ -4,15 +4,15 @@
 var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var postSchema=new Schema({
-    title:Number,
-    creator:Number,
-    created:Number,
+    title:String,
+    creator:String,
+    created:Date,
     votes:[
         {creator:String},
         {vote:Number}
     ],
     favorites:String,
-    content:Number,
+    content:String,
     tags:[],
     comments:[
         {creator:String},
@@ -40,4 +40,4 @@ var postSchema=new Schema({
     ]
 });
 
-mongoose.model('Post',postSchema);
+mongoose.model('Posts',postSchema);

@@ -24,7 +24,8 @@ function router(app) {
   var user = require('./user')(app,hasUser);
   var main = require('./main')(app,hasUser);
   var autorization=require('./autorization')(app,hasAccess);
-  //var all=require('./all')(app);
+  var newPost=require('./newpost')(app,hasUser);
+    var deletePost=require('./deletpost')(app,hasUser);
   var logout=require('./logout')(app);
 }
 

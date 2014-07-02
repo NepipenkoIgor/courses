@@ -57,3 +57,32 @@ width: 1000px;
     top:-48px;
     left:50px;
 }
+
+
+.tagdiv{
+    margin-top:10px;
+    float:left;
+}
+.tag{
+    background-color: crimson;
+    text-decoration: none;
+    color:white;
+    margin: 5px 5px;
+    padding: 5px 5px;
+    border-radius: 3px;
+}
+.postConteiner{
+background-color: white;
+    position: relative;
+    top: 0px;
+    left: 25%;
+    width: 700px;
+    padding: 20px 20px;
+    padding-bottom: 35px;
+    margin-top: 20px;
+}
+.close{
+    float: right;
+    background-color: indianred;
+    padding: 3px 3px;
+}

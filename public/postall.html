@@ -1,0 +1,22 @@
+<div class="container" ng-controller="posts">
+
+    <div ng-repeat="data in postdata" class="postConteiner">
+        <span class="close" ng-click="deletPost(data._id)">X</span>
+        <h2>{{data.title}}</h2>
+        <hr >
+        <p>{{data.content}}</p>
+        <hr>
+        <div>
+        <b style="float:left">Tags:</b>
+        <div ng-repeat="tag in data.tags" class="tagdiv">
+            <a class="tag">{{tag}}</a>
+        </div>
+    </div>
+        <div>
+
+        </div>
+    </div>
+    <div style="margin-top: 30px;float:right">
+        <a class="btn btn-success btn-lg" href="#/post/new">add new post</a>
+    </div>
+</div>

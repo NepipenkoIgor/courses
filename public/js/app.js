@@ -26,5 +26,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('signup', {
             url: "/signup",
             templateUrl: "signup.html"
+        })
+        .state('post', {
+            url: "/post/new",
+            templateUrl: "newpost.html"
+        })
+        .state('posts', {
+            url: "/post/all",
+            templateUrl: "postall.html"
         });
 });
