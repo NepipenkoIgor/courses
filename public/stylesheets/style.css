@@ -58,10 +58,18 @@ width: 1000px;
     left:50px;
 }
 
-
+.post{
+    /*border:solid 2px yellow;*/
+    overflow: hidden;
+}
 .tagdiv{
     margin-top:10px;
     float:left;
+}
+.tagConteiner{
+    /*border:solid 2px yellow;*/
+    overflow: hidden;
+    padding-bottom: 10px;
 }
 .tag{
     background-color: crimson;
@@ -73,16 +81,31 @@ width: 1000px;
 }
 .postConteiner{
 background-color: white;
+    overflow: hidden;
     position: relative;
     top: 0px;
     left: 25%;
     width: 700px;
     padding: 20px 20px;
-    padding-bottom: 35px;
+   /* border:solid 2px green;*/
     margin-top: 20px;
 }
 .close{
     float: right;
     background-color: indianred;
     padding: 3px 3px;
+}
+
+.comment{
+    float:left;
+margin-top: 50px;
+    overflow: hidden;
+   /* border:solid 2px red;*/
+}
+.oneComment{
+
+}
+.contentInput{
+   margin-top: 40px;
+   /* border:solid 2px red;*/
 }

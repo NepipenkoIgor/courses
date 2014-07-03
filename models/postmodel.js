@@ -15,9 +15,7 @@ var postSchema=new Schema({
     content:String,
     tags:[],
     comments:[
-        {creator:String},
-        {created:Date},
-        {content:String}
+        String
     ],
     replies:[
         {creator:String},

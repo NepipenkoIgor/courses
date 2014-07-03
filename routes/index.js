@@ -26,6 +26,7 @@ function router(app) {
   var autorization=require('./autorization')(app,hasAccess);
   var newPost=require('./newpost')(app,hasUser);
     var deletePost=require('./deletpost')(app,hasUser);
+    var postcomment=require('./postcomment')(app,hasUser);
   var logout=require('./logout')(app);
 }
 
