@@ -1,9 +1,17 @@
 /**
  * Created by igor on 7/1/14.
  */
-app.controller('mainMenu', function () {
+app.controller('mainMenu', function ($scope,$http) {
+  //function reqSubject() {
+       $http.get('/subject').success(function (data) {
+           $scope.menus = data;
 
-    this.menus = [
+          //  console.log($scope.menus[0]);
+        });
+
+    //};
+   // reqSubject();
+    /*this.menus = [
         {
             menuName: 'Math',
             color: {
@@ -64,7 +72,7 @@ app.controller('mainMenu', function () {
 
         }
 
-    ];
+    ];*/
 
 
 });

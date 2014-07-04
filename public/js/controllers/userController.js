@@ -45,6 +45,7 @@ app.controller('profile', function ($scope, $http) {
             $scope.userdata = false;
         }
         self.username=$scope.userdata;
+        //debugger;
         console.log(self.username)
     });
 

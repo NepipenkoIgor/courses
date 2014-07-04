@@ -47,13 +47,14 @@
                         <li><a href="#">About</a></li>
                         <li><a href="#">Knowledge Map</a></li>
                         <li class="divider"></li>
-                        <li ng-repeat="menu in menuitem.menus" class="dropdown-submenu">
-                            <a  href="#">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
+                        <li ng-repeat="menu in menus" class="dropdown-submenu">
+                            <a  ui-sref="themaTop({topic:menu.menuName})">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
                             <ul class="dropdown-menu" ng-style="menu.color">
-                                <li style="height: 52px"><a  href="#"><h4>{{menu.menuName}}</h4></a></li>
+                                <li style="height: 52px"><a  ui-sref="themaTop({topic:menu.menuName})"><h4>{{menu.menuName}}</h4></a></li>
                                 <li class="divider"></li>
                                 <ul>Subject
-                                    <li ng-repeat="subject in menu.subjects"> <a href="#">{{subject}}</a></li>
+                                    <li ng-repeat="subject in menu.subjects">
+                                        <a ui-sref="themaSubject({topic:menu.menuName,subject:subject})">{{subject}}</a></li>
 
                                 </ul>
 
@@ -91,7 +92,11 @@
 </nav>
 
 
-<div ui-view></div>
+<div ui-view style=""></div>
 </div>
+ <div class="footer">
+
+
+ </div>
 </body>
 </html>

@@ -12,19 +12,21 @@
 
 
 
-<div ng-controller="maintab as tab" class="TabContainer" ng-show="userdata" ng-style="tab.tabheight">
+<div ng-controller="maintab" class="TabContainer" ng-show="userdata" ng-style="tabheight">
     <div style="width: 220px;float:left">
-        <div class="menuTab"  ng-repeat="menu in tab.menus" ng-mouseenter="tab.hover(menu.color['background-color'])"
-             ng-style="tab.color(tab.colorTab,menu.color['background-color'],tab.changTabColor)" ng-click="tab.showTab(menu.num)"
-             ng-mouseleave="tab.hover()">
+        <div class="menuTab"  ng-repeat="menu in menus" ng-mouseenter="hover(menu.color['background-color'])"
+             ng-style="color(colorTab,menu.color['background-color'],changTabColor)" ng-click="showTab(menu.num)"
+             ng-mouseleave="hover()">
             <div class="linkTab" ng-style="menu.color"></div>
-            <div class="Tab" >{{menu.menuName}}</div>
+            <div class="Tab" >
+                <a ui-sref="themaTop({topic:menu.menuName})">{{menu.menuName}}
+                </a></div>
         </div>
     </div>
-    <div ng-repeat="menu in tab.menus" class="TabContent" ng-style="">
-        <div>
-            <div ng-repeat="subject in menu.subjects" ng-show="tab.activeTab(menu.num)">
-                <a href="#" ng-style="{'color':menu.color['background-color']}">Learn {{subject}}
+    <div ng-repeat="menu in menus" class="TabContent" ng-style="">
+        <div style="">
+            <div ng-repeat="subject in menu.subjects" ng-show="activeTab(menu.num)">
+                <a ui-sref="themaSubject({topic:menu.menuName,subject:subject})" ng-style="{'color':menu.color['background-color']}">Learn {{subject}}
                     <span class="glyphicon glyphicon-chevron-right"></span></a></div>
 
         </div>

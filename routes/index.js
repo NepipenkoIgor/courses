@@ -27,6 +27,7 @@ function router(app) {
   var newPost=require('./newpost')(app,hasUser);
     var deletePost=require('./deletpost')(app,hasUser);
     var postcomment=require('./postcomment')(app,hasUser);
+    var subject = require('./subject')(app);
   var logout=require('./logout')(app);
 }
 

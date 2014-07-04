@@ -4,8 +4,9 @@
 function model(app) {
   var User =require('./usermodel');
     var Post =require('./postmodel');
-  var  authConfig = require('./auth');
+    var Subject =require('./subjectmodel');
+  /*var  authConfig = require('./auth');
   app.set('authConfig',authConfig);
-  app.set('User',User);
+  app.set('User',User);*/
 }
 module.exports=model;

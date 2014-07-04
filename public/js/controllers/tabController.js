@@ -1,12 +1,24 @@
 /**
  * Created by igor on 7/1/14.
  */
-app.controller('maintab', function () {
+app.controller('maintab', function ($scope, $http) {
     'user strict';
 
-    this.tab = 1;
+    $scope.tab = 1;
+    function reqSubject() {
+        $http.get('/subject').success(function (data) {
+            $scope.menus = data;
+            console.log($scope.menus);
+            $scope.vertical=$scope.menus.length*90+'px';
+            $scope.tabheight={height:$scope.vertical};
+            $scope.colorTab = $scope.menus[0].color['background-color'];
+            $scope.changTabColor = $scope.menus[0].color['background-color'];
+        });
 
-    this.menus = [
+    };
+    reqSubject();
+    console.log($scope.menus);
+   /* this.menus = [
         {
             num: 1,
             menuName: 'Math',
@@ -72,17 +84,17 @@ app.controller('maintab', function () {
 
         }
 
-    ];
-    var vertical=this.menus.length*90+'px';
-    this.tabheight={height:vertical};
-    console.log(this.tabheight);
+    ];*/
+   //$scope.vertical=$scope.menus.length*90+'px';
+   // $scope.tabheight={height:$scope.vertical};
+    console.log("asd",$scope.tabheight);
 
-    this.showTab = function (num) {
-        this.tab = num;
-        this.changTabColor = this.menus[num - 1].color['background-color'];
+    $scope.showTab = function (num) {
+        $scope.tab = num;
+        $scope.changTabColor = this.menus[num - 1].color['background-color'];
     };
 
-    this.activeTab = function (num) {
+    $scope.activeTab = function (num) {
         if (num === this.tab) {
             return true;
         }
@@ -95,17 +107,17 @@ app.controller('maintab', function () {
      };
      return;
      };*/
-    this.colorTab = this.menus[0].color['background-color'];
-    this.changTabColor = this.menus[0].color['background-color'];
-    this.hover = function (color) {
+    //$scope.colorTab = $scope.menus[0].color['background-color'];
+    //$scope.changTabColor = $scope.menus[0].color['background-color'];
+    $scope.hover = function (color) {
         if (color) {
-            this.colorTab = color;
+            $scope.colorTab = color;
             return;
         }
-        this.colorTab = 'ghostwhite';
+        $scope.colorTab = 'ghostwhite';
 
     };
-    this.color = function (color1, color2, color3) {
+    $scope.color = function (color1, color2, color3) {
         if (color2 === color3) {
             return {'background-color': color2};
         }
