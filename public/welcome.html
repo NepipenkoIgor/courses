@@ -19,14 +19,14 @@
              ng-mouseleave="hover()">
             <div class="linkTab" ng-style="menu.color"></div>
             <div class="Tab" >
-                <a ui-sref="themaTop({topic:menu.menuName})">{{menu.menuName}}
+                <a >{{menu.menuName}}
                 </a></div>
         </div>
     </div>
     <div ng-repeat="menu in menus" class="TabContent" ng-style="">
         <div style="">
             <div ng-repeat="subject in menu.subjects" ng-show="activeTab(menu.num)">
-                <a ui-sref="themaSubject({topic:menu.menuName,subject:subject})" ng-style="{'color':menu.color['background-color']}">Learn {{subject}}
+                <a ui-sref="themaSubject({topic:menu.menuName,subject:subject.subjectName})" ng-style="{'color':menu.color['background-color']}">Learn {{subject.subjectName}}
                     <span class="glyphicon glyphicon-chevron-right"></span></a></div>
 
         </div>

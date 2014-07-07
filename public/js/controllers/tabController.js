@@ -9,8 +9,8 @@ app.controller('maintab', function ($scope, $http) {
         $http.get('/subject').success(function (data) {
             $scope.menus = data;
             console.log($scope.menus);
-            $scope.vertical=$scope.menus.length*90+'px';
-            $scope.tabheight={height:$scope.vertical};
+            $scope.vertical = $scope.menus.length * 90 + 'px';
+            $scope.tabheight = {height: $scope.vertical};
             $scope.colorTab = $scope.menus[0].color['background-color'];
             $scope.changTabColor = $scope.menus[0].color['background-color'];
         });
@@ -18,76 +18,86 @@ app.controller('maintab', function ($scope, $http) {
     };
     reqSubject();
     console.log($scope.menus);
-   /* this.menus = [
-        {
-            num: 1,
-            menuName: 'Math',
-            color: {
+    /* this.menus = [
+     {
+        num: 1,
+        menuName: 'Math',
+        color: {
                 'background-color': 'olive'
-            },
-            subjects: [
-                "Math1",
-                "Math2",
-                "Math3"
-            ]
-        },
-        {
-            num: 2,
-            menuName: 'Science',
-            color: {
-                'background-color': 'green'
-            },
-            subjects: [
-                "Science1",
-                "Science2",
-                "Science3"
-            ]
+                },
+        subjects: [
+               {
+               subjectName:'Math1',
+               subjectImg:'',
+               subSubjects:[
+                    {
+                    subSubjectsName:'',
+                    steps:[
+                        {
+                        stepName:'',
+                        type:'',
+                        content:''
+                        }]
+                    }]
+               }]
+      }
+     {
+     num: 2,
+     menuName: 'Science',
+     color: {
+     'background-color': 'green'
+     },
+     subjects: [
+     "Science1",
+     "Science2",
+     "Science3"
+     ]
 
-        },
-        {
-            num: 3,
-            menuName: 'Humanties',
-            color: {
-                'background-color': 'teal'
-            },
-            subjects: [
-                "Humanties1",
-                "Humanties2",
-                "Humanties3"
-            ]
+     },
+     {
+     num: 3,
+     menuName: 'Humanties',
+     color: {
+     'background-color': 'teal'
+     },
+     subjects: [
+     "Humanties1",
+     "Humanties2",
+     "Humanties3"
+     ]
 
-        },
-        {
-            num: 4,
-            menuName: 'Economics and Finance',
-            color: {
-                'background-color': 'grey'
-            },
-            subjects: [
-                "Economics and Finance1",
-                "Economics and Finance2",
-                "Economics and Finance3"
-            ]
+     },
+     {
+     num: 4,
+     menuName: 'Economics and Finance',
+     color: {
+     'background-color': 'grey'
+     },
+     subjects: [
+     "Economics and Finance1",
+     "Economics and Finance2",
+     "Economics and Finance3"
+     ]
 
-        },
-        {
-            num: 5,
-            menuName: 'Computing',
-            color: {
-                'background-color': 'gold'
-            },
-            subjects: [
-                "Computing1",
-                "Computing2",
-                "Computing3"
-            ]
+     },
+     {
+     num: 5,
+     menuName: 'Computing',
+     color: {
+     'background-color': 'gold'
+     },
+     subjects: [
+     "Computing1",
+     "Computing2",
+     "Computing3"
+     ]
 
-        }
+     }
 
-    ];*/
-   //$scope.vertical=$scope.menus.length*90+'px';
-   // $scope.tabheight={height:$scope.vertical};
-    console.log("asd",$scope.tabheight);
+     ];*/
+    //$scope.vertical=$scope.menus.length*90+'px';
+    // $scope.tabheight={height:$scope.vertical};
+    console.log("asd", $scope.tabheight);
 
     $scope.showTab = function (num) {
         $scope.tab = num;

@@ -1,9 +1,17 @@
 <div ng-style="trueSubject.color" class="topicContent">
 <div class="topicContentLeft">
-    <h1>{{subjectNow}}</h1>
-</div>
+    <h1>{{subjectNow.subjectName}}</h1>
+</div >
 
-<div class="topicContentRight">
+<div class="topicContentRight" ng-style="{'color':trueSubject.color['background-color']}">
+    <h4 style="margin-left: 80px">All Content in {{subjectNow.subjectName}}</h4>
+    <hr>
+    <a ui-sref="subSubject({topic:trueTitle,subject:subjectNow.subjectName,subsubject:sub.subSubjectName})"
+            ng-repeat="sub in subjectNow.subSubjects" class="subSubject" ng-style="{'color':trueSubject.color['background-color']}">
+
+        <div style="width: 100px;float:left"><img src="img/81925.gif"/></div>
+        <div style="width: 400px;padding-top: 30px"><h4">{{sub.subSubjectName}}</h4></div>
+    </a>
 
 </div>
 </div>
