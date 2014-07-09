@@ -27,7 +27,19 @@ app.controller('routerController', function ($stateParams, $location, $http, $sc
 console.log($scope.subjectNow.subSubjects[d]);
                                if($scope.subjectNow.subSubjects[d].subSubjectName===$stateParams.subsubject) {
                                     $scope.subSubjectNow = $scope.subjectNow.subSubjects[d];
-                                    console.log($scope.subSubjectNow)
+                                    console.log($scope.subSubjectNow.specialId);
+                                   $http.get('/modulelesson').success(function (data) {
+                                          console.log("my data",data);
+                                       var resMod=[];
+                                     for(var i=0;i<data.length;i++){
+                                           if(data[i].parent===$scope.subSubjectNow.specialId){
+                                               resMod.push(data[i]);
+                                               console.log(resMod);
+                                           }
+                                           //console.log(data[i].parent);
+                                       };
+                                       $scope.module=resMod;
+                                   });
                                 }
                                 //return;
                             }
@@ -60,6 +72,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/editprofile",
             templateUrl: "profile.html",
             controller: 'profile'
+        }).state('editcourses', {
+            url: "/editcourses",
+            templateUrl: "editcourses.html",
+            controller: 'editcourses'
         })
         .state('welcome', {
             url: "/welcome",

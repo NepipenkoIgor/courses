@@ -1,15 +1,19 @@
 <div ng-style="trueSubject.color" class="topicContent">
     <div class="topicContentLeft">
         <h1>{{subSubjectNow.subSubjectName}}</h1>
+        <p>{{subSubjectNow.description}}</p>
     </div >
 
     <div class="topicContentRight" ng-style="{'color':trueSubject.color['background-color']}">
         <h4 style="margin-left: 80px">All Content in {{subSubjectNow.subSubjectName}}</h4>
         <hr>
         <div ui-sref="subSubject({topic:trueTitle,subject:subjectNow.subjectName,subSubject:sub.subSubjectName})"
-           ng-repeat="module in subSubjectNow.module" class="stepsContainer" ng-style="{'color':trueSubject.color['background-color']}">
+           ng-repeat="module in module" class="stepsContainer" ng-style="{'color':trueSubject.color['background-color']}">
 
-            <div style="width: 250px;float:left;padding-top: 30px;text-align: center">{{module.moduleName}}</div>
+            <div style="width: 250px;float:left;padding-top: 30px;text-align: center">
+                <h3>{{module.moduleName}}</h3>
+                <p>{{module.description}}</p>
+            </div>
             <div style="width: 400px;padding-top: 30px;overflow: hidden" class="blockStepsConteiner">
             <a class="blockSteps" ng-repeat="step in module.steps">
              <img />{{step.stepName}}

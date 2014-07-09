@@ -15,6 +15,7 @@
     <script  src="javascripts/angular-ui-router.min.js"></script>
     <script  src="js/app.js"></script>
     <!--<script  src="javascripts/usermodul.js"></script>-->
+    <script  src="js/controllers/editCoursesController.js"></script>
    <script  src="js/controllers/userController.js"></script>
     <script  src="js/controllers/tabController.js"></script>
     <script  src="js/controllers/menuController.js"></script>
@@ -79,6 +80,8 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer">Hi, {{userdata.username}}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li ><a ui-sref="editprofile" >Edit Profile</a></li>
+                        <li ><a ui-sref="editcourses" >Edit Courses</a></li>
+                        <li class="divider"></li>
                         <li ><a href="/logout" >logout</a></li>
                         <!-- <li><a href="#">Another action</a></li>
                          <li><a href="#">Something else here</a></li>
