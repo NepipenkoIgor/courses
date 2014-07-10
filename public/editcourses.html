@@ -66,7 +66,7 @@
 
             <div style="width: 250px;overflow: hidden;float: left;margin-left: 30px">
 <div class="input-group"  >
-   <h3>Subject parrent:</h2><input type="text" class="form-control" ng-model="subSubjectParrent"></h3>
+   <h3>SubSubject parrent:</h2><input type="text" class="form-control" ng-model="subSubjectParrent"></h3>
 </div>
 <div class="input-group"  >
  <h3>Module Name:</h2><input type="text" class="form-control" ng-model="course.moduleName" ></h3>
@@ -87,7 +87,7 @@
                     <h3>Step type:</h2><input type="text" class="form-control" ng-model="course.typeStep" ></h3>
                 </div>
 <div class="input-group"  >
-   <h3>Step Content:</h2><input type="text" class="form-control" ng-model="course.content" ></h3>typeStep
+   <h3>Step Content:</h2><input type="text" class="form-control" ng-model="course.content" ></h3>
 </div>
             <button type="button" class="btn btn-success " ng-click="addStep()"
                     style="">add Step to template</button>
@@ -95,7 +95,14 @@
 
 </div>
         <div style="width: 50%;overflow: hidden;float: right">
-            <div style="position:fixed">
+            <div style="width: 500px">
+                <div ng-repeat="subject in loadSubjects" style="float: left;margin-left: 15px">
+                    <button type="button" class="btn" ng-click="changeCourse(subject.menuName)" ng-style="subject.color">
+                        {{subject.menuName}}
+                    </button>
+                </div>
+            </div>
+            <div style="position:relative;width: 350px;margin-top: 50px" >
                 <i>Course</i>:
                 <p>Course position : <b>{{resCourseSubject.num}}</b><span class="close" >x</span></p></p>
                 <p>Course background-color : <b>{{resCourseSubject.color['background-color']}}</b></p>
@@ -136,4 +143,5 @@
                 <button type="button" class="btn btn-success " ng-click="saveCurse()"
                         style="">Save Course</button>
             </div>
+
         </div>

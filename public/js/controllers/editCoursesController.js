@@ -6,8 +6,13 @@
 app.controller('editcourses', function ($stateParams, $location, $http, $scope) {
 
     $scope.newSubject={}
-    $http.get('/subject').success(function (data) {
-        $scope.newSubject = data;
+    $http.get('/subject').success(function (subject) {
+        $scope.loadSubjects = subject;
+
+    });
+    //$scope.newSubject={}
+    $http.get('/modulelesson').success(function (module) {
+        $scope.loadModule = module;
 
     });
 
@@ -117,6 +122,9 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
  $scope.deleteSubject=function(name){
         for(var i=0;i<$scope.resCourseSubject.subjects.length;i++){
             if($scope.resCourseSubject.subjects[i].subjectName===name){
+                for(var j=0;j<$scope.resCourseSubject.subjects[i].subSubjects.length;j++){
+                    $scope.deleteSubSubject($scope.resCourseSubject.subjects[i].subSubjects[j].subSubjectName);
+                };
                 $scope.resCourseSubject.subjects.splice(i,1);
             };
 
@@ -127,39 +135,49 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
             for(var j=0;j<$scope.resCourseSubject.subjects[i].subSubjects.length;j++){
             if($scope.resCourseSubject.subjects[i].subSubjects[j].subSubjectName===name) {
                 $scope.deleteModuleOnParent($scope.resCourseSubject.subjects[i].subSubjects[j].specialId);
-                $scope.resCourseSubject.subjects[i].subSubjects.splice(j, 1);
+              $scope.resCourseSubject.subjects[i].subSubjects.splice(j, 1);
             };
             };
 
         };
     };
     $scope.deleteModule=function(name){
- var j=0;
+
         for(var i=0;i<$scope.resModuleLessonArray.length;i++){
             if($scope.resModuleLessonArray[i].moduleName===name){
-                $scope.resModuleLessonArray.splice(i-j,1);
+                $scope.resModuleLessonArray.splice(i,1);
+                i=i-1;
             };
-            j=j+1;
+
         };
         //$scope.resModuleLessonArray=localArr;
     };
     $scope.deleteStep=function(name){
-        var j=0;
+
         for(var i=0;i<$scope.resModuleLessonArray.length;i++){
             for(var j=0;j<$scope.resModuleLessonArray[i].steps.length;j++) {
                 if ($scope.resModuleLessonArray[i].steps[j].stepName === name) {
-                    $scope.resModuleLessonArray[i].steps.splice(j-1, 1);
-                    j=j+1;
+                    $scope.resModuleLessonArray[i].steps.splice(j, 1);
+                    j=j-1;
                 };
             };
         };
     };
     $scope.deleteModuleOnParent=function(id){
-        var j=0;
+
         for(var i=0;i<$scope.resModuleLessonArray.length;i++){
             if($scope.resModuleLessonArray[i].parent===id){
-                $scope.resModuleLessonArray.splice(i-j,1);
-                j=j+1;
+                $scope.resModuleLessonArray.splice(i,1);
+               i=i-1;
+            }
+        }
+    };
+    $scope.changeCourse=function(name){
+        //loadModule
+        for(var i=0;i<$scope.loadSubjects.length;i++){
+            if($scope.loadSubjects[i].menuName===name){
+                $scope.resCourseSubject=$scope.loadSubjects[i];
+                $scope.resModuleLessonArray=$scope.loadModule;
             }
         }
     };

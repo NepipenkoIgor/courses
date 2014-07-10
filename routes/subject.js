@@ -25,7 +25,7 @@ function router(app) {
     });
 
     app.post('/subject', function (req, res) {
-       // var Obj = mongoose.Schema.Types.ObjectId;
+
 console.log(req.body);
         if(!req.body[0]._id){
             var subj=new Subjects(req.body[0]);
@@ -36,26 +36,26 @@ console.log(req.body);
                     res.json({success:true,data:{id:subj._id}});
                 });
         });
-    /*  var courseName=req.body[0].menuName;
-        */
+
         }else{
             var saveId=req.body[0]._id;
             delete req.body[0]._id;
-
-
                     Subjects.update ({'_id':saveId},req.body[0],function(err,data){
-res.end();
+                        var moduleId=[];
+                        for(var i=0;i<req.body[1].length;i++){
+                            if(moduleId.indexOf(req.body[1][i].parent)===(-1)){
+                                moduleId.push(req.body[1][i].parent);
+                                ModuleLesson.remove({parent:req.body[1][i].parent},function(err){
+                                   // console.log(err);
+                                });
+                            }
+                        };
+                        ModuleLesson.create(req.body[1],function(err,number){
+                            console.log(err, number);
+                            res.json({success:true});
+                        });
                     });
-
-                //console.log(data);
-
-
-        }
-
-
-        //var modLes=new ModuleLesson();
-
+        };
     });
-
 };
 module.exports = router;
