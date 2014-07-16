@@ -7,6 +7,12 @@ var init=function() {
     $http.get('/courses').success(function (courses) {
         $scope.courses = courses;
 //console.log( $scope.courses);
+        if(!$scope.courses){
+            var specialId=Date.now();
+            $scope.courses={title:"New Module",description:"",sections:[{title:"New Section",description:"",specialId:specialId}
+        }
+
+        }
         for (var i = 0; i < $scope.courses.length; i++) {
             if ($scope.courses[i].title === $stateParams.courseTitle) {
                 $scope.course = $scope.courses[i];
