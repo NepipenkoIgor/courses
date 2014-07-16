@@ -1,0 +1,46 @@
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+        Inventory of existing courses <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="subject in loadSubjects">
+            <a  ng-click="changeCourse(subject.menuName)">{{subject.menuName}}</a></li>
+        <li><hr></li>
+        <li><a>Add course</a></li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div  style="width: 400px;overflow: hidden;">
+            <div class="input-group"  >
+                <h3>Course Number :</h3><input type="text" class="form-control" ng-model="resCourseSubject.num" >
+            </div>
+            <div class="input-group"  >
+                <h3>Course color :</h3><input type="text" class="form-control" ng-model="resCourseSubject.color['background-color']" >
+            </div>
+            <div class="input-group"  >
+                <h3>Course Name :</h3><input type="text" class="form-control" ng-model="resCourseSubject.menuName" >
+            </div>
+            <div class="input-group"  >
+                <h3>Course Description:</h3><textarea type="text" rows="10" cols="100"
+                               class="form-control"  ng-model="resCourseSubject.description" ></textarea>
+            </div>
+            <button type="button" class="btn btn-success " ng-click="addCourse()"
+                    style="">add course to template</button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <a class="btn btn-success " ui-sref="subjectedition({course:resCourseSubject.menuName})"
+               style="">go deeper</a>
+        </div>
+
+    </div>
+</div>
+
+
+

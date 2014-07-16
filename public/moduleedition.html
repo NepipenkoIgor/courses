@@ -1,0 +1,76 @@
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+        {{courseNow.menuName}} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="subject in loadSubjects"><a href="" ng-click="changeCourse(subject.menuName)">{{subject.menuName}}</a></li>
+        <li><hr></li>
+        <li><a>Add course</a></li>
+    </ul>
+</div>
+
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+        {{subjectNow.subjectName}}<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="subject in resCourseSubject.subjects"><a href="" ng-click="changeCourse(subject.menuName)">{{subject.subjectName}}</a></li>
+        <li><hr></li>
+        <li><a>Add subject</a></li>
+    </ul>
+</div>
+
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+        {{subSubjectNow.subSubjectName}}<span class="caret"></span>
+
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="subSubject in subjectNow.subSubjects"><a href="" ng-click="changeSubSubject(subject.subSubjectName)">{{subSubject.subSubjectName}}</a></li>
+        <li><hr></li>
+        <li><a>Add subSubject</a></li>
+    </ul>
+</div>
+
+
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+        Inventory of existing modules <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="module in modulesNow"><a href="" ng-click="changeModule(module.moduleName)">{{module.moduleName}}</a></li>
+        <li><hr></li>
+        <li><a>Add module</a></li>
+    </ul>
+</div>
+
+<hr>
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div style="width: 400px;overflow: hidden;">
+           <!-- <div class="input-group"  >
+                <h3>SubSubject parrent:</h3><input type="text" class="form-control" ng-model="subSubjectParrent">
+            </div>-->
+            <div class="input-group"  >
+                <h3>Module Name:</h3><input type="text" class="form-control" ng-model="resModule.moduleName" >
+            </div>
+            <div class="input-group"  >
+                <h3>Module Description:</h3><textarea type="text" rows="10" cols="100" class="form-control" ng-model="resModule.description"  ></textarea>
+            </div>
+            <button type="button" class="btn btn-success " ng-click="addModule()"
+                    style="">add Module to template</button>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <div>
+            <a class="btn btn-success "
+               ui-sref="stepedition({course:courseNow.menuName,subject:subjectNow.subjectName,subSubject:subSubjectNow.subSubjectName,module:resModule.moduleName})"
+               style="">go deeper</a>
+        </div>
+
+    </div>
+</div>

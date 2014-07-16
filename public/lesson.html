@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-4">help</div>
+                    <div class="col-md-4">Progress</div>
+                    <div class="col-md-4">Course Map</div>
+                    </div>
+            </div>
+            <div class="col-md-2"><i class="fa fa-hand-o-left"></i></div>
+        </div>
+        <div class="row" style="margin-top: 5%">
+            <div class="col-md-12">
+                <form editable-form name="editableForm" onaftersave="saveCourse()">
+                <ul ng-repeat="module in course.modules"><a  editable-text="module.title">{{ module.title || "empty" }}</a>
+
+                    <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
+                        <button type="button" class="btn btn-success"  ng-click="addModule(module.title,'before')">before</button>
+                        <button type="button" class="btn btn-success" ng-click="addModule(module.title,'after')">after</button>
+                    </div>
+
+                    <button class="btn btn-danger" ng-click="deleteModule(module._id)" ng-show="editableForm.$visible">del</button>
+
+                    <li style="margin-left: 10%;padding: 10px" ng-repeat="section in module.sections">
+                        <a  editable-text="section.title">{{ section.title || "empty" }}</a>
+
+                        <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
+                            <button type="button" class="btn btn-success" ng-click="addSection(section.title,'before')">before</button>
+                            <button type="button" class="btn btn-success" ng-click="addSection(section.title,'after')">after</button>
+                        </div>
+
+                        <button class="btn btn-danger" ng-click="deleteSection(module.title,section.title)" ng-show="editableForm.$visible">del</button>
+                    <ul>
+                        <li style="margin-left: 10%;padding: 10px" ng-repeat="unit in showUnits(section.specialId)">
+                            <a  editable-text="unit.title">{{ unit.title || "empty" }}</a>
+
+                            <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
+                                <button type="button" class="btn btn-success" ng-click="addUnit(section.title,unit.title,'before')">before</button>
+                                <button type="button" class="btn btn-success" ng-click="addUnit(section.title,unit.title,'after')">after</button>
+                            </div>
+
+
+                            <button class="btn btn-danger" ng-click="deleteUnit(section.specialId,unit.title)" ng-show="editableForm.$visible">del</button>
+                        </li>
+                    </ul>
+                    </li>
+                </ul>
+                <hr>
+                    <div class="buttons">
+                        <!-- button to show form -->
+                        <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                            Edit
+                        </button>
+                        <!-- buttons to submit / cancel form -->
+      <span ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+            Save
+        </button>
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+            Cancel
+        </button>
+      </span>
+                    </div>
+                    </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="row">
+            <div class="col-md-12">
+                title
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                video
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                coments/ask
+            </div>
+        </div>
+    </div>
+</div>

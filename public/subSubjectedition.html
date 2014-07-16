@@ -1,0 +1,62 @@
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+        {{courseNow.menuName}} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="subject in loadSubjects"><a href="" ng-click="changeCourse(subject.menuName)">{{subject.menuName}}</a></li>
+        <li><hr></li>
+        <li><a>Add course</a></li>
+    </ul>
+</div>
+
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+       {{subjectNow.subjectName}}<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="subject in resCourseSubject.subjects"><a href="" ng-click="changeCourse(subject.menuName)">{{subject.subjectName}}</a></li>
+        <li><hr></li>
+        <li><a>Add subject</a></li>
+    </ul>
+</div>
+
+<div class="btn-group" dropdown >
+    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+        Inventory of existing subsubjects <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="subject in subjectNow.subSubjects"><a href="" ng-click="changeSubSubject(subject.subSubjectName)">{{subject.subSubjectName}}</a></li>
+        <li><hr></li>
+        <li><a>Add subSubject</a></li>
+    </ul>
+</div>
+        <hr>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div style="width: 400px;overflow: hidden;">
+           <!-- <div class="input-group"  >
+                <h3>Subject parrent:</h3><input type="text" class="form-control" ng-model="subjectParrent">
+            </div>-->
+            <div class="input-group"  >
+                <h3>SubSubject Name:</h3><input type="text" class="form-control" ng-model="resSubSubject.subSubjectName">
+            </div>
+            <div class="input-group"  >
+                <h3>SubSubject Description:</h3>
+                <textarea type="text" rows="10" cols="100" class="form-control" ng-model="resSubSubject.description"  >
+
+                </textarea>
+            </div>
+            <button type="button" class="btn btn-success " ng-click="addsubSubject()"
+                    style="">add SubSubject to template</button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <a class="btn btn-success "
+               ui-sref="moduleedition({course:courseNow.menuName,subject:subjectNow.subjectName,subSubject:resSubSubject.subSubjectName})"
+               style="">go deeper</a>
+        </div>
+
+    </div>
+</div>
