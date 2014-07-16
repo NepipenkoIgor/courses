@@ -10,14 +10,21 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+    <link href="stylesheets/xeditable.css" rel="stylesheet">
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
 
-    <script  src="javascripts/angular.min.js"></script>
+
+   <script  src="javascripts/angular.min.js"></script>
     <script  src="javascripts/angular-ui-router.min.js"></script>
+    <script  src="javascripts/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <script src="javascripts/xeditable.min.js"></script>
     <script  src="js/app.js"></script>
-    <!--<script  src="javascripts/usermodul.js"></script>-->
-    <script  src="js/controllers/editCoursesController.js"></script>
+   <!--<script  src="javascripts/usermodul.js"></script>-->
+    <script  src="js/controllers/lessonController.js"></script>
+    <!--<script  src="js/controllers/courseEditionController.js"></script>
+    <script  src="js/controllers/editCoursesController.js"></script>-->
    <script  src="js/controllers/userController.js"></script>
-    <script  src="js/controllers/tabController.js"></script>
+   <!-- <script  src="js/controllers/tabController.js"></script>-->
     <script  src="js/controllers/menuController.js"></script>
     <script  src="js/controllers/postsController.js"></script>
     <!-- <script  src="javascripts/front.js"></script>-->
@@ -36,13 +43,32 @@
             </button>
             <a class="navbar-brand" href="#">Academy</a>
         </div>
-
+         <div class="navbar-header">
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+             </button>
+             <a class="navbar-brand" href="#">{{}}</a>
+         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-            <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"  >
+            <ul class="nav navbar-nav" style="margin-left: 30%">
              <li class="" ng-hide="userdata"><a href="#/about">About</a></li>
-                <li class="" ng-show="userdata"><a href="#/welcome"><i class="fa fa-institution fa-fw"></i>Home</a></li>
+                <!--<li class="" ng-show="userdata"><a href="#/welcome"><i class="fa fa-institution fa-fw"></i>Courses</a></li>-->
                 <li class="dropdown" style="cursor:pointer">
+                <a class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-graduation-cap fa-fw"></i>Courses <b class="caret"></b></a>
+                <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu">
+
+
+                    <li ng-repeat="course in courses" class="dropdown-submenu">
+                        <a ui-sref="lesson({courseTitle:course.title})">{{course.title}}</a>
+
+                    </li>
+                </ul>
+            </li>
+                <!--<li class="dropdown" style="cursor:pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-graduation-cap fa-fw"></i>Learn <b class="caret"></b></a>
                     <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu as menuitem">
                         <li><a href="#">About</a></li>
@@ -65,8 +91,10 @@
                         <li class="divider"></li>
                         <li><a href="#">Browse all</a></li>
                     </ul>
-                </li>
-                <li class="" ng-show="userdata"><a href="#/post/all"><i class="fa fa-wechat fa-fw"></i>Blog</a></li>
+                </li>-->
+                <li class="" ng-show="userdata"><a href="#/post/all"><i class="fa fa-wechat fa-fw"></i>Comments</a></li>
+                <li class="" ng-show="userdata"><a href="#/post/all"><i class="fa fa-file-code-o fa-fw"></i>js bin</a></li>
+                <li class="" ng-show="userdata"><a href="#/post/all"><i class="fa fa-cube fa-fw"></i>Codebox</a></li>
             </ul>
             <!--  <form class="navbar-form navbar-left" role="search">
                  <div class="form-group">
@@ -76,8 +104,9 @@
              </form>-->
             <ul class="nav navbar-nav navbar-right" >
                 <li ng-hide="userdata"><a href="#/login">Login In</a></li>
+                <li  ng-show="userdata"><a  ><i class="fa fa-bell-o fa-fw"></i>Notfication</a></li>
                 <li class="dropdown" ng-show="userdata">
-                    <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer">Hi, {{userdata.username}}<b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer"><i class="fa fa-child fa-fw"></i>Hi, {{userdata.username}}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li ><a ui-sref="editprofile" ><i class="fa fa-pencil fa-fw"></i>Edit Profile</a></li>
                         <li ><a ui-sref="editcourses" ><i class="fa fa-pencil fa-fw"></i>Edit Courses</a></li>

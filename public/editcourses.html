@@ -1,147 +1,160 @@
-<!--<div ng-repeat="subject in subject">
-   <div>
-       Number of course: {{subject.num}}</br>
-      Name of course: {{subject.menuName}}</br>
-       Description of course:{{subject.description}}</br>
-       Background-color:{{subject.color['background-color']}}</br>
-       <div ng-repeat="subject in subject.subjects">
-           Name of subject: {{subject.subjectName}}</br>
-           Image of subject: {{subject.subjectImg}}</br>
-           Description of subject:{{subject.description}}</br>
-           <div ng-repeat="subject in subject.subSubjects">
-               Name of module: {{subject.moduleName}}</br>
-               Description of module:{{subject.description}}</br>
 
-           </div>
-       </div>
-       <hr>
-       </div>
-</div>-->
-        <div style="width: 50%;overflow: hidden;float: left">
-            <div style="width: 250px;overflow: hidden;float: left;margin-left: 30px">
+        <div style="width: 50%;overflow: hidden;float: right;padding-left: 30px">
+            <div style="width: 100%;overflow: hidden;float: left;">
+                <h3>Edit panel :</h3>
+                <hr>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li  ng-class="activeClass('Course')" ng-click="switchEdition('Course')"><a  href=>Course</a></li>
+                    <li ng-show="isCourse()" ng-class="activeClass('Subject')"><a href="" ng-click="switchEdition('Subject')">Subject</a></li>
+                    <li ng-show="isSubject()" ng-class="activeClass('Subsubject')"><a href="" ng-click="switchEdition('Subsubject')">Subsubject</a></li>
+                    <li ng-show="isSubSubject()" ng-class="activeClass('Module')"><a href="" ng-click="switchEdition('Module')">Module</a></li>
+                    <li ng-show="isModule()" ng-class="activeClass('Step')"><a href="" ng-click="switchEdition('Step')">Step</a></li>
+                </ul>
+                </div>
 
-            <div class="input-group"  >
-                <h3>Course Number :</h2><input type="text" class="form-control" ng-model="course.num" ></h3>
-            </div>
-            <div class="input-group"  >
-                <h3>Course color :</h2><input type="text" class="form-control" ng-model="course.color" ></h3>
-            </div>
-<div class="input-group"  >
-    <h3>Course Name :</h2><input type="text" class="form-control" ng-model="course.menuName" ></h3>
-</div>
-<div class="input-group"  >
-    <h3>Course Description:</h3><textarea type="text" class="form-control" ng-model="course.description"  ></textarea>
-</div>
-            <button type="button" class="btn btn-success " ng-click="addCourse()"
+             <div ng-show="showEdition('Course')" style="width: 400px;overflow: hidden;">
+                <div class="input-group"  >
+                <h3>Course Number :</h3><input type="text" class="form-control" ng-model="course.num" >
+                </div>
+                <div class="input-group"  >
+                <h3>Course color :</h3><input type="text" class="form-control" ng-model="course.color" >
+                </div>
+                <div class="input-group"  >
+                 <h3>Course Name :</h3><input type="text" class="form-control" ng-model="course.menuName" >
+                </div>
+                <div class="input-group"  >
+                <h3>Course Description:</h3><textarea type="text" rows="10" cols="100" class="form-control" ng-model="course.description"  ></textarea>
+                </div>
+                <button type="button" class="btn btn-success " ng-click="addCourse()"
                     style="">add course to template</button>
+              </div>
 
-            </div>
 
-
-            <div style="width: 250px;overflow: hidden;float: left;margin-left: 30px">
-<div class="input-group"  >
-    <h3>Subject Name:</h3><input type="text" class="form-control" ng-model="course.subjectName"  >
-</div>
-<div class="input-group"  >
-    <h3>Subject Description:</h2><input type="text" class="form-control" ng-model="course.subjectDescription" ></h3>
-</div>
+            <div style="width: 400px;overflow: hidden;" ng-show="showEdition('Subject')">
+             <div class="input-group"  >
+                <h3>Subject Name:</h3><input type="text" class="form-control" ng-model="course.subjectName"  >
+                </div>
+                <div class="input-group"  >
+                <h3>Subject Description:</h3><textarea type="text" rows="10" cols="100" class="form-control" ng-model="course.subjectDescription" ></textarea>
+                </div>
             <button type="button" class="btn btn-success " ng-click="addSubject()"
                     style="">add Subject to template</button>
-                <hr>
-
- <div class="input-group"  >
- <h3>Subject parrent:</h2><input type="text" class="form-control" ng-model="subjectParrent"></h3>
- </div>
-<div class="input-group"  >
-    <h3>SubSubject Name:</h2><input type="text" class="form-control" ng-model="course.subSubjectName"></h3>
-</div>
-
-<div class="input-group"  >
-    <h3>SubSubject Description:</h2><input type="text" class="form-control" ng-model="course.subSubjectDescription"  ></h3>
-</div>
-            <button type="button" class="btn btn-success " ng-click="addsubSubject()"
-                    style="">add SubSubject to template</button>
-
-                </div>
-
-            <div style="width: 250px;overflow: hidden;float: left;margin-left: 30px">
-<div class="input-group"  >
-   <h3>SubSubject parrent:</h2><input type="text" class="form-control" ng-model="subSubjectParrent"></h3>
-</div>
-<div class="input-group"  >
- <h3>Module Name:</h2><input type="text" class="form-control" ng-model="course.moduleName" ></h3>
- </div>
-<div class="input-group"  >
- <h3>Module Description:</h2><input type="text" class="form-control" ng-model="course.moduleDescription"  ></h3>
-  </div>
-            <button type="button" class="btn btn-success " ng-click="addModule()"
-                             style="">add Module to template</button>
-                <hr>
-                <div class="input-group"  >
-                    <h3>Module parrent:</h2><input type="text" class="form-control" ng-model="moduleParrent"></h3>
-                </div>
- <div class="input-group"  >
-     <h3>Step Name:</h2><input type="text" class="form-control" ng-model="course.stepName" ></h3>
- </div>
-                <div class="input-group"  >
-                    <h3>Step type:</h2><input type="text" class="form-control" ng-model="course.typeStep" ></h3>
-                </div>
-<div class="input-group"  >
-   <h3>Step Content:</h2><input type="text" class="form-control" ng-model="course.content" ></h3>
-</div>
-            <button type="button" class="btn btn-success " ng-click="addStep()"
-                    style="">add Step to template</button>
-                </div>
-
-</div>
-        <div style="width: 50%;overflow: hidden;float: right">
-            <div style="width: 500px">
-                <div ng-repeat="subject in loadSubjects" style="float: left;margin-left: 15px">
-                    <button type="button" class="btn" ng-click="changeCourse(subject.menuName)" ng-style="subject.color">
-                        {{subject.menuName}}
-                    </button>
-                </div>
             </div>
-            <div style="position:relative;width: 350px;margin-top: 50px" >
-                <i>Course</i>:
-                <p>Course position : <b>{{resCourseSubject.num}}</b><span class="close" >x</span></p></p>
-                <p>Course background-color : <b>{{resCourseSubject.color['background-color']}}</b></p>
-            <p>Course name : <b>{{resCourseSubject.menuName}}</b></p>
-            <p>Course description : <b>{{resCourseSubject.description}}</b></p>
-            <div >
-                <ul><i>Subjects</i> :
-                <li ng-repeat="subject in resCourseSubject.subjects">
-                    <p>Subject name : <b>{{subject.subjectName}}</b><span class="close"
-                          ng-click="deleteSubject(subject.subjectName)">x</span></p>
-                    <p>Subject description :<b>{{subject.description}}</b></p>
-                     <ul><i>subSubjects</i>:
-                        <li ng-repeat="subject in subject.subSubjects">
-                            <p>subSubject name : <b> {{subject.subSubjectName}}</b>
-                             <span class="close" ng-click="deleteSubSubject(subject.subSubjectName)" >x</span></p>
-                            <p>subSubject description : <b>{{subject.description}}</b></p>
-                            <ul><i>Modules</i>:
-                                <li ng-repeat="module in showModule(subject.specialId)">
-                                    <p>module name : <b> {{module.moduleName}}</b>
-                                        <span class="close" ng-click="deleteModule(module.moduleName)">x</span></p>
-                                    <p>module description : <b> {{module.description}}</b></p>
-                                <ul><i>Steps</i>:
-                                    <li ng-repeat="step in module.steps">
-                                        <p>step name :<b>{{step.stepName}}</b>
-                                            <span class="close" ng-click="deleteStep(step.stepName)">x</span></p>
-                                        <p>step type :<b>{{step.typeStep}}</b></p>
-                                        <p>step content :<b>{{step.content}}</b></p>
+
+            <div ng-show="showEdition('Subsubject')" style="width: 400px;overflow: hidden;">
+                <div class="input-group"  >
+                <h3>Subject parrent:</h3><input type="text" class="form-control" ng-model="subjectParrent">
+                </div>
+                <div class="input-group"  >
+                    <h3>SubSubject Name:</h3><input type="text" class="form-control" ng-model="course.subSubjectName">
+                </div>
+                <div class="input-group"  >
+                <h3>SubSubject Description:</h3><textarea type="text" rows="10" cols="100" class="form-control" ng-model="course.subSubjectDescription"  ></textarea>
+                    </div>
+                 <button type="button" class="btn btn-success " ng-click="addsubSubject()"
+                    style="">add SubSubject to template</button>
+            </div>
+
+            <div style="width: 400px;overflow: hidden;" ng-show="showEdition('Module')">
+                <div class="input-group"  >
+                <h3>SubSubject parrent:</h3><input type="text" class="form-control" ng-model="subSubjectParrent">
+                </div>
+                <div class="input-group"  >
+                <h3>Module Name:</h3><input type="text" class="form-control" ng-model="course.moduleName" >
+                </div>
+                <div class="input-group"  >
+                <h3>Module Description:</h3><textarea type="text" rows="10" cols="100" class="form-control" ng-model="course.moduleDescription"  ></textarea>
+                </div>
+                <button type="button" class="btn btn-success " ng-click="addModule()"
+                             style="">add Module to template</button>
+             </div>
+
+            <div ng-show="showEdition('Step')" style="width: 400px;overflow: hidden;">
+                <div class="input-group"  >
+                    <h3>Module parrent:</h3><input type="text" class="form-control" ng-model="moduleParrent">
+                </div>
+                <div class="input-group"  >
+                <h3>Step Name:</h3><input type="text" class="form-control" ng-model="course.stepName" >
+                </div>
+                <div class="input-group"  >
+                    <h3>Step type:</h3><input type="text" class="form-control" ng-model="course.typeStep" >
+                </div>
+                <div class="input-group"  >
+                <h3>Step Content:</h3><input type="text" class="form-control" ng-model="course.content" >
+                </div>
+                    <button type="button" class="btn btn-success " ng-click="addStep()"
+                    style="">add Step to template</button>
+            </div>
+
+</div>
+        <div style="width: 50%;overflow: hidden;float: left;padding-bottom: 30px">
+
+
+            <div class="row">
+                <div class="col-xs-9">
+
+                    <!-- Single button -->
+                    <div class="btn-group" dropdown is-open="status.isopen">
+                        <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+                            Inventory of existing courses <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="subject in loadSubjects"><a href="" ng-click="changeCourse(subject.menuName)">{{subject.menuName}}</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                    <div style="width: 400px;float: right;border-right:1px solid white;padding-right: 15px;border-right:1px solid gainsboro ;" >
+                        <div ng-if="showTree">
+                            <h3>Tree courses :</h3>
+                            <hr>
+                            <i>Course</i>:
+                            <p>Course position : <b>{{resCourseSubject.num}}</b><span class="close" ng-click="hideCourse()">x</span></p></p>
+                            <p>Course background-color : <b>{{resCourseSubject.color['background-color']}}</b></p>
+                            <p>Course name : <b>{{resCourseSubject.menuName}}</b></p>
+                            <p>Course description : <b>{{resCourseSubject.description}}</b></p>
+
+                            <div >
+                                <ul><i>Subjects</i> :
+                                    <li ng-repeat="subject in resCourseSubject.subjects">
+                                        <p>Subject name : <b>{{subject.subjectName}}</b><span class="close"
+                                                                                              ng-click="deleteSubject(subject.subjectName)">x</span></p>
+                                        <p>Subject description :<b>{{subject.description}}</b></p>
+                                        <ul><i>subSubjects</i>:
+                                            <li ng-repeat="subject in subject.subSubjects">
+                                                <p>subSubject name : <b> {{subject.subSubjectName}}</b>
+                                                    <span class="close" ng-click="deleteSubSubject(subject.subSubjectName)" >x</span></p>
+                                                <p>subSubject description : <b>{{subject.description}}</b></p>
+                                                <ul><i>Modules</i>:
+                                                    <li ng-repeat="module in showModule(subject.specialId)">
+                                                        <p>module name : <b> {{module.moduleName}}</b>
+                                                            <span class="close" ng-click="deleteModule(module.moduleName)">x</span></p>
+                                                        <p>module description : <b> {{module.description}}</b></p>
+                                                        <ul><i>Steps</i>:
+                                                            <li ng-repeat="step in module.steps">
+                                                                <p>step name :<b>{{step.stepName}}</b>
+                                                                    <span class="close" ng-click="deleteStep(step.stepName)">x</span></p>
+                                                                <p>step type :<b>{{step.typeStep}}</b></p>
+                                                                <p>step content :<b>{{step.content}}</b></p>
+                                                            </li>
+                                                        </ul>
+
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
+                            </div>
+                            <button type="button" class="btn btn-success " ng-click="saveCurse()"
+                                    style="">Save Course</button>
+                            <button type="button" class="btn btn-danger " ng-click="deleteCourse()"
+                                    style="" ng-show="resCourseSubject._id">Delete Course</button>
+                        </div>
 
-                                </li>
-                            </ul>
-                        </li>
-                     </ul>
-                </li>
-                </ul>
-            </div>
-                <button type="button" class="btn btn-success " ng-click="saveCurse()"
-                        style="">Save Course</button>
+                </div>
             </div>
 
         </div>

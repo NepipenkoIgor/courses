@@ -1,12 +1,41 @@
 /**
  * Created by igor on 7/1/14.
  */
-var app = angular.module("academy", ['ui.router']);
+var app = angular.module("academy", ['ui.router','ui.bootstrap','xeditable']);
+app.run(function(editableOptions) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
+/*app.service('courseEdit',function($http){
+    var courseEditService={};
 
+    courseEditService.loadSubjects = function() {
+        return $http.get('/subject');
+    };
 
-app.controller('routerController', function ($stateParams, $location, $http, $scope) {
+    courseEditService.loadModule = function() {
+        return $http.get('/modulelesson');
+    };
 
-    //function reqSubject() {
+   // this.getInventory();
+
+    courseEditService.resCourseSubject={};
+    courseEditService.resCourseSubject.subjects=[];
+    courseEditService.resModuleLessonArray=[];
+
+    courseEditService.cangedCourse=function(name){
+            for(var i=0;i<this.loadSubjects.length;i++){
+                if(courseEditService.loadSubjects[i].menuName===name){
+                    courseEditService.resCourseSubject=this.loadSubjects[i];
+                    courseEditService.resModuleLessonArray=this.loadModule;
+             }
+        }
+     };
+ return courseEditService;
+})*/
+
+/*app.controller('routerController', function ($stateParams, $location, $http, $scope) {
+
+   'use strict'
         $http.get('/subject').success(function (data) {
             $scope.subject = data;
            // console.log("adasd",$scope.subject);
@@ -36,32 +65,24 @@ console.log($scope.subjectNow.subSubjects[d]);
                                                resMod.push(data[i]);
                                                console.log(resMod);
                                            }
-                                           //console.log(data[i].parent);
-                                       };
+                                       }
                                        $scope.module=resMod;
                                    });
                                 }
-                                //return;
                             }
-                            //console.log($scope.trueSubject.subjects[j].subjectName);
                             return;
                         }
                     }
                     return;
                 }
-
             }
-
         });
-
-    //};
-    //reqSubject();
-
-});
+});*/
 
 
 
 app.config(function ($stateProvider, $urlRouterProvider) {
+
     $urlRouterProvider.when('/', '/welcome');
     //$urlRouterProvider.when('/', '/welcome');
     // For any unmatched url, send to /route1
@@ -72,15 +93,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/editprofile",
             templateUrl: "profile.html",
             controller: 'profile'
-        }).state('editcourses', {
-            url: "/editcourses",
-            templateUrl: "editcourses.html",
-            controller: 'editcourses'
         })
         .state('welcome', {
             url: "/welcome",
             templateUrl: "welcome.html",
-            controller: 'maintab'
+            controller: ''
         })
         .state('login', {
             url: "/login",
@@ -97,19 +114,48 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('posts', {
             url: "/post/all",
             templateUrl: "postall.html"
-        }).state('themaSubject', {
-            url: "/:topic/:subject",
-            templateUrl: "topicSubject.html",
-            controller: 'routerController'
-        }).state('themaTop', {
-            url: "/:topic",
-            templateUrl: "topic.html",
-            controller: 'routerController'
-        }).state('subSubject', {
-            url: "/:topic/:subject/:subsubject",
-            templateUrl: "subSubject.html",
-            controller: 'routerController'
+        }).state('lesson', {
+            url: "/courses/:courseTitle",
+            templateUrl: "lesson.html",
+            controller: 'lessonController'
         });
-
-
 });
+/*.state('themaSubject', {
+ url: "/:topic/:subject",
+ templateUrl: "topicSubject.html",
+ controller: 'routerController'
+ }).state('themaTop', {
+ url: "/:topic",
+ templateUrl: "topic.html",
+ controller: 'routerController'
+ }).state('subSubject', {
+ url: "/:topic/:subject/:subsubject",
+ templateUrl: "subSubject.html",
+ controller: 'routerController'
+ })*
+
+ /*.state('editcourses', {
+ url: "/coursesedit",
+ templateUrl: "editcourses.html",
+ controller: 'editcourses'
+ }).state('coursesedition', {
+ url: "/courses/edition",
+ templateUrl: "coursesedition.html",
+ controller: 'courseEdition'
+ }).state('subjectedition', {
+ url: "/courses/edition/:course",
+ templateUrl: "subjectedition.html",
+ controller: 'courseEdition'
+ }).state('subSubjectedition', {
+ url: "/courses/edition/:course/:subject",
+ templateUrl: "subSubjectedition.html",
+ controller: 'courseEdition'
+ }).state('moduleedition', {
+ url: "/courses/edition/:course/:subject/:subSubject",
+ templateUrl: "moduleedition.html",
+ controller: 'courseEdition'
+ }).state('stepedition', {
+ url: "/courses/edition/:course/:subject/:subSubject/:module",
+ templateUrl: "stepedition.html",
+ controller: 'courseEdition'
+ })*/

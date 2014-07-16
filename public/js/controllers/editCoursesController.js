@@ -3,18 +3,20 @@
  */
 
 
-app.controller('editcourses', function ($stateParams, $location, $http, $scope) {
+app.controller('editcourses', function ($stateParams, $location, $http, $scope,courseEdit) {
 
-    $scope.newSubject={}
-    $http.get('/subject').success(function (subject) {
-        $scope.loadSubjects = subject;
+    $scope.newSubject={};
+    $scope.getInventory=function(){
+        $http.get('/subject').success(function (subject) {
+            $scope.loadSubjects = subject;
 
-    });
-    //$scope.newSubject={}
-    $http.get('/modulelesson').success(function (module) {
-        $scope.loadModule = module;
+        });
+        $http.get('/modulelesson').success(function (module) {
+            $scope.loadModule = module;
 
-    });
+        });
+    };
+    $scope.getInventory();
 
     $scope.resCourseSubject={};
     $scope.resCourseSubject.subjects=[];
@@ -27,6 +29,7 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
         $scope.resCourseSubject.color={'background-color':$scope.course.color};
         $scope.resCourseSubject.menuName=$scope.course.menuName;
         $scope.resCourseSubject.description=$scope.course.description;
+        $scope.showTree=true;
     };
     $scope.addSubject=function(){
         var subObj={};
@@ -36,7 +39,7 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
         $scope.resCourseSubject.subjects.push(subObj);
     };
     $scope.addsubSubject=function(){
-      //
+
         var subObj={};
         subObj.subSubjectName=$scope.course.subSubjectName;
         subObj.description=$scope.course.subSubjectDescription;
@@ -44,27 +47,17 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
         subObj.module=[];
 
        for(var i=0;i<$scope.resCourseSubject.subjects.length;i++){
-          console.log($scope.resCourseSubject.subjects[i].subjectName)
+          console.log($scope.resCourseSubject.subjects[i].subjectName);
+           console.log($scope.subjectParrent);
          if($scope.resCourseSubject.subjects[i].subjectName===$scope.subjectParrent){
              console.log($scope.resCourseSubject.subjects[i])
                 $scope.resCourseSubject.subjects[i].subSubjects.push(subObj);
             };
         };
-       /* $scope.resModuleLesson.steps=[];
-        for(var i=0;i<$scope.resCourseSubject.subjects.length;i++){
-        if($scope.resCourseSubject.subjects.subjectName===$scope.subjectParrent){
-            $scope.resCourseSubject.subjects[i]..push($scope.resModuleLesson._id);
-        }
-        }*/
-
     };
     $scope.addModule=function(){
-       // $scope.subjectParrent
-       // $scope.resModuleLesson._id=Date.now()+"";
+
         var moduleObj={};
-        //$scope.resModuleLesson.moduleName=$scope.course.moduleName;
-       // $scope.resModuleLesson.description=$scope.course.moduleDescription;
-       // $scope.resModuleLesson.steps=[];
 
         moduleObj.moduleName=$scope.course.moduleName;
         moduleObj.description=$scope.course.moduleDescription;
@@ -107,6 +100,7 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
         $http.post('/subject',data).success(function (data) {
           console.log(data.data.id);
             $scope.resCourseSubject._id=data.data.id;
+            $scope.getInventory();
         });
     };
 
@@ -118,6 +112,15 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
             };
         };
         return showModule;
+    };
+    $scope.hideCourse=function(){
+        $scope.resCourseSubject={};
+        $scope.resModuleLessonArray=[];
+        $scope.resCourseSubject.subjects=[];
+        $scope.resModuleLesson={};
+        $scope.showTree=false;
+        $scope.switchName='Course';
+     $scope.getInventory();
     };
  $scope.deleteSubject=function(name){
         for(var i=0;i<$scope.resCourseSubject.subjects.length;i++){
@@ -173,12 +176,83 @@ app.controller('editcourses', function ($stateParams, $location, $http, $scope) 
         }
     };
     $scope.changeCourse=function(name){
-        //loadModule
         for(var i=0;i<$scope.loadSubjects.length;i++){
             if($scope.loadSubjects[i].menuName===name){
                 $scope.resCourseSubject=$scope.loadSubjects[i];
                 $scope.resModuleLessonArray=$scope.loadModule;
             }
         }
+        $scope.showTree=true;
+    };
+    $scope.switchName='Course';
+    $scope.switchEdition=function(name){
+ $scope.switchName=name;
+    };
+    $scope.showEdition=function(name){
+        if($scope.switchName===name){
+            return true;
+        }
+        return false;
+    };
+    $scope.activeClass=function(name){
+        if($scope.switchName===name){
+            return 'active';
+        }
+        return " ";
+    };
+    $scope.showTree=false;
+
+    $scope.deleteCourse=function(){
+        console.log($scope.resCourseSubject._id);
+        var data={action:"delete",id:$scope.resCourseSubject._id,module:$scope.resModuleLessonArray};
+        $http.post('/subject',data).success(function (data) {
+
+            $scope.getInventory();
+            $scope.showTree=false;
+        });
+    };
+    $scope.isCourse=function(){
+        if($scope.resCourseSubject.menuName||$scope.resCourseSubject.num||$scope.resCourseSubject.color){
+            return true;
+        };
+        return false;
+    };
+    $scope.isSubject=function(){
+        if($scope.resCourseSubject.subjects){
+            if($scope.resCourseSubject.subjects.length>0){
+                return true;
+            };
+        };
+
+        return false;
+    };
+    $scope.isSubSubject=function(){
+        if($scope.resCourseSubject.subjects) {
+            for (var i = 0; i < $scope.resCourseSubject.subjects.length; i++) {
+                if ($scope.resCourseSubject.subjects[i].subSubjects.length > 0) {
+                    return true;
+                };
+            } ;
+        };
+        return false;
+    };
+    $scope.isModule=function(){
+        if($scope.resModuleLessonArray.length>0){
+            return true;
+        };
+        return false;
+    };
+    $scope.status = {
+        isopen: false
+    };
+
+    $scope.toggled = function(open) {
+        console.log('Dropdown is now: ', open);
+    };
+
+    $scope.toggleDropdown = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
     };
 });

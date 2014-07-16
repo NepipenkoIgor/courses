@@ -38,6 +38,7 @@ var subjectSchema=new Schema({
     description:String,
     subjects:[subSubjectSchema]
                             });*/
+/*
 var stepShema=new Schema({
 
     stepName:String,
@@ -47,7 +48,7 @@ var stepShema=new Schema({
 
 
 var moduleLessonSchema = new Schema({
-    /*_subject:{ type: Number, ref: 'Person' }*/
+    //_subject:{ type: Number, ref: 'Person' }
     parent:{ type: Number, ref: 'Subject' },
     moduleName:String,
     description:String,
@@ -64,7 +65,7 @@ var subSubjectSchema = new Schema({
             specialId:Number,
             subSubjectName:String,
             description:String,
-           /* module:[]*/
+          // module:[]
         }]
 
 });
@@ -75,7 +76,52 @@ var subjectSchema=new Schema({
     color:Object,
     description:String,
     subjects:[subSubjectSchema]
+});*/
+
+
+var limShema=new Schema({
+
+    title:String,
+    typeLim:String,
+    content:String,
+    order:String,
+    complete:Boolean,
+    awards:String,
+    userrating:String
 });
 
-mongoose.model('ModuleLesson',moduleLessonSchema,'moduleLesson');
-mongoose.model('Subject',subjectSchema,'subject');
+
+var unitSchema = new Schema({
+    /*_subject:{ type: Number, ref: 'Person' }*/
+    parent:{ type: Number, ref: 'Courses' },
+    title:String,
+    description:String,
+    lims:[limShema]
+
+});
+
+var modulesSchema = new Schema({
+    title:String,
+    description:String,
+    sections:[
+        {
+            specialId:Number,
+            title:String,
+            description:String,
+            /* module:[]*/
+        }]
+
+});
+
+var subjectSchema=new Schema({
+    num:Number,
+    title:String,
+    color:Object,
+    description:String,
+    modules:[modulesSchema]
+});
+
+
+
+mongoose.model('Units',unitSchema,'units');
+mongoose.model('Courses',subjectSchema,'courses');

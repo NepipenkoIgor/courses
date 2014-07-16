@@ -1,12 +1,13 @@
 {
     num:1,
-    menuName:'Math',
+    title:'Math',
     color:{'background-color':'olive'},
-    subjects:[{
-        subjectName:'Math1',
-        subjectImg:'',
-        subSubjects:[{
-                subSubjectName:'Math11',
+    modules:[{
+        title:'Math1',
+        units:[{
+            specialId:"",
+                title:'Math11',
+            description:"",
                 module:[
                     {
                         moduleName: 'module1',
@@ -194,3 +195,69 @@
         }]
     }]
 }
+
+{
+    num:1,
+        title
+:
+    'Biologia',
+        color
+:
+    {
+        'background-color'
+    :
+        'olive'
+    }
+,
+    modules:[
+        {
+            title: 'Module1',
+            sections: [
+                {
+                    specialId: "11",
+                    title: 'Unit1',
+                    description: ""
+                },
+                {
+                    specialId: "21",
+                    title: 'Unit2',
+                    description: ""
+                }
+            ]
+        },
+        {
+            title: 'Module2',
+            sections: [
+                {
+                    specialId: "31",
+                    title: 'Unit1',
+                    description: ""
+                },
+                {
+                    specialId: "41",
+                    title: 'Unit2',
+                    description: ""
+                }
+            ]
+        }
+    ]
+}
+
+[
+    {
+   parent:"11",
+   title:"unit1"
+    },
+    {
+        parent:"11",
+        title:"unit2"
+    },
+    {
+        parent:"21",
+        title:"unit1"
+    },
+    {
+        parent:"21",
+        title:"unit2"
+    }
+]

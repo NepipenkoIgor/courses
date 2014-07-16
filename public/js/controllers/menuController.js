@@ -2,12 +2,22 @@
  * Created by igor on 7/1/14.
  */
 app.controller('mainMenu', function ($scope,$http) {
+
+    $http.get('/courses').success(function (courses) {
+        $scope.courses = courses;
+        console.log( $scope.courses)
+    });
+
+
+
+
+
   //function reqSubject() {
-       $http.get('/subject').success(function (data) {
-           $scope.menus = data;
+      // $http.get('/subject').success(function (data) {
+           //$scope.menus = data;
 
           //  console.log($scope.menus[0]);
-        });
+        //});
 
     //};
    // reqSubject();
