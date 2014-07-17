@@ -5,20 +5,20 @@ var app = angular.module("academy", ['ui.router','ui.bootstrap','xeditable']);
 app.run(function(editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
-/*app.service('courseEdit',function($http){
+app.service('courseEdit',function($http){
     var courseEditService={};
 
-    courseEditService.loadSubjects = function() {
+   /* courseEditService.loadSubjects = function() {
         return $http.get('/subject');
-    };
+    };*/
 
-    courseEditService.loadModule = function() {
+   /* courseEditService.loadModule = function() {
         return $http.get('/modulelesson');
     };
 
-   // this.getInventory();
+   // this.getInventory();*/
 
-    courseEditService.resCourseSubject={};
+  /*  courseEditService.resCourseSubject={};
     courseEditService.resCourseSubject.subjects=[];
     courseEditService.resModuleLessonArray=[];
 
@@ -29,9 +29,10 @@ app.run(function(editableOptions) {
                     courseEditService.resModuleLessonArray=this.loadModule;
              }
         }
-     };
+     };*/
+
  return courseEditService;
-})*/
+})
 
 /*app.controller('routerController', function ($stateParams, $location, $http, $scope) {
 

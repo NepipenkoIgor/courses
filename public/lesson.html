@@ -30,18 +30,18 @@
                             <button type="button" class="btn btn-success" ng-click="addSection(section.title,'after')">after</button>
                         </div>
 
-                        <button class="btn btn-danger" ng-click="deleteSection(module.title,section.title)" ng-show="editableForm.$visible">del</button>
+                        <button class="btn btn-danger" ng-click="deleteSection(module._id,section._id)" ng-show="editableForm.$visible">del</button>
                     <ul>
-                        <li style="margin-left: 10%;padding: 10px" ng-repeat="unit in showUnits(section.specialId)">
+                        <li style="margin-left: 10%;padding: 10px" ng-repeat="unit in showUnits(section.specialId) track by $id(unit)">
                             <a  editable-text="unit.title">{{ unit.title || "empty" }}</a>
 
                             <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
-                                <button type="button" class="btn btn-success" ng-click="addUnit(section.title,unit.title,'before')">before</button>
-                                <button type="button" class="btn btn-success" ng-click="addUnit(section.title,unit.title,'after')">after</button>
+                                <button type="button" class="btn btn-success" ng-click="addUnit(section.specialId,unit.unitid,'before')">before</button>
+                                <button type="button" class="btn btn-success" ng-click="addUnit(section.specialId,unit.unitid,'after')">after</button>
                             </div>
 
 
-                            <button class="btn btn-danger" ng-click="deleteUnit(section.specialId,unit.title)" ng-show="editableForm.$visible">del</button>
+                            <button class="btn btn-danger" ng-click="deleteUnit(section.specialId,unit.unitid)" ng-show="editableForm.$visible">del</button>
                         </li>
                     </ul>
                     </li>
