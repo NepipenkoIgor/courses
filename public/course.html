@@ -12,21 +12,27 @@
                 <ul ng-repeat="module in course.modules"><a  editable-text="module.title">{{ module.title || "empty" }}</a>
 
                     <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
-                        <button type="button" class="btn btn-success"  ng-click="addModule(module._id,'before')">before</button>
-                        <button type="button" class="btn btn-success" ng-click="addModule(module._id,'after')">after</button>
+                        <button type="button" class="btn btn-success"  ng-click="addModule(module._id,'before')"
+                                ng-disabled="disabled">before</button>
+                        <button type="button" class="btn btn-success" ng-click="addModule(module._id,'after')"
+                                ng-disabled="disabled">after</button>
                     </div>
 
-                    <button class="btn btn-danger btn-xs" ng-click="deleteModule(module._id)" ng-show="editableForm.$visible">del</button>
+                    <button class="btn btn-danger btn-xs" ng-click="deleteModule(module._id)" ng-show="editableForm.$visible"
+                            ng-disabled="disabled">del</button>
 
                     <li style="margin-left: 10%;padding: 10px" ng-repeat="section in module.sections">
                         <a  editable-text="section.title">{{ section.title || "empty" }}</a>
 
                         <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
-                            <button type="button" class="btn btn-success" ng-click="addSection(section.title,'before')">before</button>
-                            <button type="button" class="btn btn-success" ng-click="addSection(section.title,'after')">after</button>
+                            <button type="button" class="btn btn-success" ng-click="addSection(section.title,'before')"
+                                    ng-disabled="disabled">before</button>
+                            <button type="button" class="btn btn-success" ng-click="addSection(section.title,'after')"
+                                    ng-disabled="disabled">after</button>
                         </div>
 
-                        <button class="btn btn-danger btn-xs" ng-click="deleteSection(module._id,section._id)" ng-show="editableForm.$visible">del</button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteSection(module._id,section._id)" ng-show="editableForm.$visible"
+                                ng-disabled="disabled">del</button>
                     <ul>
                         <li style="margin-left: 10%;padding: 10px" ng-repeat="unit in showUnits(section.specialId) track by $id(unit)">
                             <a  editable-text="unit.title"
@@ -36,12 +42,15 @@
                             </a>
 
                             <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
-                                <button type="button" class="btn btn-success" ng-click="addUnit(module._id,section.specialId,unit.unitId,'before')">before</button>
-                                <button type="button" class="btn btn-success" ng-click="addUnit(module._id,section.specialId,unit.unitId,'after')">after</button>
+                                <button type="button" class="btn btn-success" ng-click="addUnit(module._id,section.specialId,unit.unitId,'before')"
+                                        ng-disabled="disabled">before</button>
+                                <button type="button" class="btn btn-success" ng-click="addUnit(module._id,section.specialId,unit.unitId,'after')"
+                                        ng-disabled="disabled">after</button>
                             </div>
 
 
-                            <button class="btn btn-danger btn-xs" ng-click="deleteUnit(section.specialId,unit.unitId)" ng-show="editableForm.$visible">del</button>
+                            <button class="btn btn-danger btn-xs" ng-click="deleteUnit(section.specialId,unit.unitId)" ng-show="editableForm.$visible"
+                                    ng-disabled="disabled">del</button>
                         </li>
                     </ul>
                     </li>
@@ -49,15 +58,18 @@
                 <hr>
                     <div class="buttons">
                         <!-- button to show form -->
-                        <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                        <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible"
+                                ng-disabled="disabled">
                             Edit
                         </button>
                         <!-- buttons to submit / cancel form -->
       <span ng-show="editableForm.$visible">
-        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting"
+                ng-disabled="disabled">
             Save
         </button>
-        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()"
+                ng-disabled="disabled">
             Cancel
         </button>
       </span>
