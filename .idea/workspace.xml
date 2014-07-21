@@ -96,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.25" vertical-offset="855" max-vertical-offset="4410">
-              <caret line="75" column="51" selection-start-line="75" selection-start-column="51" selection-end-line="75" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.625" vertical-offset="1800" max-vertical-offset="4410">
+              <caret line="152" column="61" selection-start-line="152" selection-start-column="61" selection-end-line="152" selection-end-column="61" />
               <folding>
                 <element signature="e#3811#4768#2" expanded="true" />
                 <element signature="e#4879#5480#2" expanded="true" />
@@ -117,15 +117,16 @@
                 <element signature="e#12588#12737#2" expanded="true" />
                 <element signature="e#12796#12941#2" expanded="true" />
                 <element signature="e#16453#16586#1" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="autorization.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="autorization.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/autorization.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14906833" vertical-offset="0" max-vertical-offset="805">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
               <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
               <folding />
             </state>
@@ -200,9 +201,9 @@
         <option value="$PROJECT_DIR$/public/js/controllers/tabController.js" />
         <option value="$PROJECT_DIR$/public/moduleChenged.html" />
         <option value="$PROJECT_DIR$/public/unitChenged.html" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/public/course.html" />
         <option value="$PROJECT_DIR$/routes/autorization.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
       </list>
     </option>
   </component>
@@ -215,8 +216,8 @@
     <initial>false</initial>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="31" />
-    <option name="y" value="35" />
+    <option name="x" value="13" />
+    <option name="y" value="2" />
     <option name="width" value="1874" />
     <option name="height" value="970" />
   </component>
@@ -529,7 +530,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="31" y="35" width="1874" height="970" extended-state="0" />
+    <frame x="13" y="2" width="1874" height="970" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -948,10 +949,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/autorization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.25" vertical-offset="855" max-vertical-offset="4410">
-          <caret line="75" column="51" selection-start-line="75" selection-start-column="51" selection-end-line="75" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.625" vertical-offset="1800" max-vertical-offset="4410">
+          <caret line="152" column="61" selection-start-line="152" selection-start-column="61" selection-end-line="152" selection-end-column="61" />
           <folding>
             <element signature="e#3811#4768#2" expanded="true" />
             <element signature="e#4879#5480#2" expanded="true" />
@@ -968,15 +977,8 @@
             <element signature="e#12588#12737#2" expanded="true" />
             <element signature="e#12796#12941#2" expanded="true" />
             <element signature="e#16453#16586#1" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/autorization.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14906833" vertical-offset="0" max-vertical-offset="805">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
