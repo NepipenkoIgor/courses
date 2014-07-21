@@ -84,7 +84,7 @@ console.log($scope.subjectNow.subSubjects[d]);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('/', '/welcome');
+   $urlRouterProvider.when('/', '/welcome');
     //$urlRouterProvider.when('/', '/welcome');
     // For any unmatched url, send to /route1
     $urlRouterProvider.otherwise("/");
@@ -94,11 +94,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/editprofile",
             templateUrl: "profile.html",
             controller: 'profile'
-        })
-        .state('welcome', {
-            url: "/welcome",
-            templateUrl: "welcome.html",
-            controller: ''
         })
         .state('login', {
             url: "/login",
@@ -115,12 +110,43 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('posts', {
             url: "/post/all",
             templateUrl: "postall.html"
-        }).state('lesson', {
+        }).state('adminlab', {
+            url: "/adminlab",
+            templateUrl: "adminlab.html"
+        }).state('adminlab.lesson', {
             url: "/courses/:courseTitle",
-            templateUrl: "lesson.html",
+            templateUrl: "course.html",
             controller: 'lessonController'
+        }).state('adminlab.lesson.module', {
+            url: "/main",
+            templateUrl: "coursedesc.html"
+
+        }).state('adminlab.lesson.unit', {
+            url: "/:moduleTitle/:sectionTitle/:unitTitle",
+            templateUrl: "courseunit.html"
+        }).state('welcome', {
+            url: "/welcome",
+            templateUrl: "welcome.html",
+            controller: ''
+        }).state('course', {
+            url: "/courses/:courseTitle",
+            templateUrl: "courseChenged.html",
+            controller: ''
+        }).state('module', {
+            url: "/courses/:courseTitle/:moduleTitle",
+            templateUrl: "moduleChenged.html"
+
+        }).state('unit', {
+            url: "/courses/:moduleTitle/:sectionTitle/:unitTitle",
+            templateUrl: "unitChenged.html"
         });
 });
+/*
+
+
+
+
+ */
 /*.state('themaSubject', {
  url: "/:topic/:subject",
  templateUrl: "topicSubject.html",

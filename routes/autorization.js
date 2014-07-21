@@ -5,8 +5,8 @@ function router(app,hasAccess) {
 
 
   app.get('/',hasAccess,function (req, res) {
-    //res.sendfile('public/index.html');
-      res.redirect('/#/welcome')
+    //res.sendfile('public/indexOld.html');
+      res.redirect('/#/welcome');
   });
 }
 module.exports=router;

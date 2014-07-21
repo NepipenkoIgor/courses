@@ -1,0 +1,433 @@
+.tall {
+  width: 200px;
+  height: 2000px;
+  background: #999;
+}
+
+.sidemenu {
+  width: 110px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1001;
+}
+
+.sidemenu .open:before {
+    content: "";
+    height: 0px;
+    position: absolute;
+    left: 0px;
+    top: 20px;
+    width: 0px; 
+    border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #4e5d6c;
+}
+
+body,
+.menu_cont {
+    margin: 0;
+    padding: 0;
+    color: #cfcfcf;
+}
+
+/************** User Menu *****************/
+
+.notify {
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #1f2f3f;
+}
+
+.user_menu {
+    position: relative;
+}
+
+.notify a {
+    text-decoration: none;
+}
+
+.notify a .user_menu span {
+    line-height: 50px;
+    color: #ddd;
+    margin-left: 60px;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    top: 8px;
+    left: 8px;
+    position: absolute;
+    background: url('http://iscoding.net/wp-content/uploads/avatars/1/d02c740d745a009db284c2aa22188128-bpthumb.jpg') center;
+    background-size:34px;
+    border-radius: 34px;  
+}
+
+.notify .dropdown-menu {
+    width: 200px;
+    left: -200px;
+    top: 0;
+}
+
+.notify_num {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.notify_num p {
+    font-size: 11px;
+    color: #fff;
+    line-height: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.list-group-item {
+    text-align: left;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+
+/************** Main Menu *****************/
+
+.menu a {
+    text-decoration: none;
+    height: 50px;
+    display: block;
+    position: relative;
+    line-height: 50px;
+}
+
+.menu a h4 {
+    width: 60px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    line-height: inherit;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+.menu a i {
+    position: absolute;
+    top: 17px;
+    left: 70px;
+    font-size: 17px;
+}
+
+.tool_menu {
+    height: 50px;
+    width: 150px;
+}
+
+.main_menu,
+.tool_menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main_menu li,
+.tool_menu li {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    float: left;
+}
+
+.main_menu li i,
+.tool_menu li i {
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.tool_menu {
+    display: none;
+}
+
+.tools:hover + ul.tool_menu,
+.tools:hover + div + ul.tool_menu,
+.tool_menu:hover {
+    display: block;
+}
+
+.tools:hover {
+    
+}
+
+.notify .open,
+.menu_cont .open {
+    
+}
+
+.menu .dropdown-menu {
+    top: 0px;
+    min-width: 150px;
+    left: -150px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background: none;
+}
+
+.course_menu {
+    position: relative;
+}
+
+.mod_title {
+    height: 50px;
+    border-top: 1px solid #1f2f3f;
+}
+
+/* Course Map icon */
+.mod_title i {
+    width: 25px;
+    height: 25px;
+    background-color: #1f2f3f;
+    border-radius: 15px;
+    color: #ddd;
+    text-align: center;
+    line-height: 27px;
+    font-size: 16px;
+    margin: 12.5px 5px;
+}
+
+.mod_title i:hover {
+    background-color: #17222e;
+}
+
+.mod_title h4 {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    line-height: 50px;
+    height: 50px;
+}
+
+.section_menu ul li {
+    
+}
+
+.course_menu ul,
+.course_menu ul ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.course_menu .section_menu li {
+    position: relative;
+}
+
+.course_menu .section_menu > li > h4 {
+    font-size: 15px;
+    color: #ddd;
+    margin: 0;
+    padding: 15px 0 2px 12px;
+}
+
+.course_menu .section_menu li h4:nth-child(2) {
+    padding: 2px 0 15px 12px;
+}
+
+.course_menu .section_menu > li:hover {
+    background-color: #1f2f3f;
+}
+
+.course_menu .section_menu > li:hover:before {
+    content: "";
+    height: 0px;
+    position: absolute;
+    left: 0px;
+    top: 40%;
+    width: 0px; 
+    border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #4e5d6c;
+}
+
+.course_menu .section_menu li div.course_sub_menu {
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 110px;
+}
+
+.course_menu .section_menu li:hover div.course_sub_menu {
+    display: block;
+}
+
+.course_menu .section_menu > li.active:hover:after,
+.section_menu li.active:before,
+.course_sub_menu li.active:before {
+        content: "\f017";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: #a5342a;
+    font-size: 14px;
+    position: absolute;
+    top: 4px;
+    left: 2px;
+}
+
+.course_menu .section_menu > li.complete:hover:after,
+.section_menu li.complete:before,
+.course_sub_menu li.complete:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: #4fa544;
+    font-size: 14px;
+    position: absolute;
+    top: 4px;
+    left: 2px;
+}
+
+.course_sub_menu li.complete:before,
+.course_sub_menu li.active:before {
+    top: -8px;
+}
+
+.section_menu li.complete h4,
+.course_sub_menu li.complete,
+.course_sub_menu li.complete i {
+    color: #888;
+}
+
+.course_sub_menu li.active {
+    color: #fff;
+}
+
+.course_sub_menu {
+    width: 154px;
+    background-color: #4e5d6c;
+    text-align: left;
+    border-left: 4px solid #0e151d;
+}
+
+.course_sub_menu ul {
+    background-color: #36414D;
+}
+
+.course_sub_menu ul li {
+    font-size: 16px;
+    width: auto;
+    text-align: left;
+    padding-left: 10px;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #17222e;
+}
+
+.course_sub_menu ul li:hover {
+    background-color: #17222e;
+}
+
+.course_sub_menu h5 {
+    margin: 0;
+    padding: 0;
+    padding-left: 15px;
+    line-height: 50px;
+    height: 50px;
+    font-size: 16px;
+}
+
+.course_sub_menu > p {
+    background-color: #0e151d;
+    font-size: 14px;
+    color: #ddd;
+    line-height: 18px;
+    padding: 5px;
+    margin: 0;
+}
+
+.course_sub_menu ul li i {
+    font-size: 14px;
+    padding-right:10px;
+}
+
+
+.menu ul li,
+.section_menu li,
+.course_sub_menu ul li {
+    cursor: pointer;
+}
+
+#editor { 
+            width: 600px;
+            height: 400px;
+        }
+
+
+
+.options {
+    position: absolute;
+    bottom: 0;
+}
+
+.options a {
+    width: 110px; 
+    height: 50px;
+    display: block;
+}
+
+.options h4 {
+    width: 60px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    line-height: inherit;
+    font-size: 14px;
+    position: absolute;
+    top: 15px;
+    left: 40px;
+}
+
+.options .dropdown-menu {
+    min-width: 100px;
+    left: -100px;
+    top: 0px;
+    padding: 0;
+}
+
+.content {
+    padding: 30px 70px;
+}
+
+
+
+.dropdown a {
+    outline: none;
+}
+
+}

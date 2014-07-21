@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
+<!-- saved from url=(0046)http://jake.thedesignori.net/layouts/wide.html -->
+<html ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
     <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
@@ -11,129 +11,279 @@
     <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <link href="stylesheets/xeditable.css" rel="stylesheet">
-   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
-
-
-   <script  src="javascripts/angular.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
+    <script  src="javascripts/angular.min.js"></script>
     <script  src="javascripts/angular-ui-router.min.js"></script>
     <script  src="javascripts/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script src="javascripts/xeditable.min.js"></script>
     <script  src="js/app.js"></script>
-   <!--<script  src="javascripts/usermodul.js"></script>-->
+    <!--<script  src="javascripts/usermodul.js"></script>-->
     <script  src="js/controllers/lessonController.js"></script>
     <!--<script  src="js/controllers/courseEditionController.js"></script>
     <script  src="js/controllers/editCoursesController.js"></script>-->
-   <script  src="js/controllers/userController.js"></script>
-   <!-- <script  src="js/controllers/tabController.js"></script>-->
+    <script  src="js/controllers/userController.js"></script>
+     <script  src="js/controllers/tabController.js"></script>
     <script  src="js/controllers/menuController.js"></script>
     <script  src="js/controllers/postsController.js"></script>
     <!-- <script  src="javascripts/front.js"></script>-->
-     <title></title>
- </head>
- <body ng-app="academy" ng-controller="profile as prof">
- <nav class="navbar navbar-default" role="navigation"  ng-controller="mainMenu">
-     <div class="container-fluid">
-         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Academy </a>
+
+
+
+
+
+<link href="stylesheets/csslayout/font-awesome.min.css" rel="stylesheet" type="text/css">
+<script src="javascripts/jslayot/jquery.min.js"></script>
+<link href="stylesheets/csslayout/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="stylesheets/csslayout/wide.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" type="image/png" href="http://iscoding.net/common/favicon.ico">
+<!--<script src="javascripts/jslayot/bootstrap.min.js"></script>-->
+<script src="javascripts/jslayot/ace.js" type="text/javascript" charset="utf-8"></script><style id="ace_editor">.ace_editor {position: relative;overflow: hidden;font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;font-size: 12px;line-height: normal;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: text;min-width: 100%;}.ace_dragging, .ace_dragging * {cursor: move !important;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;}.ace_text-input.ace_composition {background: #f8f8f8;color: #111;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;/* setting pointer-events: auto; on node under the mouse, which changesduring scroll, will break mouse wheel scrolling in Safari */pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0px;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-moz-transition: opacity 0.18s;-webkit-transition: opacity 0.18s;-o-transition: opacity 0.18s;-ms-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;-moz-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;display: block;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}/*** Dark version for fold widgets*/.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-moz-transition: opacity 0.4s ease 0.05s;-webkit-transition: opacity 0.4s ease 0.05s;-o-transition: opacity 0.4s ease 0.05s;-ms-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-moz-transition: opacity 0.05s ease 0.05s;-webkit-transition: opacity 0.05s ease 0.05s;-o-transition: opacity 0.05s ease 0.05s;-ms-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style>
+<script src="javascripts/jslayot/layout.js"></script>
+  <meta charset="utf-8">
+  <title>Designori Course layout v2</title>
+<script src="javascripts/jslayot/theme-chaos.js"></script><style id="ace-chaos">.ace-chaos .ace_gutter {background: #141414;color: #595959;border-right: 1px solid #282828;}.ace-chaos .ace_gutter-cell.ace_warning {background-image: none;background: #FC0;border-left: none;padding-left: 0;color: #000;}.ace-chaos .ace_gutter-cell.ace_error {background-position: -6px center;background-image: none;background: #F10;border-left: none;padding-left: 0;color: #000;}.ace-chaos .ace_print-margin {border-left: 1px solid #555;right: 0;background: #1D1D1D;}.ace-chaos {background-color: #161616;color: #E6E1DC;}.ace-chaos .ace_cursor {border-left: 2px solid #FFFFFF;}.ace-chaos .ace_cursor.ace_overwrite {border-left: 0px;border-bottom: 1px solid #FFFFFF;}.ace-chaos .ace_marker-layer .ace_selection {background: #494836;}.ace-chaos .ace_marker-layer .ace_step {background: rgb(198, 219, 174);}.ace-chaos .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid #FCE94F;}.ace-chaos .ace_marker-layer .ace_active-line {background: #333;}.ace-chaos .ace_gutter-active-line {background-color: #222;}.ace-chaos .ace_invisible {color: #404040;}.ace-chaos .ace_keyword {color:#00698F;}.ace-chaos .ace_keyword.ace_operator {color:#FF308F;}.ace-chaos .ace_constant {color:#1EDAFB;}.ace-chaos .ace_constant.ace_language {color:#FDC251;}.ace-chaos .ace_constant.ace_library {color:#8DFF0A;}.ace-chaos .ace_constant.ace_numeric {color:#58C554;}.ace-chaos .ace_invalid {color:#FFFFFF;background-color:#990000;}.ace-chaos .ace_invalid.ace_deprecated {color:#FFFFFF;background-color:#990000;}.ace-chaos .ace_support {color: #999;}.ace-chaos .ace_support.ace_function {color:#00AEEF;}.ace-chaos .ace_function {color:#00AEEF;}.ace-chaos .ace_string {color:#58C554;}.ace-chaos .ace_comment {color:#555;font-style:italic;padding-bottom: 0px;}.ace-chaos .ace_variable {color:#997744;}.ace-chaos .ace_meta.ace_tag {color:#BE53E6;}.ace-chaos .ace_entity.ace_other.ace_attribute-name {color:#FFFF89;}.ace-chaos .ace_markup.ace_underline {text-decoration: underline;}.ace-chaos .ace_fold-widget {text-align: center;}.ace-chaos .ace_fold-widget:hover {color: #777;}.ace-chaos .ace_fold-widget.ace_start,.ace-chaos .ace_fold-widget.ace_end,.ace-chaos .ace_fold-widget.ace_closed{background: none;border: none;box-shadow: none;}.ace-chaos .ace_fold-widget.ace_start:after {content: '▾'}.ace-chaos .ace_fold-widget.ace_end:after {content: '▴'}.ace-chaos .ace_fold-widget.ace_closed:after {content: '‣'}.ace-chaos .ace_indent-guide {border-right:1px dotted #333;margin-right:-1px;}.ace-chaos .ace_fold { background: #222; border-radius: 3px; color: #7AF; border: none; }.ace-chaos .ace_fold:hover {background: #CCC; color: #000;}</style></head>
+
+
+<body  ng-app="academy" ng-controller="profile as prof"  >
+<div ng-controller="maintab">
+<div class="sidemenu darker-bg"  >
+    <div class="menu_cont" >
+        
+        <!--- User menu --->
+        <div class="dropdown notify">
+            <a data-toggle="dropdown" href="http://jake.thedesignori.net/layouts/wide.html#" data-original-title="" title="">
+                <div class="user_menu">
+                    <div class="avatar">
+                        <div class="notify_num progress-bar-danger">
+                            <p>2</p>
+                        </div>  
+                    </div>
+                    <span>{{userdata.username}}</span>
+                </div>
+            </a>
+            <div class="dropdown-menu notifications list-group" role="menu" aria-labelledby="dLabel">
+                <a href="http://jake.thedesignori.net/layouts/wide.html#" class="list-group-item" data-original-title="" title="">
+                    <h4 class="list-group-item-heading">Notification 1</h4>
+                </a>
+                <a href="http://jake.thedesignori.net/layouts/wide.html#" class="list-group-item" data-original-title="" title="">
+                    <h4 class="list-group-item-heading">Notification 2</h4>
+                    <p class="list-group-item-text">With greater details!</p>
+                </a>
+            </div>
         </div>
-         <div class="navbar-header">
-             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                 <span class="sr-only">Toggle navigation</span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-             </button>
-             <a style="float:left" class="navbar-brand" href="#" editable-text="courseNow.course.title" ng-show="courseNow.course.title" onbeforesave="courseNow.saveCourse()">
-                 {{courseNow.course.title}}</a>
+        
+        <!--- Main menu --->
+        <a ui-sref="adminlab" style="margin-left: 20px">Admin Lab</a>
+        <div class="dropdown menu" ng-controller="mainMenu">
+            <a data-toggle="dropdown" href="http://jake.thedesignori.net/layouts/wide.html#" data-original-title="" title="">
+                <i class="fa fa-bars"></i>
+                <h4>Menu</h4>
+            </a>
+            <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <ul class="main_menu">
 
-         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"  >
-            <ul class="nav navbar-nav" style="margin-left: 30%">
-             <li class="" ng-hide="userdata"><a href="#/about">About</a></li>
-                <!--<li class="" ng-show="userdata"><a href="#/welcome"><i class="fa fa-institution fa-fw"></i>Courses</a></li>-->
-                <li class="dropdown" style="cursor:pointer">
-                <a class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-graduation-cap fa-fw"></i>Courses <b class="caret"></b></a>
-                <ul class="dropdown-menu" style="width: 300px" >
-
-
-                    <li ng-repeat="course in courseNow.courses" class="dropdown-submenu">
-                        <a ui-sref="lesson({courseTitle:course.title})" >{{course.title}}
-                        <button class="btn btn-danger" ng-click="courseNow.saveCourse('deletecourse')" >del</button>
-                        </a>
-                    </li>
-                    <hr>
-                    <li> <button class="btn btn-default" ng-click="addCourse()">Add course</button></li>
+                    <li  data-toggle="tooltip" data-placement="top" title="" class="btn-default" data-original-title="Course Work"><i class="fa fa-book"></i></li>
+                    <li data-toggle="tooltip" data-placement="top" title="" class="btn-default" data-original-title="Community"><i class="fa fa-users"></i></li>
+                    <li data-toggle="tooltip" data-placement="top" title="" class="btn-default tools" data-original-title="Tools"><i class="fa fa-wrench"></i></li>
+                    <ul class="tool_menu">
+                        <li data-toggle="tooltip" data-placement="bottom" title="" class="darker-bg" data-original-title="Codebox"><i class="fa fa-cube"></i></li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="" class="darker-bg" data-original-title="JS Bin"><i class="fa fa-code"></i></li>
+                        <li data-toggle="tooltip" data-placement="bottom" title="" class="darker-bg" data-original-title="Gitlabs"><i class="fa fa-git"></i></li>
+                    </ul>
                 </ul>
+            </div>
+        </div>
+
+
+        <div class="course_menu">
+
+        <ul class="section_menu">
+
+            <li data-original-title="" title="">
+                <h4>Courses:</h4>
+              <!--  <h4><b>S4 Title</b></h4>-->
+                <h4>{{courseNowChanged.title}}</h4>
+                <div class="course_sub_menu">
+                    <h5><b>list of courses</b></h5>
+                    <ul>
+                      <li data-original-title="" title="" ng-repeat="course in listOfCourses" ng-click="courseNowChange(course._id)"><i class="fa fa-pencil"></i>
+                          {{course.title}}
+                      </li>
+
+                    </ul>
+                </div>
             </li>
-                <!--<li class="dropdown" style="cursor:pointer">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-graduation-cap fa-fw"></i>Learn <b class="caret"></b></a>
-                    <ul class="dropdown-menu" style="width: 300px" ng-controller="mainMenu as menuitem">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Knowledge Map</a></li>
-                        <li class="divider"></li>
-                        <li ng-repeat="menu in menus" class="dropdown-submenu">
-                            <a  ui-sref="themaTop({topic:menu.menuName})">{{menu.menuName}}<span class="glyphicon glyphicon-hand-right" style="float:right"></span></a>
-                            <ul class="dropdown-menu" ng-style="menu.color">
-                                <li style="height: 52px"><a  ui-sref="themaTop({topic:menu.menuName})"><h4>{{menu.menuName}}</h4></a></li>
-                                <li class="divider"></li>
-                                <ul>Subject
-                                    <li ng-repeat="subject in menu.subjects">
-                                        <a ui-sref="themaSubject({topic:menu.menuName,subject:subject.subjectName})">{{subject.subjectName}}</a></li>
 
-                                </ul>
+        </ul>
 
-                            </ul>
-                        </li>
-                        <li><a href="#">Other</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Browse all</a></li>
-                    </ul>
-                </li>-->
-                <li class="" ng-show="userdata"><a href="#/post/all"><i class="fa fa-wechat fa-fw"></i>Comments</a></li>
-                <li class="" ng-show="userdata"><a href="#/post/all"><i class="fa fa-file-code-o fa-fw"></i>js bin</a></li>
-                <li class="" ng-show="userdata"><a href="#/post/all"><i class="fa fa-cube fa-fw"></i>Codebox</a></li>
-            </ul>
-            <!--  <form class="navbar-form navbar-left" role="search">
-                 <div class="form-group">
-                     <input type="text" class="form-control" placeholder="Search">
-                 </div>
-                 <button type="submit" class="btn btn-default">Submit</button>
-             </form>-->
-            <ul class="nav navbar-nav navbar-right" >
-                <li ng-hide="userdata"><a href="#/login">Login In</a></li>
-                <li  ng-show="userdata"><a  ><i class="fa fa-bell-o fa-fw"></i>Notfication</a></li>
-                <li class="dropdown" ng-show="userdata">
-                    <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer"><i class="fa fa-child fa-fw"></i>Hi, {{userdata.username}}<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li ><a ui-sref="editprofile" ><i class="fa fa-pencil fa-fw"></i>Edit Profile</a></li>
-                        <li ><a ui-sref="editcourses" ><i class="fa fa-pencil fa-fw"></i>Edit Courses</a></li>
-                        <li class="divider"></li>
-                        <li ><a href="/logout" ><i class="fa fa-bolt fa-fw"></i>logout</a></li>
-                        <!-- <li><a href="#">Another action</a></li>
-                         <li><a href="#">Something else here</a></li>
-                         <li class="divider"></li>
-                         <li><a href="#">Separated link</a></li>-->
-                    </ul>
+        </div>
+
+        <div class="course_menu">
+
+            <ul class="section_menu">
+
+                <li data-original-title="" title="">
+
+
+                        <h4 >Modules:</h4>
+                        <h4>{{moduleNowChanged.title}}</h4>
+
+                    <div class="course_sub_menu">
+                        <h5><b>list of modules</b></h5>
+                        <ul>
+                            <li data-original-title="" title="" ng-repeat="module in courseNowChanged.modules"
+                                ng-click="moduleNowChange(module._id)"><i class="fa fa-pencil"></i>
+                                {{module.title}}
+                            </li>
+
+                        </ul>
+                    </div>
                 </li>
+
             </ul>
-        </div><!-- /.navbar-collapse -->
+
+        </div>
+
+
+
+
+        <!--- Course menu --->
+        <div class="course_menu">
+
+            <div class="mod_title " >
+                <a href="http://jake.thedesignori.net/layouts/wide.html#" data-toggle="tooltip" data-placement="left" title="" data-original-title="Course Map">
+                    <i class="fa fa-map-marker"></i>
+                </a>
+                <h4>Module 1</h4>
+            </div>
+            <!--<ul class="section_menu">
+                <li class="complete" data-original-title="" title="">
+                    <h4>Section 1</h4>
+                    <h4><b>S1 Title</b></h4>
+                    <div class="course_sub_menu">
+                        <h5><b>S1 Title</b></h5>
+                        <p>A short description of the section. Only a couple sentences about the topics covered.</p>
+                        <ul>
+                            <li class="complete" data-original-title="" title=""><i class="fa fa-pencil"></i> Lesson title</li>
+                            <li class="complete" data-original-title="" title=""><i class="fa fa-film"></i> Lesson title</li>
+                            <li class="complete" data-original-title="" title=""><i class="fa fa-film"></i> Lesson title</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="active" data-original-title="" title="">
+                    <h4>Section 2</h4>
+                    <h4><b>S2 Title</b></h4>
+                    <div class="course_sub_menu">
+                        <h5><b>S2 Title</b></h5>
+                        <ul>
+                            <li class="complete" data-original-title="" title=""><i class="fa fa-pencil"></i> Lesson title</li>
+                            <li class="active" data-original-title="" title=""><i class="fa fa-video-camera"></i> Lesson title</li>
+                            <li data-original-title="" title=""><i class="fa fa-code"></i> Lesson title</li>
+                            <li data-original-title="" title=""><i class="fa fa-video-camera"></i> Lesson title</li>
+                        </ul>
+                    </div>
+                </li>
+                <li data-original-title="" title="">
+                    <h4>Section 3</h4>
+                    <h4><b>S3 Title</b></h4>
+                    <div class="course_sub_menu">
+                        <h5><b>Section title</b></h5>
+                        <ul>
+                            <li data-original-title="" title=""><i class="fa fa-film"></i> Lesson title</li>
+                            <li data-original-title="" title=""><i class="fa fa-code"></i> Lesson title</li>
+                        </ul>
+                    </div>
+                </li>
+                <li data-original-title="" title="">
+                    <h4>Section 4</h4>
+                    <h4><b>S4 Title</b></h4>
+                    <div class="course_sub_menu">
+                        <h5><b>Section title</b></h5>
+                        <img src="javascripts/jslayot/333" alt="">
+                        <ul>
+                            <li data-original-title="" title=""><i class="fa fa-pencil"></i> Lesson title</li>
+                            <li data-original-title="" title=""><i class="fa fa-film"></i> Lesson title</li>
+                            <li data-original-title="" title=""><i class="fa fa-film"></i> Lesson title</li>
+                            <li data-original-title="" title=""><i class="fa fa-code"></i> Lesson title</li>
+                            <li data-original-title="" title=""><i class="fa fa-pencil"></i> Lesson title</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>-->
+            <ul class="section_menu">
+                <li class="" data-original-title="" title="" ng-repeat="section in moduleNowChanged.sections">
+                    <h4>Section {{$index + 1}}</h4>
+                    <h4><b>{{section.title}}</b></h4>
+                    <div class="course_sub_menu">
+                        <h5><b>{{section.title}}</b></h5>
+                        <p></p>
+                        <ul>
+                            <li class="" data-original-title="" title=""
+                                ng-repeat="unit in showUnitsList(section.specialId) track by $id(unit)"
+                                    ng-click="unitNowChange(unit.unitId)">
+                                <i class="fa fa-pencil"></i> {{unit.title}}</li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--- Settings menu --->
+        <div class="dropdown options">
+            <a data-toggle="dropdown" href="http://jake.thedesignori.net/layouts/wide.html#" data-original-title="" title="">
+                <i class="fa fa-cogs icon"></i>
+                <h4>Options</h4>
+            </a>
+            <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <ul class="main_menu">
+                    <li data-toggle="tooltip" data-placement="top" title="" class="btn-default" data-original-title="Help"><i class="fa fa-question"></i></li>
+                    <li data-toggle="tooltip" data-placement="top" title="" class="btn-default" data-original-title="Settings"><i class="fa fa-cog"></i></li>
+                </ul>
+            </div>
+        </div>
     </div>
-</nav>
-
-
-<div ui-view style=""></div>
 </div>
- <div class="footer">
+<div ui-view style=""></div>
+<!--<div class="content">
+    <h1 id="designori">Designori</h1>
+        <p>Welcome to the Designori UI mockup. Here you will find:</p>
+        <ul>
+        <li data-original-title="" title="">General layout and interface</li>
+        <li data-original-title="" title="">Menus should function but lead no-where</li>
+        <li data-original-title="" title="">Design examples of common system usages</li>
+        </ul>
+        <p>This mockup uses the following technologies:</p>
+        <ul>
+        <li data-original-title="" title=""><a href="http://getbootstrap.com/" data-original-title="" title="">Bootstrap</a></li>
+        <li data-original-title="" title=""><a href="http://jquery.com/" data-original-title="" title="">Jquery</a></li>
+        <li data-original-title="" title=""><a href="http://fortawesome.github.io/Font-Awesome/" data-original-title="" title="">FontAwesome</a></li>
+        <li data-original-title="" title=""><a href="http://lesscss.org/" data-original-title="" title="">LESS</a></li>
+        <li data-original-title="" title=""><a href="http://bootswatch.com/" data-original-title="" title="">Bootswatch</a></li>
+        <li data-original-title="" title=""><a href="http://ace.c9.io/" data-original-title="" title="">Ace Editor</a></li>
+        </ul>
+        <h2 id="tenant">Tenet</h2>
+        <blockquote>
+        <p>Design should be simple, intuitive, unobtrusive, and barely noticed.</p>
+        </blockquote>
+        <h2 id="themes">Themes</h2>
+        <p>Themes can be changed by loading the desired bootstrap.css files into your document.</p>
+    <h1>Editor</h1>
+      <div id="editor" class=" ace_editor ace-chaos ace_dark"><textarea class="ace_text-input" wrap="off" spellcheck="false" style="opacity: 0; height: 12px; width: 6px; right: 566px; bottom: 388px;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 424px; width: 39px;"><div class="ace_gutter-cell " style="height: 12px;">1</div><div class="ace_gutter-cell " style="height: 12px;">2</div><div class="ace_gutter-cell " style="height: 12px;">3</div><div class="ace_gutter-cell " style="height: 12px;">4</div><div class="ace_gutter-cell " style="height: 12px;">5</div></div><div class="ace_gutter-active-line" style="top: 0px; height: 12px;"></div></div><div class="ace_scroller" style="left: 40px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 560px; height: 424px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 484px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height:12px;top:0px;left:0;right:0;"></div></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line" style="height:12px"></div><div class="ace_line" style="height:12px"><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;Number(min,max)&nbsp;{</div><div class="ace_line" style="height:12px"><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Math.floor((Math.random()&nbsp;*&nbsp;max)&nbsp;+&nbsp;min);</div><div class="ace_line" style="height:12px"><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;}</div><div class="ace_line" style="height:12px"><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;</div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor" style="left: 4px; top: 0px; width: 6px; height: 12px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 20px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 20px; height: 60px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 20px; left: 40px; right: 0px;"><div class="ace_scrollbar-inner" style="height: 20px; width: 560px;"></div></div><div style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; white-space: pre; font-family: inherit; font-size: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; line-height: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; white-space: pre; font-family: inherit; font-size: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; line-height: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; white-space: pre; font-family: inherit; font-size: inherit; font-style: inherit; font-variant: inherit; line-height: inherit; overflow: visible;">X</div></div></div>
+    <div class="tall">Scroll test</div>
+    <h1>bottom</h1>
+</div>-->
 
-
- </div>
-</body>
-</html>
+</div>
+</body></html>

@@ -2,13 +2,9 @@
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-10">
-                <div class="row">
-                    <div class="col-md-4">help</div>
-                    <div class="col-md-4">Progress</div>
-                    <div class="col-md-4">Course Map</div>
-                    </div>
+
             </div>
-            <div class="col-md-2"><i class="fa fa-hand-o-left"></i></div>
+
         </div>
         <div class="row" style="margin-top: 5%">
             <div class="col-md-12">
@@ -16,11 +12,11 @@
                 <ul ng-repeat="module in course.modules"><a  editable-text="module.title">{{ module.title || "empty" }}</a>
 
                     <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
-                        <button type="button" class="btn btn-success"  ng-click="addModule(module.title,'before')">before</button>
-                        <button type="button" class="btn btn-success" ng-click="addModule(module.title,'after')">after</button>
+                        <button type="button" class="btn btn-success"  ng-click="addModule(module._id,'before')">before</button>
+                        <button type="button" class="btn btn-success" ng-click="addModule(module._id,'after')">after</button>
                     </div>
 
-                    <button class="btn btn-danger" ng-click="deleteModule(module._id)" ng-show="editableForm.$visible">del</button>
+                    <button class="btn btn-danger btn-xs" ng-click="deleteModule(module._id)" ng-show="editableForm.$visible">del</button>
 
                     <li style="margin-left: 10%;padding: 10px" ng-repeat="section in module.sections">
                         <a  editable-text="section.title">{{ section.title || "empty" }}</a>
@@ -30,18 +26,22 @@
                             <button type="button" class="btn btn-success" ng-click="addSection(section.title,'after')">after</button>
                         </div>
 
-                        <button class="btn btn-danger" ng-click="deleteSection(module._id,section._id)" ng-show="editableForm.$visible">del</button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteSection(module._id,section._id)" ng-show="editableForm.$visible">del</button>
                     <ul>
                         <li style="margin-left: 10%;padding: 10px" ng-repeat="unit in showUnits(section.specialId) track by $id(unit)">
-                            <a  editable-text="unit.title">{{ unit.title || "empty" }}</a>
+                            <a  editable-text="unit.title"
+                                ui-sref="adminlab.lesson.unit({moduleTitle:module.title,sectionTitle:section.title,unitTitle:unit.title})"
+                                    ng-click="changeInit(unit._id)">
+                                {{ unit.title || "empty" }}
+                            </a>
 
                             <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
-                                <button type="button" class="btn btn-success" ng-click="addUnit(section.specialId,unit.unitid,'before')">before</button>
-                                <button type="button" class="btn btn-success" ng-click="addUnit(section.specialId,unit.unitid,'after')">after</button>
+                                <button type="button" class="btn btn-success" ng-click="addUnit(module._id,section.specialId,unit.unitId,'before')">before</button>
+                                <button type="button" class="btn btn-success" ng-click="addUnit(module._id,section.specialId,unit.unitId,'after')">after</button>
                             </div>
 
 
-                            <button class="btn btn-danger" ng-click="deleteUnit(section.specialId,unit.unitid)" ng-show="editableForm.$visible">del</button>
+                            <button class="btn btn-danger btn-xs" ng-click="deleteUnit(section.specialId,unit.unitId)" ng-show="editableForm.$visible">del</button>
                         </li>
                     </ul>
                     </li>
@@ -68,22 +68,8 @@
         </div>
     </div>
     <div class="col-md-7">
-        <div class="row">
-            <div class="col-md-12">
-                title
-                <hr>
-            </div>
+        <div ui-view style="">
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                video
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                coments/ask
-            </div>
-        </div>
+
     </div>
 </div>

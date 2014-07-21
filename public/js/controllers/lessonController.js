@@ -21,11 +21,9 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                     courseEdit.course=$scope.course;
                 }
             }
-            console.log("kyky",$scope.course)
+
             if (!$scope.course) {
-                /*courseEdit.courses=$scope.courses;
-                courseEdit.course=" ";*/
-                $state.go('welcome');
+                $state.go('adminlab');
             }
 
 
@@ -41,14 +39,14 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 $scope.units = units;
             } else {
                 $scope.units = [];
-                $state.go('welcome');
+                $state.go('adminlab');
             }
             $scope.showUnits = function (id) {
                 function sortArr(a, b) {
-                    if (a.unitid < b.unitid) {
+                    if (a.unitId < b.unitId) {
                         return -1;
                     }
-                    if (a.unitid > b.unitid) {
+                    if (a.unitId > b.unitId) {
                         return 1;
                     }
                     return 0;
@@ -59,6 +57,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                         arrUnits.push($scope.units[i]);
                     }
                 }
+                console.log("sort unit",arrUnits.sort(sortArr));
                 return arrUnits.sort(sortArr);
             };
 
@@ -84,22 +83,29 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             $scope.unitsNew = null;
             console.log(data);
             if(action==='deletecourse'){
-                $state.go('lesson',{courseTitle:$scope.courses[0].title});
+               // $state.go('lesson',{courseTitle:$scope.courses[0].title});
+                $state.go('adminlab');
+                init();
+                return;
             }
-            $state.go('lesson',{courseTitle:$scope.course.title});
-            //init();
+            console.log($scope.course.title)
+            $state.go('adminlab.lesson.module',{courseTitle:$scope.course.title});
+           // $state.go('adminlab')
+            init();
         });
     };
     courseEdit.saveCourse=$scope.saveCourse;
 
     $scope.unitsDelete = []
     $scope.deleteUnit = function (parent, unitId) {
-        var unitTitle = unitId || "all";
+        console.log("parent", parent)
+        console.log("unitId", unitId)
+       var unitTitle = unitId || "all";
         if (unitTitle === "all") {
             for (var i = 0; i < $scope.units.length; i++) {
                 if ($scope.units[i].parent === parent) {
                     $scope.unitsDelete.push($scope.units[i]._id);
-                    $scope.unitsDelete
+                    $scope.unitsDelete;
                     $scope.units.splice(i, 1);
                     $scope.saveCourse();
                     i--;
@@ -109,20 +115,35 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
             return;
         }
-        for (var i = 0; i < $scope.units.length; i++) {
-            if ($scope.units[i].parent === parent && $scope.units[i].unitid === unitId) {
-                // unitsDelete.push($scope.units[i]._id);
+       for(var i = 0; i < $scope.units.length; i++) {
+           if($scope.units[i].unitId !== unitId){
+               continue;
+           }
                 $scope.unitsDelete.push($scope.units[i]._id);
-
                 $scope.units.splice(i, 1);
                 $scope.saveCourse();
-
+                return;
             }
 
-        }
-
-        console.log("delet units", $scope.unitsDelete)
     };
+
+$scope.deleteCourse=function(id){
+        for(var i=0;i<$scope.courses.length;i++){
+            if($scope.courses[i]._id!==id) {
+                continue;
+            }
+           $scope.course=$scope.courses[i];
+            for(var j=0;j<$scope.courses[i].modules.length;j++){
+                for(var l=0;l<$scope.courses[i].modules[j].sections.length;l++){
+                    $scope.deleteUnit($scope.courses[i].modules[j].sections[l].specialId);
+                }
+            }
+            $scope.saveCourse('deletecourse');
+
+        }
+    };
+    courseEdit.deleteCourse=$scope.deleteCourse;
+
 
 
     $scope.deleteModule = function (id) {
@@ -133,7 +154,8 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                     $scope.deleteUnit($scope.course.modules[i].sections[j].specialId);
                 }
                 $scope.course.modules.splice(i, 1);
-                j--;
+                //return;
+                //j--;
             }
         }
 
@@ -150,7 +172,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             if ($scope.course.modules[i]._id === moduleId) {
                 for (var j = 0, l = $scope.course.modules[i].sections.length; j < l; j++) {
                     if ($scope.course.modules[i].sections[j]._id === id) {
-                        $scope.deleteUnit($scope.course.modules[i].sections[j].specialId)
+                        //  $scope.deleteUnit($scope.course.modules[i].sections[j].specialId)
                         $scope.course.modules[i].sections.splice(j, 1);
                         l--;
                     }
@@ -162,11 +184,11 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     };
 
 
-    $scope.addModule = function (name, position) {
+    $scope.addModule = function (id, position) {
 
         for (var i = 0, l = $scope.course.modules.length; i < l; i++) {
             //console.log($scope.course.modules[i].title===name)
-            if ($scope.course.modules[i].title === name) {
+            if ($scope.course.modules[i]._id === id) {
                 console.log(position === 'after')
                 if (position === 'after') {
                     //console.log(l)
@@ -175,7 +197,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                         {title: "New Section", description: "", specialId: specialId}
                     ]})
                     // console.log( $scope.course.modules);
-                    $scope.units.push({parent: specialId, title: "New Unit", unitid: specialId, description: "", lims: []});
+                    $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                     $scope.saveCourse();
                     return;
                 }
@@ -186,7 +208,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                         {title: "New Section", description: "", specialId: specialId}
                     ]})
                     // console.log( $scope.course.modules);
-                    $scope.units.push({parent: specialId, title: "New Unit", unitid: specialId, description: "", lims: []});
+                    $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                     $scope.saveCourse();
                     return;
                 }
@@ -203,7 +225,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                         var specialId = Date.now();
                         $scope.course.modules[i].sections.splice(j + 1, 0, {title: "New Section", description: "", specialId: specialId});
                         // console.log( $scope.course.modules);
-                        $scope.units.push({parent: specialId, title: "New Unit", unitid: specialId, description: "", lims: []});
+                        $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                         $scope.saveCourse();
                         return;
                     }
@@ -211,7 +233,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                         var specialId = Date.now();
                         $scope.course.modules[i].sections.splice(j, 0, {title: "New Section", description: "", specialId: specialId});
                         console.log($scope.course.modules[i].sections);
-                        $scope.units.push({parent: specialId, title: "New Unit", unitid: specialId, description: "", lims: []});
+                        $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                         //  $scope.unitsNew.push
                         console.log($scope.units)
                         $scope.saveCourse();
@@ -222,28 +244,43 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         }
     }
 
-    $scope.addUnit = function (id, unitsOrderId, position) {
-        for (var i = 0; i < $scope.course.modules.length; i++) {
+    $scope.addUnit = function (moduleId,sectionId, unitsOrderId, position) {
+      for (var i = 0; i < $scope.course.modules.length; i++) {
+          if($scope.course.modules[i]._id!==moduleId){
+              continue;
+          }
             for (var j = 0, l = $scope.course.modules[i].sections.length; j < l; j++) {
-                if ($scope.course.modules[i].sections[j].specialId === id) {
+                if ($scope.course.modules[i].sections[j].specialId === sectionId) {
                     var specialId = $scope.course.modules[i].sections[j].specialId;
-                    //  for(var l=0;l< $scope.units)
 
                     if (position === 'after') {
                         var orderId = unitsOrderId + 1;
-                        $scope.units.push({parent: specialId, unitid: orderId, title: "New Unit", description: "", lims: []});
-                        $scope.saveCourse();
-                        return;
+                        var newUnit={parent: specialId, unitId: orderId, title: "New Unit", description: "", lims: []}
+                        for(var z=0;z<$scope.units.length;z++){
+                            if($scope.units[z].unitId!==newUnit.unitId){
+                                $scope.units.push(newUnit);
+                                $scope.saveCourse();
+                                console.log("after",$scope.units)
+                                return;
+                            }
+
+                        }
                     }
                     if (position === 'before') {
                         var orderId = unitsOrderId - 1;
                         // $scope.course.modules[i].sections.splice(j,0,{title:"New Section",description:"",specialId:specialId});
                         console.log($scope.course.modules[i].sections);
-                        $scope.units.push({parent: specialId, unitid: orderId, title: "New Unit", description: "", lims: []});
+                        var newUnit={parent: specialId, unitId: orderId, title: "New Unit", description: "", lims: []}
+                        for(var z=0;z<$scope.units.length;z++){
+                            if($scope.units[z].unitId!==newUnit.unitId){
+                                $scope.units.push(newUnit);
+                                $scope.saveCourse();
+                                console.log($scope.units);
+                                return;
+                            }
 
-                        console.log($scope.units);
-                        $scope.saveCourse();
-                        return;
+                        }
+
                     }
                 }
             }
@@ -251,5 +288,15 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
     }
 
+
+    $scope.changeInit=function(id){
+        for(var i=0;i<$scope.units.length;i++){
+            if($scope.units[i]._id!==id){
+                continue;
+            }
+            $scope.unitNow=$scope.units[i];
+        }
+
+    }
 
 })

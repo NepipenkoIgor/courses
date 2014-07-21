@@ -96,7 +96,7 @@ var unitSchema = new Schema({
     parent:{ type: Number, ref: 'Courses' },
     title:String,
     description:String,
-    unitid:Number,
+    unitId:Number,
     lims:[limShema]
 
 });

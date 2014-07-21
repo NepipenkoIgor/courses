@@ -42,12 +42,6 @@ app.controller('courseEdition', function ($state,$stateParams, $location, $http,
     $scope.resModuleLessonArray=[];
     console.log(courseEdit);
 
-   // console.log(courseEdit.loadSubjects);
-   /* $scope.loadSubjects=courseEdit.loadSubjects;
-    $scope.resModuleLessonArray=courseEdit.resModuleLessonArray;*/
-
-
-  //  console.log($stateParams.subject)
 
     $scope.changeCourse=function(name){
         for(var i=0;i<$scope.loadSubjects.length;i++){

@@ -1,142 +1,76 @@
 /**
  * Created by igor on 7/1/14.
  */
-app.controller('maintab', function ($scope, $http) {
+app.controller('maintab', function ($scope, $http,$state) {
     'user strict';
 
-    $scope.tab = 1;
-    function reqSubject() {
-        $http.get('/subject').success(function (data) {
-            $scope.menus = data;
-            console.log($scope.menus);
-            $scope.vertical = $scope.menus.length * 90 + 'px';
-            $scope.tabheight = {height: $scope.vertical};
-            $scope.colorTab = $scope.menus[0].color['background-color'];
-            $scope.changTabColor = $scope.menus[0].color['background-color'];
-        });
+    $http.get('/courses').success(function (courses) {
+$scope.listOfCourses=courses;
+    });
+    $http.get('/units').success(function (units) {
+        $scope.listOfUnits=units;
 
-    };
-    reqSubject();
-    console.log($scope.menus);
-    /* this.menus = [
-     {
-        num: 1,
-        menuName: 'Math',
-        color: {
-                'background-color': 'olive'
-                },
-        subjects: [
-               {
-               subjectName:'Math1',
-               subjectImg:'',
-               subSubjects:[
-                    {
-                    subSubjectsName:'',
-                    steps:[
-                        {
-                        stepName:'',
-                        type:'',
-                        content:''
-                        }]
-                    }]
-               }]
-      }
-     {
-     num: 2,
-     menuName: 'Science',
-     color: {
-     'background-color': 'green'
-     },
-     subjects: [
-     "Science1",
-     "Science2",
-     "Science3"
-     ]
 
-     },
-     {
-     num: 3,
-     menuName: 'Humanties',
-     color: {
-     'background-color': 'teal'
-     },
-     subjects: [
-     "Humanties1",
-     "Humanties2",
-     "Humanties3"
-     ]
+        $scope.showUnitsList = function (id) {
+            function sortArr(a, b) {
+                if (a.unitId < b.unitId) {
+                    return -1;
+                }
+                if (a.unitId > b.unitId) {
+                    return 1;
+                }
+                return 0;
+            };
+            var arrUnits = [];
+            for (var i = 0; i < $scope.listOfUnits.length; i++) {
+                if ($scope.listOfUnits[i].parent === id) {
+                    arrUnits.push($scope.listOfUnits[i]);
+                }
+            }
+            console.log("sort unit",arrUnits.sort(sortArr));
+            return arrUnits.sort(sortArr);
+        };
 
-     },
-     {
-     num: 4,
-     menuName: 'Economics and Finance',
-     color: {
-     'background-color': 'grey'
-     },
-     subjects: [
-     "Economics and Finance1",
-     "Economics and Finance2",
-     "Economics and Finance3"
-     ]
+    });
 
-     },
-     {
-     num: 5,
-     menuName: 'Computing',
-     color: {
-     'background-color': 'gold'
-     },
-     subjects: [
-     "Computing1",
-     "Computing2",
-     "Computing3"
-     ]
 
-     }
-
-     ];*/
-    //$scope.vertical=$scope.menus.length*90+'px';
-    // $scope.tabheight={height:$scope.vertical};
-    console.log("asd", $scope.tabheight);
-
-    $scope.showTab = function (num) {
-        $scope.tab = num;
-        $scope.changTabColor = this.menus[num - 1].color['background-color'];
-    };
-
-    $scope.activeTab = function (num) {
-        if (num === this.tab) {
-            return true;
+    $scope.courseNowChange=function(id){
+        for(var i=0;i<$scope.listOfCourses.length;i++){
+            if($scope.listOfCourses[i]._id===id){
+                $scope.courseNowChanged=$scope.listOfCourses[i];
+               // console.log("iam here",$scope.courseNowChanged);
+                $scope.moduleNowChanged="";
+                $state.go('course',{courseTitle:$scope.courseNowChanged.title});
+            }
         }
-        return false;
-    };
-
-    /* this.classActive=function(num){
-     if(num===this.tab){
-     return "active";
-     };
-     return;
-     };*/
-    //$scope.colorTab = $scope.menus[0].color['background-color'];
-    //$scope.changTabColor = $scope.menus[0].color['background-color'];
-    $scope.hover = function (color) {
-        if (color) {
-            $scope.colorTab = color;
-            return;
-        }
-        $scope.colorTab = 'ghostwhite';
 
     };
-    $scope.color = function (color1, color2, color3) {
-        if (color2 === color3) {
-            return {'background-color': color2};
+    $scope.moduleNowChange=function(id){
+        for(var i=0;i<$scope.courseNowChanged.modules.length;i++){
+            if($scope.courseNowChanged.modules[i]._id===id){
+                $scope.moduleNowChanged=$scope.courseNowChanged.modules[i];
+                //console.log("iam here",$scope.courseNowChanged);
+                $state.go('module',{courseTitle:$scope.courseNowChanged.title,moduleTitle:$scope.moduleNowChanged.title});
+            }
         }
-        if (color1 === color2) {
 
-            return {'background-color': color1};
-        }
-        return {'background-color': 'ghostwhite'};
     };
+    $scope.unitNowChange=function(id){
 
+        for(var i=0;i<$scope.listOfUnits.length;i++){
+           // console.log($scope.listOfUnits[i]);
+            if($scope.listOfUnits[i].unitId===id){
+                $scope.unitNowChanged=$scope.listOfUnits[i];
+                console.log("iam here", $scope.unitNowChanged);
+                for(var j=0;j<$scope.moduleNowChanged.sections.length;j++){
+                    if($scope.moduleNowChanged.sections[j].specialId===$scope.unitNowChanged.parent){
+                        $scope.sectionNowChanged=$scope.moduleNowChanged.sections[j];
+                    }
+                }
+                $state.go('unit',{courseTitle:$scope.courseNowChanged.title,moduleTitle:$scope.moduleNowChanged.title,
+            sectionTitle:$scope.sectionNowChanged.title,unitTitle:$scope.unitNowChanged.title});
+            }
+        }
 
+    };
 });
