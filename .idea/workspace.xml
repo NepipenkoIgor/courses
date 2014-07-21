@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="lessonController.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="lessonController.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/lessonController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="4605">
-              <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="61" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.36517534" vertical-offset="2698" max-vertical-offset="4605">
+              <caret line="200" column="22" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -76,16 +76,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stepedition.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/stepedition.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.583333" vertical-offset="478" max-vertical-offset="1305">
-              <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="menuController.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/menuController.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -96,27 +86,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.625" vertical-offset="1800" max-vertical-offset="4410">
-              <caret line="152" column="61" selection-start-line="152" selection-start-column="61" selection-end-line="152" selection-end-column="61" />
+            <state vertical-scroll-proportion="3.125" vertical-offset="225" max-vertical-offset="4485">
+              <caret line="10" column="86" selection-start-line="10" selection-start-column="86" selection-end-line="10" selection-end-column="86" />
               <folding>
-                <element signature="e#3811#4768#2" expanded="true" />
-                <element signature="e#4879#5480#2" expanded="true" />
-                <element signature="e#5559#5816#2" expanded="true" />
-                <element signature="e#5905#6146#2" expanded="true" />
-                <element signature="e#8693#9054#1" expanded="true" />
-                <element signature="e#9055#9256#1" expanded="true" />
-                <element signature="e#9547#9908#1" expanded="true" />
-                <element signature="e#9909#10106#1" expanded="true" />
-                <element signature="e#10968#11145#2" expanded="true" />
-                <element signature="e#11378#11555#2" expanded="true" />
-                <element signature="e#11604#11789#2" expanded="true" />
-                <element signature="e#12387#12532#2" expanded="true" />
-                <element signature="e#12588#12737#2" expanded="true" />
-                <element signature="e#12796#12941#2" expanded="true" />
-                <element signature="e#16453#16586#1" expanded="true" />
+                <element signature="e#3654#4611#2" expanded="true" />
+                <element signature="e#4722#5323#2" expanded="true" />
+                <element signature="e#5402#5659#2" expanded="true" />
+                <element signature="e#5748#5989#2" expanded="true" />
+                <element signature="e#8536#8897#1" expanded="true" />
+                <element signature="e#8898#9099#1" expanded="true" />
+                <element signature="e#9390#9751#1" expanded="true" />
+                <element signature="e#9752#9949#1" expanded="true" />
+                <element signature="e#10811#10988#2" expanded="true" />
+                <element signature="e#11221#11398#2" expanded="true" />
+                <element signature="e#11447#11632#2" expanded="true" />
+                <element signature="e#12230#12375#2" expanded="true" />
+                <element signature="e#12431#12580#2" expanded="true" />
+                <element signature="e#12639#12784#2" expanded="true" />
+                <element signature="e#16296#16429#1" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -195,7 +185,6 @@
         <option value="$PROJECT_DIR$/public/view.html" />
         <option value="$PROJECT_DIR$/public/js/controllers/menuController.js" />
         <option value="$PROJECT_DIR$/public/adminlab.html" />
-        <option value="$PROJECT_DIR$/public/js/controllers/lessonController.js" />
         <option value="$PROJECT_DIR$/public/courseChenged.html" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/public/js/controllers/tabController.js" />
@@ -204,6 +193,7 @@
         <option value="$PROJECT_DIR$/public/course.html" />
         <option value="$PROJECT_DIR$/routes/autorization.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/public/js/controllers/lessonController.js" />
       </list>
     </option>
   </component>
@@ -307,7 +297,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="stylesheets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -325,11 +315,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -692,13 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/postsController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.03529412" vertical-offset="30" max-vertical-offset="1320">
@@ -823,13 +802,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/Designori Course layout v2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="11.5" vertical-offset="306" max-vertical-offset="810">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="541">
@@ -901,14 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controllers/lessonController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="4605">
-          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="61" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="2910">
@@ -957,28 +921,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Downloads/Designori Course layout v2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="810">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="14" selection-end-column="6" />
+          <folding>
+            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.625" vertical-offset="1800" max-vertical-offset="4410">
-          <caret line="152" column="61" selection-start-line="152" selection-start-column="61" selection-end-line="152" selection-end-column="61" />
+        <state vertical-scroll-proportion="3.125" vertical-offset="225" max-vertical-offset="4485">
+          <caret line="10" column="86" selection-start-line="10" selection-start-column="86" selection-end-line="10" selection-end-column="86" />
           <folding>
-            <element signature="e#3811#4768#2" expanded="true" />
-            <element signature="e#4879#5480#2" expanded="true" />
-            <element signature="e#5559#5816#2" expanded="true" />
-            <element signature="e#5905#6146#2" expanded="true" />
-            <element signature="e#8693#9054#1" expanded="true" />
-            <element signature="e#9055#9256#1" expanded="true" />
-            <element signature="e#9547#9908#1" expanded="true" />
-            <element signature="e#9909#10106#1" expanded="true" />
-            <element signature="e#10968#11145#2" expanded="true" />
-            <element signature="e#11378#11555#2" expanded="true" />
-            <element signature="e#11604#11789#2" expanded="true" />
-            <element signature="e#12387#12532#2" expanded="true" />
-            <element signature="e#12588#12737#2" expanded="true" />
-            <element signature="e#12796#12941#2" expanded="true" />
-            <element signature="e#16453#16586#1" expanded="true" />
+            <element signature="e#3654#4611#2" expanded="true" />
+            <element signature="e#4722#5323#2" expanded="true" />
+            <element signature="e#5402#5659#2" expanded="true" />
+            <element signature="e#5748#5989#2" expanded="true" />
+            <element signature="e#8536#8897#1" expanded="true" />
+            <element signature="e#8898#9099#1" expanded="true" />
+            <element signature="e#9390#9751#1" expanded="true" />
+            <element signature="e#9752#9949#1" expanded="true" />
+            <element signature="e#10811#10988#2" expanded="true" />
+            <element signature="e#11221#11398#2" expanded="true" />
+            <element signature="e#11447#11632#2" expanded="true" />
+            <element signature="e#12230#12375#2" expanded="true" />
+            <element signature="e#12431#12580#2" expanded="true" />
+            <element signature="e#12639#12784#2" expanded="true" />
+            <element signature="e#16296#16429#1" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/controllers/lessonController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36517534" vertical-offset="2698" max-vertical-offset="4605">
+          <caret line="200" column="22" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -198,7 +198,7 @@ $scope.deleteCourse=function(id){
                     ]})
                     // console.log( $scope.course.modules);
                     $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
-                    $scope.saveCourse();
+                    //$scope.saveCourse();
                     return;
                 }
                 if (position === 'before') {
@@ -209,7 +209,7 @@ $scope.deleteCourse=function(id){
                     ]})
                     // console.log( $scope.course.modules);
                     $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
-                    $scope.saveCourse();
+                    //$scope.saveCourse();
                     return;
                 }
             }
@@ -226,7 +226,7 @@ $scope.deleteCourse=function(id){
                         $scope.course.modules[i].sections.splice(j + 1, 0, {title: "New Section", description: "", specialId: specialId});
                         // console.log( $scope.course.modules);
                         $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
-                        $scope.saveCourse();
+                        //$scope.saveCourse();
                         return;
                     }
                     if (position === 'before') {
@@ -236,7 +236,7 @@ $scope.deleteCourse=function(id){
                         $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                         //  $scope.unitsNew.push
                         console.log($scope.units)
-                        $scope.saveCourse();
+                        //$scope.saveCourse();
                         return;
                     }
                 }
@@ -259,7 +259,7 @@ $scope.deleteCourse=function(id){
                         for(var z=0;z<$scope.units.length;z++){
                             if($scope.units[z].unitId!==newUnit.unitId){
                                 $scope.units.push(newUnit);
-                                $scope.saveCourse();
+                                //$scope.saveCourse();
                                 console.log("after",$scope.units)
                                 return;
                             }
@@ -274,7 +274,7 @@ $scope.deleteCourse=function(id){
                         for(var z=0;z<$scope.units.length;z++){
                             if($scope.units[z].unitId!==newUnit.unitId){
                                 $scope.units.push(newUnit);
-                                $scope.saveCourse();
+                                //$scope.saveCourse();
                                 console.log($scope.units);
                                 return;
                             }
