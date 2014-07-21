@@ -173,7 +173,7 @@ $scope.deleteCourse=function(id){
             if ($scope.course.modules[i]._id === moduleId) {
                 for (var j = 0, l = $scope.course.modules[i].sections.length; j < l; j++) {
                     if ($scope.course.modules[i].sections[j]._id === id) {
-                        //$scope.deleteUnit($scope.course.modules[i].sections[j].specialId)
+                        $scope.deleteUnit($scope.course.modules[i].sections[j].specialId)
                         $scope.course.modules[i].sections.splice(j, 1);
                         l--;
                     }
