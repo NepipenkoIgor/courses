@@ -307,7 +307,14 @@ $scope.deleteCourse=function(id){
                 type:$scope.unitNow.lims[0].typeLim
             };
         }
-        $scope.quizInEdit=$scope.unitNow.lims[0].content||[{description:"",quiz:[{orderId:Date.now(),title:"",answer:""}]}];
+        console.log($scope.unitNow.lims[0]===undefined||!angular.isObject($scope.unitNow.lims[0].content[0]));
+        if($scope.unitNow.lims[0]===undefined||!angular.isObject($scope.unitNow.lims[0].content[0])){
+            $scope.quizInEdit=[{description:"",quiz:[{orderId:Date.now(),title:"",answer:""}]}];
+
+        }else{
+            $scope.quizInEdit=$scope.unitNow.lims[0].content;
+        }
+
 
     };
 
