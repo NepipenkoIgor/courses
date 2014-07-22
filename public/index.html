@@ -226,7 +226,7 @@
                             <li class="" data-original-title="" title=""
                                 ng-repeat="unit in showUnitsList(section.specialId) track by $id(unit)"
                                     ng-click="unitNowChange(unit.unitId)">
-                                <i class="fa fa-pencil"></i> {{unit.title}}</li>
+                                <i ng-class="faUnitClass(unit.lims[0].typeLim)"></i> {{unit.title}}</li>
                         </ul>
                     </div>
                 </li>
@@ -260,7 +260,7 @@
         </div>
     </div>
 </div>
-<div ui-view style=""></div>
+<div ui-view style="padding-right: 100px"></div>
 <!--<div class="content">
     <h1 id="designori">Designori</h1>
         <p>Welcome to the Designori UI mockup. Here you will find:</p>

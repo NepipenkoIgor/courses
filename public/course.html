@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <div class="row">
             <div class="col-md-10">
 
@@ -16,10 +16,11 @@
                                 ng-disabled="disabled">before</button>
                         <button type="button" class="btn btn-success" ng-click="addModule(module._id,'after')"
                                 ng-disabled="disabled">after</button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteModule(module._id)" ng-show="editableForm.$visible"
+                                ng-disabled="disabled">del</button>
                     </div>
 
-                    <button class="btn btn-danger btn-xs" ng-click="deleteModule(module._id)" ng-show="editableForm.$visible"
-                            ng-disabled="disabled">del</button>
+
 
                     <li style="margin-left: 10%;padding: 10px" ng-repeat="section in module.sections">
                         <a  editable-text="section.title">{{ section.title || "empty" }}</a>
@@ -29,14 +30,15 @@
                                     ng-disabled="disabled">before</button>
                             <button type="button" class="btn btn-success" ng-click="addSection(section.title,'after')"
                                     ng-disabled="disabled">after</button>
+                            <button class="btn btn-danger btn-xs" ng-click="deleteSection(module._id,section._id)" ng-show="editableForm.$visible"
+                                    ng-disabled="disabled">del</button>
                         </div>
 
-                        <button class="btn btn-danger btn-xs" ng-click="deleteSection(module._id,section._id)" ng-show="editableForm.$visible"
-                                ng-disabled="disabled">del</button>
+
                     <ul>
                         <li style="margin-left: 10%;padding: 10px" ng-repeat="unit in showUnits(section.specialId) track by $id(unit)">
                             <a  editable-text="unit.title"
-                                ui-sref="adminlab.lesson.unit({moduleTitle:module.title,sectionTitle:section.title,unitTitle:unit.title})"
+                                ui-sref="adminlab.lesson.unit({moduleTitle:module.title,sectionTitle:section.title,unitTitle:unit.unitId})"
                                     ng-click="changeInit(unit._id)">
                                 {{ unit.title || "empty" }}
                             </a>
@@ -46,11 +48,12 @@
                                         ng-disabled="disabled">before</button>
                                 <button type="button" class="btn btn-success" ng-click="addUnit(module._id,section.specialId,unit.unitId,'after')"
                                         ng-disabled="disabled">after</button>
+                                <button class="btn btn-danger btn-xs" ng-click="deleteUnit(section.specialId,unit.unitId)" ng-show="editableForm.$visible"
+                                        ng-disabled="disabled">del</button>
                             </div>
 
 
-                            <button class="btn btn-danger btn-xs" ng-click="deleteUnit(section.specialId,unit.unitId)" ng-show="editableForm.$visible"
-                                    ng-disabled="disabled">del</button>
+
                         </li>
                     </ul>
                     </li>
@@ -79,7 +82,7 @@
 
         </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
         <div ui-view style="">
         </div>
 

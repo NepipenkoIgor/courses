@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/15/14.
  */
-app.controller('lessonController', function ($scope, $http, $stateParams, $state,courseEdit) {
+app.controller('lessonController', function ($scope, $http, $stateParams, $state, $sce,$location,courseEdit) {
 
     var init = function () {
         $http.get('/courses').success(function (courses) {
@@ -297,7 +297,82 @@ $scope.deleteCourse=function(id){
             }
             $scope.unitNow=$scope.units[i];
         }
+        console.log("unit now",$scope.unitNow);
+        if(!$scope.unitNow.lims[0]){
+            $scope.typeLim ={
+                type:"quiz"
+        };
+        }else{
+            $scope.typeLim ={
+                type:$scope.unitNow.lims[0].typeLim
+            };
+        }
+        $scope.quizInEdit=$scope.unitNow.lims[0].content||[{description:"",quiz:[{orderId:Date.now(),title:"",answer:""}]}];
 
+    };
+
+
+
+
+
+    $scope.statuses = [
+        {value: 'static', text: 'static'},
+        {value: 'video', text: 'video'},
+        {value: 'quiz', text: 'quiz'}
+    ];
+
+    $scope.formatVideoUrl = function(url) {
+        //TODO: append params, etc.
+        var url=url||$scope.unitNow.lims[0].content[0];
+        $scope.videoSource=url;
+        return $sce.trustAsResourceUrl(url);
+    };
+
+    $scope.saveVideo=function(){
+        //console.log($scope.unitNow)
+       // console.log($scope.videoSource,$scope.typeLim.type)
+       // console.log($location.$$absUrl.split("/"));
+        var obj={typeLim:$scope.typeLim.type,content:$scope.videoSource}
+        $scope.unitNow.lims[0]=obj;
+       // $scope.unitNow.content=$scope.videoSource;
+        console.log("new unit seeeee",$scope.unitNow);
+        $scope.saveCourse();
     }
 
+$scope.addQuiz=function(id,position){
+
+    for(var i=0;i<$scope.quizInEdit[0].quiz.length;i++){
+        console.log($scope.quizInEdit[0].quiz[i].orderId===id)
+        if($scope.quizInEdit[0].quiz[i].orderId===id){
+            if(position==="after"){
+                $scope.quizInEdit[0].quiz.splice(i+1,0,{orderId:id+1,title:"",answer:""})
+                return;
+            }
+            if(position==="before"){
+                $scope.quizInEdit[0].quiz.splice(i,0,{orderId:id-1,title:"",answer:""})
+                return;
+            }
+        }
+    }
+};
+
+    $scope.deleteQuiz=function(id){
+        for(var i=0;i<$scope.quizInEdit[0].quiz.length;i++){
+
+            if($scope.quizInEdit[0].quiz[i].orderId===id){
+
+                    $scope.quizInEdit[0].quiz.splice(i,1)
+                    return;
+
+            }
+        }
+    }
+
+       $scope.saveQuiz = function(){
+           var obj={typeLim:$scope.typeLim.type,content:[$scope.quizInEdit[0]]};
+
+           $scope.unitNow.lims[0]=obj;
+           console.log($scope.unitNow.lims[0]);
+           $scope.saveCourse();
+       }
 })

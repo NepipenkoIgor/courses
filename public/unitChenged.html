@@ -1,1 +1,32 @@
-<h4>Unit Chenged : {{unitNowChanged.title}}</h4>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Lesson Title : {{unitNowChanged.title}}</h1>
+        <hr>
+    </div>
+</div>
+<div class="row" ng-switch on="unitNowChanged.lims[0].typeLim">
+    <div class="col-md-12">
+        <div ng-switch-when="video" style="background-color: black">
+            <iframe width="800" height="600" style="margin-left: 25%"
+                    ng-src='{{formatVideoUrl(unitNowChanged.lims[0].content[0])}}' frameborder="0" allowfullscreen></iframe>
+
+        </div>
+        <div ng-switch-when="quiz" style="padding-bottom: 50px">
+            <div style="margin-left: 30%; width: 650px">
+                <h3>{{ unitNowChanged.lims[0].content[0].description}}</h3>
+                <div ng-repeat="quiz in unitNowChanged.lims[0].content[0].quiz" style="margin-left: 30px">
+                    <input type="checkbox"  ng-model="quiz.answer" ng-click="quizStatuses()" style="float: left;width: 16px; height: 16px;margin-right: 10px">
+                    <div>
+                        <p >{{ quiz.title || 'empty quiz' }}</p>
+                    </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        coments/ask
+    </div>
+</div>

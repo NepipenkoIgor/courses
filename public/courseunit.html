@@ -1,17 +1,55 @@
- <div class="row">
-         <div class="col-md-12">
-             <h1>Lesson Title : {{unitNow.title}}</h1>
-             <hr>
-         </div>
-     </div>
-     <div class="row">
-         <div class="col-md-12">
-             video
-             <hr>
-         </div>
-     </div>
-     <div class="row">
-         <div class="col-md-12">
-             coments/ask
-         </div>
-     </div>
+<div class="row">
+    <div class="col-md-12">
+        <h1>Lesson Title : {{unitNow.title}}</h1>
+
+        <h3>Lesson Type :
+
+            <a href="#" editable-select="typeLim.type" e-ng-options="s.value as s.text for s in statuses">
+                {{ typeLim.type }}
+            </a>
+
+        </h3>
+
+        <hr>
+    </div>
+</div>
+<div class="row" ng-switch on="typeLim.type">
+    <div class="col-md-12">
+        <div ng-switch-when="video" style="padding-bottom: 50px">
+            <div>
+                <a href="#" editable-text="videoSource">{{ videoSource || 'src of new video' }}</a>
+            </div>
+            <iframe width="800" height="600" ng-src='{{formatVideoUrl(videoSource)}}' frameborder="0"
+                    allowfullscreen></iframe>
+            <button class="btn btn-success" style="float: right" ng-click="saveVideo()">Add video</button>
+        </div>
+        <div ng-switch-when="quiz" style="padding-bottom: 50px">
+            <div>
+                <a href="#" editable-textarea="quizInEdit[0].description" e-rows="7" e-cols="40">
+                    <pre>{{ quizInEdit[0].description || 'quiz description' }}</pre>
+                </a>
+                <div ng-repeat="quiz in quizInEdit[0].quiz">
+                 <input type="checkbox"  ng-model="quiz.answer" ng-click="quizStatuses()" style="float: left;width: 16px; height: 16px;margin-right: 10px">
+                    <div>
+                        <a href="#" editable-text="quiz.title">{{ quiz.title || 'empty quiz' }}</a>
+                    </div>
+                <div class="btn-group btn-group-xs" >
+                    <button type="button" class="btn btn-success" ng-click="addQuiz(quiz.orderId,'before')"
+                            ng-disabled="disabled">before</button>
+                    <button type="button" class="btn btn-success" ng-click="addQuiz(quiz.orderId,'after')"
+                            ng-disabled="disabled">after</button>
+                    <button class="btn btn-danger btn-xs" ng-click="deleteQuiz(quiz.orderId)"
+                            ng-disabled="disabled">del</button>
+                </div>
+                </div>
+                <button class="btn btn-success" style="float: right" ng-click="saveQuiz()">Add quiz</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        coments/ask
+    </div>
+</div>

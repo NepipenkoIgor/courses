@@ -83,7 +83,7 @@ var limShema=new Schema({
 
     title:String,
     typeLim:String,
-    content:String,
+    content:[],
     order:String,
     complete:Boolean,
     awards:String,
@@ -108,7 +108,7 @@ var modulesSchema = new Schema({
         {
             specialId:Number,
             title:String,
-            description:String,
+            description:String
             /* module:[]*/
         }]
 

@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/1/14.
  */
-app.controller('maintab', function ($scope, $http,$state) {
+app.controller('maintab', function ($scope, $http,$state,$sce) {
     'user strict';
 
     $http.get('/courses').success(function (courses) {
@@ -67,10 +67,27 @@ $scope.listOfCourses=courses;
                         $scope.sectionNowChanged=$scope.moduleNowChanged.sections[j];
                     }
                 }
+                console.log($scope.unitNowChanged)
                 $state.go('unit',{courseTitle:$scope.courseNowChanged.title,moduleTitle:$scope.moduleNowChanged.title,
             sectionTitle:$scope.sectionNowChanged.title,unitTitle:$scope.unitNowChanged.title});
             }
         }
 
     };
+    $scope.formatVideoUrl = function(url) {
+        //TODO: append params, etc.
+
+        return $sce.trustAsResourceUrl(url);
+    };
+    $scope.faUnitClass=function(type){
+        if(type==="video"){
+            return "fa fa-film";
+        }
+        if(type==="quiz"){
+            return "fa fa-question"
+        }
+        if(type===undefined){
+            return "fa fa-pencil"
+        }
+    }
 });
