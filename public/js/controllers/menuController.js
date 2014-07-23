@@ -53,6 +53,7 @@ app.controller('mainMenu', function ($scope, $http, $state,courseEdit) {
         $http.post('/subjects', data).success(function (data) {
             console.log(data);
             $state.go('adminlab.lesson.module', {courseTitle: "New Course"});
+            courseEdit.initTab();
             //init()
         });
 

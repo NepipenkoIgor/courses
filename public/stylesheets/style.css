@@ -84,6 +84,7 @@ width: 1000px;
     /*border:solid 2px yellow;*/
     overflow: hidden;
     padding-bottom: 10px;
+
 }
 .tag{
     background-color: crimson;
@@ -206,3 +207,5 @@ margin-left: 100px;
 
 
 }
+
+.ace_editor { height: 200px; }

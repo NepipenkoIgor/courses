@@ -45,6 +45,15 @@
                 <button class="btn btn-success" style="float: right" ng-click="saveQuiz()">Add quiz</button>
             </div>
         </div>
+        <div ng-switch-when="static" style="padding-bottom: 50px">
+            <div ui-ace="{
+            onLoad: aceLoaded
+            }"></div>
+
+
+            <button class="btn btn-success" style="float: right" ng-click="saveStatic()">Add static</button>
+
+        </div>
         <hr>
     </div>
 </div>
@@ -53,3 +62,6 @@
         coments/ask
     </div>
 </div>
+
+
+

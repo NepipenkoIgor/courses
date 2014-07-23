@@ -1,38 +1,42 @@
 /**
  * Created by igor on 7/1/14.
  */
-app.controller('maintab', function ($scope, $http,$state,$sce) {
+app.controller('maintab', function ($scope, $http,$state,$sce,courseEdit) {
     'user strict';
 
-    $http.get('/courses').success(function (courses) {
-$scope.listOfCourses=courses;
-    });
-    $http.get('/units').success(function (units) {
-        $scope.listOfUnits=units;
+    function initTab() {
+        $http.get('/courses').success(function (courses) {
+            $scope.listOfCourses = courses;
+        });
+        $http.get('/units').success(function (units) {
+            $scope.listOfUnits = units;
 
 
-        $scope.showUnitsList = function (id) {
-            function sortArr(a, b) {
-                if (a.unitId < b.unitId) {
-                    return -1;
+            $scope.showUnitsList = function (id) {
+                function sortArr(a, b) {
+                    if (a.unitId < b.unitId) {
+                        return -1;
+                    }
+                    if (a.unitId > b.unitId) {
+                        return 1;
+                    }
+                    return 0;
+                };
+                var arrUnits = [];
+                for (var i = 0; i < $scope.listOfUnits.length; i++) {
+                    if ($scope.listOfUnits[i].parent === id) {
+                        arrUnits.push($scope.listOfUnits[i]);
+                    }
                 }
-                if (a.unitId > b.unitId) {
-                    return 1;
-                }
-                return 0;
+                //console.log("sort unit", arrUnits.sort(sortArr));
+                return arrUnits.sort(sortArr);
             };
-            var arrUnits = [];
-            for (var i = 0; i < $scope.listOfUnits.length; i++) {
-                if ($scope.listOfUnits[i].parent === id) {
-                    arrUnits.push($scope.listOfUnits[i]);
-                }
-            }
-            console.log("sort unit",arrUnits.sort(sortArr));
-            return arrUnits.sort(sortArr);
-        };
 
-    });
+        });
 
+    }
+    initTab();
+    courseEdit.initTab=initTab;
 
     $scope.courseNowChange=function(id){
         for(var i=0;i<$scope.listOfCourses.length;i++){
@@ -61,7 +65,7 @@ $scope.listOfCourses=courses;
            // console.log($scope.listOfUnits[i]);
             if($scope.listOfUnits[i].unitId===id){
                 $scope.unitNowChanged=$scope.listOfUnits[i];
-                console.log("iam here", $scope.unitNowChanged);
+               // console.log("iam here", $scope.unitNowChanged);
                 for(var j=0;j<$scope.moduleNowChanged.sections.length;j++){
                     if($scope.moduleNowChanged.sections[j].specialId===$scope.unitNowChanged.parent){
                         $scope.sectionNowChanged=$scope.moduleNowChanged.sections[j];
@@ -86,8 +90,23 @@ $scope.listOfCourses=courses;
         if(type==="quiz"){
             return "fa fa-question"
         }
+        if(type==="static"){
+            return "fa fa-file-o"
+        }
         if(type===undefined){
             return "fa fa-pencil"
         }
-    }
+    };
+    $scope.trustHtml=function(html){
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&amp/g, "&;")
+                .replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">")
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'");
+        }
+        return $sce.trustAsHtml(escapeHtml(html));
+    };
+
 });
