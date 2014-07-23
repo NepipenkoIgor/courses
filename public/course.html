@@ -9,7 +9,7 @@
         <div class="row" style="margin-top: 5%">
             <div class="col-md-12">
                 <form editable-form name="editableForm" onaftersave="saveCourse()">
-                <ul ng-repeat="module in course.modules"><a  editable-text="module.title">{{ module.title || "empty" }}</a>
+                <ul ng-repeat="module in course.modules"><a  editable-text="module.title" >{{ module.title || "empty" }}</a>
 
                     <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
                         <button type="button" class="btn btn-success"  ng-click="addModule(module._id,'before')"
@@ -39,7 +39,7 @@
                         <li style="margin-left: 10%;padding: 10px" ng-repeat="unit in showUnits(section.specialId) track by $id(unit)">
                             <a  editable-text="unit.title"
                                 ui-sref="adminlab.lesson.unit({moduleTitle:module.title,sectionTitle:section.title,unitTitle:unit.unitId})"
-                                    ng-click="changeInit(unit._id)">
+                                    ng-click="changeInit(unit._id)" ng-disabled="disabled">
                                 {{ unit.title || "empty" }}
                             </a>
 
