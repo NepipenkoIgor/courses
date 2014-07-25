@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Courses = mongoose.model('Courses');
 var Units = mongoose.model('Units');
 
-function router(app) {
+function router(app,isAdmin) {
     //'use strict'
     app.get('/courses', function (req, res) {
 

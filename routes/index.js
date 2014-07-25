@@ -4,7 +4,12 @@
 
 function router(app) {
 
-
+    function isAdmin(req, res, next) {
+        console.log("USER",req.user.position)
+       // if (req.isAuthenticated()&&req.user.position) return next();
+        return next();
+        res.redirect("/#/welcome");
+    };
   function hasUser(req, res, next) {
     if (req.isAuthenticated()) return next();
     res.redirect("/#/welcome");
@@ -27,7 +32,7 @@ function router(app) {
   var newPost=require('./newpost')(app,hasUser);
     var deletePost=require('./deletpost')(app,hasUser);
     var postcomment=require('./postcomment')(app,hasUser);
-    var subject = require('./subject')(app);
+    var subject = require('./subject')(app,isAdmin);
   var logout=require('./logout')(app);
 }
 

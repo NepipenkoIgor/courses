@@ -88,7 +88,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 init();
 
             }else{
-                $state.go('adminlab.lesson.module', {courseTitle: $scope.course.title});
+              //  $state.go('adminlab.lesson.module', {courseTitle: $scope.course.title});
                 // $state.go('adminlab')
                 init();
                 courseEdit.initTab();
@@ -289,35 +289,36 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
 
     $scope.changeInit = function (id) {
-        for (var i = 0; i < $scope.units.length; i++) {
-            if ($scope.units[i]._id !== id) {
-                continue;
+        if( $scope.disabled===false) {
+            for (var i = 0; i < $scope.units.length; i++) {
+                if ($scope.units[i]._id !== id) {
+                    continue;
+                }
+                $scope.unitNow = $scope.units[i];
             }
-            $scope.unitNow = $scope.units[i];
-        }
-        console.log("unit now", $scope.unitNow);
-        if (!$scope.unitNow.lims[0]) {
-            $scope.typeLim = {
-                type: "quiz"
-            };
-        } else {
-            $scope.typeLim = {
-                type: $scope.unitNow.lims[0].typeLim
-            };
-        }
-        //console.log($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0]));
-        if ($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0])) {
-            $scope.quizInEdit = [
-                {description: "", quiz: [
-                    {orderId: Date.now(), title: "", answer: ""}
-                ]}
-            ];
+            console.log("unit now", $scope.unitNow);
+            if (!$scope.unitNow.lims[0]) {
+                $scope.typeLim = {
+                    type: "quiz"
+                };
+            } else {
+                $scope.typeLim = {
+                    type: $scope.unitNow.lims[0].typeLim
+                };
+            }
+            //console.log($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0]));
+            if ($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0])) {
+                $scope.quizInEdit = [
+                    {description: "", quiz: [
+                        {orderId: Date.now(), title: "", answer: ""}
+                    ]}
+                ];
 
-        } else {
-            $scope.quizInEdit = $scope.unitNow.lims[0].content;
+            } else {
+                $scope.quizInEdit = $scope.unitNow.lims[0].content;
+            }
+
         }
-
-
     };
 
 

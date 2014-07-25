@@ -17,6 +17,7 @@ var userSchema=new Schema({
   birth:Date,
   email:String,
   phone:String,
+   position:Boolean,
   settings:Boolean,
   courses:[
       {id:String}

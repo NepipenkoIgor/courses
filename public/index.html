@@ -8,17 +8,17 @@
 
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="stylesheets/csslayout/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="stylesheets/csslayout/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="stylesheets/csslayout/wide.css" rel="stylesheet" type="text/css">
     <!--<link rel="shortcut icon" type="image/png" href="http://iscoding.net/common/favicon.ico">-->
     <link href="stylesheets/xeditable.css" rel="stylesheet">
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 
-    <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+   <!-- <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
@@ -28,13 +28,9 @@
     <script src="javascripts/ui-ace.min.js"></script>
     <script  src="javascripts/angular-ui-router.min.js"></script>
     <script  src="javascripts/ui-bootstrap-tpls-0.11.0.min.js"></script>
-
     <script src="javascripts/xeditable.min.js"></script>
     <script  src="js/app.js"></script>
-    <!--<script  src="javascripts/usermodul.js"></script>-->
     <script  src="js/controllers/lessonController.js"></script>
-    <!--<script  src="js/controllers/courseEditionController.js"></script>
-    <script  src="js/controllers/editCoursesController.js"></script>-->
     <script  src="js/controllers/userController.js"></script>
      <script  src="js/controllers/tabController.js"></script>
     <script  src="js/controllers/menuController.js"></script>
@@ -42,7 +38,7 @@
     <!-- <script  src="javascripts/front.js"></script>-->
 
 <!--<script src="javascripts/jslayot/bootstrap.min.js"></script>-->
-    <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!--<script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
 
 
@@ -62,14 +58,15 @@
             <a data-toggle="dropdown" ui-sref="editprofile" data-original-title="" title="">
 
                 <div class="user_menu" ng-if="userdata">
-                    <div class="avatar">
-                        <div class="notify_num progress-bar-danger">
+                    <div class="avatar" ng-style="userAvatar(userdata.avatar)">
+                       <div class="notify_num progress-bar-danger" ng-show="false" >
                             <p>2</p>
                         </div>  
                     </div>
                     <span>{{userdata.username}}</span>
                 </div>
-                <button ng-hide="userdata"><a href="#/login">Login In</a></button>
+                <button ng-hide="userdata" class="btn btn-warning" style="width: 110px;height: 50px">
+                    <a href="#/login" style="color:#000000">Login In</a></button>
             </a>
             <div class="dropdown-menu notifications list-group" role="menu" aria-labelledby="dLabel">
                 <a href="" class="list-group-item" data-original-title="" title="">
@@ -83,7 +80,7 @@
         </div>
         
         <!--- Main menu --->
-        <a ui-sref="adminlab" style="margin-left: 20px">Admin Lab</a>
+        <a ui-sref="adminlab" style="margin-left: 20px" ng-if="userdata.position">Admin Lab</a>
         <div class="dropdown menu" ng-controller="mainMenu">
             <a data-toggle="dropdown" href="" data-original-title="" title="">
                 <i class="fa fa-bars"></i>
@@ -112,7 +109,7 @@
             <li data-original-title="" title="">
                 <h4>Courses:</h4>
               <!--  <h4><b>S4 Title</b></h4>-->
-                <h4>{{courseNowChanged.title}}</h4>
+                <h4 style="color:green">{{courseNowChanged.title}}</h4>
                 <div class="course_sub_menu">
                     <h5><b>list of courses</b></h5>
                     <ul>
@@ -136,7 +133,7 @@
 
 
                         <h4 >Modules:</h4>
-                        <h4>{{moduleNowChanged.title}}</h4>
+                        <h4 style="color:yellow">{{moduleNowChanged.title}}</h4>
 
                     <div class="course_sub_menu">
                         <h5><b>list of modules</b></h5>
@@ -161,7 +158,7 @@
         <div class="course_menu">
 
             <div class="mod_title " ng-show="moduleNowChanged">
-                <a href="http://jake.thedesignori.net/layouts/wide.html#" data-toggle="tooltip" data-placement="left" title="" data-original-title="Course Map">
+                <a href="" data-toggle="tooltip" data-placement="left" title="" data-original-title="Course Map">
                     <i class="fa fa-map-marker"></i>
                 </a>
                 <h4></h4>
@@ -222,7 +219,7 @@
             </ul>-->
             <ul class="section_menu">
                 <li class="" data-original-title="" title="" ng-repeat="section in moduleNowChanged.sections">
-                    <h4>Section {{$index + 1}}</h4>
+                    <h4 style="color:orange">Section {{$index + 1}}</h4>
                     <h4><b>{{section.title}}</b></h4>
                     <div class="course_sub_menu">
                         <h5><b>{{section.title}}</b></h5>
@@ -265,7 +262,7 @@
         </div>
     </div>
 </div>
-<div ui-view style="padding-right: 110px"></div>
+<div ui-view style="padding-right: 110px;"></div>
 <!--<div class="content">
     <h1 id="designori">Designori</h1>
         <p>Welcome to the Designori UI mockup. Here you will find:</p>

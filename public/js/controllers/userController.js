@@ -36,14 +36,13 @@ app.controller('profile', function ($scope, $http) {
         if (!data.settings) {
             data.settings = '';
         }
-        /*if (!data.courses[0].id) {
-            data.courses[0].id = '';
-        }*/
+
 
         $scope.userdata = data;
         if (typeof $scope.userdata === 'string') {
             $scope.userdata = false;
         }
+        $scope.userAvatar=$scope.userdata.avatar||'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
         self.username=$scope.userdata;
         //debugger;
         console.log(self.username)
@@ -52,16 +51,7 @@ app.controller('profile', function ($scope, $http) {
 }
     $scope.us=reqUser;
     $scope.us();
-    //setInterval(reqUser,1000);
-/*$scope.username=function(){
- setInterval(function(){
- console.log($scope.userdata.username)
- //return $scope.userdata.username;
- },1000);
- };*/
-// var user=reqUser();
-//  console.log('her',typeof user)
-//self.username=reqUser().username;
+
 $scope.postProfile = function (data) {
 console.log($scope.us);
     $http.post('/main', data).success(function (data) {
@@ -71,16 +61,11 @@ console.log($scope.us);
     });
 
 };
-/*  this.flag = false;
-
- this.editProfile = function () {
- console.log(this.flag);
- if (this.flag === false) {
- this.flag = true;
- return;
- }
- this.flag = false;
-
- };*/
+    $scope.userAvatar = function (img) {
+        var img=img||'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg'
+        var background = "url'"+"("+img+")'"+" "+"center";
+        var obj={'background':background}
+        return obj;
+    };
 
 });

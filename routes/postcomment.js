@@ -10,6 +10,7 @@ function router(app, hasUser) {
         console.log(req.body.comments);
 
         Posts.update({_id: req.body._id}, {$set: {comments: req.body.comments}}, function(err, num) {
+            console.log("ggood",num)
             res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
         });/*
 

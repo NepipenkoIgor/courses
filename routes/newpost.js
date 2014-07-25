@@ -7,12 +7,15 @@ var Posts = mongoose.model('Posts');
 function router(app, hasUser) {
     'use strict'
     app.post('/post/new', hasUser, function (req, res) {
+        console.log(req.body);
        Posts.count(function(err,count){
            console.log("doc in base",count);
            var Post = new Posts;
            Post.id=count;
            Post.title=req.body.title;
            Post.content=req.body.content;
+           Post.creator=req.body.creator;
+           Post.lesson=req.body.unit;
            var tags=req.body.tags.split(",");
            var resTags=[]
            for(var i=0;i<tags.length;i++){
@@ -24,8 +27,8 @@ function router(app, hasUser) {
            // console.log("postNew", postNew);
            Post.save(function (err, post) {
                console.log("good new post");
-               //res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
-               res.redirect("/#/post/all");
+               res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+              // res.redirect("/#/post/all");
            });
 
        });

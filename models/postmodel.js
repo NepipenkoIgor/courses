@@ -7,6 +7,7 @@ var postSchema=new Schema({
     title:String,
     creator:String,
     created:Date,
+    lesson:Number,
     votes:[
         {creator:String},
         {vote:Number}
@@ -14,9 +15,7 @@ var postSchema=new Schema({
     favorites:String,
     content:String,
     tags:[],
-    comments:[
-        String
-    ],
+    comments:[],
     replies:[
         {creator:String},
         {created:Date},
