@@ -10,7 +10,8 @@ app.controller('posts', function ($scope, $http,$sce) {
             console.log($scope.postdata);
         });
 
-    };
+    }
+
     reqPosts();
     function reqUsers() {
         $http.get('/users').success(function (data) {
@@ -18,7 +19,8 @@ app.controller('posts', function ($scope, $http,$sce) {
             console.log($scope.postUsersdata);
         });
 
-    };
+    }
+
     reqUsers();
     $scope.postAvatar=function(id){
         for (var i; i < $scope.postUsersdata.length; i++) {
@@ -27,16 +29,15 @@ app.controller('posts', function ($scope, $http,$sce) {
             }
         }
         var url = userPostAvatar || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
-       // consosle.log("url",url)
+
         return $sce.trustAsResourceUrl(url);
-    }
+    };
 
 
-    $scope.deletPost = function (id) {
-       // console.log(id);
-      //  console.log($scope.postdata[0]['_id'])
+    $scope.deletePost = function (id) {
+
         for (var i = 0; i < $scope.postdata.length; i++) {
-            if ($scope.postdata[i]['_id'] === id) {
+            if ($scope.postdata[i]._id === id) {
                // console.log("kyky");
                 $scope.postdata.splice(i, 1);
                 //console.log(id)
@@ -48,20 +49,20 @@ app.controller('posts', function ($scope, $http,$sce) {
 
         }
     };
-    $scope.deletComment = function (comment, id) {
+    $scope.deleteComment = function (comment, id) {
         console.log(comment);
 
         for (var i = 0; i < $scope.postdata.length; i++) {
 
-            if ($scope.postdata[i]['_id'] === id) {
-                console.log($scope.postdata[i]['_id']);
+            if ($scope.postdata[i]._id === id) {
+              //  console.log($scope.postdata[i]._id);
                 for (var j = 0; j < $scope.postdata[i].comments.length; j++) {
                     //console.log($scope.postdata[i].comments[j])
                     if ($scope.postdata[i].comments[j] === comment) {
                         $scope.postdata[i].comments.splice(j, 1);
                         var data = {"_id": id, "comments": $scope.postdata[i].comments};
                         $http.post('/comment/new', data).success(function () {
-                            console.log("good  comment request");
+                            //console.log("good  comment request");
                         });
                     }
 
@@ -74,13 +75,13 @@ app.controller('posts', function ($scope, $http,$sce) {
 
     };
     $scope.addComment = function (idPost,creator) {
-        console.log(this.comment);
+       // console.log(this.comment);
 
         for (var i = 0; i < $scope.postdata.length; i++) {
-            if ($scope.postdata[i]['_id'] === idPost && this.comment !== "") {
+            if ($scope.postdata[i]._id === idPost && this.comment !== "") {
 
                 $scope.postdata[i].comments.push({content:this.comment,creator:creator});
-                console.log($scope.postdata[i].comments);
+              //  console.log($scope.postdata[i].comments);
                 var data = {"_id": idPost, "comments": $scope.postdata[i].comments};
                 $http.post('/comment/new', data).success(function () {
                     console.log("good  comment request");
@@ -146,5 +147,5 @@ app.controller('posts', function ($scope, $http,$sce) {
             return true;
         }
         return false;
-    }
+    };
 });

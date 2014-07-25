@@ -75,7 +75,7 @@
                 style="padding-top: 18px;">Total questions of this lesson</span></h2>
         <div ng-repeat="data in postdata" class="postConteiner"
              ng-if="postsOfUnit(data.lesson,unitNowChanged.unitId)" style="color:black;float: left">
-            <span class="close" ng-click="deletPost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
+            <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
 
             <div class="post">
                 <div>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="comment">
                     <div ng-repeat="comment in data.comments" style="width: 550px;float: right">
-                        <span class="close" ng-click="deletComment(comment,data._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
+                        <span class="close" ng-click="deleteComment(comment,data._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
                         <div>
                             <img ng-src="{{postAvatar(comment.creator)}}" width="50" style="float: left"/>
                             <h5 style="color:red">{{getCreator(comment.creator)}}</h5>

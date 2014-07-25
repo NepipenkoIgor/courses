@@ -13,14 +13,14 @@ app.service('courseEdit',function($http){
 
 
 app.run(function($rootScope,$location,courseEdit){
-    $rootScope.$on('$stateChangeStart',
+   /* $rootScope.$on('$stateChangeStart',
         function(event, toState, toParams, fromState, fromParams){
            if(toState.name==="unit"){
-               /* for(var i=0;i<courseEdit.listOfUnits.length;i++){
+                for(var i=0;i<courseEdit.listOfUnits.length;i++){
                     if(toParams.unitTitle===courseEdit.listOfUnits[i]){
 
                     }
-                }*/
+                }
                console.log("courseEdit.listOfUnits",courseEdit.listOfUnits);
                 console.log("RuncourseEdit.unitNowChanged",courseEdit.unitNowChanged)
                // courseEdit.unitNowChange(toParams.unitTitle)
@@ -33,7 +33,7 @@ app.run(function($rootScope,$location,courseEdit){
             //console.log(toState);
             courseEdit.course={};
             //console.log(courseEdit.unitNowChange);
-        })
+        })*/
 })
 
 

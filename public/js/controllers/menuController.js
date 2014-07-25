@@ -14,7 +14,7 @@ app.controller('mainMenu', function ($scope, $http, $state,courseEdit) {
     });
 
     $scope.addCourse = function () {
-        var specialId = Date.now()
+        var specialId = Date.now();
         $scope.courses.push({
             title: "New Course",
             description: "",
@@ -60,18 +60,7 @@ app.controller('mainMenu', function ($scope, $http, $state,courseEdit) {
     };
 
     $scope.courseNow = courseEdit;
-    if(!$scope.courseNow) {
-        $scope.$watch('courseNow.course.title', function () {
-            // alert('hey, myVar has changed!');
-           // $scope.courseNow.saveCourse();
-           // $state.go("lesson", {courseTitle: courseNow.course.title})
-        });
-    }
-    /*$scope.course=courseEdit.course;
-    $scope.courses=courseEdit.courses;
-*/
-    $scope.deleteCourse = function (id) {
 
-    };
+
 
 });
