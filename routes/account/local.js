@@ -27,5 +27,10 @@ function router(app,hasAccess) {
     failureRedirect: '/#/welcome' // redirect back to the signup page if there is an error
     //failureFlash : true // allow flash messages
   }));
+    app.post('/signup/admin', passport.authenticate('local-admin', {
+        successRedirect: '/#/welcome', // redirect to the secure profile section
+        failureRedirect: '/#/welcome' // redirect back to the signup page if there is an error
+        //failureFlash : true // allow flash messages
+    }));
 }
 module.exports=router;

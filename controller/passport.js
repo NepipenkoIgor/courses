@@ -80,7 +80,40 @@ var config=app.get('config');
                 });
             });
         }));
-
+    passport.use('local-admin', new LocalStrategy({
+            // by default, local strategy uses username and password, we will override with email
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
+        },
+        function (req, email, password, done) {
+            //console.log('IAM ADMIN', email);
+            process.nextTick(function () {
+                User.findOne({ 'email': email }, function (err, user) {
+                    if (err) {
+                        return done(err);
+                    }
+                    if (user) {
+                        //return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                        return done(null, user);
+                    } else {
+                        var newUser = new User();
+                        newUser.email = email;
+                        var date = new Date();
+                        newUser.lid = date.getTime();
+                        newUser.password = password;
+                        newUser.position = true;
+                        newUser.save(function (err) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            newUser.id = newUser['_id'];
+                            return done(null, newUser);
+                        });
+                    }
+                });
+            });
+        }));
 
     passport.use(new GoogleStrategy({
             clientID: config.GOOGLE_CLIENT_ID||process.env.GOOGLEID,//config.GOOGLEID,//authConfig.googleAuth.clientID,

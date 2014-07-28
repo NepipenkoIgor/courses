@@ -11,65 +11,65 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, c
 
         $http.get('/courses').success(function (courses) {
             $scope.listOfCourses = courses;
-            $http.get('/units').success(function (units) {
-                $scope.listOfUnits = units;
-                courseEdit.listOfUnits = $scope.listOfUnits;
 
-                $scope.showUnitsList = function (id) {
-                    function sortArr(a, b) {
-                        if (a.unitId < b.unitId) {
-                            return -1;
-                        }
-                        if (a.unitId > b.unitId) {
-                            return 1;
-                        }
-                        return 0;
+        });
+        $http.get('/units').success(function (units) {
+            $scope.listOfUnits = units;
+            courseEdit.listOfUnits = $scope.listOfUnits;
+
+            $scope.showUnitsList = function (id) {
+                function sortArr(a, b) {
+                    if (a.unitId < b.unitId) {
+                        return -1;
                     }
-
-                    var arrUnits = [];
-                    for (var i = 0; i < $scope.listOfUnits.length; i++) {
-                        if ($scope.listOfUnits[i].parent === id) {
-                            arrUnits.push($scope.listOfUnits[i]);
-                        }
+                    if (a.unitId > b.unitId) {
+                        return 1;
                     }
-                    //console.log("sort unit", arrUnits.sort(sortArr));
-                    return arrUnits.sort(sortArr);
-                };
-
-                // console.log("iam $stateParams");
-                function reloadLink() {
-                    //console.log("peregryzka params",$state.current.name)
-                    for (var i = 0; i < $scope.listOfCourses.length; i++) {
-                        if ($stateParams.courseTitle && $scope.listOfCourses[i].title === $stateParams.courseTitle) {
-                            $scope.courseNowChange($scope.listOfCourses[i]._id);
-
-                            for (var j = 0; j < $scope.courseNowChanged.modules.length; j++) {
-                                //console.log("course change",$scope.courseNowChanged.modules[j])
-                                if ($stateParams.moduleTitle && $scope.courseNowChanged.modules[j].title === $stateParams.moduleTitle) {
-                                    $scope.moduleNowChange($scope.courseNowChanged.modules[j]._id);
-
-                                    for (var l = 0; l < $scope.listOfUnits.length; l++) {
-                                        // console.log("iam ty ty",$scope.listOfUnits[i].unitId)
-                                        if ($stateParams.unitTitle && $scope.listOfUnits[l].unitId === parseInt($stateParams.unitTitle)) {
-
-                                            $scope.unitNowChange($scope.listOfUnits[l].unitId);
-
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
+                    return 0;
                 }
 
-                //setTimeout(reloadLink,100);
-                reloadLink();
+                var arrUnits = [];
+                for (var i = 0; i < $scope.listOfUnits.length; i++) {
+                    if ($scope.listOfUnits[i].parent === id) {
+                        arrUnits.push($scope.listOfUnits[i]);
+                    }
+                }
+                //console.log("sort unit", arrUnits.sort(sortArr));
+                return arrUnits.sort(sortArr);
+            };
 
-            });
+            // console.log("iam $stateParams");
+            function reloadLink() {
+                //console.log("peregryzka params",$state.current.name)
+                for (var i = 0; i < $scope.listOfCourses.length; i++) {
+                    if ($stateParams.courseTitle && $scope.listOfCourses[i].title === $stateParams.courseTitle) {
+                        $scope.courseNowChange($scope.listOfCourses[i]._id);
+
+                        for (var j = 0; j < $scope.courseNowChanged.modules.length; j++) {
+                            //console.log("course change",$scope.courseNowChanged.modules[j])
+                            if ($stateParams.moduleTitle && $scope.courseNowChanged.modules[j].title === $stateParams.moduleTitle) {
+                                $scope.moduleNowChange($scope.courseNowChanged.modules[j]._id);
+
+                                for (var l = 0; l < $scope.listOfUnits.length; l++) {
+                                    // console.log("iam ty ty",$scope.listOfUnits[i].unitId)
+                                    if ($stateParams.unitTitle && $scope.listOfUnits[l].unitId === parseInt($stateParams.unitTitle)) {
+
+                                        $scope.unitNowChange($scope.listOfUnits[l].unitId);
+
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+            }
+
+            //setTimeout(reloadLink,100);
+            reloadLink();
+
         });
-
 
     }
 

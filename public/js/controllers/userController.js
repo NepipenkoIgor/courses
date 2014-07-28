@@ -1,9 +1,22 @@
 app.controller('profile', function ($scope, $http) {
     'user strict';
-    var self = $scope;
 
-    function reqUser() {
+    $scope.reqUser=function(){
         $http.get('/user').success(function (data) {
+ console.log("iam start");
+
+            /*$scope.userdata = data || {};
+
+            $scope.userdata.username = data.username || 'guest';
+            $scope.userdata.password = data.password || '';
+            $scope.userdata.userlevel = data.userlevel || '0';
+            $scope.userdata.firstname = data.firstname || '';
+            $scope.userdata.lastname = data.lastname || '';
+            $scope.userdata.birth = data.birth || '';
+            $scope.userdata.email = data.email || '';
+            $scope.userdata.phone = data.phone || '';
+            $scope.userdata.settings = data.settings || '';*/
+
             if (!data.username) {
                 data.username = 'guest';
             }
@@ -35,29 +48,41 @@ app.controller('profile', function ($scope, $http) {
                 data.settings = '';
             }
 
+console.log("data scope",$scope.userdata);
 
-            $scope.userdata = data;
+
+            if($scope.userdata&&data){
+                $scope.userdata = $scope.userdata||{};
+                _.extend($scope.userdata, data);
+            }else{
+                $scope.userdata=data;
+            }
+
+
+           //
+
+
+            //console.log($scope.userdata);
             if (typeof $scope.userdata === 'string') {
                 $scope.userdata = false;
             }
-           // $scope.userAvatar = $scope.userdata.avatar || '';
-            self.username = $scope.userdata;
-            //debugger;
-            //console.log(self.username)
+
         });
 
-    }
+    };
 
-    $scope.us = reqUser;
-    $scope.us();
+    $scope.reqUser();
+    //$scope.us();
 
     $scope.postProfile = function (data) {
-        console.log($scope.us);
+        console.log(data,$scope.userdata);
+        //data.username=$scope.userdata.username;
         $http.post('/main', data).success(function (data) {
             console.log("my callback data =", data.data);
             console.log("good request");
-            $scope.us();
+             $scope.reqUser();
         });
+
 
     };
     $scope.userAvatar = function (img) {

@@ -3,13 +3,14 @@
  */
 var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable']);
 app.run(function(editableOptions) {
+    'use strict';
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
 app.service('courseEdit',function($http){
+    'use strict';
     var courseEditService={};
-
  return courseEditService;
-})
+});
 
 
 app.run(function($rootScope,$location,courseEdit){
@@ -34,11 +35,11 @@ app.run(function($rootScope,$location,courseEdit){
             courseEdit.course={};
             //console.log(courseEdit.unitNowChange);
         })*/
-})
+});
 
 
 app.config(function ($stateProvider, $urlRouterProvider) {
-
+'use strict';
    $urlRouterProvider.when('/', '/welcome');
     //$urlRouterProvider.when('/', '/welcome');
     // For any unmatched url, send to /route1
@@ -47,16 +48,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('editprofile', {
             url: "/editprofile",
-            templateUrl: "profile.html",
+            templateUrl: "views/account/profile.html",
             controller: 'profile'
         })
         .state('login', {
             url: "/login",
-            templateUrl: "login.html"
+            templateUrl: "views/account/login.html"
         })
         .state('signup', {
             url: "/signup",
-            templateUrl: "signup.html"
+            templateUrl: "views/account/signup.html"
+        })
+        .state('signupadmin', {
+            url: "/signup/admin",
+            templateUrl: "views/account/signupadmin.html"
         })
         .state('post', {
             url: "/post/new",
@@ -67,77 +72,33 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "postall.html"
         }).state('adminlab', {
             url: "/adminlab",
-            templateUrl: "adminlab.html"
+            templateUrl: "views/adminlab/adminlab.html"
         }).state('adminlab.lesson', {
             url: "/courses/:courseTitle",
-            templateUrl: "course.html",
+            templateUrl: "views/adminlab/course.html",
             controller: 'lessonController'
         }).state('adminlab.lesson.module', {
             url: "/main",
-            templateUrl: "coursedesc.html"
+            templateUrl: "views/adminlab/coursedesc.html"
 
         }).state('adminlab.lesson.unit', {
             url: "/:moduleTitle/:sectionTitle/:unitTitle",
-            templateUrl: "courseunit.html"
+            templateUrl: "views/adminlab/courseunit.html"
         }).state('welcome', {
             url: "/welcome",
-            templateUrl: "welcome.html",
+            templateUrl: "views/main/welcome.html",
             controller: ''
         }).state('course', {
             url: "/courses/:courseTitle",
-            templateUrl: "courseChenged.html",
+            templateUrl: "views/courses/courseChenged.html",
             controller: ''
         }).state('module', {
             url: "/courses/:courseTitle/:moduleTitle",
-            templateUrl: "moduleChenged.html"
+            templateUrl: "views/courses/moduleChenged.html"
 
         }).state('unit', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
-            templateUrl: "unitChenged.html"
+            templateUrl: "views/courses/unitChenged.html"
         });
 });
-/*
 
-
-
-
- */
-/*.state('themaSubject', {
- url: "/:topic/:subject",
- templateUrl: "topicSubject.html",
- controller: 'routerController'
- }).state('themaTop', {
- url: "/:topic",
- templateUrl: "topic.html",
- controller: 'routerController'
- }).state('subSubject', {
- url: "/:topic/:subject/:subsubject",
- templateUrl: "subSubject.html",
- controller: 'routerController'
- })*
-
- /*.state('editcourses', {
- url: "/coursesedit",
- templateUrl: "editcourses.html",
- controller: 'editcourses'
- }).state('coursesedition', {
- url: "/courses/edition",
- templateUrl: "coursesedition.html",
- controller: 'courseEdition'
- }).state('subjectedition', {
- url: "/courses/edition/:course",
- templateUrl: "subjectedition.html",
- controller: 'courseEdition'
- }).state('subSubjectedition', {
- url: "/courses/edition/:course/:subject",
- templateUrl: "subSubjectedition.html",
- controller: 'courseEdition'
- }).state('moduleedition', {
- url: "/courses/edition/:course/:subject/:subSubject",
- templateUrl: "moduleedition.html",
- controller: 'courseEdition'
- }).state('stepedition', {
- url: "/courses/edition/:course/:subject/:subSubject/:module",
- templateUrl: "stepedition.html",
- controller: 'courseEdition'
- })*/

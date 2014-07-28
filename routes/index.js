@@ -22,18 +22,18 @@ function router(app) {
      res.redirect("/#/welcome");
 
  }
-  var google = require('./google')(app);
-  var facebook = require('./facebook')(app);
-  var twitter = require('./twitter')(app);
-  var local = require('./local')(app,hasAccess);
-  var user = require('./user')(app,hasUser);
-  var main = require('./main')(app,hasUser);
-  var autorization=require('./autorization')(app,hasAccess);
-  var newPost=require('./newpost')(app,hasUser);
-    var deletePost=require('./deletpost')(app,hasUser);
-    var postcomment=require('./postcomment')(app,hasUser);
-    var subject = require('./subject')(app,isAdmin);
-  var logout=require('./logout')(app);
+  var google = require('./account/google')(app);
+  var facebook = require('./account/facebook')(app);
+  var twitter = require('./account/twitter')(app);
+  var local = require('./account/local')(app,hasAccess);
+  var user = require('./account/user')(app,hasUser);
+  var main = require('./account/main')(app,hasUser);
+  var autorization=require('./account/autorization')(app,hasAccess);
+  var newPost=require('./posts/newpost')(app,hasUser);
+    var deletePost=require('./posts/deletpost')(app,hasUser);
+    var postcomment=require('./posts/postcomment')(app,hasUser);
+    var subject = require('./courses/subject')(app,isAdmin);
+  var logout=require('./account/logout')(app);
 }
 
 module.exports = router;
