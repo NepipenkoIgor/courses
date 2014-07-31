@@ -74,8 +74,8 @@
       <file leaf-file-name="moduleChenged.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/views/courses/moduleChenged.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
-              <caret line="0" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.24193548" vertical-offset="0" max-vertical-offset="558">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -955,8 +955,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/views/courses/moduleChenged.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
-          <caret line="0" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.24193548" vertical-offset="0" max-vertical-offset="558">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
