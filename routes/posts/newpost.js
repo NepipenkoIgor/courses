@@ -41,6 +41,12 @@ function router(app, hasUser) {
             res.json(posts);
         });
     });
+    app.post('/postslikes',hasUser ,function (req, res) {
+        console.log(req.body);
+       Posts.update({_id:req.body._id},{$set:{likes:req.body.likes}},function (err, num) {
+            res.json(num);
+        });
+    });
 
     /*app.get('/post/new/*',hasUser ,function (req, res) {
         res.redirect("#/post/all");

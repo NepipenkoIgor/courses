@@ -21,7 +21,8 @@ var userSchema=new Schema({
   settings:Boolean,
   courses:[
       {id:String}
-  ]
+  ],
+  progress:[]
 });
 
 mongoose.model('Users',userSchema);

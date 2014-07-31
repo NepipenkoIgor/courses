@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+</head>
+<body>
+
+
+<div id="ytapiplayer">
+    You need Flash player 8+ and JavaScript enabled to view this video.
+</div>
+<button onclick="play()">play</button>
+<script type="text/javascript">
+
+    var params = { allowScriptAccess: "always" };
+    var atts = { id: "myytplayer" };
+    swfobject.embedSWF("http://www.youtube.com/v/5-RszQzQCvg?enablejsapi=1&playerapiid=ytplayer",
+            "ytapiplayer", "425", "356", "8", null, null, params, atts);
+    function play() {
+        if (ytplayer) {
+            ytplayer.playVideo();
+        }
+    }
+    function onYouTubePlayerReady(playerId) {
+        console.log("gotov",playerId)
+        ytplayer = document.getElementById("myytplayer");
+        console.log(ytplayer.getDuration())
+        //ytplayer.addEventListener("onStateChange","onytplayerStateChange");
+    }
+    function onytplayerStateChange(newState) {
+        if(newState===0){
+            console.log("conec")
+        }
+    }
+
+</script>
+</body>
+</html>

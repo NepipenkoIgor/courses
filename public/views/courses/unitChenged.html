@@ -2,11 +2,31 @@
 <div class="row">
     <div class="col-md-12">
 
-        <h1>Lesson Title : {{unitNowChanged.title}}
-            {{simpleObj()}}
+        <h1 style="color:white">Lesson Title : {{unitNowChanged.title}}
+            <div class="progress" ng-if="userdata">
+                <div class="progress-bar progress-bar-danger" ng-style="progress.red">
+                    <span class="sr-only">35% Complete (success)</span>
+                </div>
+                <div class="progress-bar progress-bar-warning " ng-style="progress.orange">
+                    <span class="sr-only">20% Complete (warning)</span>
+                </div>
+                <div class="progress-bar progress-bar-success" ng-style="progress.green">
+                    <span class="sr-only">30% Complete (danger)</span>
+                </div>
+            </div>
             <hr>
         </h1>
+        <div class="col-md-1" >
+        </div>
+        <div class="col-md-9" >
+        <!--<div class="embed-responsive embed-responsive-16by9"  >
+                   <div id="lessonVideoPlayer" class="embed-responsive-item">
 
+                   </div>
+            </div>-->
+        </div>
+        <div class="col-md-1" >
+        </div>
     </div>
 </div>
 <div class="row" ng-switch on="unitNowChanged.lims[0].typeLim" >
@@ -14,36 +34,110 @@
 
     </div>
     <div class="col-md-9" >
-        <div class="embed-responsive embed-responsive-16by9" ng-switch-when="video">
-            <iframe class="embed-responsive-item" ng-src='{{formatVideoUrl(unitNowChanged.lims[0].content[0])}}'></iframe>
+<div ng-switch-when="video" >
+        <div class="embed-responsive embed-responsive-16by9" id="videoConteiner">
+            <div id="lessonVideoPlayer" class="embed-responsive-item">
+                You need Flash player 8+ and JavaScript enabled to view this video.
+            </div>
+            <!--<iframe  class="embed-responsive-item" ng-src='{{formatVideoUrl(unitNowChanged.lims[0].content[0])}}'></iframe>-->
+
             <hr>
         </div>
-        <!--<div ng-switch-when="video" style="background-color: black" >
-            <iframe width="800" height="600" style=""
-                    ng-src='{{formatVideoUrl(unitNowChanged.lims[0].content[0])}}' frameborder="0"
-                    allowfullscreen></iframe>
-            <hr>
-        </div>-->
-        <div ng-switch-when="quiz" style="padding-bottom: 50px">
-            <div style="">
-                <h3>{{ unitNowChanged.lims[0].content[0].description}}</h3>
+        <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
+                ng-click="nextUnit(unitNowChanged.unitId)" style="margin-top: 10px" >Next unit</button>
+        </div>
+        <div ng-switch-when="quiz" style="padding-bottom: 50px" >
+            <div style="" >
+                <h3 style="color:white">{{ unitNowChanged.lims[0].content[0].description}}</h3>
 
-                <div ng-repeat="quiz in unitNowChanged.lims[0].content[0].quiz" style="margin-left: 30px">
-                    <input type="checkbox" ng-model="quiz.answer" ng-click="quizStatuses()"
-                           style="float: left;width: 16px; height: 16px;margin-right: 10px">
+                <div ng-repeat="quiz in unitNowChanged.lims[0].content[0].quiz" style="margin-left: 30px;margin-top: 15px;margin-bottom: 15px">
+                    <input type="checkbox" ng-model="quiz.answer" ng-change="quizCheck()"
+                           style="float: left;width: 20px; height: 20px;margin-right: 10px;">
 
                     <div>
-                        <p>{{ quiz.title || 'empty quiz' }}</p>
+                        <p style="color:white">{{ quiz.title || 'empty quiz' }}</p>
                     </div>
+
                 </div>
+                <button type="" class="btn btn-success btn"
+                        ng-click="checkQuiz()" style="margin-top: 10px"
+                        ng-if="markOfCompleteUnit(unitNowChanged.unitId)!=='complete'">check answer</button>
+                <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
+                        ng-click="nextUnit(unitNowChanged.unitId)" style="margin-top: 10px" >Next unit</button>
             </div>
             <hr>
         </div>
+        <div ng-switch-when="static">
+            <div ng-bind-html="trustHtml(unitNowChanged.lims[0].content[0])" style="color:white"></div>
+            <button type="" class="btn btn-success btn"
+                    ng-click="completeStatic()" style="margin-top: 10px" >Next unit</button>
+        </div>
+        <div ng-switch-when="code quest" >
+            <div class="holder">
+                <div class="row center">
+                    <ul class="breadcrumbs"  >
+                        <li ng-class="{'active': lesson.isActive, 'current':lesson.isCurrent}"
+                            ng-repeat="lesson in unitNowChanged.lims[0].content[0].levels"><span></span>
+                            <a href="">{{lesson.id}}</a>
+                        </li>
+                    </ul>
+                    <h2 class="b_title" >Level {{lessonId}}</h2>
+                </div>
+
+                <div class="console_cont col-xs-6">
+                   <!-- <div class="logo_cont">
+                        <div class="logo"></div>
+                        <div class="designori">
+                            <div class="red"></div>
+                            <div class="blue"></div>
+                            <div class="green"></div>
+                            <div class="yellow"></div>
+                        </div>
+                    </div>-->
+                    <div class="outline">
+                        <div class="console" scroll-glue>
+                            <div class="msg">
+                                <p class="{{message.class}}"
+                                   ng-repeat="message in messages"
+                                   ng-bind="message.text">
+                                </p>
+                            </div>
+                        </div>
+                        <input type="text" ng-model="console" value=""/>
+                    </div>
+                </div>
+                <div class="tabbable col-xs-6"  >
+                    <a href="#" class="btn_red">Answer</a>
+                    <tabset >
+                        <tab heading="Code">
+                            <div style="position:relative;">
+                                <div ui-ace="aceOption" ng-model="lesson.code"></div>
+                            </div>
+                        </tab>
+                        <tab heading="Preview" >
+                            <div class="b_wrap_text" id="preview" ng-bind-html="loadEx(lesson.code)">
+
+                            </div>
+                        </tab>
+                        <tab>
+                            <tab-heading>
+                                <i class="fa fa-question fa-fw"></i>Help<!--<sup>{{}}</sup>-->
+                            </tab-heading>
+                            <div class="b_wrap_text">
+                                <p ng-repeat="less in lesson.tests" ng-bind-html="less.help"></p>
+                            </div>
+                        </tab>
+                    </tabset>
+                    <button type="button" ng-click="check()" ng-init="n=-1" class="btn_red diff" >{{btnText}}</button>
+                </div>
+
+            </div>
+        </div>
 
     </div>
-    <div ng-switch-when="static">
+    <!--<div ng-switch-when="static">
         <div ng-bind-html="trustHtml(unitNowChanged.lims[0].content[0])" style=""></div>
-    </div>
+    </div>-->
 
 
 
@@ -57,11 +151,14 @@
     </div>
     <div class="col-md-6">
         <div class="container">
-            <div class="col-sm-8">
+            <div class="col-sm-8" style="color:white">
+                <button type="" class="btn btn-warning btn-xs" ng-click="showAddQuestion()" style="float: right;">
+                    <span class="fa fa-sort-up fa-fw" ng-show="addQuestionFlag" style="width: 150px">   don't ask question</span>
+                    <span class="fa fa-sort-down fa-fw" ng-hide="addQuestionFlag" style="width: 150px">   ask question</span>
+                </button>
+                <h2 ><span class="fa fa-bullhorn fa-fw" style="float: left"></span> Add new question</h2>
 
-                <h2><span class="fa fa-bullhorn fa-fw"></span> Add new question</h2>
-
-                <form style="min-width: 300px" >
+                <form style="min-width: 300px" ng-show="addQuestionFlag">
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" class="form-control" ng-model="title" ng-click="showTemplatePost()">
@@ -105,7 +202,13 @@
                     <div ng-repeat="tag in data.tags" class="tagdiv">
                         <a class="tag">{{tag}}</a>
                     </div>
+
                 </div>
+
+                <div style="float: right">{{data.likes.length}}<img src="http://www.studentenpand.nl/duim.png"
+                            width="30px"
+                            style="margin-top: -16px;cursor:pointer" ng-click="like(userdata._id,data.likes,data._id)"/></div>
+
                 <div class="comment">
                     <div ng-repeat="comment in data.comments" style="width: 550px;float: right">
                         <span class="close" ng-click="deleteComment(comment,data._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
@@ -114,6 +217,9 @@
                             <h5 style="color:red">{{getCreator(comment.creator)}}</h5>
                         </div>
                         <div class="oneComment"><p class="">{{comment.content}}</p></div>
+                        <!--<div >0 <img src="http://www.studentenpand.nl/duim.png"
+                                                         width="30px"
+                                                         style="margin-top: -16px;cursor:pointer"/></div>-->
                         <hr>
                     </div>
                 </div>

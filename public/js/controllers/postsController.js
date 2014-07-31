@@ -1,13 +1,14 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http,$sce) {
+app.controller('posts', function ($scope, $http, $sce) {
     'user strict';
     $scope.comment = "";
     function reqPosts() {
         $http.get('/posts').success(function (data) {
             $scope.postdata = data;
-            console.log($scope.postdata);
+            // console.log($scope.postdata);
+            // $scope.likes=data.likes||[];
         });
 
     }
@@ -16,13 +17,12 @@ app.controller('posts', function ($scope, $http,$sce) {
     function reqUsers() {
         $http.get('/users').success(function (data) {
             $scope.postUsersdata = data;
-            console.log($scope.postUsersdata);
         });
 
     }
 
     reqUsers();
-    $scope.postAvatar=function(id){
+    $scope.postAvatar = function (id) {
         for (var i; i < $scope.postUsersdata.length; i++) {
             if ($scope.postUsersdata[i]._id === id) {
                 var userPostAvatar = $scope.postUsersdata[i].avatar;
@@ -38,7 +38,7 @@ app.controller('posts', function ($scope, $http,$sce) {
 
         for (var i = 0; i < $scope.postdata.length; i++) {
             if ($scope.postdata[i]._id === id) {
-               // console.log("kyky");
+                // console.log("kyky");
                 $scope.postdata.splice(i, 1);
                 //console.log(id)
                 var id = {"_id": id};
@@ -55,7 +55,7 @@ app.controller('posts', function ($scope, $http,$sce) {
         for (var i = 0; i < $scope.postdata.length; i++) {
 
             if ($scope.postdata[i]._id === id) {
-              //  console.log($scope.postdata[i]._id);
+                //  console.log($scope.postdata[i]._id);
                 for (var j = 0; j < $scope.postdata[i].comments.length; j++) {
                     //console.log($scope.postdata[i].comments[j])
                     if ($scope.postdata[i].comments[j] === comment) {
@@ -74,14 +74,14 @@ app.controller('posts', function ($scope, $http,$sce) {
         }
 
     };
-    $scope.addComment = function (idPost,creator) {
-       // console.log(this.comment);
+    $scope.addComment = function (idPost, creator) {
+        // console.log(this.comment);
 
         for (var i = 0; i < $scope.postdata.length; i++) {
             if ($scope.postdata[i]._id === idPost && this.comment !== "") {
 
-                $scope.postdata[i].comments.push({content:this.comment,creator:creator});
-              //  console.log($scope.postdata[i].comments);
+                $scope.postdata[i].comments.push({content: this.comment, creator: creator});
+                //  console.log($scope.postdata[i].comments);
                 var data = {"_id": idPost, "comments": $scope.postdata[i].comments};
                 $http.post('/comment/new', data).success(function () {
                     console.log("good  comment request");
@@ -115,16 +115,19 @@ app.controller('posts', function ($scope, $http,$sce) {
 
     };
 
-
-    $scope.getCreator=function(id){
-        console.log("id",id);
-        for (var i=0; i < $scope.postUsersdata.length; i++) {
-            if ($scope.postUsersdata[i]._id === id) {
-                var userCreator = $scope.postUsersdata[i].username;
+    $scope.getCreator = function (id) {
+        //console.log("id",id);
+        var userCreator;
+        if ($scope.postUsersdata) {
+            for (var i = 0; i < $scope.postUsersdata.length; i++) {
+                if ($scope.postUsersdata[i]._id === id) {
+                    userCreator = $scope.postUsersdata[i].username;
+                }
             }
         }
         return userCreator;
     };
+
 
     $scope.postsOfUnit = function (postId, unitId) {
         // console.log("tyty",postId,unitId);
@@ -135,17 +138,38 @@ app.controller('posts', function ($scope, $http,$sce) {
     };
     $scope.postAvatar = function () {
         var img = "http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg";
-        console.log("img", img);
+        // console.log("img", img);
         return img;
     };
 
-    $scope.ifThisIsAvtor=function(nowUser,AvtorId){
-        if(nowUser.position===true){
+    $scope.ifThisIsAvtor = function (nowUser, AvtorId) {
+        if (nowUser.position === true) {
             return true;
         }
-        if(nowUser._id===AvtorId){
+        if (nowUser._id === AvtorId) {
             return true;
         }
         return false;
+    };
+    $scope.like = function (userId, arrayLikes,postId) {
+        if (arrayLikes.indexOf(userId) === (-1)) {
+            arrayLikes.push(userId);
+            $scope.updateLikes(postId,arrayLikes);
+            return;
+        }
+        for (var i = 0; i < arrayLikes.length; i++) {
+            console.log(arrayLikes[i], userId);
+            if (arrayLikes[i] === userId) {
+                //console.log(arrayLikes[i]);
+                arrayLikes.splice(i, 1);
+                $scope.updateLikes(postId,arrayLikes);
+                return;
+            }
+        }
+    };
+    $scope.updateLikes=function(postId,likes){
+        var date={_id:postId,likes:likes};
+        $http.post('/postslikes', date).success(function (num) {
+        });
     };
 });

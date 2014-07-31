@@ -99,6 +99,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state('unit', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/courses/unitChenged.html"
+
         });
 });
 

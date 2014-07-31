@@ -83,6 +83,7 @@ var limShema=new Schema({
 
     title:String,
     typeLim:String,
+    points:Number,
     content:[],
     order:String,
     complete:Boolean,

@@ -1,21 +1,8 @@
-app.controller('profile', function ($scope, $http) {
+app.controller('profile', function ($scope, $http,courseEdit) {
     'user strict';
 
-    $scope.reqUser=function(){
+    $scope.reqUser=function(cb){
         $http.get('/user').success(function (data) {
- console.log("iam start");
-
-            /*$scope.userdata = data || {};
-
-            $scope.userdata.username = data.username || 'guest';
-            $scope.userdata.password = data.password || '';
-            $scope.userdata.userlevel = data.userlevel || '0';
-            $scope.userdata.firstname = data.firstname || '';
-            $scope.userdata.lastname = data.lastname || '';
-            $scope.userdata.birth = data.birth || '';
-            $scope.userdata.email = data.email || '';
-            $scope.userdata.phone = data.phone || '';
-            $scope.userdata.settings = data.settings || '';*/
 
             if (!data.username) {
                 data.username = 'guest';
@@ -48,35 +35,28 @@ app.controller('profile', function ($scope, $http) {
                 data.settings = '';
             }
 
-console.log("data scope",$scope.userdata);
-
-
             if($scope.userdata&&data){
                 $scope.userdata = $scope.userdata||{};
                 _.extend($scope.userdata, data);
             }else{
                 $scope.userdata=data;
+                courseEdit.userdata=$scope.userdata;
             }
 
-
-           //
-
-
-            //console.log($scope.userdata);
             if (typeof $scope.userdata === 'string') {
                 $scope.userdata = false;
             }
-
+             return cb && cb();
         });
 
     };
 
     $scope.reqUser();
+    courseEdit.reqUser= $scope.reqUser;
     //$scope.us();
 
     $scope.postProfile = function (data) {
-        console.log(data,$scope.userdata);
-        //data.username=$scope.userdata.username;
+
         $http.post('/main', data).success(function (data) {
             console.log("my callback data =", data.data);
             console.log("good request");
@@ -86,7 +66,7 @@ console.log("data scope",$scope.userdata);
 
     };
     $scope.userAvatar = function (img) {
-        var img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
+        img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
         var background = "url('" + img + "') center";
         var obj = {'background': background};
         return obj;

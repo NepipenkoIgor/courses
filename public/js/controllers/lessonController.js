@@ -84,7 +84,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             console.log(data);
             if (action === 'deletecourse') {
                 // $state.go('lesson',{courseTitle:$scope.courses[0].title});
-                $state.go('adminlab');
+               // $state.go('adminlab');
                 init();
 
             }else{
@@ -305,6 +305,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 $scope.typeLim = {
                     type: $scope.unitNow.lims[0].typeLim
                 };
+                $scope.points.count=$scope.unitNow.lims[0].points;
             }
             //console.log($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0]));
             if ($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0])) {
@@ -325,7 +326,8 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     $scope.statuses = [
         {value: 'static', text: 'static'},
         {value: 'video', text: 'video'},
-        {value: 'quiz', text: 'quiz'}
+        {value: 'quiz', text: 'quiz'},
+        {value: 'code quest', text: 'code quest'}
     ];
 
     $scope.formatVideoUrl = function (url) {
@@ -341,12 +343,12 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     };
 
     $scope.saveVideo = function () {
-
-        var obj = {typeLim: $scope.typeLim.type, content: $scope.videoSource};
+        var obj = {typeLim: $scope.typeLim.type, content: $scope.videoSource,points:parseInt($scope.points.count)};
         $scope.unitNow.lims[0] = obj;
 
        // console.log("new unit seeeee", $scope.unitNow);
         $scope.saveCourse();
+        $scope.points.count=0;
     };
 
     $scope.addQuiz = function (id, position) {
@@ -379,11 +381,12 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     };
 
     $scope.saveQuiz = function () {
-        var obj = {typeLim: $scope.typeLim.type, content: [$scope.quizInEdit[0]]};
-
+        var obj = {typeLim: $scope.typeLim.type, content: [$scope.quizInEdit[0]],points:parseInt($scope.points.count)};
+console.log(obj)
         $scope.unitNow.lims[0] = obj;
         console.log($scope.unitNow.lims[0]);
         $scope.saveCourse();
+        $scope.points.count=0;
     };
 
     $scope.aceLoaded = function(_editor){
@@ -429,12 +432,225 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     };
  $scope.saveStatic=function(){
      console.log($scope.editView);
-     var obj = {typeLim: $scope.typeLim.type, content: [$scope.editView]};
+     var obj = {typeLim: $scope.typeLim.type, content: [$scope.editView],points:parseInt($scope.points.count)};
      $scope.unitNow.lims[0] = obj;
      $scope.saveCourse();
  };
+    $scope.saveCodeQuest=function(){
+        console.log($scope.editView);
+        var lessons = {
+            levels : [
+                {
+                    id: 1,
+                    description:'HTML (“HyperText Markup Language”) is a ' +
+                        'language to describe the contents of web documents. The code on ' +
+                        'the right is a basic structure of an HTML document. Notice how there is ' +
+                        'an opening tag &lt; /&gt; and a closing tag &lt;/ &gt;. These represent the beginning and' +
+                        ' end of an element. <br><strong>Try changing the title of this document by changing the text ' +
+                        'between the &lt;title&gt;&lt;/title&gt; tags to something else then checking the preview.</strong>  Type ' +
+                        '“next” when you are done.',
+                    tests: {
+                        1:{
+                            error: 'Oops, looks like it is still the same. <strong>Click in the editor on the right'+
+                                'and change the text “Code Quest” to something else.</strong>',
+                            check: 'Code Quest',
+                            help: ''
+                        },
+                        2:{
+                            error: 'Oops, looks like it is still the same. Change the code “&lt;title&gt;Code Quest&lt;/title&gt;” '+
+                                ' to “&lt;title&gt;{{username}}’s HTML&lt;/title&gt;”',
+                            check: 'Code Quest',
+                            help: ''
+                        }
+                    },
+                    correct: 'Great. Now let’s try typing out that basic structure on your own. '+
+                        ' <strong>In the editor on the right type out the follow HTML code:</strong><br>'+
+                        ' <pre class="c_black">&lt;!DOCTYPE html&gt;<br>'+
+                        '&lt;html&gt;<br>'+
+                        ' &lt;head&gt;<br>'+
+                        '   &lt;title&gt;{{username}}’s HTML&lt;/title&gt;<br>'+
+                        ' &lt;/head&gt;<br>'+
+                        ' &lt;body&gt;<br><br>'+
+                        ' &lt;/body&gt;<br>'+
+                        '&lt;/html&gt;</pre>',
+                    code:'<!DOCTYPE html>\n'+
+                        '<html>\n'+
+                        '  <head>\n'+
+                        '    <title>Code Quest</title>\n'+
+                        '  </head>\n'+
+                        '  <body>\n'+
+                        '  </body>\n'+
+                        '</html>'
+                },
+                {
+                    id: 2,
+                    description:'Now that you’ve run through the basic structure of an HTML document,' +
+                        ' let’s add some elements. In the code on the right you will notice new ' +
+                        'elements in the &lt;body&gt;&lt;/body&gt; tags. &lt;h1&gt; is a header. &lt;p&gt; a paragraph. ' +
+                        'and &lt;b&gt; is for bold. <strong>Try the following:</strong><br>' +
+                        '<ul class="b_des_list">' +
+                        '<li>1. Change &lt;h1&gt; to any number between 2 and 6.</li>' +
+                        '<li>2. Add a sentence to the paragraph, in between the &lt;p&gt; tags.</li>' +
+                        '<li>3. Change the text between the &lt;b&gt; tags to anything else.</li>' +
+                        '</ul> <p>Type “next” when you are done.</p>',
+                    tests: {
+                        1:{
+                            error: 'Oops, looks like you missed step 1.<br>' +
+                                '<ul class="b_des_list">' +
+                                '<li>1. Change &lt;h1&gt; to any number between 2 and 6</li>' +
+                                '</ul>',
+                            check: '<h1>Giraffes</h1>',
+                            help: 'Your code should look like this...'+
+                                '<pre class="c_black">&lt;!DOCTYPE html&gt;<br>'+
+                                '&lt;html&gt;<br>'+
+                                ' &lt;head&gt;<br>'+
+                                '   &lt;title&gt;{{username}}’s HTML elements&lt;/title&gt;<br>'+
+                                ' &lt;/head&gt;<br>'+
+                                ' &lt;body&gt;<br>'+
+                                '   &lt;h1&gt;{{username}}&lt;/h1&gt;<br>'+
+                                '   &lt;p&gt;A sentence about you, &lt;b&gt;{{username}}&lt;/b&gt;&lt;/p&gt;'+
+                                ' &lt;/body&gt;<br>'+
+                                '&lt;/html&gt;</pre>'
+                        },
+                        2:{
+                            error: 'Oops, looks like you missed step 2 or 3.<br>' +
+                                '<ul class="b_des_list">' +
+                                '<li>2. Add a sentence to the paragraph, in between the &lt;p&gt; tags.</li>' +
+                                '<li>3. Change the text between the &lt;b&gt; tags to anything else.</li>' +
+                                '</ul>',
+                            check: {
+                                1: 'I’d love to own a pet <b>giraffe!</b>',
+                                2: 'giraffe!'
+                            },
+                            help: 'Make sure to close your tags...'+
+                                '<pre class="c_black">&lt;h1&gt;{{username}}&lt;/h1&gt;<br>'+
+                                '&lt;p&gt;A sentence about you, &lt;b&gt;{{username}}.&lt;/b&gt;&lt;/p&gt;</pre>'
+                        }
+                    },
+                    correct: 'Good job. Now try it on your own by adding these elements to'+
+                        'the &lt;body&gt; tags. <strong>In the editor on the right add a header &lt;h1&gt;, '+
+                        'paragraph &lt;p&gt;, and bold&lt;b&gt; something inside that paragraph.</strong> ',
+                    code:'<!DOCTYPE html>\n'+
+                        '<html>\n'+
+                        '  <head>\n'+
+                        '    <title>Code Quest</title>\n'+
+                        '  </head>\n'+
+                        '  <body>\n'+
+                        '    <h1>Giraffes</h1>\n'+
+                        '    <p>I’d love to own a pet <b>giraffe!</b></p>\n'+
+                        '  </body>\n'+
+                        '</html>'
+                },
+                {
+                    id: 3,
+                    description: 'Next let’s add some images with HTML. The &lt;img&gt; tag ' +
+                        'is a singular tag meaning everything needed will be in one set of &lt;&gt;.' +
+                        ' <strong>Try changing the img source (src) to </strong><br>'+
+                        '<p class="b_des">http://code.thedesignori.net/images/moose2.jpg</p> ' +
+                        'Type “next” when you are done.',
+                    tests: {
+                        1:{
+                            error: 'Oops, <strong>Try changing the img source (src="moose.jpg") </strong>'+
+                                'to <p class="b_des">src="http://www.epatage-club.ru/wp-content/uploads/2011/09/cat-200x200.jpg"</p>',
+                            check: 'http://www.epatage-club.ru/wp-content/uploads/2011/09/cat-200x200.jpg',
+                            help: 'Your code should look like this:'+
+                                '<pre class="c_black">'+
+                                '&lt;img src="http://code.thedesignori.net/images/moose2.jpg" alt="This is an image." height="50" width="50" /&gt;'+
+                                '</pre><br />'+
+                                'Make sure you have " "'
+                        }
+                    },
+                    correct: 'Good job. Now try it on your own by adding the entire &lt;img&gt; '+
+                        'tag. In the editor on the right add the image '+
+                        '<p class="b_des">http://code.thedesignori.net/images/more_moose.jpg</p>'+
+                        'with a width of 100 and a height of 75.',
+                    code:'<!DOCTYPE html>\n'+
+                        '<html>\n'+
+                        '  <head>\n'+
+                        '    <title>Code Quest</title>\n'+
+                        '  </head>\n'+
+                        '  <body>\n'+
+                        '    <h1>Moose!</h1>\n'+
+                        '    <img src="moose.jpg" alt="This is an image." height="50" width="50" />\n'+
+                        '  </body>\n'+
+                        '</html>'
+                },
+                {
+                    id: 4,
+                    description: 'Now we are going to make some lists.There are ' +
+                        'two types of lists, ordered list and unordered lists.' +
+                        'Which use the &lt;ol&gt; and &lt;ul&gt; tag respectively. Each item in the list uses ' +
+                        'the list item tag &lt;li&gt;. <strong>Try adding another list item to each list. Follow ' +
+                        'the same syntax that you see in the provided code.</strong> <br>' +
+                        'Type “next” when you are done.',
+                    tests: {
+                        1:{
+                            error: 'List items need to be closed like a typical HTML tag.'+
+                                '&lt;li&gt;this is a list item&lt;/li&gt;, Try adding this between '+
+                                'the &lt;ul&gt;&lt;/ul&gt; and &lt;ol&gt; &lt;/ol&gt; tags.',
+                            check: '',
+                            help: 'Start with the &lt;ol&gt; &lt;/ol&gt; tags, then add your list items between them.'
+                        },
+                        2:{
+                            help: 'Make sure you have fully closed your tags. &lt;ol&gt; &lt;li&gt;list item&lt;/li&gt; &lt;/ol&gt;. You need 5 list items.'
+                        }
+                    },
+                    correct: 'Great. Now try it on your own by creating your own lists.<br>'+
+                        ' <strong>In the editor on the right create an ordered list giving 5 list items.</strong>',
+                    code:'<!DOCTYPE html>\n'+
+                        '<html>\n'+
+                        '  <head>\n'+
+                        '    <title>Lists</title>\n'+
+                        '  </head>\n'+
+                        '  <body>\n'+
+                        '    <ol>\n'+
+                        '      <li>Yawn</li>\n'+
+                        '      <li>Take a nap</li>\n'+
+                        '      <li>Wake up</li>\n'+
+                        '    </ol>\n'+
+                        '    <ul>\n'+
+                        '      <li>Salt</li>\n'+
+                        '      <li>Pepper</li>\n'+
+                        '      <li>Cummin</li>\n'+
+                        '    </ul>\n'+
+                        '  </body>\n'+
+                        '</html>'
+                },
+                {
+                    id: 5,
+                    description: 'Whilst HTML structures the document and tells browsers what' +
+                        ' an element’s function is, CSS gives the browser instructions on how to display' +
+                        ' a certain element. Take a look at the code on the right. We will be place our' +
+                        ' CSS inside the &lt;style&gt;&lt;/style&gt; tags. CSS works by selecting an element then' +
+                        ' applying properties to it. <br>Type “next” when you are done.',
+                    tests: {
+                        1:{
+                            error: 'xxxxxxxxx, Xxxx.',
+                            check: '',
+                            help: ''
+                        }
+                    },
+                    correct: 'xxxxxxx. Xxxxx.',
+                    code:'<style>\n' +
+                        'selector {\n' +
+                        '  property1:value;\n' +
+                        '  property2:value;\n' +
+                        '  property3:value;\n' +
+                        '}\n' +
+                        '</style>'
+                }
+            ]};
+        var obj = {typeLim: $scope.typeLim.type, content: [lessons],points:parseInt($scope.points.count)};
 
+        $scope.unitNow.lims[0] = obj;
+        $scope.saveCourse();
+    };
 
+    $scope.points = {
+        count: 0
+    };
 
-
+    /*$scope.getPoints=function(num){
+        console.log($scope.points.count,num)
+    };*/
 })

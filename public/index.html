@@ -13,7 +13,9 @@
     <!--<link rel="shortcut icon" type="image/png" href="http://iscoding.net/common/favicon.ico">-->
     <link href="stylesheets/xeditable.css" rel="stylesheet">
 
-
+    <link rel="stylesheet" href="stylesheets/fontello.css">
+    <link rel="stylesheet" href="stylesheets/animation.css">
+    <link rel="stylesheet" href="stylesheets/all.css" type="text/css"/>
     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
@@ -39,7 +41,7 @@
      <script  src="js/controllers/postsController.js"></script>
     <!-- <script  src="javascripts/front.js"></script>-->
 
-<!--<script src="javascripts/jslayot/bootstrap.min.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
     <!--<script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
 
@@ -160,7 +162,7 @@
         <div class="course_menu">
 
             <div class="mod_title " ng-show="moduleNowChanged">
-                <a href="" data-toggle="tooltip" data-placement="left" title="" data-original-title="Course Map">
+                <a href="" data-toggle="tooltip" data-placement="left" title="" data-original-title="Course Map" ng-click="mapModule()">
                     <i class="fa fa-map-marker"></i>
                 </a>
                 <h4></h4>
@@ -220,14 +222,14 @@
                 </li>
             </ul>-->
             <ul class="section_menu">
-                <li class="" data-original-title="" title="" ng-repeat="section in moduleNowChanged.sections">
-                    <h4 style="color:orange">Section {{$index + 1}}</h4>
+                <li ng-class="markOfCompleteSection(section.specialId)" data-original-title="" title="" ng-repeat="section in moduleNowChanged.sections">
+                    <h4 style="color:orange" >Section {{$index + 1}}</h4>
                     <h4><b>{{section.title}}</b></h4>
                     <div class="course_sub_menu">
                         <h5><b>{{section.title}}</b></h5>
                         <p></p>
                         <ul>
-                            <li class="" data-original-title="" title=""
+                            <li ng-class="markOfCompleteUnit(unit.unitId)" data-original-title="" title=""
                                 ng-repeat="unit in showUnitsList(section.specialId) track by $id(unit)"
                                     ng-click="unitNowChange(unit.unitId)">
                                 <i ng-class="faUnitClass(unit.lims[0].typeLim)"></i> {{unit.title}}</li>
@@ -298,6 +300,6 @@
     <div class="tall">Scroll test</div>
     <h1>bottom</h1>
 </div>-->
-
+<!--<div ng-show="false" id="editor"></div>-->
 </div>
 </body></html>

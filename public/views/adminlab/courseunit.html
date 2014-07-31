@@ -10,12 +10,17 @@
 
         </h3>
 
+        <h3>Lesson Points :
+            <a href="#" editable-text="points.count">{{ points.count || '0' }}</a>
+        </h3>
+        <!--<button ng-click="getPoints(points.count)">points</button>-->
         <hr>
     </div>
 </div>
 <div class="row" ng-switch on="typeLim.type">
     <div class="col-md-12">
         <div ng-switch-when="video" style="padding-bottom: 50px">
+
             <div>
                 <a href="#" editable-text="videoSource">{{ videoSource || 'src of new video' }}</a>
             </div>
@@ -28,19 +33,25 @@
                 <a href="#" editable-textarea="quizInEdit[0].description" e-rows="7" e-cols="40">
                     <pre>{{ quizInEdit[0].description || 'quiz description' }}</pre>
                 </a>
+
                 <div ng-repeat="quiz in quizInEdit[0].quiz">
-                 <input type="checkbox"  ng-model="quiz.answer" ng-click="quizStatuses()" style="float: left;width: 16px; height: 16px;margin-right: 10px">
+                    <input type="checkbox" ng-model="quiz.answer" ng-click="quizStatuses()"
+                           style="float: left;width: 16px; height: 16px;margin-right: 10px">
+
                     <div>
                         <a href="#" editable-text="quiz.title">{{ quiz.title || 'empty quiz' }}</a>
                     </div>
-                <div class="btn-group btn-group-xs" >
-                    <button type="button" class="btn btn-success" ng-click="addQuiz(quiz.orderId,'before')"
-                            ng-disabled="disabled">before</button>
-                    <button type="button" class="btn btn-success" ng-click="addQuiz(quiz.orderId,'after')"
-                            ng-disabled="disabled">after</button>
-                    <button class="btn btn-danger btn-xs" ng-click="deleteQuiz(quiz.orderId)"
-                            ng-disabled="disabled">del</button>
-                </div>
+                    <div class="btn-group btn-group-xs">
+                        <button type="button" class="btn btn-success" ng-click="addQuiz(quiz.orderId,'before')"
+                                ng-disabled="disabled">before
+                        </button>
+                        <button type="button" class="btn btn-success" ng-click="addQuiz(quiz.orderId,'after')"
+                                ng-disabled="disabled">after
+                        </button>
+                        <button class="btn btn-danger btn-xs" ng-click="deleteQuiz(quiz.orderId)"
+                                ng-disabled="disabled">del
+                        </button>
+                    </div>
                 </div>
                 <button class="btn btn-success" style="float: right" ng-click="saveQuiz()">Add quiz</button>
             </div>
@@ -52,6 +63,13 @@
 
 
             <button class="btn btn-success" style="float: right" ng-click="saveStatic()">Add static</button>
+
+        </div>
+        <div ng-switch-when="code quest" style="padding-bottom: 50px">
+            code quest
+
+
+            <button class="btn btn-success" style="float: right" ng-click="saveCodeQuest()">Add code quest</button>
 
         </div>
         <hr>

@@ -18,5 +18,15 @@ function router(app,hasUser) {
         //
 
     });
+    app.post('/progress',hasUser ,function (req, res) {
+        console.log(req.body);
+        Users.update({_id:req.body[0]},{$push:{progress:req.body[1]}},function(err,num){
+            res.json(num);
+        })
+        //
+
+    });
+
+
 }
 module.exports=router;
