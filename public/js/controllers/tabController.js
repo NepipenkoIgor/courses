@@ -185,6 +185,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$l
 //console.log(courseEdit.userdata)
     };
     $scope.saveProgress = function (unitId) {
+        if(!courseEdit.userdata){
+            return;
+        }
         if (courseEdit.userdata.progress.indexOf(unitId) === (-1)) {
             $http.post("/progress", [courseEdit.userdata._id, unitId]).success(function (num) {
                 console.log("good  progress request", num);
@@ -196,6 +199,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$l
         }
     };
     $scope.calculateTotalProgress = function (totalPoints, userProgress, secionId) {
+        if(!courseEdit.userdata){
+            return;
+        }
         console.log("scores of this sections", totalPoints);
         console.log("userProgress", userProgress);
         var realpointsOfSection = 0;
@@ -232,22 +238,28 @@ $scope.returnProgress=function(){
         return [$scope.progress.red, $scope.progress.orange, $scope.progress.green]
     }
     $scope.markOfCompleteUnit = function (unitId) {
+        if(!courseEdit.userdata){
+            return;
+        }
         if (courseEdit.userdata.progress.indexOf(unitId) !== (-1)) {
             return "complete";
         }
-        if(unitId===$scope.unitNowChanged.unitId){
+        if($scope.unitNowChanged!==undefined&&unitId===$scope.unitNowChanged.unitId){
             return "active";
         }
     };
     $scope.markOfCompleteSection = function (sectionId) {
- for(var i=0;i<$scope.listOfUnits.length;i++){
-     if($scope.listOfUnits[i].parent===sectionId){
-         if(courseEdit.userdata.progress.indexOf($scope.listOfUnits[i].unitId)===(-1)){
-             return " ";
-         }
-     }
- }
-        return "complete";
+        if(!courseEdit.userdata){
+            return;
+        }
+            for (var i = 0; i < $scope.listOfUnits.length; i++) {
+                if ($scope.listOfUnits[i].parent === sectionId) {
+                    if (courseEdit.userdata.progress.indexOf($scope.listOfUnits[i].unitId) === (-1)) {
+                        return " ";
+                    }
+                }
+            }
+            return "complete";
 
     };
 $scope.completeStatic=function(){
@@ -473,5 +485,5 @@ var arrLocal=$location.$$url.split("/");
         }
         $scope.addQuestionFlag=false
         return;
-    }
+    };
 });

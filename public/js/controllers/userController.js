@@ -45,6 +45,7 @@ app.controller('profile', function ($scope, $http,courseEdit) {
 
             if (typeof $scope.userdata === 'string') {
                 $scope.userdata = false;
+                courseEdit.userdata=$scope.userdata;
             }
              return cb && cb();
         });
