@@ -9,6 +9,16 @@ app.controller('posts', function ($scope, $http, $sce) {
             $scope.postdata = data;
             // console.log($scope.postdata);
             // $scope.likes=data.likes||[];
+            $scope.countUserPost = function(id){
+                var count = 0;
+                for(var i=0; i<$scope.postdata.length; i++){
+                    if($scope.postdata[i].creator === id){
+                        count++;
+                    }
+                }
+                return count;
+            };
+
         });
 
     }
@@ -172,4 +182,5 @@ app.controller('posts', function ($scope, $http, $sce) {
         $http.post('/postslikes', date).success(function (num) {
         });
     };
+
 });
