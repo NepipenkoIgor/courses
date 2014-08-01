@@ -5,7 +5,7 @@
 }
 
 .sidemenu {
-  width: 110px;
+  min-width: 110px;
   height: 100%;
   position: fixed;
   top: 0;
@@ -16,10 +16,11 @@
 .sidemenu .open:before {
     content: "";
     height: 0px;
+    z-index: 9;
     position: absolute;
     left: 0px;
     top: 20px;
-    width: 0px; 
+    width: 0px;
     border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
 	border-left: 5px solid #4e5d6c;
@@ -52,6 +53,7 @@ body,
 .notify a .user_menu span {
     line-height: 50px;
     color: #ddd;
+    padding-right: 8px;
     margin-left: 60px;
 }
 
@@ -63,7 +65,7 @@ body,
     position: absolute;
     background: url('http://www.servimg.com/u/f60/15/20/71/92/user10.png') center;
     background-size:34px;
-    border-radius: 34px;  
+    border-radius: 34px;
 }
 
 .notify .dropdown-menu {
@@ -111,28 +113,11 @@ body,
     text-decoration: none;
     height: 50px;
     display: block;
-    position: relative;
-    line-height: 50px;
 }
 
-.menu a h4 {
-    width: 60px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    line-height: inherit;
-    font-size: 16px;
-    position: absolute;
-    top: 0;
-    left: 10px;
-}
-
-.menu a i {
-    position: absolute;
-    top: 17px;
-    left: 70px;
-    font-size: 17px;
-}
+.menu a>*{float: left;margin: 0 10px;}
+.menu a h4,
+.menu a i {line-height: 50px;}
 
 .tool_menu {
     height: 50px;
@@ -173,12 +158,12 @@ body,
 }
 
 .tools:hover {
-    
+
 }
 
 .notify .open,
 .menu_cont .open {
-    
+
 }
 
 .menu .dropdown-menu {
@@ -229,7 +214,7 @@ body,
 }
 
 .section_menu ul li {
-    
+
 }
 
 .course_menu ul,
@@ -264,7 +249,7 @@ body,
     position: absolute;
     left: 0px;
     top: 40%;
-    width: 0px; 
+    width: 0px;
     border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
 	border-left: 5px solid #4e5d6c;
@@ -274,7 +259,7 @@ body,
     display: none;
     position: absolute;
     top: 0px;
-    right: 110px;
+    right: 100%;
 }
 
 .course_menu .section_menu li:hover div.course_sub_menu {
@@ -383,7 +368,7 @@ body,
     cursor: pointer;
 }
 
-#editor { 
+#editor {
             width: 600px;
             height: 400px;
         }
@@ -393,12 +378,17 @@ body,
 .options {
     position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
 }
-
+.menu_cont .open{background-color: transparent;}
+.menu_cont .open a:first-child{background-color: #1f2f3f;}
 .options a {
-    width: 110px; 
+    width: 50%;
     height: 50px;
+    text-align: center;
     display: block;
+    float: left;
 }
 
 .options h4 {

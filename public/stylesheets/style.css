@@ -95,13 +95,13 @@ width: 1000px;
     border-radius: 3px;
 }
 .postConteiner{
-background-color: white;
+    background-color: white;
     overflow: hidden;
     position: relative;
-  top: 0px;
-    left: 5%;
+    top: 0px;
+    /*left: 5%;*/
     /*max-width: 700px;*/
-   min-width: 730px;
+    min-width: 730px;
     padding: 20px 20px;
    /* border:solid 2px green;*/
     margin-top: 2px;
