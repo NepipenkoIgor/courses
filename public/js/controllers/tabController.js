@@ -93,7 +93,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             if ($scope.courseNowChanged.modules[i]._id === id) {
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
                 //console.log("iam here",$scope.courseNowChanged);
-                $state.go('module', {courseTitle: $scope.courseNowChanged.title, moduleTitle: $scope.moduleNowChanged.title});
+               // $state.go('module', {courseTitle: $scope.courseNowChanged.title, moduleTitle: $scope.moduleNowChanged.title});
             }
         }
 

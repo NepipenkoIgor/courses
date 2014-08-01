@@ -1,4 +1,4 @@
-
+<!--
 <div class="container" ng-controller="posts">
 
     <div class="col-sm-6 col-sm-offset-3">
@@ -27,4 +27,27 @@
 
     </div>
 
+</div>-->
+<div class="container" ng-controller="posts">
+<div class="row">
+    <div class="col-sm-12" style="color:white">
+        <h2><span class="fa fa-bullhorn fa-fw" style="float: left"></span> Add new post</h2>
+        <form style="min-width: 300px" >
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" ng-model="title" ng-click="showTemplatePost()">
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea class="form-control" ng-model="content" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label>tags</label>
+                <input type="textarea" class="form-control" ng-model="tags">
+            </div>
+            <button type="" class="btn btn-success btn-lg" ng-click="saveNewPost(userdata._id)">add new question</button>
+        </form>
+        <hr>
+    </div>
 </div>
+    </div>
