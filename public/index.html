@@ -79,7 +79,7 @@
                 </a>
             </div>
         </div>
-        
+
         <!--- Main menu --->
         <a ui-sref="adminlab" style="display: block;padding: 20px 8px 8px;" ng-if="userdata.position">Admin Lab</a>
             <div class="dropdown menu" ng-controller="mainMenu">
@@ -100,6 +100,15 @@
                     </ul>
                 </ul>
             </div>
+        </div>
+
+        <div class="dropdown notify" ng-if="!ifCommunity()" >
+            <a data-toggle="dropdown"  data-original-title="" title="">
+
+                <button  class="btn btn-primary" style=";height: 50px">
+                    <a href="#/post/new" style="color:#000000">Add new post</a></button>
+            </a>
+
         </div>
 
 

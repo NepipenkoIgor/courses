@@ -123,11 +123,10 @@ var config=app.get('config');
         function (accessToken, refreshToken, profile, done) {
             // asynchronous verification, for effect...
             process.nextTick(function () {
-                User.findOne({ 'id': profile.id }, function (err, user) {
+                User.findOne({ 'gid': profile.id }, function (err, user) {
                     if (err) {
                         return done(err);
                     }
-                    ;
                     if (user) {
                         return done(null, user);
                     } else {

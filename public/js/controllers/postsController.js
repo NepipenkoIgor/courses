@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http, $sce) {
+app.controller('posts', function ($scope, $http, $sce,$state) {
     'user strict';
     $scope.comment = "";
     function reqPosts() {
@@ -74,6 +74,15 @@ app.controller('posts', function ($scope, $http, $sce) {
         }
 
     };
+    $scope.saveNewPost=function(creator){
+        var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
+        $http.post('/post/new', newPost).success(function (data) {
+
+        //    console.log(data);
+            reqPosts();
+            $state.go('posts')
+        });
+    }
     $scope.addComment = function (idPost, creator) {
         // console.log(this.comment);
 
