@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/1/14.
  */
-app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$location,$window,courseEdit) {
+app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, courseEdit) {
     'user strict';
 //$scope.courseEdit=courseEdit;
 
@@ -38,8 +38,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$l
                 return arrUnits.sort(sortArr);
             };
             function reloadLink() {
-                console.log("$location",$location.$$url.split("/")[1]!=="adminlab");
-                if($location.$$url.split("/")[1]!=="adminlab") {
+                console.log("$location", $location.$$url.split("/")[1] !== "adminlab");
+                if ($location.$$url.split("/")[1] !== "adminlab") {
                     //console.log("peregryzka params",$state.current.name)
                     for (var i = 0; i < $scope.listOfCourses.length; i++) {
                         if ($stateParams.courseTitle && $scope.listOfCourses[i].title === $stateParams.courseTitle) {
@@ -99,7 +99,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$l
 
     };
     $scope.unitNowChange = function (id) {
-        $scope.addQuestionFlag=false;
+        $scope.addQuestionFlag = false;
         $scope.progress.red = {};
         $scope.progress.orange = {};
         $scope.progress.green = {};
@@ -185,7 +185,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$l
 //console.log(courseEdit.userdata)
     };
     $scope.saveProgress = function (unitId) {
-        if(!courseEdit.userdata){
+        if (!courseEdit.userdata) {
             return;
         }
         if (courseEdit.userdata.progress.indexOf(unitId) === (-1)) {
@@ -199,7 +199,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$l
         }
     };
     $scope.calculateTotalProgress = function (totalPoints, userProgress, secionId) {
-        if(!courseEdit.userdata){
+        if (!courseEdit.userdata) {
             return;
         }
         console.log("scores of this sections", totalPoints);
@@ -234,42 +234,41 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams,$l
         console.log($scope.progress.red, $scope.progress.orange, $scope.progress.green);
 
     };
-$scope.returnProgress=function(){
+    $scope.returnProgress = function () {
         return [$scope.progress.red, $scope.progress.orange, $scope.progress.green]
     }
     $scope.markOfCompleteUnit = function (unitId) {
-        if(!courseEdit.userdata){
+        if (!courseEdit.userdata) {
             return;
         }
         if (courseEdit.userdata.progress.indexOf(unitId) !== (-1)) {
             return "complete";
         }
-        if($scope.unitNowChanged!==undefined&&unitId===$scope.unitNowChanged.unitId){
+        if ($scope.unitNowChanged !== undefined && unitId === $scope.unitNowChanged.unitId) {
             return "active";
         }
     };
     $scope.markOfCompleteSection = function (sectionId) {
-        if(!courseEdit.userdata){
+        if (!courseEdit.userdata) {
             return;
         }
-            for (var i = 0; i < $scope.listOfUnits.length; i++) {
-                if ($scope.listOfUnits[i].parent === sectionId) {
-                    if (courseEdit.userdata.progress.indexOf($scope.listOfUnits[i].unitId) === (-1)) {
-                        return " ";
-                    }
+        for (var i = 0; i < $scope.listOfUnits.length; i++) {
+            if ($scope.listOfUnits[i].parent === sectionId) {
+                if (courseEdit.userdata.progress.indexOf($scope.listOfUnits[i].unitId) === (-1)) {
+                    return " ";
                 }
             }
-            return "complete";
+        }
+        return "complete";
 
     };
-$scope.completeStatic=function(){
-    $scope.saveProgress($scope.unitNowChanged.unitId);
-};
+    $scope.completeStatic = function () {
+        $scope.saveProgress($scope.unitNowChanged.unitId);
+    };
 
-$scope.nextUnit=function(id){
-    $scope.unitNowChange($scope.unitNowChanged.unitId+1);
-};
-
+    $scope.nextUnit = function (id) {
+        $scope.unitNowChange($scope.unitNowChanged.unitId + 1);
+    };
 
 
     function onYouTubePlayerReady(playerId) {
@@ -467,23 +466,43 @@ $scope.nextUnit=function(id){
 //*****************************************************************************************
 
 
-
-    $scope.mapModule=function(){
+    $scope.mapModule = function () {
         console.log($location.$$url);
-var arrLocal=$location.$$url.split("/");
-        arrLocal.splice(4,2)
+        var arrLocal = $location.$$url.split("/");
+        arrLocal.splice(4, 2)
         console.log(arrLocal.join("/"));
-        arrLocal=arrLocal.join("/")
+        arrLocal = arrLocal.join("/")
         //$location.$$url=arrLocal;
-        $window.location="/#"+arrLocal;
+        $window.location = "/#" + arrLocal;
     };
-    $scope.showAddQuestion=function(){
+    $scope.showAddQuestion = function () {
 
-        if(!$scope.addQuestionFlag){
-            $scope.addQuestionFlag=true;
+        if (!$scope.addQuestionFlag) {
+            $scope.addQuestionFlag = true;
             return;
         }
-        $scope.addQuestionFlag=false
+        $scope.addQuestionFlag = false
         return;
     };
+
+
+    $scope.goToCommunity = function () {
+        console.log($location.$$url)
+        $location.$$url = "/post/all";
+        $state.go('posts').then(function () {
+            console.log("good redirect")
+        });
+    };
+    $scope.goToCourse = function () {
+        $state.go('welcome').then(function () {
+            console.log("good redirect");
+        });
+    };
+    $scope.ifCommunity = function () {
+        if ($location.$$url === "/post/all" || $location.$$url === "/post/new") {
+            return false;
+        }
+        return true;
+    };
+
 });

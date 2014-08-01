@@ -27,8 +27,8 @@ function router(app, hasUser) {
            // console.log("postNew", postNew);
            Post.save(function (err, post) {
                console.log("good new post");
-               res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
-              // res.redirect("/#/post/all");
+               //res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+               res.redirect("/#/post/all");
            });
 
        });
