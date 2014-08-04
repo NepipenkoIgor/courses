@@ -110,6 +110,15 @@
             </a>
 
         </div >
+
+        <div class="input-group" ng-if="!ifCommunity()" style="width: 200px">
+            <input type="text" class="form-control" ng-model="textOfSearch.text">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="textSearch()">Go!</button>
+      </span>
+        </div><!-- /input-group -->
+
+
         <div ng-if="!ifCommunity()">
             <a href="#" editable-select="search.type" e-ng-options="s.value as s.text for s in searchType">
                 {{ search.type }}

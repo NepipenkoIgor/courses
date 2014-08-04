@@ -541,5 +541,13 @@ $scope.postFilter=function(user,postData){
     console.log(searchObj);
     courseEdit.searchPosts(searchObj);
 };
+    $scope.textOfSearch= {text:"search"};
+    $scope.textSearch=function(){
+        var searchObj={};
+        searchObj.type='text';
+        searchObj.text=$scope.textOfSearch.text;
+        console.log(searchObj);
+        courseEdit.searchPosts(searchObj);
+    };
 
 });
