@@ -159,16 +159,14 @@ var config=app.get('config');
     passport.use(new FacebookStrategy({
             clientID: config.FACEBOOK_CLIENT_ID||process.env.FACEBOOKID,// authConfig.facebookAuth.clientID,
             clientSecret:config.FACEBOOK_CLIENT_SECRET || process.env.FACEBOOKSECRET,//authConfig.facebookAuth.clientSecret,
-            callbackURL: config.FACEBOOK_CALLBACK_URL|| process.env.FACEBOOKCALLBACK//authConfig.facebookAuth.callbackURL
-
+            callbackURL: config.FACEBOOK_CALLBACK_URL|| process.env.FACEBOOKCALLBACK,//authConfig.facebookAuth.callbackURL
+            profileFields: ['id', 'displayName', 'emails','photos']
         },
-        function (token, refreshToken, profile, done) {
 
+        function (token, refreshToken, profile, done) {
             process.nextTick(function () {
                 User.findOne({ fid: profile.id }, function (err, user) {
-                    console.log("#########################################################");
-                    console.log(user);
-                    console.log("#########################################################");
+
                     if (err) {
                         return done(err);
                     }
@@ -177,9 +175,9 @@ var config=app.get('config');
                     }
                     var newUser = new User({
                         fid: profile.id,
-                        username: profile.name.givenName + " " + profile.name.familyName,
+                        username: profile.displayName,
                         email: profile.emails[0].value,
-                        //avatar: profile._json.picture,
+                        avatar: profile.photos[0].value,
                         dataReg: dataReg(newData)
                     });
 

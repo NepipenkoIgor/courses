@@ -98,6 +98,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
 
     };
+
     $scope.unitNowChange = function (id) {
         $scope.addQuestionFlag = false;
         $scope.progress.red = {};
@@ -538,8 +539,16 @@ $scope.postFilter=function(user,postData){
         case 'All Activity':
             break;
     }
-    console.log(searchObj);
+    //console.log(searchObj);
     courseEdit.searchPosts(searchObj);
 };
-
+    $scope.pointsCalculate = function(userProgresArr){
+        var count = 0;
+        for(var i=0; i<$scope.listOfUnits.length; i++){
+            if(userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)){
+                count = count+$scope.listOfUnits[i].lims[0].points;
+            }
+        }
+        return count;
+    };
 });

@@ -1,4 +1,4 @@
-app.controller('profile', function ($scope, $http,courseEdit) {
+app.controller('profile', function ($scope, $http, courseEdit) {
     'user strict';
 
     $scope.reqUser=function(cb){
@@ -28,9 +28,6 @@ app.controller('profile', function ($scope, $http,courseEdit) {
             if (!data.phone) {
                 data.phone = '';
             }
-            if (!data.phone) {
-                data.phone = '';
-            }
             if (!data.settings) {
                 data.settings = '';
             }
@@ -54,18 +51,13 @@ app.controller('profile', function ($scope, $http,courseEdit) {
 
     $scope.reqUser();
     courseEdit.reqUser= $scope.reqUser;
-    //$scope.us();
 
     $scope.postProfile = function (data) {
-
         $http.post('/main', data).success(function (data) {
-            console.log("my callback data =", data.data);
-            console.log("good request");
-             $scope.reqUser();
+            $scope.reqUser();
         });
-
-
     };
+
     $scope.userAvatar = function (img) {
         img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
         var background = "url('" + img + "') center";
