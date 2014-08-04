@@ -16,6 +16,7 @@ function router(app, hasUser) {
            Post.content=req.body.content;
            Post.creator=req.body.creator;
            Post.lesson=req.body.unit;
+           Post.typePost=req.body.typePost||"";
            var tags=req.body.tags.split(",");
            var resTags=[]
            for(var i=0;i<tags.length;i++){

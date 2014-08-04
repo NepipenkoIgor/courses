@@ -58,7 +58,7 @@
             <b style="float:left">Tags:</b>
 
             <div ng-repeat="tag in data.tags" class="tagdiv">
-                <a class="tag">{{tag}}</a>
+                <a class="tag" ng-click="searchByTag(tag)" style="cursor:pointer">{{tag}}</a>
             </div>
 
         </div>
