@@ -163,11 +163,12 @@ var config=app.get('config');
 
         },
         function (token, refreshToken, profile, done) {
-            console.log("#########################################################");
-            console.log(profile);
-            console.log("#########################################################");
+
             process.nextTick(function () {
                 User.findOne({ fid: profile.id }, function (err, user) {
+                    console.log("#########################################################");
+                    console.log(user);
+                    console.log("#########################################################");
                     if (err) {
                         return done(err);
                     }
@@ -178,7 +179,7 @@ var config=app.get('config');
                         fid: profile.id,
                         username: profile.name.givenName + " " + profile.name.familyName,
                         email: profile.emails[0].value,
-                        avatar: profile._json.picture,
+                        //avatar: profile._json.picture,
                         dataReg: dataReg(newData)
                     });
 
