@@ -2,6 +2,7 @@
  * Created by igor on 7/1/14.
  */
 var mongoose=require('mongoose');
+//var textSearch = require('mongoose-text-search');
 var Schema=mongoose.Schema;
 var postSchema=new Schema({
     title:String,
@@ -14,7 +15,7 @@ var postSchema=new Schema({
     ],
     favorites:String,
     typePost:String,
-    content:String,
+    content:{type:String,index: true},
     tags:[],
     comments:[],
     likes:[],
@@ -38,5 +39,7 @@ var postSchema=new Schema({
         }
     ]
 });
+//postSchema.plugin(textSearch);
+postSchema.index({content:"text"});
 
 mongoose.model('Posts',postSchema);

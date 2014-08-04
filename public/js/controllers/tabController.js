@@ -93,7 +93,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             if ($scope.courseNowChanged.modules[i]._id === id) {
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
                 //console.log("iam here",$scope.courseNowChanged);
-               // $state.go('module', {courseTitle: $scope.courseNowChanged.title, moduleTitle: $scope.moduleNowChanged.title});
+                // $state.go('module', {courseTitle: $scope.courseNowChanged.title, moduleTitle: $scope.moduleNowChanged.title});
             }
         }
 
@@ -514,41 +514,52 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         {value: 'Only Questions', text: 'Only Questions'},
         {value: 'All Activity', text: 'All Activity'}
     ];
-    $scope.search={
-        type:"All Posts"
+    $scope.search = {
+        type: "All Posts"
     };
-$scope.postFilter=function(user,postData){
-    var searchObj={};
-    switch ($scope.search.type){
-        case 'All Posts':
-            searchObj.type='All Posts';
-            break;
-        case 'My Posts':
-            searchObj.type='My Posts';
-            searchObj.creator=user._id;
-            break;
-        case 'My Questions':
-            searchObj.type='My Questions';
-            searchObj.creator=user._id;
-            searchObj.typePost="question";
-            break;
-        case 'Only Questions':
-            searchObj.type='Only Questions';
-            searchObj.typePost="question";
-            break;
-        case 'All Activity':
-            break;
-    }
-    //console.log(searchObj);
-    courseEdit.searchPosts(searchObj);
-};
-    $scope.pointsCalculate = function(userProgresArr){
+    $scope.postFilter = function (user, postData) {
+        var searchObj = {};
+        switch ($scope.search.type) {
+            case 'All Posts':
+                searchObj.type = 'All Posts';
+                break;
+            case 'My Posts':
+                searchObj.type = 'My Posts';
+                searchObj.creator = user._id;
+                break;
+            case 'My Questions':
+                searchObj.type = 'My Questions';
+                searchObj.creator = user._id;
+                searchObj.typePost = "question";
+                break;
+            case 'Only Questions':
+                searchObj.type = 'Only Questions';
+                searchObj.typePost = "question";
+                break;
+            case 'All Activity':
+                break;
+        }
+        //console.log(searchObj);
+        courseEdit.searchPosts(searchObj);
+    };
+
+    $scope.pointsCalculate = function (userProgresArr) {
         var count = 0;
-        for(var i=0; i<$scope.listOfUnits.length; i++){
-            if(userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)){
-                count = count+$scope.listOfUnits[i].lims[0].points;
+        for (var i = 0; i < $scope.listOfUnits.length; i++) {
+            if (userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)) {
+                count = count + $scope.listOfUnits[i].lims[0].points;
             }
         }
         return count;
     };
+
+    $scope.textOfSearch = {text: "search"};
+    $scope.textSearch = function () {
+        var searchObj = {};
+        searchObj.type = 'text';
+        searchObj.text = $scope.textOfSearch.text;
+        console.log(searchObj);
+        courseEdit.searchPosts(searchObj);
+    };
+
 });

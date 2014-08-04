@@ -25,7 +25,8 @@
     "passport-google-oauth": "*",
     "passport-local": "*",
     "underscore": "~1.6.0",
-    "mongoose": "~3.8.13"
+    "mongoose": "~3.8.13",
+    "mongoose-text-search":"*"
   },
   "engines": {
     "node": "*",

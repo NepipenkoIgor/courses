@@ -4,10 +4,11 @@
 var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
 
+
 function router(app, hasUser) {
     //'use strict'
     app.post('/post/search', hasUser, function (req, res) {
-        console.log(req.body.comments);
+
         if (req.body.type === 'All Posts') {
             Posts.find({}, function (err, data) {
                 console.log("searchData", data)
@@ -35,6 +36,14 @@ function router(app, hasUser) {
         if (req.body.type === 'tags') {
            Posts.find({"tags":req.body.tag},function(err,data){
                 console.log("UNWINDDDDDD",data);
+                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            });
+        }
+        if (req.body.type === 'text') {
+            console.log(req.body);
+            Posts.find({$text:{ $search:req.body.text }},function(err,data){
+                if(err) return err;
+                console.log("text search",data);
                 res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
