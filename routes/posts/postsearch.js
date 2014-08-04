@@ -33,21 +33,10 @@ function router(app, hasUser) {
             });
         }
         if (req.body.type === 'tags') {
-          /*  Posts.aggregate({$unwind:"$tags"},function(err,data){
+           Posts.find({"tags":req.body.tag},function(err,data){
                 console.log("UNWINDDDDDD",data);
-                var newData=[]
-                for(var i=0;i<data.length;i++){
-                   if(data[i].tags===req.body.tag){
-                       var query={_id:data[i]._id};
-                       newData.
-                   }
-                }
-               // res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
-            });*/
-
-            
-
-
+                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            });
         }
     });
 
