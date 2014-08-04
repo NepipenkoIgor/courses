@@ -22,28 +22,6 @@
         width: 70%!important;
         float: right!important;
     }
-    .statistic{margin-bottom: 60px;}
-    .statistic>div{
-        text-align: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: transparent;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        -ms-transition: all 0.5s ease;
-        border-left: 1px solid #fff;
-    }
-    .statistic>div.col-md-3{border-bottom: 1px solid #fff;}
-    .statistic>div.col-md-3:first-child,
-    .statistic>div.col-md-3+.col-md-4{border-left: 0;}
-    .statistic>div:hover{background-color: #fff;}
-    .statistic>div h3{
-        margin-bottom: 25px;
-        color: #fff;
-    }
-    .statistic>div p{color: #999;}
-    .statistic>div:hover h3{color: #000;}
 </style>
 <form name="userForm" class="editprofile"> <!--ng-show="this.flag"-->
     <div class="input-group">
@@ -69,33 +47,3 @@
     </div>
     <button type="button" class="btn btn-success" ng-click="postProfile(userdata)">Save profile</button>
 </form>
-<div class="row statistic">
-    <div class="col-md-3">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Userlevel</p>
-    </div>
-    <div class="col-md-3">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Badges</p>
-    </div>
-    <div class="col-md-3">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Points</p>
-    </div>
-    <div class="col-md-3" ng-controller="posts">
-        <h3>{{countUserPost(userdata._id)}}</h3>
-        <p>Posts</p>
-    </div>
-    <div class="col-md-4">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Date registration</p>
-    </div>
-    <div class="col-md-4">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Points</p>
-    </div>
-    <div class="col-md-4">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Posts</p>
-    </div>
-</div>

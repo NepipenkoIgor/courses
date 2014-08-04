@@ -7,28 +7,58 @@
         <a href="/auth/twitter" class="btn btn-info" ng-if="false"><span class="fa fa-twitter"></span>Sign in with Twitter</a>
         <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span>Sign in with Facebook</a>
     </div>
-
 </div>
-
-<!--
-
-<div ng-controller="maintab" class="TabContainer" ng-show="userdata" ng-style="tabheight">
-    <div style="width: 220px;float:left">
-        <div class="menuTab"  ng-repeat="menu in menus" ng-mouseenter="hover(menu.color['background-color'])"
-             ng-style="color(colorTab,menu.color['background-color'],changTabColor)" ng-click="showTab(menu.num)"
-             ng-mouseleave="hover()">
-            <div class="linkTab" ng-style="menu.color"></div>
-            <div class="Tab" >
-                <a >{{menu.menuName}}
-                </a></div>
-        </div>
+<style>
+    .statistic{margin-bottom: 60px;}
+    .statistic>div{
+        text-align: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: transparent;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        border-left: 1px solid #fff;
+    }
+    .statistic>div.col-md-3{border-bottom: 1px solid #fff;}
+    .statistic>div.col-md-3:first-child,
+    .statistic>div.col-md-3+.col-md-4{border-left: 0;}
+    .statistic>div:hover{background-color: #fff;}
+    .statistic>div h3{
+        margin-bottom: 25px;
+        color: #fff;
+    }
+    .statistic>div p{color: #999;}
+    .statistic>div:hover h3{color: #000;}
+</style>
+<div class="row statistic" ng-if="userdata">
+    <div class="col-md-3">
+        <h3>{{userdata.userlevel}}</h3>
+        <p>Userlevel</p>
     </div>
-    <div ng-repeat="menu in menus" class="TabContent" ng-style="">
-        <div style="">
-            <div ng-repeat="subject in menu.subjects" ng-show="activeTab(menu.num)">
-                <a ui-sref="themaSubject({topic:menu.menuName,subject:subject.subjectName})" ng-style="{'color':menu.color['background-color']}">Learn {{subject.subjectName}}
-                    <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-
-        </div>
+    <div class="col-md-3">
+        <h3>{{userdata.userlevel}}</h3>
+        <p>Badges</p>
     </div>
-</div>-->
+    <div class="col-md-3">
+        <h3>{{userdata.userlevel}}</h3>
+        <p>Points</p>
+    </div>
+    <div class="col-md-3" ng-controller="posts">
+        <h3>{{countUserPost(userdata._id)}}</h3>
+        <p>Posts</p>
+    </div>
+    <div class="col-md-4">
+        <h3>{{userdata.dataReg}}</h3>
+        <p>Date registration</p>
+    </div>
+    <div class="col-md-4">
+        <h3>{{userdata.userlevel}}</h3>
+        <p>Points</p>
+    </div>
+    <div class="col-md-4">
+        <h3>{{userdata.userlevel}}</h3>
+        <p>Posts</p>
+    </div>
+</div>

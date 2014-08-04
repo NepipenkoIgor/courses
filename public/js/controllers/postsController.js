@@ -11,9 +11,11 @@ app.controller('posts', function ($scope, $http, $sce,$state) {
             // $scope.likes=data.likes||[];
             $scope.countUserPost = function(id){
                 var count = 0;
-                for(var i=0; i<$scope.postdata.length; i++){
-                    if($scope.postdata[i].creator === id){
-                        count++;
+                if($scope.postdata !== undefined){
+                    for(var i=0; i<$scope.postdata.length; i++){
+                        if($scope.postdata[i].creator === id){
+                            count++;
+                        }
                     }
                 }
                 return count;
@@ -155,8 +157,8 @@ app.controller('posts', function ($scope, $http, $sce,$state) {
         }
         return false;
     };
-    $scope.postAvatar = function () {
-        var img = "http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg";
+    $scope.postAvatar = function (img) {
+        var img = img || "http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg";
         // console.log("img", img);
         return img;
     };

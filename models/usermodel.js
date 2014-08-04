@@ -13,11 +13,13 @@ var userSchema=new Schema({
   password:String,
   userlevel:Number,
   firstname:String,
+  avatar:String,
   lastname:String,
   birth:Date,
+  dataReg:String,
   email:String,
   phone:String,
-   position:Boolean,
+  position:Boolean,
   settings:Boolean,
   courses:[
       {id:String}

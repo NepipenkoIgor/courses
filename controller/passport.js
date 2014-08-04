@@ -25,6 +25,14 @@ var config=app.get('config');
         });
     });
 
+    var newData = new Date();
+    function dataReg(data){
+        var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        var newDataDate = data.getDate();
+        var newDataMonth = monthNames[data.getMonth()];
+        var newDataYear = data.getFullYear();
+        return newDataDate + " " + newDataMonth + " " + newDataYear;
+    }
 
     passport.use('local-login', new LocalStrategy({
             usernameField: 'email',
@@ -69,6 +77,7 @@ var config=app.get('config');
                         var date = new Date();
                         newUser.lid = date.getTime();
                         newUser.password = password;
+                        newUser.dataReg = dataReg(newData);
                         newUser.save(function (err) {
                             if (err) {
                                 console.log(err);
@@ -103,6 +112,7 @@ var config=app.get('config');
                         newUser.lid = date.getTime();
                         newUser.password = password;
                         newUser.position = true;
+                        newUser.dataReg = dataReg(newData);
                         newUser.save(function (err) {
                             if (err) {
                                 console.log(err);
@@ -122,6 +132,7 @@ var config=app.get('config');
         },
         function (accessToken, refreshToken, profile, done) {
             // asynchronous verification, for effect...
+
             process.nextTick(function () {
                 User.findOne({ 'gid': profile.id }, function (err, user) {
                     if (err) {
@@ -133,7 +144,9 @@ var config=app.get('config');
                         var newUser = new User();
                         newUser.username = profile.name.givenName + " " + profile.name.familyName;
                         newUser.gid = profile.id;
+                        newUser.avatar = profile._json.picture;
                         newUser.email = profile.email;
+                        newUser.dataReg = dataReg(newData);
                         newUser.save(function (err) {
                             return done(null, newUser);
                         });
@@ -150,6 +163,9 @@ var config=app.get('config');
 
         },
         function (token, refreshToken, profile, done) {
+            console.log("#########################################################");
+            console.log(profile);
+            console.log("#########################################################");
             process.nextTick(function () {
                 User.findOne({ fid: profile.id }, function (err, user) {
                     if (err) {
@@ -161,7 +177,9 @@ var config=app.get('config');
                     var newUser = new User({
                         fid: profile.id,
                         username: profile.name.givenName + " " + profile.name.familyName,
-                        email: profile.emails[0].value
+                        email: profile.emails[0].value,
+                        avatar: profile._json.picture,
+                        dataReg: dataReg(newData)
                     });
 
                     newUser.save(function (err, user) {
