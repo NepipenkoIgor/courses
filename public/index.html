@@ -109,7 +109,23 @@
                     <a href="#/post/new" style="color:#000000">Add new post</a></button>
             </a>
 
+        </div >
+        <div ng-if="!ifCommunity()">
+            <a href="#" editable-select="search.type" e-ng-options="s.value as s.text for s in searchType">
+                {{ search.type }}
+            </a>
         </div>
+        <div class="dropdown notify" ng-if="!ifCommunity()" >
+            <a data-toggle="dropdown"  data-original-title="" title="">
+
+                <button  class="btn btn-success" style=";height: 50px" ng-click="postFilter(userdata)" >
+                   apply filter</button>
+            </a>
+
+        </div >
+
+
+
 
 
         <div class="course_menu" ng-if="ifCommunity()">

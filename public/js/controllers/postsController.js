@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http, $sce,$state) {
+app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     'user strict';
     $scope.comment = "";
     function reqPosts() {
@@ -127,7 +127,7 @@ app.controller('posts', function ($scope, $http, $sce,$state) {
 
     };
     $scope.saveNewQuestion = function (creator, unit) {
-        var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit};
+        var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit,typePost:"question"};
         $http.post('/post/new', newQuestion).success(function (data) {
 
             console.log(data);
@@ -193,5 +193,20 @@ app.controller('posts', function ($scope, $http, $sce,$state) {
         $http.post('/postslikes', date).success(function (num) {
         });
     };
+    $scope.searchPosts=function(searchObj){
+        $http.post('/post/search', searchObj).success(function (data) {
+            console.log("searchData",data);
+            console.log($scope.postdata);
+            if(data.data!==undefined){
+                $scope.postdata=data.data;
+            }
 
+        });
+    };
+    courseEdit.searchPosts=$scope.searchPosts;
+    $scope.searchByTag=function(tag){
+        console.log(tag);
+        var searchObj={type:"tags",tag:tag};
+        courseEdit.searchPosts(searchObj);
+    };
 });

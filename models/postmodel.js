@@ -13,6 +13,7 @@ var postSchema=new Schema({
         {vote:Number}
     ],
     favorites:String,
+    typePost:String,
     content:String,
     tags:[],
     comments:[],

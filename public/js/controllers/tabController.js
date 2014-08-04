@@ -505,4 +505,41 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return true;
     };
 
+
+    $scope.searchType = [
+        {value: 'All Posts', text: 'All Posts'},
+        {value: 'My Posts', text: 'My Posts'},
+        {value: 'My Questions', text: 'My Questions'},
+        {value: 'Only Questions', text: 'Only Questions'},
+        {value: 'All Activity', text: 'All Activity'}
+    ];
+    $scope.search={
+        type:"All Posts"
+    };
+$scope.postFilter=function(user,postData){
+    var searchObj={};
+    switch ($scope.search.type){
+        case 'All Posts':
+            searchObj.type='All Posts';
+            break;
+        case 'My Posts':
+            searchObj.type='My Posts';
+            searchObj.creator=user._id;
+            break;
+        case 'My Questions':
+            searchObj.type='My Questions';
+            searchObj.creator=user._id;
+            searchObj.typePost="question";
+            break;
+        case 'Only Questions':
+            searchObj.type='Only Questions';
+            searchObj.typePost="question";
+            break;
+        case 'All Activity':
+            break;
+    }
+    console.log(searchObj);
+    courseEdit.searchPosts(searchObj);
+};
+
 });

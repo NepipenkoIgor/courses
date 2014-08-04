@@ -32,6 +32,7 @@ function router(app) {
   var newPost=require('./posts/newpost')(app,hasUser);
     var deletePost=require('./posts/deletpost')(app,hasUser);
     var postcomment=require('./posts/postcomment')(app,hasUser);
+    var postsearch=require('./posts/postsearch')(app,hasUser);
     var subject = require('./courses/subject')(app,isAdmin);
   var logout=require('./account/logout')(app);
 }
