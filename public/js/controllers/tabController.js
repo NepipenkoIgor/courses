@@ -3,9 +3,8 @@
  */
 app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, courseEdit) {
     'user strict';
-//$scope.courseEdit=courseEdit;
 
-//console.log("peregryzka")
+    /**/
 
     $scope.progress = {};
     function initTab() {
@@ -37,8 +36,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
                 return arrUnits.sort(sortArr);
             };
+            /*function of redirect on reload window*/
             function reloadLink() {
-                console.log("$location", $location.$$url.split("/")[1] !== "adminlab");
+                //console.log("$location", $location.$$url.split("/")[1] !== "adminlab");
                 if ($location.$$url.split("/")[1] !== "adminlab") {
                     //console.log("peregryzka params",$state.current.name)
                     for (var i = 0; i < $scope.listOfCourses.length; i++) {
@@ -66,9 +66,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
 
             }
-
             reloadLink();
-
         });
 
     }
@@ -136,34 +134,30 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         var answerObj = [];
                         // _.extend(answerObj,$scope.unitNowChanged.lims[0].content[0].quiz);
                         for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
-                            var obj = {}
-                            _.extend(obj, $scope.unitNowChanged.lims[0].content[0].quiz[i])
+                            var obj = {};
+                            _.extend(obj, $scope.unitNowChanged.lims[0].content[0].quiz[i]);
                             answerObj.push(obj);
                             $scope.unitNowChanged.lims[0].content[0].quiz[i].answer = "";
                         }
                         //console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
 
                         $scope.checkQuiz = function () {
-                            console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
+                            //console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
                             //console.log(_.isEqual(answerObj,$scope.unitNowChanged.lims[0].content[0].quiz))
                             for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
                                 //_.isEqual(answerObj[i],$scope.unitNowChanged.lims[0].content[0].quiz[i]);
                                 if (answerObj[i].answer != $scope.unitNowChanged.lims[0].content[0].quiz[i].answer) {
-                                    console.log("your answer  bad")
+                                   // console.log("your answer  bad")
                                     return;
                                 }
                             }
-
-                            console.log("your answer  good");
+                            //console.log("your answer  good");
                             $scope.saveProgress($scope.unitNowChanged.unitId);
                         };
-                        $scope.quizCheck = function () {
-
+                        /*$scope.quizCheck = function () {
                             // console.log($scope.unitNowChanged.lims[0].content[0].quiz)
-                        };
+                        };*/
                     }
-
-
                 });
                 refresh();
 
@@ -178,7 +172,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         for (var i = 0; i < $scope.listOfUnits.length; i++) {
             if ($scope.listOfUnits[i].parent === sectionId) {
                 //console.log($scope.listOfUnits[i].lims[0].points)
-                totalPoints += $scope.listOfUnits[i].lims[0].points
+                totalPoints += $scope.listOfUnits[i].lims[0].points;
             }
         }
         //console.log("scores of this sections",totalPoints);
@@ -191,9 +185,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
         if (courseEdit.userdata.progress.indexOf(unitId) === (-1)) {
             $http.post("/progress", [courseEdit.userdata._id, unitId]).success(function (num) {
-                console.log("good  progress request", num);
+                //console.log("good  progress request", num);
                 courseEdit.reqUser(function () {
-                    console.log("iam cb")
+                    //console.log("iam cb")
                     $scope.calculateTotalProgress($scope.totalSectionPoint($scope.sectionNowChanged.specialId), courseEdit.userdata.progress, $scope.sectionNowChanged.specialId);
                 });//need promes
             });
@@ -203,8 +197,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         if (!courseEdit.userdata) {
             return;
         }
-        console.log("scores of this sections", totalPoints);
-        console.log("userProgress", userProgress);
+        // console.log("scores of this sections", totalPoints);
+        // console.log("userProgress", userProgress);
         var realpointsOfSection = 0;
         for (var i = 0; i < $scope.listOfUnits.length; i++) {
             if (userProgress.indexOf($scope.listOfUnits[i].unitId) !== (-1) && $scope.listOfUnits[i].parent === secionId) {
@@ -213,8 +207,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
             }
         }
-        console.log("real points", realpointsOfSection);
-        console.log(realpointsOfSection / totalPoints);
+        //console.log("real points", realpointsOfSection);
+        //console.log(realpointsOfSection / totalPoints);
         var percentage = realpointsOfSection / totalPoints;
 
         if (percentage >= 0 && percentage < 0.4) {
@@ -232,12 +226,12 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             $scope.progress.orange = {width: 40 + "%"};
             $scope.progress.green = {width: percentage * 100 - 80 + "%"};
         }
-        console.log($scope.progress.red, $scope.progress.orange, $scope.progress.green);
+        //console.log($scope.progress.red, $scope.progress.orange, $scope.progress.green);
 
     };
     $scope.returnProgress = function () {
-        return [$scope.progress.red, $scope.progress.orange, $scope.progress.green]
-    }
+        return [$scope.progress.red, $scope.progress.orange, $scope.progress.green];
+    };
     $scope.markOfCompleteUnit = function (unitId) {
         if (!courseEdit.userdata) {
             return;
@@ -280,7 +274,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     function onytplayerStateChange(newState) {
         if (newState === 0) {
-            console.log("conec");//video watch registration
+            //console.log("conec");//video watch registration
             $scope.saveProgress($scope.unitNowChanged.unitId);
         }
     }
@@ -339,7 +333,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
     $scope.loadEx = function (html) {
         /* document.getElementById('preview').innerHTML = $scope.lesson.code;*/
-        console.log($scope.lesson.code)
+        //console.log($scope.lesson.code)
         function escapeHtml(unsafe) {
             return unsafe
                 .replace(/&amp/g, "&;")
@@ -399,7 +393,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.check = function () {
         if (next) {
-            console.log("next")
+            //console.log("next")
             refresh($scope.lessonId + 1);
             return;
             //$location.path("/lessons/" + ($scope.lessonId + 1));
@@ -468,11 +462,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.mapModule = function () {
-        console.log($location.$$url);
+        // console.log($location.$$url);
         var arrLocal = $location.$$url.split("/");
-        arrLocal.splice(4, 2)
-        console.log(arrLocal.join("/"));
-        arrLocal = arrLocal.join("/")
+        arrLocal.splice(4, 2);
+        // console.log(arrLocal.join("/"));
+        arrLocal = arrLocal.join("/");
         //$location.$$url=arrLocal;
         $window.location = "/#" + arrLocal;
     };
@@ -482,7 +476,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             $scope.addQuestionFlag = true;
             return;
         }
-        $scope.addQuestionFlag = false
+        $scope.addQuestionFlag = false;
         return;
     };
 
@@ -491,12 +485,12 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         console.log($location.$$url)
         $location.$$url = "/post/all";
         $state.go('posts').then(function () {
-            console.log("good redirect")
+            //console.log("good redirect")
         });
     };
     $scope.goToCourse = function () {
         $state.go('welcome').then(function () {
-            console.log("good redirect");
+            // console.log("good redirect");
         });
     };
     $scope.ifCommunity = function () {
@@ -539,17 +533,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             case 'All Activity':
                 break;
         }
-        //console.log(searchObj);
         courseEdit.searchPosts(searchObj);
     };
 
     $scope.pointsCalculate = function (userProgresArr) {
         var count = 0;
-        for (var i = 0; i < $scope.listOfUnits.length; i++) {
-            if (userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)) {
-                count = count + $scope.listOfUnits[i].lims[0].points;
+        if ($scope.listOfUnits !== undefined) {
+            for (var i = 0; i < $scope.listOfUnits.length; i++) {
+                if (userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)) {
+                    count = count + $scope.listOfUnits[i].lims[0].points;
+                }
             }
         }
+
         return count;
     };
 
