@@ -35,7 +35,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
 
     reqUsers();
     $scope.postAvatar = function (id) {
-        for (var i; i < $scope.postUsersdata.length; i++) {
+        for (var i=0; i < $scope.postUsersdata.length; i++) {
             if ($scope.postUsersdata[i]._id === id) {
                 var userPostAvatar = $scope.postUsersdata[i].avatar;
             }
@@ -157,11 +157,11 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         }
         return false;
     };
-    $scope.postAvatar = function (img) {
+  /*  $scope.postAvatar = function (img) {
         var img = img || "http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg";
         // console.log("img", img);
         return img;
-    };
+    };*/
 
     $scope.ifThisIsAvtor = function (nowUser, AvtorId) {
         if (nowUser.position === true) {

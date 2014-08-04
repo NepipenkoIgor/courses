@@ -102,35 +102,21 @@
             </div>
         </div>
 
-        <div class="dropdown notify" ng-if="!ifCommunity()" >
-            <a data-toggle="dropdown"  data-original-title="" title="">
-
-                <button  class="btn btn-primary" style=";height: 50px">
-                    <a href="#/post/new" style="color:#000000">Add new post</a></button>
-            </a>
-
+        <div class="dropdown notify" ng-if="!ifCommunity()" style="margin: 10px 8px;">
+            <a class="btn btn-primary" href="#/post/new" style="color:#000000;width: 100%">Add new post</a>
         </div >
 
-        <div class="input-group" ng-if="!ifCommunity()" style="width: 200px">
-            <input type="text" class="form-control" ng-model="textOfSearch.text">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="textSearch()">Go!</button>
-      </span>
-        </div><!-- /input-group -->
-
-
-        <div ng-if="!ifCommunity()">
+        <div ng-if="!ifCommunity()" style="overflow: hidden;margin: 20px 8px;">
+            <input type="text" placeholder="Search" class="form-control" style="" ng-model="textOfSearch.text">
+            <button class="btn btn-default" style="width: 100%;" type="button" ng-click="textSearch()">Go!</button>
+        </div>
+        <div ng-if="!ifCommunity()" class="filterMenu">
             <a href="#" editable-select="search.type" e-ng-options="s.value as s.text for s in searchType">
                 {{ search.type }}
             </a>
         </div>
-        <div class="dropdown notify" ng-if="!ifCommunity()" >
-            <a data-toggle="dropdown"  data-original-title="" title="">
-
-                <button  class="btn btn-success" style=";height: 50px" ng-click="postFilter(userdata)" >
-                   apply filter</button>
-            </a>
-
+        <div ng-if="!ifCommunity()" style="margin: 20px 8px;">
+            <a class="btn btn-success" ng-click="postFilter(userdata)">apply filter</a>
         </div >
 
 

@@ -553,7 +553,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return count;
     };
 
-    $scope.textOfSearch = {text: "search"};
+    $scope.textOfSearch = {text: ""};
     $scope.textSearch = function () {
         var searchObj = {};
         searchObj.type = 'text';

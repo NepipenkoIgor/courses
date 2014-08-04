@@ -26,8 +26,7 @@
 	border-left: 5px solid #4e5d6c;
 }
 
-body,
-.menu_cont {
+body{
     margin: 0;
     padding: 0;
     color: #cfcfcf;
@@ -35,12 +34,19 @@ body,
 
 /************** User Menu *****************/
 
-.notify {
-    height: 50px;
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid #1f2f3f;
+.notify {border-bottom: 1px solid #1f2f3f;}
+.course_sub_menu b,
+.course_sub_menu ul li{color: #fff}
+.filterMenu{margin: 20px 8px;}
+.filterMenu>a.editable-click{border-bottom: none;color: #27a1a5;}
+.filterMenu form{overflow: hidden;}
+.filterMenu *{
+    width: 100%!important;
+    float: none!important;
+    display: block!important;
+    margin: 0!important;
 }
+.filterMenu span button{width: 50%!important;float: left!important;}
 
 .user_menu {
     position: relative;

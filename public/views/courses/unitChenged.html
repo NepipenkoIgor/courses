@@ -125,7 +125,7 @@
             <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
             <div class="post">
                 <div>
-                    <img ng-src="{{postAvatar(userdata.avatar)}}" width="150" style="float: left"/>
+                    <img ng-src="{{postAvatar(data.creator)}}" width="150" style="float: left"/>
                     <h3 style="color:red">{{getCreator(data.creator)}}</h3>
                 </div>
                 <h2>{{data.title}}</h2>
