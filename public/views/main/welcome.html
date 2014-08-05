@@ -62,3 +62,8 @@
         <p>Posts</p>
     </div>
 </div>
+
+
+            <div ng-repeat="badge in listOfBadges" ng-show="eqvalBadges(badge.badgeId)" >
+            <img ng-src="{{badge.img}}" />
+            </div>

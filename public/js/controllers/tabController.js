@@ -6,7 +6,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /**/
 
+
     $scope.progress = {};
+
+    function initBadge(){
+        $http.get('/badges').success(function (badge) {
+            $scope.listOfBadges = badge;
+            courseEdit.listOfBadges = $scope.listOfBadges;
+        });
+
+    }
+    initBadge();
+    courseEdit.initBadge = initBadge;
+
     function initTab() {
 
         $http.get('/courses').success(function (courses) {
@@ -66,6 +78,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
 
             }
+
             reloadLink();
         });
 
@@ -113,11 +126,15 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         $scope.sectionNowChanged = $scope.moduleNowChanged.sections[j];
                         $scope.calculateTotalProgress($scope.totalSectionPoint($scope.sectionNowChanged.specialId), courseEdit.userdata.progress, $scope.sectionNowChanged.specialId);
 
-                        /* $state.go('unit', {courseTitle: $scope.courseNowChanged.title, moduleTitle: $scope.moduleNowChanged.title,
-                         sectionTitle: $scope.sectionNowChanged.title, unitTitle: $scope.unitNowChanged.unitId});*/
                     }
                 }
                 courseEdit.unitNowChanged = $scope.unitNowChanged;
+
+                if (courseEdit.listOfBadges && courseEdit.userdata) {
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata)
+                }
+
+
                 $state.go('unit', {courseTitle: $scope.courseNowChanged.title, moduleTitle: $scope.moduleNowChanged.title,
                     sectionTitle: $scope.sectionNowChanged.title, unitTitle: $scope.unitNowChanged.unitId}).then(function () {
                     setTimeout(function getEl() {
@@ -142,21 +159,16 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         //console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
 
                         $scope.checkQuiz = function () {
-                            //console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
-                            //console.log(_.isEqual(answerObj,$scope.unitNowChanged.lims[0].content[0].quiz))
                             for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
-                                //_.isEqual(answerObj[i],$scope.unitNowChanged.lims[0].content[0].quiz[i]);
+
                                 if (answerObj[i].answer != $scope.unitNowChanged.lims[0].content[0].quiz[i].answer) {
-                                   // console.log("your answer  bad")
+
                                     return;
                                 }
                             }
-                            //console.log("your answer  good");
+                            courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata)
                             $scope.saveProgress($scope.unitNowChanged.unitId);
                         };
-                        /*$scope.quizCheck = function () {
-                            // console.log($scope.unitNowChanged.lims[0].content[0].quiz)
-                        };*/
                     }
                 });
                 refresh();
@@ -275,6 +287,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     function onytplayerStateChange(newState) {
         if (newState === 0) {
             //console.log("conec");//video watch registration
+            courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata)
             $scope.saveProgress($scope.unitNowChanged.unitId);
         }
     }
@@ -480,9 +493,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return;
     };
 
+    /************************************COMMUNITY and FILTERS***********************************************/
 
     $scope.goToCommunity = function () {
-        console.log($location.$$url)
+        // console.log($location.$$url)
         $location.$$url = "/post/all";
         $state.go('posts').then(function () {
             //console.log("good redirect")
@@ -505,8 +519,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         {value: 'All Posts', text: 'All Posts'},
         {value: 'My Posts', text: 'My Posts'},
         {value: 'My Questions', text: 'My Questions'},
-        {value: 'Only Questions', text: 'Only Questions'},
-        {value: 'All Activity', text: 'All Activity'}
+        {value: 'Only Questions', text: 'Only Questions'}
     ];
     $scope.search = {
         type: "All Posts"
@@ -530,11 +543,21 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 searchObj.type = 'Only Questions';
                 searchObj.typePost = "question";
                 break;
-            case 'All Activity':
-                break;
         }
         courseEdit.searchPosts(searchObj);
     };
+
+    $scope.textOfSearch = {text: ""};
+    $scope.textSearch = function () {
+        var searchObj = {};
+        searchObj.type = 'text';
+        searchObj.text = $scope.textOfSearch.text;
+        console.log(searchObj);
+        courseEdit.searchPosts(searchObj);
+    };
+
+    /***********************************************************************************/
+
 
     $scope.pointsCalculate = function (userProgresArr) {
         var count = 0;
@@ -549,13 +572,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return count;
     };
 
-    $scope.textOfSearch = {text: ""};
-    $scope.textSearch = function () {
-        var searchObj = {};
-        searchObj.type = 'text';
-        searchObj.text = $scope.textOfSearch.text;
-        console.log(searchObj);
-        courseEdit.searchPosts(searchObj);
-    };
+    $scope.eqvalBadges=function(a){
+        if(courseEdit.userdata.badges.indexOf(a)!==(-1)){
+            return true;
+        }
+        return false;
+    }
 
 });

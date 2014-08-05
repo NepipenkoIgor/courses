@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/1/14.
  */
-var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable']);
+var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate']);
 app.run(function(editableOptions) {
     'use strict';
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'

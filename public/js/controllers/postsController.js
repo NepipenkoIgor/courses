@@ -29,25 +29,25 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     function reqUsers() {
         $http.get('/users').success(function (data) {
             $scope.postUsersdata = data;
+            $scope.postAvatar = function (id) {
+                for (var i=0; i < $scope.postUsersdata.length; i++) {
+                    if ($scope.postUsersdata[i]._id === id) {
+                        var userPostAvatar = $scope.postUsersdata[i].avatar;
+                    }
+                }
+                var url = userPostAvatar || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
+
+                return $sce.trustAsResourceUrl(url);
+            };
         });
 
     }
 
     reqUsers();
-    $scope.postAvatar = function (id) {
-        for (var i=0; i < $scope.postUsersdata.length; i++) {
-            if ($scope.postUsersdata[i]._id === id) {
-                var userPostAvatar = $scope.postUsersdata[i].avatar;
-            }
-        }
-        var url = userPostAvatar || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
 
-        return $sce.trustAsResourceUrl(url);
-    };
 
 
     $scope.deletePost = function (id) {
-
         for (var i = 0; i < $scope.postdata.length; i++) {
             if ($scope.postdata[i]._id === id) {
                 // console.log("kyky");
@@ -156,12 +156,6 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         }
         return false;
     };
-  /*  $scope.postAvatar = function (img) {
-        var img = img || "http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg";
-        // console.log("img", img);
-        return img;
-    };*/
-
     $scope.ifThisIsAvtor = function (nowUser, AvtorId) {
         if (nowUser.position === true) {
             return true;
@@ -204,7 +198,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     };
     courseEdit.searchPosts=$scope.searchPosts;
     $scope.searchByTag=function(tag){
-        console.log(tag);
+        //console.log(tag);
         var searchObj={type:"tags",tag:tag};
         courseEdit.searchPosts(searchObj);
     };
