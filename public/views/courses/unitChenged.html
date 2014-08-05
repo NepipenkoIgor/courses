@@ -121,34 +121,31 @@
                 <hr>
             </div>
         </div>
-        <div ng-repeat="data in postdata" class="postConteiner" ng-if="postsOfUnit(data.lesson,unitNowChanged.unitId)" style="color:black;float: left">
+        <div ng-repeat="data in postdata" class="postConteiner" ng-if="postsOfUnit(data.lesson,unitNowChanged.unitId)" style="color:black;margin-bottom: 15px;">
             <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
             <div class="post">
+                <img ng-src="{{postAvatar(data.creator)}}" width="150" style="float: left;margin-right: 10px;"/>
                 <div>
-                    <img ng-src="{{postAvatar(data.creator)}}" width="150" style="float: left"/>
                     <h3 style="color:red">{{getCreator(data.creator)}}</h3>
+                    <h2>{{data.title}}</h2>
+                    <hr>
+                    <p>{{data.content}}</p>
+                    <hr>
                 </div>
-                <h2>{{data.title}}</h2>
-                <hr>
-                <p>{{data.content}}</p>
-                <hr>
                 <div class="tagConteiner">
-                    <b style="float:left">Tags:</b>
-                    <div ng-repeat="tag in data.tags" class="tagdiv">
-                        <a class="tag">{{tag}}</a>
-                    </div>
+                    <b style="float:left;margin-top: 4px;">Tags:</b>
+                    <a ng-repeat="tag in data.tags" class="tag">{{tag}}</a>
                 </div>
-                <div style="float: right">{{data.likes.length}}<img src="http://www.studentenpand.nl/duim.png" style="width: 30px;margin-top: -16px;cursor:pointer" ng-click="like(userdata._id,data.likes,data._id)"/></div>
+                <div style="float: right;margin-top: -25px;">{{data.likes.length}}<img src="http://www.studentenpand.nl/duim.png" style="width: 30px;margin-top: -16px;cursor:pointer" ng-click="like(userdata._id,data.likes,data._id)"/></div>
                 <div class="comment">
-                    <div ng-repeat="comment in data.comments" style="width: 550px;float: right">
+                    <div ng-repeat="comment in data.comments" style="">
                         <span class="close" ng-click="deleteComment(comment,data._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
+                        <img ng-src="{{postAvatar(comment.creator)}}" width="50" style="float: left;margin-right: 10px;"/>
                         <div>
-                            <img ng-src="{{postAvatar(comment.creator)}}" width="50" style="float: left"/>
                             <h5 style="color:red">{{getCreator(comment.creator)}}</h5>
+                            <div class="oneComment"><p class="">{{comment.content}}</p></div>
                         </div>
-                        <div class="oneComment"><p class="">{{comment.content}}</p></div>
                         <!--<div >0 <img src="http://www.studentenpand.nl/duim.png" width="30px" style="margin-top: -16px;cursor:pointer"/></div>-->
-                        <hr>
                     </div>
                 </div>
             </div>

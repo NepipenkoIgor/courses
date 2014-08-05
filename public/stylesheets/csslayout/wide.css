@@ -425,5 +425,9 @@ body{
 .dropdown a {
     outline: none;
 }
-
-
+.tagConteiner a{
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none!important;
+    margin: 0 10px;
+}

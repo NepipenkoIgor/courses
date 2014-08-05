@@ -13,29 +13,7 @@ app.service('courseEdit',function($http){
 });
 
 
-app.run(function($rootScope,$location,courseEdit){
-   /* $rootScope.$on('$stateChangeStart',
-        function(event, toState, toParams, fromState, fromParams){
-           if(toState.name==="unit"){
-                for(var i=0;i<courseEdit.listOfUnits.length;i++){
-                    if(toParams.unitTitle===courseEdit.listOfUnits[i]){
-
-                    }
-                }
-               console.log("courseEdit.listOfUnits",courseEdit.listOfUnits);
-                console.log("RuncourseEdit.unitNowChanged",courseEdit.unitNowChanged)
-               // courseEdit.unitNowChange(toParams.unitTitle)
-            }
-            //console.log("toState",toState.resolve.simpleObj());
-            //console.log("toParams",toParams);
-            //console.log("fromState",fromState);
-            //console.log("fromParams",fromParams);
-            // console.log("$location",$location);
-            //console.log(toState);
-            courseEdit.course={};
-            //console.log(courseEdit.unitNowChange);
-        })*/
-});
+app.run(function($rootScope,$location,courseEdit){});
 
 
 app.config(function ($stateProvider, $urlRouterProvider) {
