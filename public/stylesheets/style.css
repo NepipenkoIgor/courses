@@ -214,3 +214,32 @@ margin-left: 100px;
 }
 
 .ace_editor { height: 200px; }
+
+.animate-show {
+    position: absolute;
+    top:100px;
+    left:100px;
+    line-height:20px;
+    opacity:1;
+    padding:10px;
+   /* border:1px solid black;*/
+   /* background:white;*/
+    z-index: 999;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+    -webkit-transition:all linear 1s;
+    transition:all linear 1s;
+}
+
+.animate-show.ng-hide {
+    line-height:0;
+    opacity:0;
+    padding:0 10px;
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+
+

@@ -24,7 +24,8 @@ var userSchema=new Schema({
   courses:[
       {id:String}
   ],
-  progress:[]
+  progress:[],
+    badges:[]
 });
 
 mongoose.model('Users',userSchema);

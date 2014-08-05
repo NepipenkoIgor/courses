@@ -29,25 +29,25 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     function reqUsers() {
         $http.get('/users').success(function (data) {
             $scope.postUsersdata = data;
+            $scope.postAvatar = function (id) {
+                for (var i=0; i < $scope.postUsersdata.length; i++) {
+                    if ($scope.postUsersdata[i]._id === id) {
+                        var userPostAvatar = $scope.postUsersdata[i].avatar;
+                    }
+                }
+                var url = userPostAvatar || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
+
+                return $sce.trustAsResourceUrl(url);
+            };
         });
 
     }
 
     reqUsers();
-    $scope.postAvatar = function (id) {
-        for (var i=0; i < $scope.postUsersdata.length; i++) {
-            if ($scope.postUsersdata[i]._id === id) {
-                var userPostAvatar = $scope.postUsersdata[i].avatar;
-            }
-        }
-        var url = userPostAvatar || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
 
-        return $sce.trustAsResourceUrl(url);
-    };
 
 
     $scope.deletePost = function (id) {
-
         for (var i = 0; i < $scope.postdata.length; i++) {
             if ($scope.postdata[i]._id === id) {
                 // console.log("kyky");
@@ -55,14 +55,14 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
                 //console.log(id)
                 var id = {"_id": id};
                 $http.post('/post/delete', id).success(function () {
-                    console.log("good  delete request");
+                    //console.log("good  delete request");
                 });
             }
 
         }
     };
     $scope.deleteComment = function (comment, id) {
-        console.log(comment);
+        //console.log(comment);
 
         for (var i = 0; i < $scope.postdata.length; i++) {
 
@@ -94,7 +94,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
             reqPosts();
             $state.go('posts')
         });
-    }
+    };
     $scope.addComment = function (idPost, creator) {
         // console.log(this.comment);
 
@@ -105,7 +105,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
                 //  console.log($scope.postdata[i].comments);
                 var data = {"_id": idPost, "comments": $scope.postdata[i].comments};
                 $http.post('/comment/new', data).success(function () {
-                    console.log("good  comment request");
+                   // console.log("good  comment request");
                 });
             }
 
@@ -129,8 +129,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     $scope.saveNewQuestion = function (creator, unit) {
         var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit,typePost:"question"};
         $http.post('/post/new', newQuestion).success(function (data) {
-
-            console.log(data);
+            //console.log(data);
             reqPosts();
         });
 
@@ -157,12 +156,6 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         }
         return false;
     };
-  /*  $scope.postAvatar = function (img) {
-        var img = img || "http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg";
-        // console.log("img", img);
-        return img;
-    };*/
-
     $scope.ifThisIsAvtor = function (nowUser, AvtorId) {
         if (nowUser.position === true) {
             return true;
@@ -179,7 +172,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
             return;
         }
         for (var i = 0; i < arrayLikes.length; i++) {
-            console.log(arrayLikes[i], userId);
+            //console.log(arrayLikes[i], userId);
             if (arrayLikes[i] === userId) {
                 //console.log(arrayLikes[i]);
                 arrayLikes.splice(i, 1);
@@ -195,8 +188,8 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     };
     $scope.searchPosts=function(searchObj){
         $http.post('/post/search', searchObj).success(function (data) {
-            console.log("searchData",data);
-            console.log($scope.postdata);
+           // console.log("searchData",data);
+            //console.log($scope.postdata);
             if(data.data!==undefined){
                 $scope.postdata=data.data;
             }
@@ -205,7 +198,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     };
     courseEdit.searchPosts=$scope.searchPosts;
     $scope.searchByTag=function(tag){
-        console.log(tag);
+        //console.log(tag);
         var searchObj={type:"tags",tag:tag};
         courseEdit.searchPosts(searchObj);
     };
