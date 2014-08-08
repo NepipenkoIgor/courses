@@ -83,6 +83,7 @@ width: 1000px;
 .tagConteiner{
     /*border:solid 2px yellow;*/
     overflow: hidden;
+    clear: both;
     padding-bottom: 10px;
 
 }
@@ -97,17 +98,17 @@ width: 1000px;
 .postConteiner{
     background-color: white;
     /*overflow: hidden;*/
-    position: relative;
+    /*position: relative;
     top: 0px;
-    /*left: 5%;*/
+    left: 5%;*/
     /*max-width: 700px;*/
     /*min-width: 730px;*/
     padding: 20px 20px;
-   /* border:solid 2px green;*/
-    margin-top: 2px;
+   /* border:solid 2px green;
+    margin-top: 2px;*/
 }
-.grid>div{width: 46%;clear: both;}
-.grid>div.postConteiner{margin: 1%}
+.grid>div{width: 30.5%;clear: both}
+.grid>div.postConteiner{margin: .5%;}
 .close{
     float: right;
     background-color: indianred;
