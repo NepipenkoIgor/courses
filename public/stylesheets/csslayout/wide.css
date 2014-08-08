@@ -242,7 +242,7 @@ body{
 }
 
 .course_menu .section_menu li h4:nth-child(2) {
-    padding: 2px 0 15px 12px;
+    padding: 2px 12px 15px;
 }
 
 .course_menu .section_menu > li:hover {
@@ -320,7 +320,7 @@ body{
 }
 
 .course_sub_menu {
-    width: 154px;
+    min-width: 154px;
     background-color: #4e5d6c;
     text-align: left;
     border-left: 4px solid #0e151d;
@@ -331,11 +331,13 @@ body{
 }
 
 .course_sub_menu ul li {
-    font-size: 16px;
-    width: auto;
+    font-size: 13px;
+    width: 100%;
     text-align: left;
     padding-left: 10px;
     height: 40px;
+    white-space: nowrap;
+    padding-right: 15px;
     line-height: 40px;
     border-top: 1px solid #17222e;
 }
@@ -350,7 +352,8 @@ body{
     padding-left: 15px;
     line-height: 50px;
     height: 50px;
-    font-size: 16px;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 .course_sub_menu > p {
@@ -430,4 +433,32 @@ body{
     vertical-align: top;
     text-decoration: none!important;
     margin: 0 10px;
+}
+.contentInput .btn-xs{
+    padding: 0 5px;
+}
+.contentInput textarea{
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,.1);
+}
+.contentInput .form-group+button{
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.contentInput .form-group label{
+    font-size: 14px;
+}
+.post div h2{
+    font-size: 22px;
+    margin-top: 10px;
+}
+.admin_content_course .col-md-12>*{color:#fff;margin: 20px 0;}
+.admin_content_course iframe{width: 100%}
+.admin_content_course .col-md-12 div div a{
+    margin: 0 0 20px;
+    display: block;
+    border: none;
+}
+.admin_content_course .col-md-12 div div form{
+    margin: 0 0 20px;
 }

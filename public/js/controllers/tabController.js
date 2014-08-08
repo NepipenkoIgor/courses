@@ -89,6 +89,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.courseNowChange = function (id) {
+        console.log(id);
         for (var i = 0; i < $scope.listOfCourses.length; i++) {
             if ($scope.listOfCourses[i]._id === id) {
                 $scope.courseNowChanged = $scope.listOfCourses[i];

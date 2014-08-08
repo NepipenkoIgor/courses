@@ -1,4 +1,9 @@
 <style>
+    .title{
+        text-align: center;
+        margin: 60px 0;
+        color: #fff;
+    }
     .editprofile{
         width: 450px;
         margin: 60px auto;
@@ -23,6 +28,7 @@
         float: right!important;
     }
 </style>
+<h1 class="title">Edit profile</h1>
 <form name="userForm" class="editprofile"> <!--ng-show="this.flag"-->
     <div class="input-group">
         <h3>Username:</h3><input type="text" class="form-control" ng-model="userdata.username" name="username" >
@@ -40,7 +46,7 @@
         <h3>Birth:</h3><input type="text" class="form-control" ng-model="userdata.birth" name="firstname">
     </div>
     <div class="input-group">
-        <h3>Email:</h3><input type="text" class="form-control" ng-model="userdata.email" name="email">
+        <h3>Email:</h3><input type="email" class="form-control" ng-model="userdata.email" name="email">
     </div>
     <div class="input-group" >
         <h3>Phone:</h3><input type="text" class="form-control" ng-model="userdata.phone" name="phone">

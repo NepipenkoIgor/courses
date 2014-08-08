@@ -1,21 +1,20 @@
 <div class="row" style="padding-bottom: 100px;">
     <div class="col-md-12">
-        <h1 style="color:white">Lesson Title : {{unitNowChanged.title}}
-            <div class="progress" ng-if="userdata">
-                <div class="progress-bar progress-bar-danger" ng-style="progress.red">
-                    <span class="sr-only">35% Complete (success)</span>
-                </div>
-                <div class="progress-bar progress-bar-warning " ng-style="progress.orange">
-                    <span class="sr-only">20% Complete (warning)</span>
-                </div>
-                <div class="progress-bar progress-bar-success" ng-style="progress.green">
-                    <span class="sr-only">30% Complete (danger)</span>
-                </div>
+        <h1 style="color:white; margin: 21px 0;">Lesson Title : {{unitNowChanged.title}}</h1>
+        <div class="progress" ng-if="userdata">
+            <div class="progress-bar progress-bar-danger" ng-style="progress.red">
+                <span class="sr-only">35% Complete (success)</span>
             </div>
-            <hr>
-        </h1>
+            <div class="progress-bar progress-bar-warning " ng-style="progress.orange">
+                <span class="sr-only">20% Complete (warning)</span>
+            </div>
+            <div class="progress-bar progress-bar-success" ng-style="progress.green">
+                <span class="sr-only">30% Complete (danger)</span>
+            </div>
+        </div>
+        <hr>
     </div>
-    <div class="col-md-8 col-md-offset-2" ng-switch on="unitNowChanged.lims[0].typeLim">
+    <div class="col-md-8 col-md-offset-2" style="padding-bottom: 50px" ng-switch on="unitNowChanged.lims[0].typeLim">
         <div ng-switch-when="video" >
             <div class="embed-responsive embed-responsive-16by9" id="videoConteiner">
                 <div id="lessonVideoPlayer" class="embed-responsive-item">You need Flash player 8+ and JavaScript enabled to view this video.</div>
@@ -25,7 +24,7 @@
             <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
                     ng-click="nextUnit(unitNowChanged.unitId)" style="margin-top: 10px" >Next unit</button>
         </div>
-        <div ng-switch-when="quiz" style="padding-bottom: 50px" >
+        <div ng-switch-when="quiz">
             <div style="" >
                 <h3 style="color:white">{{ unitNowChanged.lims[0].content[0].description}}</h3>
                 <div ng-repeat="quiz in unitNowChanged.lims[0].content[0].quiz" style="margin-left: 30px;margin-top: 15px;margin-bottom: 15px">
@@ -98,7 +97,7 @@
     <div class="col-md-8 col-md-offset-2" ng-controller="posts"  ng-if="userdata">
         <div class="row">
             <div class="col-sm-12" style="color:white">
-                <button type="" class="btn btn-warning btn-xs" ng-click="showAddQuestion()" style="float: right;">
+                <button type="" class="btn btn-warning btn-xs" ng-click="showAddQuestion()" style="float: right;margin-top: 7px;">
                     <span class="fa fa-sort-up fa-fw" ng-show="addQuestionFlag" style="width: 150px">   don't ask question</span>
                     <span class="fa fa-sort-down fa-fw" ng-hide="addQuestionFlag" style="width: 150px">   ask question</span>
                 </button>

@@ -2,10 +2,11 @@
 
 html {min-height:100%;}
 body {
-	margin:0;
+	margin:0 0 100px;
 	color:#3d434b;
 	font:14px  Arial, Helvetica, sans-serif;
 	height:100%;
+    color: #fff;
 	/*background:#e5e5e5;*/
 	
 }
