@@ -1,5 +1,18 @@
-<div >
-    <a href="#" editable-textarea="course.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
-        <pre>{{ course.description || 'no description' }}</pre>
-    </a>
-</div>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="fileimg" style="color: #ffffff"/>
+    <input type="hidden" name="courseId" value="{{course._id}}"/>
+    <input type="hidden" name="url" value="{{url}}"/>
+    <input type="hidden" name="oldImg" value="{{course.img}}"/>
+    <div id="mapDiv" style="position: relative;border: 1px solid red;width:902px">
+        <img ng-src="{{course.img}}" style="width:900px;"  id="mapDivImg"/>
+       <div ng-repeat="module in course.modules" ng-hide="!module.map">
+           <div class="pointOfTheMap" ng-style="module.map"><h1>{{$index+1}}</h1></div>
+       </div >
+    </div>
+
+    <button type="submit"  class="btn btn-success">upload</button>
+</form>
+<button   class="btn btn-success" style="float:right" ng-click="savePointsMap(course)">Save point on map</button>
+
+
+

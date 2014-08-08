@@ -1,3 +1,4 @@
+<!--<h4>Module chenged:{{moduleNowChanged.title}}</h4>-->
 <div style="margin: 100px 100px;" ng-if="!userdata">
     <div class="jumbotron text-center">
         <p style="color:#fff;">Login or Register with:</p>
@@ -9,7 +10,7 @@
     </div>
 </div>
 <style>
-    .statistic{margin-bottom: 60px;}
+    .statistic{margin-bottom: 60px;cursor:pointer}
     .statistic>div{
         text-align: center;
         padding-top: 40px;
@@ -32,39 +33,8 @@
     .statistic>div p{color: #999;}
     .statistic>div:hover h3{color: #000;}
 </style>
-<div class="row statistic" ng-if="userdata">
+<div class="row statistic"  ng-repeat="course in listOfCourses" ng-click="courseNowChange(course._id)">
     <div class="col-md-3">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Userlevel</p>
-    </div>
-    <div class="col-md-3">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Badges</p>
-    </div>
-    <div class="col-md-3">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Points</p>
-    </div>
-    <div class="col-md-3" ng-controller="posts">
-        <h3>{{countUserPost(userdata._id)}}</h3>
-        <p>Posts</p>
-    </div>
-    <div class="col-md-4">
-        <h3>{{userdata.dataReg}}</h3>
-        <p>Date registration</p>
-    </div>
-    <div class="col-md-4">
-        <h3>{{pointsCalculate(userdata.progress)}}</h3>
-        <p>Points</p>
-    </div>
-    <div class="col-md-4">
-        <h3>{{userdata.userlevel}}</h3>
-        <p>Posts</p>
+        <h3>{{course.title}}</h3>
     </div>
 </div>
-
-
-            <!--<div ng-repeat="badge in listOfBadges" ng-style="eqvalBadges(badge.badgeId)" >
-            <img ng-src="{{badge.img}}" />
-            </div>-->
-<div deckgrid source="listOfBadges" cardTemplate="views/templates/deckgrid-card.html" class="deckgrid" ng-if="userdata" ></div>

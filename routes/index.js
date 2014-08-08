@@ -8,11 +8,11 @@ function router(app) {
         console.log("USER",req.user.position)
        // if (req.isAuthenticated()&&req.user.position) return next();
         return next();
-        res.redirect("/#/welcome");
+        res.redirect("/#/dashboard");
     };
   function hasUser(req, res, next) {
     if (req.isAuthenticated()) return next();
-    res.redirect("/#/welcome");
+    res.redirect("/#/dashboard");
   };
  function hasAccess(req,res,next){
      console.log(req.isAuthenticated());

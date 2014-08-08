@@ -211,6 +211,8 @@ margin-left: 100px;
 
 .ace_editor { height: 200px; }
 
+
+/**********************************/
 .animate-show {
     position: absolute;
     top:100px;
@@ -234,8 +236,58 @@ margin-left: 100px;
     opacity:0;
     padding:0 10px;
     position: absolute;
-    top:0px;
-    left:0px;
+    top:-200px;
+    left:-200px;
+}
+/**********************************************/
+
+.deckgrid[deckgrid]::before {
+    /* Specifies that the grid should have a maximum of 4 columns. Each column will have the classes 'column' and 'column-1-4' */
+    content: '6 .column.column-1-6';
+    font-size: 0; /* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
+    visibility: hidden;
+}
+
+.deckgrid .column {
+    float: left;
+}
+
+.deckgrid .column-1-6 {
+    width: 16%;
+}
+@media screen and (max-width: 520px){
+    .deckgrid[deckgrid]::before {
+        content: '1 .column.column-1-1';
+    }
+
+    .deckgrid .column-1-1 {
+        width: 100%;
+    }
+}
+
+.a-card {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    margin: 5px;
+    text-align: center;
+    padding-bottom: 10px;
+    opacity: 0.2;
+}
+.a-card img{
+    max-width: 100%;
 }
 
 
+
+.pointOfTheMap{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 16px;
+    background-color: green;
+    float:left;
+    cursor:pointer;
+    z-index: 1000;
+    color: #ffffff;
+    text-align: center;
+}

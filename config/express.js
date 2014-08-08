@@ -11,7 +11,8 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')({session: session});
 var passport = require('passport');
-
+var multipart=require('connect-multiparty');
+var multipartMiddleware = multipart();
 module.exports = function (app) {
 
     app.use(favicon());
@@ -20,6 +21,7 @@ module.exports = function (app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
     app.use(cookieParser());
+    app.use(multipartMiddleware);
 
     var mongoUri = process.env.MONGOLAB_URI ||
         process.env.MONGOHQ_URL ||

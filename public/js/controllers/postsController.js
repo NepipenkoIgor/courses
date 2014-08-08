@@ -87,6 +87,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
 
     };
     $scope.saveNewPost=function(creator){
+        courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata)
         var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
         $http.post('/post/new', newPost).success(function (data) {
 
@@ -127,6 +128,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
 
     };
     $scope.saveNewQuestion = function (creator, unit) {
+        courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata)
         var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit,typePost:"question"};
         $http.post('/post/new', newQuestion).success(function (data) {
             //console.log(data);
