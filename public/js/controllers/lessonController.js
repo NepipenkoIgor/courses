@@ -64,7 +64,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
         });
 
-
+        $scope.url = $location.$$url
     }
 
     init();
@@ -287,7 +287,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                         }
                         if (positionArr === unitArray.length - 1) {
                             var orderId = unitsOrderId - 1;
-                            if((unitArray.length - 1)>0){
+                            if ((unitArray.length - 1) > 0) {
                                 var orderId = unitsOrderId - (unitArray[positionArr] - unitArray[positionArr - 1]) / 2;
                             }
                         }
@@ -676,4 +676,286 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     /*$scope.getPoints=function(num){
      console.log($scope.points.count,num)
      };*/
-})
+
+    $scope.saveMap = function () {
+
+        init();
+        courseEdit.initTab();
+
+    }
+
+    $scope.DragMap = (function () {
+        var dragObject
+        var pos = {};
+        var margin = {};
+        var mapDiv;
+        var menuDiv;
+        var topMargin;
+        var leftMargin;
+        var onMap;
+        var margeL;
+        var fullConteiner;
+        // console.log(menuDiv.offsetLeft)
+        /*    function getPosition(element) {
+         return {left: element.offsetLeft, top: element.offsetTop}
+         }
+         */
+
+        function mouseDown(event) {
+            var target = event.target;
+            mapDiv = document.getElementById("viewEdition");
+            menuDiv = document.getElementById("menuEdition");
+            fullConteiner = document.getElementById("fullConteiner");
+            // console.log("asdsad",mapDiv.offsetLeft,mapDiv.offsetTop)
+            if (target.parentNode.getAttribute("class") === "pointOfTheMap") {
+
+                target = target.parentNode;
+                console.log(target)
+                console.log(target.parentNode.parentNode)
+                if (target.parentNode.getAttribute("id") === "mapDiv"||target.parentNode.parentNode.getAttribute("id") === "mapDiv") {
+                    console.log(margin.left);
+                    onMap = true;
+                }
+                dragObject = target;
+                topMargin = target.offsetTop;
+                margin.left = event.pageX + mapDiv.offsetLeft;
+                pos.left = event.pageX;
+                if (margeL != undefined) {
+                    margeL = event.pageX;
+                }
+                pos.top = event.pageY;
+                drag = true;
+                document.ondragstart = function () {
+                    return false
+                }
+                document.body.onselectstart = function () {
+                    return false
+                }
+                return false;
+            }
+        }
+
+        function mouseMove(event) {
+
+            if (dragObject) {
+                if (onMap) {
+                    console.log("asdasd", fullConteiner.offsetLeft)
+                    dragObject.style.position = "absolute";
+                    dragObject.style.left = event.pageX - fullConteiner.offsetLeft - mapDiv.offsetLeft - 35 + "px";
+                    dragObject.style.top = event.pageY - pos.top + topMargin + "px";
+                    return false
+                }
+                dragObject.style.position = "absolute";
+                dragObject.style.left = event.pageX - pos.left + "px";
+                dragObject.style.top = event.pageY - pos.top + topMargin + "px";
+            }
+            return false
+        }
+
+        function mouseUp(event) {
+            if (dragObject) {
+                var el = dragObject.cloneNode(true);
+                var parent = document.getElementById("mapDiv");
+                parent.appendChild(el)
+                dragObject.remove();
+                dragObject = null;
+
+
+                if (!onMap) {
+                    el.style.position = "absolute";
+                    el.style.left = event.pageX - margin.left - 15 + "px";
+                    el.style.top = event.pageY - pos.top + topMargin + "px";
+                }
+                if (onMap) {
+                    el.style.position = "absolute";
+                    el.style.left = event.pageX - fullConteiner.offsetLeft - mapDiv.offsetLeft - 35 + "px";
+                    el.style.top = event.pageY - pos.top + topMargin + "px";
+                }
+                onMap = false
+                mapDiv = {};
+                pos = {};
+                margin = {};
+                menuDiv = undefined;
+                topMargin = undefined;
+                leftMargin = undefined;
+                onMap = undefined;
+            }
+        }
+
+        return {
+            init: function () {
+                document.onmousemove = mouseMove;
+                document.onmouseup = mouseUp;
+            },
+            makeDrag: function () {
+                document.onmousedown = mouseDown;
+            }
+        }
+    })()
+    $scope.DragMap.init();
+   $scope.DragMap.makeDrag();
+
+    $scope.savePointsMap = function (course) {
+        var node = document.getElementById("mapDiv");
+        var objPointMap = {}
+        for (var i = 0; i < node.childNodes.length; i++) {
+
+            if (node.childNodes[i].nodeType !== 3&&node.childNodes[i].nodeType!==8) {
+                for(var j=0;j<node.childNodes[i].childNodes.length;j++){
+                    if (node.childNodes[i].childNodes[j].nodeType !== 3&&node.childNodes[i].childNodes[j].nodeType!==8) {
+                        if(node.childNodes[i].childNodes[j].getAttribute("style")!==null){
+
+                            var objPosition = {left: node.childNodes[i].childNodes[j].offsetLeft, top: node.childNodes[i].childNodes[j].offsetTop};
+                            console.log("NGREPEAT ", j,objPosition);
+                            objPointMap[node.childNodes[i].childNodes[j].firstChild.innerHTML] = objPosition;
+                        }
+
+                    }
+                }
+
+          if (node.childNodes[i].getAttribute("class") === "pointOfTheMap") {
+                //console.log("POINT",node.childNodes[i]);
+                 // console.log(node.childNodes[i].firstChild.innerHTML);
+                    var objPosition = {left: node.childNodes[i].offsetLeft, top: node.childNodes[i].offsetTop};
+                    objPointMap[node.childNodes[i].firstChild.innerHTML] = objPosition;
+                }
+               // console.log("not text",node.childNodes[i]);
+            }
+
+        }
+        console.log("!!!!!!!!!",objPointMap);
+        for (var i = 0; i < course.modules.length; i++) {
+            course.modules[i].map = objPointMap[i + 1]
+        }
+        console.log($scope.course);
+        $scope.saveCourse();
+    }
+})/*.directive('mapPoint',function($document){
+    return function (scope,element,attr) {
+        //console.log("1",scope,"2",element,"3",attr);
+        element.css({
+        width: '40px',
+        height: '40px',
+        'border-radius': '16px',
+        'background-color': 'red',
+        float:'left',
+        cursor:'pointer',
+        'z-index': '1000',
+        color: '#ffffff',
+        'text-align': 'center'
+        })
+        console.log(element);
+
+        element.on("mousedown",mouseDown)
+        var dragObject
+        var pos = {};
+        var margin = {};
+        var mapDiv;
+        var menuDiv;
+        var topMargin;
+        var leftMargin;
+        var onMap;
+        var margeL;
+        var fullConteiner;
+        // console.log(menuDiv.offsetLeft)
+            function getPosition(element) {
+         return {left: element.offsetLeft, top: element.offsetTop}
+         }
+
+
+        function mouseDown(event) {
+            var target = event.target.parentNode;
+            dragObject = target;
+            pos.left = event.pageX;
+            pos.top = event.pageY;
+            *//*var target = event.target;
+            mapDiv = $document.getElementById("viewEdition");
+            menuDiv = $document.getElementById("menuEdition");
+            fullConteiner = $document.getElementById("fullConteiner");
+            // console.log("asdsad",mapDiv.offsetLeft,mapDiv.offsetTop)
+            if (target.parentNode.getAttribute("class") === "ng-scope") {
+                console.log("POBEDA",event.target)
+            }
+            if (target.parentNode.getAttribute("class") === "pointOfTheMap") {
+                // getPosition(target);
+                target = target.parentNode;
+                // console.log("PARENT",target.parentNode)
+                if (target.parentNode.getAttribute("id") === "mapDiv") {
+                    console.log(margin.left);
+                    onMap = true;
+                }
+                dragObject = target;
+                topMargin = target.offsetTop;
+                margin.left = event.pageX + mapDiv.offsetLeft;
+                pos.left = event.pageX;
+                if (margeL != undefined) {
+                    margeL = event.pageX;
+                }
+                pos.top = event.pageY;
+                drag = true;
+
+                return false;
+            }*//*
+
+            $document.on('mousemove', mouseMove);
+            $document.on('mouseup', mouseUp);
+            *//*$document.ondragstart = function () {
+                return false
+            }
+            $document.body.onselectstart = function () {
+                return false
+            }*//*
+        }
+
+        function mouseMove(event) {
+
+            dragObject.style.position = "absolute";
+            dragObject.style.left = event.pageX - pos.left + "px";
+            dragObject.style.top = event.pageY + "px";
+            return false
+        }
+
+        function mouseUp(event) {
+            $document.off('mousemove', mouseMove);
+            $document.off('mouseup', mouseUp);
+            if (dragObject) {
+                var el = dragObject.cloneNode(true);
+                var parent = $document.getElementById("mapDiv");
+                parent.appendChild(el)
+                dragObject.remove();
+                dragObject = null;
+
+
+                if (!onMap) {
+                    el.style.position = "absolute";
+                    el.style.left = event.pageX - margin.left - 15 + "px";
+                    el.style.top = event.pageY - pos.top + topMargin + "px";
+                }
+                if (onMap) {
+                    el.style.position = "absolute";
+                    el.style.left = event.pageX - fullConteiner.offsetLeft - mapDiv.offsetLeft - 35 + "px";
+                    el.style.top = event.pageY - pos.top + topMargin + "px";
+                }
+                onMap = false
+                mapDiv = {};
+                pos = {};
+                margin = {};
+                menuDiv = undefined;
+                topMargin = undefined;
+                leftMargin = undefined;
+                onMap = undefined;
+
+            }
+        }
+        *//*element.onmousedown = mouseDown;*//*
+      *//*  return {
+            init: function () {
+                $document.onmousemove = mouseMove;
+                $document.onmouseup = mouseUp;
+            },
+            makeDrag: function () {
+
+            }
+        }*//*
+    }
+})*/

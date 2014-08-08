@@ -1,5 +1,9 @@
+<div  style="overflow: hidden;margin: 20px 8px;">
+    <input type="text" placeholder="Search" class="form-control" style="" ng-model="textOfSearch.text">
+    <button class="btn btn-default" style="width: 100%;" type="button" ng-click="textSearch()">Go!</button>
+</div>
 <div class="container grid" masonry  ng-controller="posts">
-<div ng-repeat="data in postdata" class="postConteiner" style="color:black;">
+    <div ng-repeat="data in postdata" class="postConteiner" style="color:black;">
     <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
 
     <div class="post">

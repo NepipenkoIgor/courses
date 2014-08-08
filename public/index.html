@@ -38,6 +38,10 @@
     <script  src="javascripts/angular-ui-router.min.js"></script>
     <script  src="javascripts/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script src="javascripts/xeditable.min.js"></script>
+    <script src="javascripts/angular-deckgrid.js"></script>
+   <script src="javascripts/ng-flow-standalone.min.js"></script>
+  <!--  <script src="javascripts/provider.js"></script>-->
+    <!--  <script src="javascripts/flow.js"></script>-->
     <!--<script src="javascripts/angular-animate.min.js"></script>-->
     <script  src="js/app.js"></script>
      <script  src="js/controllers/lessonController.js"></script>
@@ -112,15 +116,21 @@
             <a class="btn btn-primary" href="#/post/new" style="color:#000000;width: 100%">Add new post</a>
         </div >
 
-        <div ng-if="!ifCommunity()" style="overflow: hidden;margin: 20px 8px;">
+        <!--<div ng-if="!ifCommunity()" style="overflow: hidden;margin: 20px 8px;">
             <input type="text" placeholder="Search" class="form-control" style="" ng-model="textOfSearch.text">
             <button class="btn btn-default" style="width: 100%;" type="button" ng-click="textSearch()">Go!</button>
-        </div>
-        <div ng-if="!ifCommunity()" class="filterMenu">
+        </div>-->
+       <!-- <div ng-if="!ifCommunity()" class="filterMenu">
             <a href="#" editable-select="search.type" e-ng-options="s.value as s.text for s in searchType">
                 {{ search.type }}
             </a>
-        </div>
+        </div>-->
+        <div ng-if="!ifCommunity()" style="margin: 20px 8px;">
+            <a class="btn btn-warning" >{{ search.type }}</a>
+        </div >
+        <div ng-if="!ifCommunity()" style="margin: 20px 8px;" ng-repeat="type in searchType">
+            <a class="btn " ng-click="typeSearch(type)">{{type}}</a>
+        </div >
         <div ng-if="!ifCommunity()" style="margin: 20px 8px;">
             <a class="btn btn-success" ng-click="postFilter(userdata)">apply filter</a>
         </div >
@@ -129,13 +139,13 @@
 
 
 
-        <div class="course_menu" ng-if="ifCommunity()">
+        <!--<div class="course_menu" ng-if="ifCommunity()">
 
         <ul class="section_menu">
 
             <li data-original-title="" title="">
                 <h4>Courses:</h4>
-              <!--  <h4><b>S4 Title</b></h4>-->
+              &lt;!&ndash;  <h4><b>S4 Title</b></h4>&ndash;&gt;
                 <h4 style="color:green">{{courseNowChanged.title}}</h4>
                 <div class="course_sub_menu">
                     <h5><b>list of courses</b></h5>
@@ -178,7 +188,7 @@
 
             </ul>
 
-        </div>
+        </div>-->
 
 
 
@@ -235,17 +245,24 @@
     <div class="animate-show" ng-controller="badgeController" ng-show="showBadges">
         <span class=""></span> I show up when your checkbox is checked.
     </div>-->
-    <div>
+    <!--<div>
 
         <div class="check-element animate-show" ng-controller="badgeController" ng-show="showBadges">
-           <!-- <span class="glyphicon glyphicon-thumbs-up"></span> I show up when your checkbox is checked.-->
+           &lt;!&ndash; <span class="glyphicon glyphicon-thumbs-up"></span> I show up when your checkbox is checked.&ndash;&gt;
             <img ng-src="{{imgBadge}}" />
             <span style="cursor: pointer" ng-click="hideBadge()"><h1>X</h1></span>
         </div>
-    </div>
+    </div>-->
+
+<div  class="check-element animate-show a-card" ng-controller="badgeController"
+      ng-show="showBadges" style="opacity: 1;cursor: pointer" ng-click="hideBadge()">
+   <!-- <span style="cursor: pointer" ><h1>X</h1></span>-->
+    <img ng-src="{{imgBadge}}">
+    <p>{{desc}}</p>
+</div>
     <div class="container">
         <div class="row">
-            <div class="col-md-12"><div ui-view ></div></div>
+            <div class="col-md-12" id="fullConteiner"><div ui-view ></div></div>
         </div>
     </div>
 

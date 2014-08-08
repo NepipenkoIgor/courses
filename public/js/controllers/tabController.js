@@ -9,7 +9,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.progress = {};
 
-    function initBadge(){
+    /*function initBadge(){
         $http.get('/badges').success(function (badge) {
             $scope.listOfBadges = badge;
             courseEdit.listOfBadges = $scope.listOfBadges;
@@ -17,7 +17,72 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     }
     initBadge();
-    courseEdit.initBadge = initBadge;
+    courseEdit.initBadge = initBadge;*/
+  $scope.listOfBadges=[
+        {
+            "badgeId":0,
+            "img":"http://www.auplod.com/u/lpauod37c05.png",
+            "description":"your first lesson "
+           },
+      {
+          "badgeId":1,
+          "img":"http://www.auplod.com/u/oupdal37d51.png",
+          "description":"your first answer for quiz"
+      },
+      {
+          "badgeId":2,
+          "img":"http://www.auplod.com/u/dalopu37d54.png",
+          "description":"your first viewed video"
+      },
+      {
+          "badgeId":3,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first post"
+      },
+      {
+          "badgeId":4,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first question"
+      },
+      {
+          "badgeId":5,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first lesson"
+      },
+      {
+          "badgeId":0,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first lesson"
+      },
+      {
+          "badgeId":1,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first answer for quiz sgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
+      },
+      {
+          "badgeId":2,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first viewed video"
+      },
+      {
+          "badgeId":3,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first post dsgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
+      },
+      {
+          "badgeId":4,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first question"
+      },
+      {
+          "badgeId":5,
+          "img":"http://www.auplod.com/u/lpauod37c05.png",
+          "description":"your first lesson"
+      }
+    ]
+    console.log($scope.listOfBadge)
+    courseEdit.listOfBadges = $scope.listOfBadges;
+    console.log(courseEdit)
 
     function initTab() {
 
@@ -476,13 +541,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.mapModule = function () {
-        // console.log($location.$$url);
-        var arrLocal = $location.$$url.split("/");
+      /*  var arrLocal = $location.$$url.split("/");
         arrLocal.splice(4, 2);
-        // console.log(arrLocal.join("/"));
         arrLocal = arrLocal.join("/");
-        //$location.$$url=arrLocal;
-        $window.location = "/#" + arrLocal;
+        $window.location = "/#" + arrLocal;*/
+        $scope.courseNowChange($scope.courseNowChanged._id)
     };
     $scope.showAddQuestion = function () {
 
@@ -504,7 +567,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         });
     };
     $scope.goToCourse = function () {
-        $state.go('welcome').then(function () {
+        $state.go('courses').then(function () {
             // console.log("good redirect");
         });
     };
@@ -516,7 +579,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
 
-    $scope.searchType = [
+    /*$scope.searchType = [
         {value: 'All Posts', text: 'All Posts'},
         {value: 'My Posts', text: 'My Posts'},
         {value: 'My Questions', text: 'My Questions'},
@@ -524,7 +587,16 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     ];
     $scope.search = {
         type: "All Posts"
+    };*/
+    $scope.searchType = ['All Posts','My Posts','My Questions','Only Questions']
+    $scope.search = {
+        type: "All Posts"
     };
+    $scope.typeSearch=function(type){
+        $scope.search = {
+            type: type
+        };
+    }
     $scope.postFilter = function (user, postData) {
         var searchObj = {};
         switch ($scope.search.type) {
@@ -573,11 +645,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return count;
     };
 
-    $scope.eqvalBadges=function(a){
-        if(courseEdit.userdata.badges.indexOf(a)!==(-1)){
-            return true;
+    $scope.eqvalBadges=function(){
+        if(courseEdit.userdata.badges&&courseEdit.listOfBadges){
+            console.log(courseEdit.userdata.badges)
+            console.log(courseEdit.listOfBadges)
+            for(var i =0; i<courseEdit.userdata.badges.length;i++){
+                courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity={"opacity":1}
+            }
         }
-        return false;
+
     }
+    courseEdit.eqvalBadges=$scope.eqvalBadges;
+    //$scope.eqvalBadges();
+
+
 
 });

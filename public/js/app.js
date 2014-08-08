@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/1/14.
  */
-var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate']);
+var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate','akoenig.deckgrid']);
 app.run(function(editableOptions) {
     'use strict';
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -18,7 +18,7 @@ app.run(function($rootScope,$location,courseEdit){});
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 'use strict';
-   $urlRouterProvider.when('/', '/welcome');
+   $urlRouterProvider.when('/', '/login');
     //$urlRouterProvider.when('/', '/welcome');
     // For any unmatched url, send to /route1
     $urlRouterProvider.otherwise("/");
@@ -63,16 +63,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/adminlab/courseunit.html"
         }).state('welcome', {
-            url: "/welcome",
+            url: "/dashboard",
             templateUrl: "views/main/welcome.html",
             controller: ''
         }).state('course', {
             url: "/courses/:courseTitle",
             templateUrl: "views/courses/courseChenged.html",
             controller: ''
-        }).state('module', {
-            url: "/courses/:courseTitle/:moduleTitle",
-            templateUrl: "views/courses/moduleChenged.html"
+        }).state('courses', {
+            url: "/courses",
+            templateUrl: "views/courses/courses.html"
 
         }).state('unit', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",

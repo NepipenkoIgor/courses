@@ -6,10 +6,13 @@
             </div>
 
         </div>
-        <div class="row" style="margin-top: 5%">
-            <div class="col-md-12">
+        <div class="row" style="margin-top: 5%" id="menuEdition">
+            <div class="col-md-12" >
                 <form editable-form name="editableForm" onaftersave="saveCourse()">
-                <ul ng-repeat="module in course.modules"><a  editable-text="module.title" >{{ module.title || "empty" }}</a>
+                <ul ng-repeat="module in course.modules" >
+                    <div class="pointOfTheMap" ng-hide="module.map"><h1>{{$index+1}}</h1></div>
+
+                    <a  style="margin-left: 40px" editable-text="module.title" >{{ module.title || "empty" }}</a>
 
                     <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
                         <button type="button" class="btn btn-success"  ng-click="addModule(module._id,'before')"
@@ -82,7 +85,7 @@
 
         </div>
     </div>
-    <div class="col-md-7 admin_content_course">
+    <div class="col-md-7 admin_content_course" id="viewEdition">
         <div ui-view style="">
         </div>
 

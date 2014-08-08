@@ -1,6 +1,8 @@
-<h4>Course chenged:{{courseNowChanged.title}}</h4>
-        <div style=" background: url() center;"></div>
-     <!--   <img src="../../img/unuser.jpg" width="50" />-->
-<div class="col-md-10 col-md-offset-1" style="margin-top: 100px">
-    <img style="max-width: 100%" src="http://www.sunhome.ru/UsersGallery/wallpapers/263/karta_sokrovisch.jpg">
+<div class="col-md-10" style="margin-top: 100px;border: 1px solid red;width: 902px;"><img
+        ng-src="{{courseNowChanged.img}}"
+        width="900" style="margin-left: -15px">
+        <div ng-repeat="module in courseNowChanged.modules"
+             class="pointOfTheMap"
+                ng-style="module.map"
+                ng-click="moduleNowChange(module._id)"><h1>{{$index+1}}</h1></div>
 </div>
