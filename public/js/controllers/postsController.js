@@ -204,6 +204,23 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         var searchObj={type:"tags",tag:tag};
         courseEdit.searchPosts(searchObj);
     };
+    document.getElementById("post").checked=true;
+    document.getElementById("question").checked=false;
+    $scope.typeCheck=true
+    $scope.chekNewPost=function(bool){
+        console.log("bool",bool)
+        if(bool){
+            document.getElementById("post").checked=true;
+            document.getElementById("question").checked=false;
+            $scope.typeCheck=true
+            return;
+        }
+        document.getElementById("post").checked=false;
+        document.getElementById("question").checked=true;
+        $scope.typeCheck=false;
+    }
+
+
 });
 
 app.directive('masonry', function() {

@@ -289,10 +289,19 @@ margin-left: 100px;
     width: 40px;
     height: 40px;
     border-radius: 16px;
-    background-color: green;
+    background-color: red;
     float:left;
     cursor:pointer;
     z-index: 1000;
     color: #ffffff;
     text-align: center;
+}
+
+.completeMod{
+    background-color: green;
+}
+
+
+.userInput{
+    margin: 10px;
 }

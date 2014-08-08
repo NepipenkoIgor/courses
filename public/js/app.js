@@ -25,7 +25,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state('editprofile', {
-            url: "/editprofile",
+            url: "/profile/:username",
             templateUrl: "views/account/profile.html",
             controller: 'profile'
         })

@@ -321,6 +321,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             return "active";
         }
     };
+
     $scope.markOfCompleteSection = function (sectionId) {
         if (!courseEdit.userdata) {
             return;
@@ -330,11 +331,36 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 if (courseEdit.userdata.progress.indexOf($scope.listOfUnits[i].unitId) === (-1)) {
                     return " ";
                 }
+
             }
         }
+
+
         return "complete";
 
     };
+    $scope.markOfCompleteModule = function (id) {
+        console.log( "!!!!!",$scope.sectionOfModule)
+        if (!courseEdit.userdata) {
+            return;
+        }
+        for(var j=0;j<$scope.courseNowChanged.modules.length;j++){
+            if($scope.courseNowChanged.modules[j]._id===id){
+                for(var l=0;l<$scope.courseNowChanged.modules[j].sections.length;l++){
+                    console.log("section",l);
+                    if($scope.markOfCompleteSection($scope.courseNowChanged.modules[j].sections[l].specialId)!=="complete"){
+                        return "pointOfTheMap"
+                    }
+                }
+            }
+        }
+        console.log( "*******")
+        return "pointOfTheMap completeMod";
+
+    };
+
+
+
     $scope.completeStatic = function () {
         $scope.saveProgress($scope.unitNowChanged.unitId);
     };

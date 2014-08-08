@@ -2,7 +2,7 @@
         ng-src="{{courseNowChanged.img}}"
         width="900" style="margin-left: -15px">
         <div ng-repeat="module in courseNowChanged.modules"
-             class="pointOfTheMap"
-                ng-style="module.map"
+             ng-class="markOfCompleteModule(module._id)"
+                ng-style="module.map" ng-style="{'background-color':'green'}"
                 ng-click="moduleNowChange(module._id)"><h1>{{$index+1}}</h1></div>
 </div>

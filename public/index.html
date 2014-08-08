@@ -66,7 +66,7 @@
         
         <!--- User menu --->
         <div class="dropdown notify" >
-            <a data-toggle="dropdown" ui-sref="editprofile" data-original-title="" title="">
+            <a data-toggle="dropdown" ng-click="profileGo(userdata.username)" data-original-title="" title="">
 
                 <div class="user_menu" ng-if="userdata">
                     <div class="avatar" ng-style="userAvatar(userdata.avatar)">
@@ -212,7 +212,7 @@
                         <ul>
                             <li ng-class="markOfCompleteUnit(unit.unitId)" data-original-title="" title=""
                                 ng-repeat="unit in showUnitsList(section.specialId) track by $id(unit)"
-                                    ng-click="unitNowChange(unit.unitId)">
+                                    ng-click="unitNowChange(unit.unitId)" >
                                 <i ng-class="faUnitClass(unit.lims[0].typeLim)"></i> {{unit.title}}</li>
                         </ul>
                     </div>

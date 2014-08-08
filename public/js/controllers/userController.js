@@ -1,4 +1,4 @@
-app.controller('profile', function ($scope, $http, courseEdit) {
+app.controller('profile', function ($scope,$state, $http, courseEdit) {
     'user strict';
 
     $scope.reqUser=function(cb){
@@ -67,5 +67,7 @@ app.controller('profile', function ($scope, $http, courseEdit) {
         var obj = {'background': background};
         return obj;
     };
-
+    $scope.profileGo=function(user){
+        $state.go('editprofile',({username:user}))
+    }
 });
