@@ -118,28 +118,31 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 //console.log("$location", $location.$$url.split("/")[1] !== "adminlab");
                 if ($location.$$url.split("/")[1] !== "adminlab") {
                     //console.log("peregryzka params",$state.current.name)
-                    for (var i = 0; i < $scope.listOfCourses.length; i++) {
-                        if ($stateParams.courseTitle && $scope.listOfCourses[i].title === $stateParams.courseTitle) {
-                            $scope.courseNowChange($scope.listOfCourses[i]._id);
+                    if( $scope.listOfCourses){
+                        for (var i = 0; i < $scope.listOfCourses.length; i++) {
+                            if ($stateParams.courseTitle && $scope.listOfCourses[i].title === $stateParams.courseTitle) {
+                                $scope.courseNowChange($scope.listOfCourses[i]._id);
 
-                            for (var j = 0; j < $scope.courseNowChanged.modules.length; j++) {
-                                //console.log("course change",$scope.courseNowChanged.modules[j])
-                                if ($stateParams.moduleTitle && $scope.courseNowChanged.modules[j].title === $stateParams.moduleTitle) {
-                                    $scope.moduleNowChange($scope.courseNowChanged.modules[j]._id);
+                                for (var j = 0; j < $scope.courseNowChanged.modules.length; j++) {
+                                    //console.log("course change",$scope.courseNowChanged.modules[j])
+                                    if ($stateParams.moduleTitle && $scope.courseNowChanged.modules[j].title === $stateParams.moduleTitle) {
+                                        $scope.moduleNowChange($scope.courseNowChanged.modules[j]._id);
 
-                                    for (var l = 0; l < $scope.listOfUnits.length; l++) {
-                                        // console.log("iam ty ty",$scope.listOfUnits[i].unitId)
-                                        if ($stateParams.unitTitle && $scope.listOfUnits[l].unitId === parseInt($stateParams.unitTitle)) {
+                                        for (var l = 0; l < $scope.listOfUnits.length; l++) {
+                                            // console.log("iam ty ty",$scope.listOfUnits[i].unitId)
+                                            if ($stateParams.unitTitle && $scope.listOfUnits[l].unitId === parseInt($stateParams.unitTitle)) {
 
-                                            $scope.unitNowChange($scope.listOfUnits[l].unitId);
+                                                $scope.unitNowChange($scope.listOfUnits[l].unitId);
 
+                                            }
                                         }
                                     }
-                                }
 
+                                }
                             }
                         }
                     }
+
                 }
 
             }
@@ -155,14 +158,17 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.courseNowChange = function (id) {
         console.log(id);
-        for (var i = 0; i < $scope.listOfCourses.length; i++) {
-            if ($scope.listOfCourses[i]._id === id) {
-                $scope.courseNowChanged = $scope.listOfCourses[i];
-                $scope.moduleNowChanged = "";
-                $state.go('course', {courseTitle: $scope.courseNowChanged.title});
-                return;
+        if($scope.listOfCourses){
+            for (var i = 0; i < $scope.listOfCourses.length; i++) {
+                if ($scope.listOfCourses[i]._id === id) {
+                    $scope.courseNowChanged = $scope.listOfCourses[i];
+                    $scope.moduleNowChanged = "";
+                    $state.go('course', {courseTitle: $scope.courseNowChanged.title});
+                    return;
+                }
             }
         }
+
 
     };
     $scope.moduleNowChange = function (id) {
