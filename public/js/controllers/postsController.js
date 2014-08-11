@@ -6,26 +6,30 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     $scope.comment = "";
     function reqPosts() {
         $http.get('/posts').success(function (data) {
-            $scope.postdata = data;
-            // console.log($scope.postdata);
-            // $scope.likes=data.likes||[];
-            $scope.countUserPost = function(id){
-                var count = 0;
-                if($scope.postdata !== undefined){
-                    for(var i=0; i<$scope.postdata.length; i++){
-                        if($scope.postdata[i].creator === id){
-                            count++;
+
+                console.log("postdata",data);
+                $scope.postdata = data;
+                // console.log($scope.postdata);
+                // $scope.likes=data.likes||[];
+                $scope.countUserPost = function(id){
+                    var count = 0;
+                    if($scope.postdata !== undefined){
+                        for(var i=0; i<$scope.postdata.length; i++){
+                            if($scope.postdata[i].creator === id){
+                                count++;
+                            }
                         }
                     }
-                }
-                return count;
-            };
+                    return count;
+                };
+
+
 
         });
 
     }
 
-    reqPosts();
+   // reqPosts();
     function reqUsers() {
         $http.get('/users').success(function (data) {
             $scope.postUsersdata = data;
@@ -43,8 +47,10 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
 
     }
 
+    reqPosts();
     reqUsers();
-
+    courseEdit.reqPosts=reqPosts;
+    courseEdit.reqUsers=reqUsers;
 
 
     $scope.deletePost = function (id) {
@@ -56,6 +62,8 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
                 var id = {"_id": id};
                 $http.post('/post/delete', id).success(function () {
                     //console.log("good  delete request");
+                    reqPosts();
+                    reqUsers();
                 });
             }
 
@@ -107,6 +115,8 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
                 var data = {"_id": idPost, "comments": $scope.postdata[i].comments};
                 $http.post('/comment/new', data).success(function () {
                    // console.log("good  comment request");
+                    /*reqPosts();
+                    reqUsers();*/
                 });
             }
 
@@ -117,7 +127,10 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     $scope.setId = function (id) {
         if (this.id === id) {
             this.id = "";
+//            reqPosts();
+//            reqUsers();
             return;
+
         }
 
         if (!this.id || this.id !== id) {
@@ -204,9 +217,11 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         var searchObj={type:"tags",tag:tag};
         courseEdit.searchPosts(searchObj);
     };
-    document.getElementById("post").checked=true;
-    document.getElementById("question").checked=false;
-    $scope.typeCheck=true
+    if( document.getElementById("post")&&document.getElementById("question")){
+        document.getElementById("post").checked=true;
+        document.getElementById("question").checked=false;
+    }
+    $scope.typeCheck=true;
     $scope.chekNewPost=function(bool){
         console.log("bool",bool)
         if(bool){

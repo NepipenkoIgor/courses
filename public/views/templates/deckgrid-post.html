@@ -1,0 +1,102 @@
+<div  >
+ <!--   <img src="" data-ng-src="{{card.img}}">-->
+    <!--<div style="width: 300px;height: 300px;background-color: #ffffff;border: 2px solid red;color:black"><p >{{card}}</p></div>-->
+    <div  class="postConteiner" style="color:black;margin: 10px">
+        <span class="close" ng-click="deletePost(card._id)" ng-if="ifThisIsAvtor(userdata,card.creator)">X</span>
+
+        <div class="post">
+            <img ng-src="{{postAvatar(card.creator)}}" width="150" style="float: left;margin-right: 15px;"/>
+            <div class="contentPot">
+                <h3 style="color:red">{{getCreator(card.creator)}}</h3>
+                <h2>{{card.title}}</h2>
+                <hr>
+                <p>{{card.content}}</p>
+                <hr>
+            </div>
+            <div class="tagConteiner">
+                <b style="float:left;margin-top: 4px;">Tags:</b>
+                <a class="tag" ng-repeat="tag in card.tags" ng-click="searchByTag(tag)" style="cursor:pointer">{{tag}}</a>
+            </div>
+
+            <div style="float: right;margin-top: -30px;">{{card.likes.length}}<img src="http://www.studentenpand.nl/duim.png"
+                                                                                   width="30px"
+                                                                                   style="margin-top: -16px;cursor:pointer" ng-click="like(userdata._id,card.likes,card._id)"/></div>
+
+            <div class="comment">
+                <div ng-repeat="comment in card.comments">
+                    <span class="close" ng-click="deleteComment(comment,card._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
+                    <img ng-src="{{postAvatar(comment.creator)}}" width="50" style="float: left;margin-right: 10px" alt=""/>
+                    <div>
+                        <h5 style="color:red">{{getCreator(comment.creator)}}</h5>
+                        <div class="oneComment"><p class="">{{comment.content}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contentInput">
+
+            <div class="form-group" ng-show="data._id===id">
+                <label>Content</label>
+                <textarea class="form-control" rows="10" ng-model="comment"></textarea>
+            </div>
+
+            <button type="" class="btn btn-success btn-lg" ng-click="addComment(data._id,userdata._id)" ng-show="data._id===id">add
+                new comment
+            </button>
+            <button type="" class="btn btn-warning btn-xs" ng-click="setId(data._id)" style="float: right;">
+                <span class="fa fa-sort-up" ng-show="data._id===id"></span>
+                <span class="fa fa-sort-down" ng-hide="data._id===id"></span>
+            </button>
+        </div>
+
+    </div>
+</div>
+<!--<div ng-repeat="data in postdata" class="postConteiner" style="color:black;">
+    <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
+
+    <div class="post">
+        <img ng-src="{{postAvatar(data.creator)}}" width="150" style="float: left;margin-right: 15px;"/>
+        <div class="contentPot">
+            <h3 style="color:red">{{getCreator(data.creator)}}</h3>
+            <h2>{{data.title}}</h2>
+            <hr>
+            <p>{{data.content}}</p>
+            <hr>
+        </div>
+        <div class="tagConteiner">
+            <b style="float:left;margin-top: 4px;">Tags:</b>
+            <a class="tag" ng-repeat="tag in data.tags" ng-click="searchByTag(tag)" style="cursor:pointer">{{tag}}</a>
+        </div>
+
+        <div style="float: right;margin-top: -30px;">{{data.likes.length}}<img src="http://www.studentenpand.nl/duim.png"
+                                                                               width="30px"
+                                                                               style="margin-top: -16px;cursor:pointer" ng-click="like(userdata._id,data.likes,data._id)"/></div>
+
+        <div class="comment">
+            <div ng-repeat="comment in data.comments">
+                <span class="close" ng-click="deleteComment(comment,data._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
+                <img ng-src="{{postAvatar(comment.creator)}}" width="50" style="float: left;margin-right: 10px" alt=""/>
+                <div>
+                    <h5 style="color:red">{{getCreator(comment.creator)}}</h5>
+                    <div class="oneComment"><p class="">{{comment.content}}</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contentInput">
+
+        <div class="form-group" ng-show="data._id===id">
+            <label>Content</label>
+            <textarea class="form-control" rows="10" ng-model="comment"></textarea>
+        </div>
+
+        <button type="" class="btn btn-success btn-lg" ng-click="addComment(data._id,userdata._id)" ng-show="data._id===id">add
+            new comment
+        </button>
+        <button type="" class="btn btn-warning btn-xs" ng-click="setId(data._id)" style="float: right;">
+            <span class="fa fa-sort-up" ng-show="data._id===id"></span>
+            <span class="fa fa-sort-down" ng-hide="data._id===id"></span>
+        </button>
+    </div>
+
+</div>-->

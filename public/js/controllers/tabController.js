@@ -589,6 +589,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         // console.log($location.$$url)
         $location.$$url = "/post/all";
         $state.go('posts').then(function () {
+            /*courseEdit.reqPosts();
+            courseEdit.reqUsers();*/
             //console.log("good redirect")
         });
     };
