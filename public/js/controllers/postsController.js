@@ -8,7 +8,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         $http.get('/posts').success(function (data) {
 
                 console.log("postdata",data);
-                $scope.postdata = data;
+                $scope.postdata = data.reverse();
                 // console.log($scope.postdata);
                 // $scope.likes=data.likes||[];
                 $scope.countUserPost = function(id){
@@ -115,8 +115,9 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
                 var data = {"_id": idPost, "comments": $scope.postdata[i].comments};
                 $http.post('/comment/new', data).success(function () {
                    // console.log("good  comment request");
-                    /*reqPosts();
-                    reqUsers();*/
+                    reqPosts();
+                    reqUsers();
+                    //$scope.setId(idPost);
                 });
             }
 
