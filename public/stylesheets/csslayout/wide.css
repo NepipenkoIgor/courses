@@ -272,6 +272,22 @@ body{
     display: block;
 }
 
+.course_menu .section_menu > li.redAlert:hover:after,
+.section_menu li.redAlert:before,
+.course_sub_menu li.redAlert:before {
+    content: "\f00d";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    /*--adjust as necessary--*/
+    color: #a5342a;
+    font-size: 14px;
+    position: absolute;
+    top: 4px;
+    left: 2px;
+}
+
 .course_menu .section_menu > li.active:hover:after,
 .section_menu li.active:before,
 .course_sub_menu li.active:before {

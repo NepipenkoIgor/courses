@@ -6,7 +6,7 @@ function router(app,hasAccess) {
 
   app.get('/',hasAccess,function (req, res) {
     //res.sendfile('public/indexOld.html');
-      res.redirect('/#/welcome');
+      res.redirect('/#/dashboard');
   });
 }
 module.exports=router;

@@ -6,7 +6,7 @@
     <div id="mapDiv" style="position: relative;border: 1px solid red;width:902px">
         <img ng-src="{{course.img}}" style="width:900px;"  id="mapDivImg"/>
        <div ng-repeat="module in course.modules" ng-hide="!module.map">
-           <div class="pointOfTheMap" ng-style="module.map"><h1>{{$index+1}}</h1></div>
+           <div class="pointOfTheMap" ng-style="module.map"><h2>{{$index+1}}</h2></div>
        </div >
     </div>
 

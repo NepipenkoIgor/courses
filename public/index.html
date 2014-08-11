@@ -210,9 +210,9 @@
                     <div class="course_sub_menu">
                         <h5><b>{{section.title}}</b></h5>
                         <ul>
-                            <li ng-class="markOfCompleteUnit(unit.unitId)" data-original-title="" title=""
+                            <li ng-class="markOfCompleteUnit(unit.unitId,section.specialId)"  data-original-title="" title=""
                                 ng-repeat="unit in showUnitsList(section.specialId) track by $id(unit)"
-                                    ng-click="unitNowChange(unit.unitId)" >
+                                    ng-click="unitNowChange(unit.unitId,section.specialId)" >
                                 <i ng-class="faUnitClass(unit.lims[0].typeLim)"></i> {{unit.title}}</li>
                         </ul>
                     </div>

@@ -1,7 +1,7 @@
-<div  >
+<div ng-controller="posts">
  <!--   <img src="" data-ng-src="{{card.img}}">-->
     <!--<div style="width: 300px;height: 300px;background-color: #ffffff;border: 2px solid red;color:black"><p >{{card}}</p></div>-->
-    <div  class="postConteiner" style="color:black;margin: 10px">
+    <div class="postConteiner" style="color:black;">
         <span class="close" ng-click="deletePost(card._id)" ng-if="ifThisIsAvtor(userdata,card.creator)">X</span>
 
         <div class="post">
@@ -35,17 +35,17 @@
         </div>
         <div class="contentInput">
 
-            <div class="form-group" ng-show="data._id===id">
+            <div class="form-group" ng-show="card._id===id">
                 <label>Content</label>
                 <textarea class="form-control" rows="10" ng-model="comment"></textarea>
             </div>
 
-            <button type="" class="btn btn-success btn-lg" ng-click="addComment(data._id,userdata._id)" ng-show="data._id===id">add
+            <button type="" class="btn btn-success btn-lg" ng-click="addComment(card._id,userdata._id)" ng-show="card._id===id">add
                 new comment
             </button>
-            <button type="" class="btn btn-warning btn-xs" ng-click="setId(data._id)" style="float: right;">
-                <span class="fa fa-sort-up" ng-show="data._id===id"></span>
-                <span class="fa fa-sort-down" ng-hide="data._id===id"></span>
+            <button type="" class="btn btn-warning btn-xs" ng-click="setId(card._id)" style="float: right;">
+                <span class="fa fa-sort-up" ng-show="card._id===id"></span>
+                <span class="fa fa-sort-down" ng-hide="card._id===id"></span>
             </button>
         </div>
 

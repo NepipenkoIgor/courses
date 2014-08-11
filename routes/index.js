@@ -11,8 +11,10 @@ function router(app) {
         res.redirect("/#/dashboard");
     };
   function hasUser(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect("/#/dashboard");
+    if (req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/#/login");
   };
  function hasAccess(req,res,next){
      console.log(req.isAuthenticated());

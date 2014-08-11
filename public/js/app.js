@@ -18,7 +18,7 @@ app.run(function($rootScope,$location,courseEdit){});
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 'use strict';
-   $urlRouterProvider.when('/', '/dashboard');
+   $urlRouterProvider.when('/', '/login');
     //$urlRouterProvider.when('/', '/welcome');
     // For any unmatched url, send to /route1
     $urlRouterProvider.otherwise("/");

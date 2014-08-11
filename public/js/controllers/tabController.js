@@ -10,79 +10,79 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     $scope.progress = {};
 
     /*function initBadge(){
-        $http.get('/badges').success(function (badge) {
-            $scope.listOfBadges = badge;
-            courseEdit.listOfBadges = $scope.listOfBadges;
-        });
+     $http.get('/badges').success(function (badge) {
+     $scope.listOfBadges = badge;
+     courseEdit.listOfBadges = $scope.listOfBadges;
+     });
 
-    }
-    initBadge();
-    courseEdit.initBadge = initBadge;*/
-  $scope.listOfBadges=[
+     }
+     initBadge();
+     courseEdit.initBadge = initBadge;*/
+    $scope.listOfBadges = [
         {
-            "badgeId":0,
-            "img":"http://www.auplod.com/u/lpauod37c05.png",
-            "description":"your first lesson "
-           },
-      {
-          "badgeId":1,
-          "img":"http://www.auplod.com/u/oupdal37d51.png",
-          "description":"your first answer for quiz"
-      },
-      {
-          "badgeId":2,
-          "img":"http://www.auplod.com/u/dalopu37d54.png",
-          "description":"your first viewed video"
-      },
-      {
-          "badgeId":3,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first post"
-      },
-      {
-          "badgeId":4,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first question"
-      },
-      {
-          "badgeId":5,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first lesson"
-      },
-      {
-          "badgeId":0,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first lesson"
-      },
-      {
-          "badgeId":1,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first answer for quiz sgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
-      },
-      {
-          "badgeId":2,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first viewed video"
-      },
-      {
-          "badgeId":3,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first post dsgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
-      },
-      {
-          "badgeId":4,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first question"
-      },
-      {
-          "badgeId":5,
-          "img":"http://www.auplod.com/u/lpauod37c05.png",
-          "description":"your first lesson"
-      }
-    ]
-    console.log($scope.listOfBadge)
+            "badgeId": 0,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first lesson "
+        },
+        {
+            "badgeId": 1,
+            "img": "http://www.auplod.com/u/oupdal37d51.png",
+            "description": "your first answer for quiz"
+        },
+        {
+            "badgeId": 2,
+            "img": "http://www.auplod.com/u/dalopu37d54.png",
+            "description": "your first viewed video"
+        },
+        {
+            "badgeId": 3,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first post"
+        },
+        {
+            "badgeId": 4,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first question"
+        },
+        {
+            "badgeId": 5,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first lesson"
+        },
+        {
+            "badgeId": 0,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first lesson"
+        },
+        {
+            "badgeId": 1,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first answer for quiz sgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
+        },
+        {
+            "badgeId": 2,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first viewed video"
+        },
+        {
+            "badgeId": 3,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first post dsgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
+        },
+        {
+            "badgeId": 4,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first question"
+        },
+        {
+            "badgeId": 5,
+            "img": "http://www.auplod.com/u/lpauod37c05.png",
+            "description": "your first lesson"
+        }
+    ];
+    //console.log($scope.listOfBadge)
     courseEdit.listOfBadges = $scope.listOfBadges;
-    console.log(courseEdit)
+    //console.log(courseEdit)
 
     function initTab() {
 
@@ -118,7 +118,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 //console.log("$location", $location.$$url.split("/")[1] !== "adminlab");
                 if ($location.$$url.split("/")[1] !== "adminlab") {
                     //console.log("peregryzka params",$state.current.name)
-                    if( $scope.listOfCourses){
+                    if ($scope.listOfCourses) {
                         for (var i = 0; i < $scope.listOfCourses.length; i++) {
                             if ($stateParams.courseTitle && $scope.listOfCourses[i].title === $stateParams.courseTitle) {
                                 $scope.courseNowChange($scope.listOfCourses[i]._id);
@@ -157,8 +157,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.courseNowChange = function (id) {
-        console.log(id);
-        if($scope.listOfCourses){
+       // console.log(id);
+        if ($scope.listOfCourses) {
             for (var i = 0; i < $scope.listOfCourses.length; i++) {
                 if ($scope.listOfCourses[i]._id === id) {
                     $scope.courseNowChanged = $scope.listOfCourses[i];
@@ -172,17 +172,40 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     };
     $scope.moduleNowChange = function (id) {
+        if($scope.dangerModule.indexOf(id)>0){
+            alert("you must complete the previous module");
+            return;
+        }
         for (var i = 0; i < $scope.courseNowChanged.modules.length; i++) {
             if ($scope.courseNowChanged.modules[i]._id === id) {
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
-                //console.log("iam here",$scope.courseNowChanged);
-                // $state.go('module', {courseTitle: $scope.courseNowChanged.title, moduleTitle: $scope.moduleNowChanged.title});
+                $scope.dangerUnit = {};
+                $scope.dangerSection = [];
             }
         }
 
     };
 
-    $scope.unitNowChange = function (id) {
+    $scope.unitNowChange = function (id,specialId) {
+      /*  for (var j = 0; j < $scope.moduleNowChanged.sections.length; j++) {
+            if($scope.moduleNowChanged.sections[i].specialId===id){
+
+            }
+        }*/
+        /*for (var j = 0; j < $scope.moduleNowChanged.sections.length; j++) {
+            if($scope.moduleNowChanged.sections[j].specialId===specialId){
+
+            }
+        }*/
+        if($scope.dangerSection.indexOf(specialId)>0){
+            alert("you must complete the previous section");
+            return;
+        }
+        if ($scope.dangerUnit[specialId].indexOf(id) > 0){
+            alert("you must complete the previous lesson");
+            return;
+        }
+        //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         $scope.addQuestionFlag = false;
         $scope.progress.red = {};
         $scope.progress.orange = {};
@@ -196,6 +219,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 for (var j = 0; j < $scope.moduleNowChanged.sections.length; j++) {
                     if ($scope.moduleNowChanged.sections[j].specialId === $scope.unitNowChanged.parent) {
                         $scope.sectionNowChanged = $scope.moduleNowChanged.sections[j];
+
+
+
+
                         $scope.calculateTotalProgress($scope.totalSectionPoint($scope.sectionNowChanged.specialId), courseEdit.userdata.progress, $scope.sectionNowChanged.specialId);
 
                     }
@@ -203,7 +230,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 courseEdit.unitNowChanged = $scope.unitNowChanged;
 
                 if (courseEdit.listOfBadges && courseEdit.userdata) {
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata)
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
                 }
 
 
@@ -255,7 +282,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         var totalPoints = 0;
         for (var i = 0; i < $scope.listOfUnits.length; i++) {
             if ($scope.listOfUnits[i].parent === sectionId) {
-                //console.log($scope.listOfUnits[i].lims[0].points)
+
+                if(!$scope.listOfUnits[i].lims[0].points){
+                    $scope.listOfUnits[i].lims[0].points=0;
+                }
                 totalPoints += $scope.listOfUnits[i].lims[0].points;
             }
         }
@@ -281,18 +311,15 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         if (!courseEdit.userdata) {
             return;
         }
-        // console.log("scores of this sections", totalPoints);
-        // console.log("userProgress", userProgress);
+
         var realpointsOfSection = 0;
         for (var i = 0; i < $scope.listOfUnits.length; i++) {
             if (userProgress.indexOf($scope.listOfUnits[i].unitId) !== (-1) && $scope.listOfUnits[i].parent === secionId) {
-                //console.log("i is etogo yroka")
                 realpointsOfSection += $scope.listOfUnits[i].lims[0].points;
 
             }
         }
-        //console.log("real points", realpointsOfSection);
-        //console.log(realpointsOfSection / totalPoints);
+
         var percentage = realpointsOfSection / totalPoints;
 
         if (percentage >= 0 && percentage < 0.4) {
@@ -316,11 +343,29 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     $scope.returnProgress = function () {
         return [$scope.progress.red, $scope.progress.orange, $scope.progress.green];
     };
-    $scope.markOfCompleteUnit = function (unitId) {
+
+    $scope.dangerUnit = {};
+    $scope.markOfCompleteUnit = function (unitId, sectionId) {
+        var unitArr = [];
+        for (var i = 0; i < $scope.showUnitsList(sectionId).length; i++) {
+            unitArr.push($scope.showUnitsList(sectionId)[i].unitId);
+        }
+//console.log("$scope.dangerUnit[sectionId]",$scope.dangerUnit[sectionId])
+        if($scope.dangerUnit[sectionId]===undefined){
+            $scope.dangerUnit[sectionId]=unitArr;
+        }
+        console.log("red", $scope.dangerUnit);
+        console.log("$scope.dangerSection",$scope.dangerSection);
         if (!courseEdit.userdata) {
             return;
         }
         if (courseEdit.userdata.progress.indexOf(unitId) !== (-1)) {
+            if($scope.dangerUnit[sectionId].indexOf(unitId)!==(-1)){
+                var index=$scope.dangerUnit[sectionId].indexOf(unitId);
+                $scope.dangerUnit[sectionId].splice(index,1);
+                //console.log(" $scope.dangerUnit", $scope.dangerUnit)
+            }
+
             return "complete";
         }
         if ($scope.unitNowChanged !== undefined && unitId === $scope.unitNowChanged.unitId) {
@@ -328,7 +373,17 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
     };
 
+    $scope.dangerSection = [];
     $scope.markOfCompleteSection = function (sectionId) {
+        var sectionArr = [];
+        if($scope.moduleNowChanged){
+            for (var i = 0; i < $scope.moduleNowChanged.sections.length; i++) {
+                sectionArr.push($scope.moduleNowChanged.sections[i].specialId);
+            }
+            if($scope.dangerSection.length===0){
+                $scope.dangerSection=sectionArr;
+            }
+        }
         if (!courseEdit.userdata) {
             return;
         }
@@ -340,31 +395,50 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
             }
         }
-
-
+        if($scope.dangerSection.indexOf(sectionId)!==(-1)){
+            var  index=$scope.dangerSection.indexOf(sectionId);
+            $scope.dangerSection.splice(index,1);
+        }
+        //$scope.dangerSection.splice(0,1);
         return "complete";
 
     };
+    $scope.dangerModule= [];
     $scope.markOfCompleteModule = function (id) {
-        console.log( "!!!!!",$scope.sectionOfModule)
+        var moduleArr=[]
+        if($scope.courseNowChanged){
+            for (var i = 0; i < $scope.courseNowChanged.modules.length; i++) {
+                moduleArr.push($scope.courseNowChanged.modules[i]._id);
+            }
+            if($scope.dangerModule.length===0){
+                $scope.dangerModule=moduleArr;
+            }
+        }
+        // console.log( "!!!!!",$scope.sectionOfModule)
         if (!courseEdit.userdata) {
             return;
         }
-        for(var j=0;j<$scope.courseNowChanged.modules.length;j++){
-            if($scope.courseNowChanged.modules[j]._id===id){
-                for(var l=0;l<$scope.courseNowChanged.modules[j].sections.length;l++){
-                    console.log("section",l);
-                    if($scope.markOfCompleteSection($scope.courseNowChanged.modules[j].sections[l].specialId)!=="complete"){
-                        return "pointOfTheMap"
+        for (var j = 0; j < $scope.courseNowChanged.modules.length; j++) {
+            if ($scope.courseNowChanged.modules[j]._id === id) {
+                if($scope.courseNowChanged.modules[j]._id=== $scope.moduleNowChanged._id){
+                    return "pointOfTheMap nowMod";
+                }
+                for (var l = 0; l < $scope.courseNowChanged.modules[j].sections.length; l++) {
+                     //console.log("section",l);
+                    if ($scope.markOfCompleteSection($scope.courseNowChanged.modules[j].sections[l].specialId) !== "complete") {
+                        return "pointOfTheMap";
                     }
                 }
             }
         }
-        console.log( "*******")
+        if($scope.dangerModule.indexOf(id)!==(-1)){
+            var  index=$scope.dangerModule.indexOf(id);
+            $scope.dangerModule.splice(index,1);
+        }
+        //console.log( "*******")
         return "pointOfTheMap completeMod";
 
     };
-
 
 
     $scope.completeStatic = function () {
@@ -385,7 +459,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     function onytplayerStateChange(newState) {
         if (newState === 0) {
             //console.log("conec");//video watch registration
-            courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata)
+            courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
             $scope.saveProgress($scope.unitNowChanged.unitId);
         }
     }
@@ -573,11 +647,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.mapModule = function () {
-      /*  var arrLocal = $location.$$url.split("/");
-        arrLocal.splice(4, 2);
-        arrLocal = arrLocal.join("/");
-        $window.location = "/#" + arrLocal;*/
-        $scope.courseNowChange($scope.courseNowChanged._id)
+
+        $scope.courseNowChange($scope.courseNowChanged._id);
     };
     $scope.showAddQuestion = function () {
 
@@ -596,7 +667,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $location.$$url = "/post/all";
         $state.go('posts').then(function () {
             /*courseEdit.reqPosts();
-            courseEdit.reqUsers();*/
+             courseEdit.reqUsers();*/
             //console.log("good redirect")
         });
     };
@@ -614,23 +685,23 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     /*$scope.searchType = [
-        {value: 'All Posts', text: 'All Posts'},
-        {value: 'My Posts', text: 'My Posts'},
-        {value: 'My Questions', text: 'My Questions'},
-        {value: 'Only Questions', text: 'Only Questions'}
-    ];
-    $scope.search = {
-        type: "All Posts"
-    };*/
-    $scope.searchType = ['All Posts','My Posts','My Questions','Only Questions']
+     {value: 'All Posts', text: 'All Posts'},
+     {value: 'My Posts', text: 'My Posts'},
+     {value: 'My Questions', text: 'My Questions'},
+     {value: 'Only Questions', text: 'Only Questions'}
+     ];
+     $scope.search = {
+     type: "All Posts"
+     };*/
+    $scope.searchType = ['All Posts', 'My Posts', 'My Questions', 'Only Questions'];
     $scope.search = {
         type: "All Posts"
     };
-    $scope.typeSearch=function(type){
+    $scope.typeSearch = function (type) {
         $scope.search = {
             type: type
         };
-    }
+    };
     $scope.postFilter = function (user, postData) {
         var searchObj = {};
         switch ($scope.search.type) {
@@ -659,7 +730,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         var searchObj = {};
         searchObj.type = 'text';
         searchObj.text = $scope.textOfSearch.text;
-        console.log(searchObj);
+        //console.log(searchObj);
         courseEdit.searchPosts(searchObj);
     };
 
@@ -679,19 +750,16 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return count;
     };
 
-    $scope.eqvalBadges=function(){
-        if(courseEdit.userdata.badges&&courseEdit.listOfBadges){
-            console.log(courseEdit.userdata.badges)
-            console.log(courseEdit.listOfBadges)
-            for(var i =0; i<courseEdit.userdata.badges.length;i++){
-                courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity={"opacity":1}
+    $scope.eqvalBadges = function () {
+        if (courseEdit.userdata.badges && courseEdit.listOfBadges) {
+            /*console.log(courseEdit.userdata.badges)
+            console.log(courseEdit.listOfBadges)*/
+            for (var i = 0; i < courseEdit.userdata.badges.length; i++) {
+                courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};
             }
         }
 
-    }
-    courseEdit.eqvalBadges=$scope.eqvalBadges;
-    //$scope.eqvalBadges();
-
-
+    };
+    courseEdit.eqvalBadges = $scope.eqvalBadges;
 
 });
