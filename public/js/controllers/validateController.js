@@ -9,7 +9,7 @@ app.controller('validateController', function ($scope, $http) {
     var notextnum = /[^\w\-]/;
     var num = /\d/;
     var validmail = /([\w\-]{1,20}\.)*([\w\-]{1,20})\@([\w\-]{1,20}\.)*([\w\-]{1,20})\.([a-z]{2,5})$/;
-    //var button = document.getElementById("submit"); // делаем кномку визуально неактивной
+
     $("#submit").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
     $("#alertFirstName").hide();
     $("#alertLastName").hide();
@@ -25,11 +25,11 @@ app.controller('validateController', function ($scope, $http) {
     $scope.trueValidate=function(){
     if($scope.firstname&&$scope.lastname&&$scope.email&&$scope.password&&$scope.comfpassword){
         $("#submit").removeClass("button-bad").addClass("btn-primary").removeClass("disabled");
-        return
+        return;
     }
         $("#submit").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
-        return
-    }
+        return;
+    };
     var req = function (data,event,name) {
         $http.post("/true/email", {"email": data}).success(function (promisedate) {
             if (promisedate.length === 0) {
@@ -54,7 +54,7 @@ app.controller('validateController', function ($scope, $http) {
             $scope.name[name] = "name can not be zero length";
             $scope.email=false;
             $scope.trueValidate();
-            return
+            return;
         }
      if(validmail.test(event.currentTarget.value)!==true){
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
@@ -87,7 +87,7 @@ app.controller('validateController', function ($scope, $http) {
         }
         if (text.test(event.currentTarget.value)) {
             $(event.currentTarget).next().show().removeClass("alert-danger").addClass("alert-success");
-            $scope.name[name] = "success validation"
+            $scope.name[name] = "success validation";
             $scope[name]=true;
             $scope.trueValidate();
             return;
@@ -106,14 +106,14 @@ app.controller('validateController', function ($scope, $http) {
         }
         if (notextnum.test(event.currentTarget.value) === true) {
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-            $scope.name[name] = "name can only contain letters and numbers"
+            $scope.name[name] = "name can only contain letters and numbers";
             $scope.password=false;
             $scope.trueValidate();
             return;
         }
         if ((text.test(event.currentTarget.value) && num.test(event.currentTarget.value)) === true) {
             $(event.currentTarget).next().show().removeClass("alert-danger").addClass("alert-success");
-            $scope.name[name] = "success validation"
+            $scope.name[name] = "success validation";
             $scope.value = event.currentTarget.value;
             $scope.password=true;
             $scope.trueValidate();
@@ -144,7 +144,7 @@ app.controller('validateController', function ($scope, $http) {
             return;
         }
         $(event.currentTarget).next().show().removeClass("alert-danger").addClass("alert-success");
-        $scope.name[name] = "success validation"
+        $scope.name[name] = "success validation";
         $scope.comfpassword=true;
         $scope.trueValidate();
         return;

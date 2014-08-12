@@ -101,7 +101,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
 
         //    console.log(data);
             reqPosts();
-            $state.go('posts')
+            $state.go('posts');
         });
     };
     $scope.addComment = function (idPost, creator) {
@@ -143,7 +143,9 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     };
     $scope.saveNewQuestion = function (creator, unit) {
         courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata)
-        var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit,typePost:"question"};
+        var tag=courseEdit.positionInCourse.course+"."+courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section+"."+courseEdit.positionInCourse.unit;
+        var newQuestion = {title: $scope.title, content: $scope.content, tags: tag+","+$scope.tags, creator: creator, unit: unit,typePost:"question"};
+        console.log(newQuestion)
         $http.post('/post/new', newQuestion).success(function (data) {
             //console.log(data);
             reqPosts();

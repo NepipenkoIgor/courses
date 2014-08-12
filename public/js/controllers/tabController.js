@@ -6,7 +6,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /**/
 
-
+    $scope.positionInCourse = {};
     $scope.progress = {};
 
     /*function initBadge(){
@@ -165,6 +165,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             for (var i = 0; i < $scope.listOfCourses.length; i++) {
                 if ($scope.listOfCourses[i]._id === id) {
                     $scope.courseNowChanged = $scope.listOfCourses[i];
+                    $scope.positionInCourse.course=i+1;
+                    console.log( $scope.positionInCourse.course)
                     $scope.moduleNowChanged = "";
                     $state.go('course', {courseTitle: $scope.courseNowChanged.title});
                     return;
@@ -182,6 +184,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         for (var i = 0; i < $scope.courseNowChanged.modules.length; i++) {
             if ($scope.courseNowChanged.modules[i]._id === id) {
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
+                $scope.positionInCourse.module=i+1;
+                console.log( $scope.positionInCourse.module)
                 $scope.dangerUnit = {};
                 $scope.dangerSection = [];
             }
@@ -224,8 +228,17 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         $scope.sectionNowChanged = $scope.moduleNowChanged.sections[j];
 
 
+                        $scope.positionInCourse.section=j+1;
+                        console.log( $scope.positionInCourse.section)
+                        var mass=$scope.showUnitsList($scope.sectionNowChanged.specialId);
+                         for(var t=0;t<mass.length;t++){
+                             if(mass[t].unitId===$scope.unitNowChanged.unitId){
+                                 $scope.positionInCourse.unit=t+1;
+                                 console.log($scope.positionInCourse.unit)
+                             }
+                         }
 
-
+                        courseEdit.positionInCourse=$scope.positionInCourse;
                         $scope.calculateTotalProgress($scope.totalSectionPoint($scope.sectionNowChanged.specialId), courseEdit.userdata.progress, $scope.sectionNowChanged.specialId);
 
                     }
@@ -351,14 +364,16 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     $scope.markOfCompleteUnit = function (unitId, sectionId) {
         var unitArr = [];
         for (var i = 0; i < $scope.showUnitsList(sectionId).length; i++) {
+
             unitArr.push($scope.showUnitsList(sectionId)[i].unitId);
         }
+
 //console.log("$scope.dangerUnit[sectionId]",$scope.dangerUnit[sectionId])
         if($scope.dangerUnit[sectionId]===undefined){
             $scope.dangerUnit[sectionId]=unitArr;
         }
-        console.log("red", $scope.dangerUnit);
-        console.log("$scope.dangerSection",$scope.dangerSection);
+        /*console.log("red", $scope.dangerUnit);
+        console.log("$scope.dangerSection",$scope.dangerSection);*/
         if (!courseEdit.userdata) {
             return;
         }

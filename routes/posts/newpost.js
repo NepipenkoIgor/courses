@@ -17,14 +17,18 @@ function router(app, hasUser) {
            Post.creator=req.body.creator;
            Post.lesson=req.body.unit;
            Post.typePost=req.body.typePost||"";
-           var tags=req.body.tags.split(",");
-           var resTags=[]
-           for(var i=0;i<tags.length;i++){
-               if(resTags.indexOf(tags[i])===(-1)){
-                   resTags.push(tags[i]);
+           if(req.body.tags){
+
+               var tags=req.body.tags.split(",");
+               var resTags=[];
+               for(var i=0;i<tags.length;i++){
+                   console.log(tags[i]);
+                   if(resTags.indexOf(tags[i])===(-1)&&tags[i]!==""){
+                       resTags.push(tags[i]);
+                   }
                }
            }
-           Post.tags=resTags;
+           Post.tags=resTags||null;
            // console.log("postNew", postNew);
            Post.save(function (err, post) {
                console.log("good new post");
