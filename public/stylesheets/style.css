@@ -271,12 +271,16 @@ margin-left: 100px;
 }
 
 .a-card {
+    overflow: hidden;
     border: 1px solid #000000;
+    border-radius: 50px;
     background-color: #ffffff;
     margin: 5px;
     text-align: center;
-    padding-bottom: 10px;
+    padding: 20px;
+    padding-bottom: 40px;
     opacity: 0.2;
+
 }
 .a-card img{
     max-width: 100%;

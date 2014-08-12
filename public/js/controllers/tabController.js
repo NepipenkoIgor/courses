@@ -57,7 +57,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         {
             "badgeId": 1,
             "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first answer for quiz sgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
+            "description": "your first answer for quiz sgdfghh hhhhhh hhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhh hhhhhhh hhhhhh hhhhhhhhhhh hhhhhh hhhhhh hhhhhhhh"
         },
         {
             "badgeId": 2,
@@ -67,7 +67,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         {
             "badgeId": 3,
             "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first post dsgdfghhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhh"
+            "description": "your first post dsgdfghhhhhh hhhhhhhhh hhhhhhhhh hhhhhhhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhhhh hhhhhh"
         },
         {
             "badgeId": 4,
@@ -772,7 +772,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         if (courseEdit.userdata.badges && courseEdit.listOfBadges) {
             /*console.log(courseEdit.userdata.badges)
             console.log(courseEdit.listOfBadges)*/
+            $scope.countBadges=0
             for (var i = 0; i < courseEdit.userdata.badges.length; i++) {
+                $scope.countBadges++;
                 courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};
             }
         }
