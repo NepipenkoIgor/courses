@@ -11,9 +11,6 @@ var User = mongoose.model('Users');
 
 function session(app) {
 var config=app.get('config');
-//console.log(app.get('config'))
-//Passport controler
-
     passport.serializeUser(function (user, done) {
         done(null, user);
     });
@@ -61,10 +58,25 @@ var config=app.get('config');
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
-        function (req, email, password, done) {
-            console.log('email', email);
-            process.nextTick(function () {
-                User.findOne({ 'email': email }, function (err, user) {
+        function (req,email,password,done) {
+            console.log('email', req.body.email);
+           process.nextTick(function () {
+               var newUser = new User();
+               newUser.email = req.body.email;
+               var date = new Date();
+               newUser.lid = date.getTime();
+               newUser.password = req.body.password;
+               newUser.dataReg = dataReg(newData);
+               newUser.firstname = req.body.firstname;
+               newUser.lastname = req.body.lastname;
+               newUser.save(function (err) {
+                   if (err) {
+                       console.log(err);
+                   }
+                   newUser.id = newUser['_id'];
+                   return done(null, newUser);
+               });
+                /*User.findOne({ 'email': email }, function (err, user) {
                     if (err) {
                         return done(err);
                     }
@@ -86,7 +98,7 @@ var config=app.get('config');
                             return done(null, newUser);
                         });
                     }
-                });
+                });*/
             });
         }));
     passport.use('local-admin', new LocalStrategy({

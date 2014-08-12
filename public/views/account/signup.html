@@ -11,36 +11,41 @@
         <% } %> -->
 
         <!-- LOGIN FORM -->
-        <form action="/signup" method="post">
+        <form action="/signup" method="post" style="" ng-controller="validateController">
             <div class="form-group">
-                <label style="color:#fff">first name</label>
-                <input type="text" class="form-control" name="email">
+                <label style="color:#fff;font-size: x-large">first name<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="firstname" id="firstname" ng-keyup="validName($event,'firstname')">
+                <div class="alert alert-danger" role="alert" id="alertFirstName">{{name.firstname}}</div>
             </div>
             <div class="form-group">
-                <label style="color:#fff">last name</label>
-                <input type="text" class="form-control" name="email">
+                <label style="color:#fff;font-size: x-large">last name<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="lastname" id="lastname" ng-keyup="validName($event,'lastname')">
+                <div class="alert alert-danger" role="alert" id="alertLastName">{{name.lastname}}</div>
             </div>
             <div class="form-group">
-                <label style="color:#fff">email</label>
-                <input type="text" class="form-control" name="email">
+                <label style="color:#fff;font-size: x-large">e-mail<span style="color:red">*</span></label>
+                <input type="email" class="form-control" name="email" id="email" ng-keyup="validMail($event,'email')">
+                <div class="alert alert-danger" role="alert" id="alertEmail">{{name.email}}</div>
             </div>
             <div class="form-group">
-                <label style="color:#fff">password</label>
-                <input type="password" class="form-control" name="password">
+                <label style="color:#fff;font-size: x-large">password<span style="color:red">*</span></label>
+                <input type="password" class="form-control" name="password" id="password" ng-keyup="validPassword($event,'password')">
+                <div class="alert alert-danger" role="alert" id="alertPassword">{{name.password}}</div>
             </div>
             <div class="form-group">
-                <label style="color:#fff">password confirm</label>
-                <input type="password" class="form-control" name="password">
+                <label style="color:#fff;font-size: x-large">password confirm<span style="color:red">*</span></label>
+                <input type="password" class="form-control" name="comfpassword" id="comfpassword" ng-keyup="comfPassword($event,'comfpassword')">
+                <div class="alert alert-danger" role="alert" id="alertComfPassword">{{name.comfpassword}}</div>
             </div>
             <div class="form-group">
-                <label style="color:#fff">registration code</label>
-                <input type="text" class="form-control" name="email">
+                <label style="color:#fff;font-size: x-large">registration code<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="code" id="code">
             </div>
             <div class="form-group">
-                <label style="color:#fff">phone</label>
-                <input type="text" class="form-control" name="email">
+                <label style="color:#fff;font-size: x-large">phone</label>
+                <input type="text" class="form-control" name="phone" id="phone">
             </div>
-            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+            <button type="submit" class="btn btn-primary btn-lg" id="submit">Signup</button>
         </form>
 
         <hr>

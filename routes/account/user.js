@@ -18,6 +18,15 @@ function router(app,hasUser) {
         //
 
     });
+
+    app.post('/true/email',function(req,res){
+        console.log(req.body.email);
+        Users.find({email:req.body.email},function(err,data){
+            res.json(data);
+        })
+       // res.json({data:req.body.email});
+    });
+
     app.post('/progress',hasUser ,function (req, res) {
         console.log(req.body);
         Users.update({_id:req.body[0]},{$push:{progress:req.body[1]}},function(err,num){
