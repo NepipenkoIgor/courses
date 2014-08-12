@@ -16,6 +16,12 @@ app.controller('validateController', function ($scope, $http) {
     $("#alertEmail").hide();
     $("#alertPassword").hide();
     $("#alertComfPassword").hide();
+
+    $("#formsign").keypress(function(event){
+        if(event.keyCode===13){
+            event.preventDefault();
+        }
+    });
     $scope.trueValidate=function(){
     if($scope.firstname&&$scope.lastname&&$scope.email&&$scope.password&&$scope.comfpassword){
         $("#submit").removeClass("button-bad").addClass("btn-primary").removeClass("disabled");
