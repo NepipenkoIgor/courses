@@ -2,7 +2,7 @@
  * Created by igor on 7/15/14.
  */
 app.controller('lessonController', function ($scope, $http, $stateParams, $state, $sce, $location, courseEdit) {
-
+    $("#blockwindow").hide();
     function init() {
         $http.get('/courses').success(function (courses) {
 
@@ -71,6 +71,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
 
     $scope.saveCourse = function (action) {
+        $("#blockwindow").show();
         $scope.disabled = true;
         var data = [
             {action: action},
@@ -95,7 +96,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 init();
                 courseEdit.initTab();
             }
-
+            $("#blockwindow").hide();
 
         });
     };

@@ -3,8 +3,8 @@
     <input type="hidden" name="courseId" value="{{course._id}}"/>
     <input type="hidden" name="url" value="{{url}}"/>
     <input type="hidden" name="oldImg" value="{{course.img}}"/>
-    <div id="mapDiv" style="position: relative;border: 1px solid red;width:902px">
-        <img ng-src="{{course.img}}" style="width:900px;height: 600px"  id="mapDivImg"/>
+    <div id="mapDiv" style="position: relative;border: 1px solid red;width:852px">
+        <img ng-src="{{course.img}}" style="width:850px;height: 600px"  id="mapDivImg"/>
        <div ng-repeat="module in course.modules" ng-hide="!module.map">
            <!--<div class="pointOfTheMap" ng-style="module.map"><h2>{{$index+1}}</h2></div>-->
            <div class="pointOfTheMap" ng-style="module.map">
