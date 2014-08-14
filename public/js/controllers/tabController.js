@@ -3,7 +3,7 @@
  */
 app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, courseEdit) {
     'user strict';
-
+    $("#blockwindow").hide();
     /**/
 
     $scope.positionInCourse = {};
