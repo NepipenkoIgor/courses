@@ -319,6 +319,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 }
                 $scope.unitNow = $scope.units[i];
             }
+
             //console.log("unit now", $scope.unitNow);
             if (!$scope.unitNow.lims[0]) {
                 $scope.typeLim = {
@@ -341,7 +342,10 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             } else {
                 $scope.quizInEdit = $scope.unitNow.lims[0].content;
             }
-
+            if($scope.unitNow.lims[0]&&$scope.unitNow.lims[0].typeLim==="video"){
+                console.log( $scope.videoSource,$scope.unitNow.lims[0].content[0])
+                $scope.videoSource=$scope.unitNow.lims[0].content[0];
+            }
         }
     };
     $scope.changeSection = function (id) {
@@ -380,22 +384,17 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
     $scope.formatVideoUrl = function (url) {
 
-        if ($scope.unitNow.lims[0] === undefined || $scope.unitNow.lims[0].typeLim != 'video') {
-            var url = "//www.youtube.com/v/mSgX4wNekns";
-        } else {
-            var url = url || $scope.unitNow.lims[0].content[0];
-        }
-
-        $scope.videoSource = url;
+        $scope.videoSaveSource=url;
         return $sce.trustAsResourceUrl(url);
     };
 
     $scope.saveVideo = function () {
-        var obj = {typeLim: $scope.typeLim.type, content: $scope.videoSource, points: parseInt($scope.points.count)};
+        //console.log("save video",$scope.videoSource)
+        var obj = {typeLim: $scope.typeLim.type, content:  $scope.videoSaveSource, points: parseInt($scope.points.count)};
         $scope.unitNow.lims[0] = obj;
 
         // console.log("new unit seeeee", $scope.unitNow);
-        $scope.saveCourse();
+      $scope.saveCourse();
         //$scope.points.count=0;
     };
 
