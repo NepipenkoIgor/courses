@@ -319,7 +319,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 }
                 $scope.unitNow = $scope.units[i];
             }
-            console.log("unit now", $scope.unitNow);
+            //console.log("unit now", $scope.unitNow);
             if (!$scope.unitNow.lims[0]) {
                 $scope.typeLim = {
                     type: "quiz"
@@ -344,7 +344,32 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
         }
     };
+    $scope.changeSection = function (id) {
+        if ($scope.disabled === false) {
+            for (var i = 0; i < $scope.course.modules.length; i++) {
+                for(var j=0;j<$scope.course.modules[i].sections.length;j++){
+                    if($scope.course.modules[i].sections[j]._id===id){
+                        $scope.sectionNow = $scope.course.modules[i].sections[j];
+                    }
+                }
+            };
+            //console.log("$scope.sectionNow",$scope.sectionNow)
+        }
 
+    };
+    $scope.changeModule = function (id) {
+        if ($scope.disabled === false) {
+            for (var i = 0; i < $scope.course.modules.length; i++) {
+
+                    if($scope.course.modules[i]._id===id){
+                        $scope.moduleNow = $scope.course.modules[i];
+                    }
+
+            };
+            console.log("$scope.sectionNow", $scope.moduleNow)
+        }
+
+    };
 
     $scope.statuses = [
         {value: 'static', text: 'static'},
@@ -807,19 +832,17 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
                             var objPosition = {left: node.childNodes[i].childNodes[j].offsetLeft, top: node.childNodes[i].childNodes[j].offsetTop};
                             console.log("NGREPEAT ", j,objPosition);
-                            objPointMap[node.childNodes[i].childNodes[j].firstChild.innerHTML] = objPosition;
+                            objPointMap[node.childNodes[i].childNodes[j].childNodes[1].innerHTML] = objPosition;
                         }
 
                     }
                 }
 
           if (node.childNodes[i].getAttribute("class") === "pointOfTheMap") {
-                //console.log("POINT",node.childNodes[i]);
-                 // console.log(node.childNodes[i].firstChild.innerHTML);
+
                     var objPosition = {left: node.childNodes[i].offsetLeft, top: node.childNodes[i].offsetTop};
-                    objPointMap[node.childNodes[i].firstChild.innerHTML] = objPosition;
+                    objPointMap[node.childNodes[i].childNodes[1].innerHTML] = objPosition;
                 }
-               // console.log("not text",node.childNodes[i]);
             }
 
         }

@@ -4,15 +4,22 @@
     <input type="hidden" name="url" value="{{url}}"/>
     <input type="hidden" name="oldImg" value="{{course.img}}"/>
     <div id="mapDiv" style="position: relative;border: 1px solid red;width:902px">
-        <img ng-src="{{course.img}}" style="width:900px;"  id="mapDivImg"/>
+        <img ng-src="{{course.img}}" style="width:900px;height: 600px"  id="mapDivImg"/>
        <div ng-repeat="module in course.modules" ng-hide="!module.map">
-           <div class="pointOfTheMap" ng-style="module.map"><h2>{{$index+1}}</h2></div>
+           <!--<div class="pointOfTheMap" ng-style="module.map"><h2>{{$index+1}}</h2></div>-->
+           <div class="pointOfTheMap" ng-style="module.map">
+               <h4>{{$index+1}}</h4>
+               <i class="fa fa-map-marker"></i>
+               <h4><b class="ng-binding">{{module.title}}</b></h4>
+               <h4><b class="ng-binding">{{module.description}}</b></h4>
+               <!--<h1>{{$index+1}}</h1>-->
+           </div>
        </div >
     </div>
 
     <button type="submit"  class="btn btn-success">upload</button>
 </form>
-<button   class="btn btn-success" style="float:right" ng-click="savePointsMap(course)">Save point on map</button>
+<button   class="btn btn-success" style="" ng-click="savePointsMap(course)">Save point on map</button>
 
 
 

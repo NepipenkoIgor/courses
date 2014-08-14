@@ -1,16 +1,16 @@
 
-<div class="container">
+<!--<div class="container">
 
     <div class="col-sm-6 col-sm-offset-3">
 
         <h1 style="color:#fff;margin: 60px 0"><span class="fa fa-sign-in"></span> Signup</h1>
 
-        <!-- show any messages that come back with authentication
+        &lt;!&ndash; show any messages that come back with authentication
         <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
-        <% } %> -->
+        <% } %> &ndash;&gt;
 
-        <!-- LOGIN FORM -->
+        &lt;!&ndash; LOGIN FORM &ndash;&gt;
         <form action="/signup" method="post" style="" ng-controller="validateController"  id="formsign">
             <div class="form-group">
                 <label style="color:#fff;font-size: x-large">first name<span style="color:red">*</span></label>
@@ -54,4 +54,42 @@
 
     </div>
 
+</div>-->
+
+
+<div class="login_cont ng-scope" ng-controller="validateController">
+    <form action="/signup" method="post"    id="formsign">
+        <h2 class="form-heading">Please Sign Up</h2>
+        <div class="form-fields">
+            <input type="text" class="form-control" name="firstname" id="firstname" ng-keyup="validName($event,'firstname')"  placeholder="Firstname">
+            <div class="alert alert-danger alertMessage" role="alert" id="alertFirstName">{{name.firstname}}</div>
+
+            <input type="text" class="form-control" name="lastname" id="lastname" ng-keyup="validName($event,'lastname')"  placeholder="Lastname">
+            <div class="alert alert-danger alertMessage" role="alert" id="alertLastName">{{name.lastname}}</div>
+
+            <input type="text" class="form-control" name="email" id="email" ng-keyup="validMail($event,'email')"  placeholder="Email">
+            <div class="alert alert-danger alertMessage" role="alert" id="alertEmail">{{name.email}}</div>
+
+            <input type="password" class="form-control" name="password" id="password" ng-keyup="validPassword($event,'password')"  placeholder="Password">
+            <div class="alert alert-danger alertMessage" role="alert" id="alertPassword">{{name.password}}</div>
+
+            <input type="password" class="form-control" name="comfpassword" id="comfpassword" ng-keyup="comfPassword($event,'comfpassword')"  placeholder="Password confirm">
+            <div class="alert alert-danger alertMessage" role="alert" id="alertComfPassword">{{name.comfpassword}}</div>
+
+            <input type="text" class="form-control" name="code" id="code" placeholder="Registration code">
+
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
+
+            <!--<input name="first_name" placeholder="First Name" type="text" class="form-control">
+            <input name="login" placeholder="Email" type="text" class="form-control" ua-is-email="">
+            <input name="password" placeholder="Password" type="password" class="form-control">-->
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="submit">
+            <span ng-show="!loading" class="">Sign Up</span>
+            <img ng-show="loading" src="img/ajax-loader-blue.gif" class="ng-hide">
+        </button>
+     <!--   <div ng-show="error" class="alert alert-danger ng-binding ng-hide"></div>
+        <div ng-show="verificationEmailSent" class="alert alert-success ng-hide">An email has been sent to your inbox. Click on the link to verify your account.</div>-->
+    </form>
+    <p style="text-align: center;">Already signed up? <a href="#/login">Login</a></p>
 </div>

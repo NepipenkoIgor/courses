@@ -10,9 +10,15 @@
             <div class="col-md-12" >
                 <form editable-form name="editableForm" onaftersave="saveCourse()">
                 <ul ng-repeat="module in course.modules" >
-                    <div class="pointOfTheMap" ng-hide="module.map"><h1>{{$index+1}}</h1></div>
+                    <div class="pointOfTheMap" ng-hide="module.map">
+                        <h4>{{$index+1}}</h4>
+                        <i class="fa fa-map-marker" ></i>
+                        <!--<h1>{{$index+1}}</h1>-->
+                    </div>
 
-                    <a  style="margin-left: 40px" editable-text="module.title" >{{ module.title || "empty" }}</a>
+                    <a  style="margin-left: 40px" editable-text="module.title"
+                        ui-sref="adminlab.lesson.description"
+                        ng-click="changeModule(module._id)">{{ module.title || "empty" }}</a>
 
                     <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
                         <button type="button" class="btn btn-success"  ng-click="addModule(module._id,'before')"
@@ -26,7 +32,9 @@
 
 
                     <li style="margin-left: 10%;padding: 10px" ng-repeat="section in module.sections">
-                        <a  editable-text="section.title">{{ section.title || "empty" }}</a>
+                        <a  editable-text="section.title"
+                            ui-sref="adminlab.lesson.description"
+                            ng-click="changeSection(section._id)">{{ section.title || "empty" }}</a>
 
                         <div class="btn-group btn-group-xs" ng-show="editableForm.$visible">
                             <button type="button" class="btn btn-success" ng-click="addSection(section.title,'before')"

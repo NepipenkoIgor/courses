@@ -1,0 +1,21 @@
+
+<div >
+    <h3>Description of {{course.title}}</h3>
+    <a href="#" editable-textarea="course.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
+        <pre>{{ course.description || 'no description' }}</pre>
+    </a>
+</div>
+
+<div >
+    <h3>Description of {{sectionNow.title}}</h3>
+    <a href="#" editable-textarea="sectionNow.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
+        <pre>{{ sectionNow.description || 'no description' }}</pre>
+    </a>
+</div>
+
+<div >
+    <h3>Description of {{moduleNow.title}}</h3>
+    <a href="#" editable-textarea="moduleNow.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
+        <pre>{{ moduleNow.description || 'no description' }}</pre>
+    </a>
+</div>

@@ -62,7 +62,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state('adminlab.lesson.unit', {
             url: "/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/adminlab/courseunit.html"
-        }).state('welcome', {
+        }).state('adminlab.lesson.description', {
+            url: "/description",
+            templateUrl: "views/adminlab/description.html"
+        }).state('dashboard', {
             url: "/dashboard",
             templateUrl: "views/main/welcome.html",
             controller: ''
@@ -73,7 +76,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state('courses', {
             url: "/courses",
             templateUrl: "views/courses/courses.html"
-
+        }).state('modules', {
+            url: "/courses/:courseTitle/:moduleTitle",
+            templateUrl: "views/courses/moduleChanged.html"
         }).state('unit', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/courses/unitChenged.html"

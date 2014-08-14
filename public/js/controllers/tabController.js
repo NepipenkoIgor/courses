@@ -184,6 +184,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         for (var i = 0; i < $scope.courseNowChanged.modules.length; i++) {
             if ($scope.courseNowChanged.modules[i]._id === id) {
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
+                $state.go("modules",{courseTitle: $scope.courseNowChanged.title,moduleTitle:$scope.moduleNowChanged.title})
                 $scope.positionInCourse.module=i+1;
                 console.log( $scope.positionInCourse.module)
                 $scope.dangerUnit = {};
@@ -193,17 +194,18 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     };
 
+    $scope.startModule=function(){
+        //console.log("asdasdasdasdasdas",$scope.moduleNowChanged)
+        if($scope.moduleNowChanged){
+            var id=$scope.moduleNowChanged.sections[0].specialId;
+            var massUnit=$scope.showUnitsList(id);
+            //console.log(id,massUnit)
+            $scope.unitNowChange(massUnit[0].unitId,id);
+        }
+
+     };
     $scope.unitNowChange = function (id,specialId) {
-      /*  for (var j = 0; j < $scope.moduleNowChanged.sections.length; j++) {
-            if($scope.moduleNowChanged.sections[i].specialId===id){
 
-            }
-        }*/
-        /*for (var j = 0; j < $scope.moduleNowChanged.sections.length; j++) {
-            if($scope.moduleNowChanged.sections[j].specialId===specialId){
-
-            }
-        }*/
         if($scope.dangerSection.indexOf(specialId)>0){
             alert("you must complete the previous section");
             return;
@@ -433,18 +435,18 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
         }
         // console.log( "!!!!!",$scope.sectionOfModule)
-        if (!courseEdit.userdata) {
+        if (!courseEdit.userdata||!$scope.courseNowChanged) {
             return;
         }
         for (var j = 0; j < $scope.courseNowChanged.modules.length; j++) {
             if ($scope.courseNowChanged.modules[j]._id === id) {
                 if($scope.courseNowChanged.modules[j]._id=== $scope.moduleNowChanged._id){
-                    return "pointOfTheMap nowMod";
+                    return {'color':'orange'};
                 }
                 for (var l = 0; l < $scope.courseNowChanged.modules[j].sections.length; l++) {
                      //console.log("section",l);
                     if ($scope.markOfCompleteSection($scope.courseNowChanged.modules[j].sections[l].specialId) !== "complete") {
-                        return "pointOfTheMap";
+                        return ;
                     }
                 }
             }
@@ -454,7 +456,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             $scope.dangerModule.splice(index,1);
         }
         //console.log( "*******")
-        return "pointOfTheMap completeMod";
+        return {'color':'green'};
 
     };
 
@@ -475,6 +477,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     }
 
     function onytplayerStateChange(newState) {
+        //alert("change state")
         if (newState === 0) {
             //console.log("conec");//video watch registration
             courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);

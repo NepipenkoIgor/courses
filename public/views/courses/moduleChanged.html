@@ -1,0 +1,38 @@
+<div ui-view="Main" class="content ng-scope"><div class="module_start_cont ng-scope">
+
+    <div class="left" >
+        <div class="map_cont" style="background-image: url({{courseNowChanged.img}})">
+            <div class="course_title">
+                <h1 class="ng-binding">{{courseNowChanged.title}}</h1>
+            </div>
+
+            <div class="marker_cont">
+                <div class="marker">
+                    <i class="fa fa-map-marker" ng-style="markOfCompleteModule(moduleNowChanged._id)"></i>
+                    <h1 class="ng-binding">{{moduleNowChanged.title}}</h1>
+                    <p class="ng-binding">{{moduleNowChanged.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="section_cont">
+            <h2>Sections in this module:</h2>
+            <ul class="section_list">
+               <li ng-repeat="section in moduleNowChanged.sections" class="ng-scope">
+                <h4><b class="ng-binding">{{section.title}}</b></h4>
+                <p class="ng-binding">{{section.description}}</p>
+            </li>
+            </ul>
+        </div>
+    </div>
+
+    <a style="cursor:pointer" ng-click="startModule()">
+        <div class="start" ">Start</div>
+    </a>
+
+</div>
+
+
+</div>

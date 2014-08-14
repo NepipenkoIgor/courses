@@ -1,16 +1,11 @@
 
-<div class="container">
+<!--<div class="container">
 
     <div class="col-sm-6 col-sm-offset-3">
 
         <h1 style="color:#fff;margin: 60px 0;"><span class="fa fa-sign-in"></span> Login</h1>
 
-        <!-- show any messages that come back with authentication
-        <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-        <% } %> -->
 
-        <!-- LOGIN FORM -->
         <form action="/login" method="post">
             <div class="form-group">
                 <label style="color:#fff">Email</label>
@@ -29,4 +24,24 @@
         <p style="color:#fff">Need an account? <a href="#/signup">Signup</a></p>
 
 
+    </div>-->
+
+
+
+    <div class="login_cont ng-scope">
+        <form class="form ng-pristine ng-valid" action="/login" method="post">
+            <h2 class="form-heading">Please Log In</h2>
+            <div class="form-fields">
+                <input name="email" placeholder="Email" type="text" class="form-control">
+                <input name="password" placeholder="Password" type="password" class="form-control">
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="loading">
+                <span ng-show="!loading" class="">Log In</span>
+                <img ng-show="loading" src="img/ajax-loader-blue.gif" class="ng-hide">
+            </button>
+            <!--<div ng-show="error" class="alert alert-danger ng-binding ng-hide"></div>-->
+        </form>
+
+        <p style="text-align: center;"><a href="#/reset-password">Forgot your password?</a></p>
+        <p style="text-align: center;"><a href="#/signup">Signup</a></p>
     </div>

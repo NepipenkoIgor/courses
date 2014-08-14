@@ -61,12 +61,68 @@
 <script src="javascripts/jslayot/layout.js"></script>
 
 <body  ng-app="academy" ng-controller="profile">
-<div ng-controller="maintab">
+<div ng-controller="maintab" style="height: 100%">
 <div class="sidemenu darker-bg" ng-if="userdata" >
     <div class="menu_cont" >
-        
+
+
+        <!--jh-->
+
+
+        <div class="dropdown notify">
+            <a href="" class="dropdown-toggle user_but" aria-haspopup="true" aria-expanded="false">
+                <div class="user_menu">
+                    <div class="avatar">
+                        <img gravatar-src="'sirnip@YANDEX.RU'" gravatar-size="50" src="https://secure.gravatar.com/avatar/47a4058ecfb39c09ddac00ad8e9dd427?size=50&amp;default=mm">
+                        <div class="notify_num notify_user_num progress-bar-danger">
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <span class="ng-binding">{{userdata.username}}</span>
+                </div>
+            </a>
+            <div class="dropdown-menu notifications list-group" role="menu" aria-labelledby="dLabel" ng-if="userdata" style="cursor: pointer">
+                <div class="user_controls">
+                    <ul>
+                        <li class="notify_icon">
+                            <i class="fa fa-bell icon"></i>
+                            <div class="notify_num progress-bar-danger">
+                                <p>2</p>
+                            </div>
+                        </li>
+                        <a ui-sref="dashboard" >
+                            <li class="icon_but ng-scope" tooltip="Dashboard" tooltip-placement="bottom">
+                                <i class="fa fa-dashboard icon"></i>
+                            </li>
+                        </a>
+                        <a >
+                            <li class="icon_but ng-scope" tooltip="Settings" tooltip-placement="bottom">
+                                <i class="fa fa-cog icon"></i>
+                            </li>
+                        </a>
+                        <a  ng-click="profileGo(userdata.username)">
+                            <li class="icon_but ng-scope" tooltip="Profile" tooltip-placement="bottom">
+                                <i class="fa fa-user icon"></i>
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <a class="list-group-item">
+                    <h4 class="list-group-item-heading">Notification 1</h4>
+                </a>
+                <a class="list-group-item">
+                    <h4 class="list-group-item-heading">Notification 2</h4>
+                    <p class="list-group-item-text">With greater details!</p>
+                </a>
+                <a class="notify_viewall">
+                    <p>view all</p>
+                </a>
+            </div>
+        </div>
+
+
         <!--- User menu --->
-        <div class="dropdown notify" >
+<!--        <div class="dropdown notify" >
             <a data-toggle="dropdown" ng-click="profileGo(userdata.username)" data-original-title="" title="">
 
                 <div class="user_menu" ng-if="userdata">
@@ -77,8 +133,7 @@
                     </div>
                     <span>{{userdata.username}}</span>
                 </div>
-                <!--<button ng-hide="userdata" class="btn btn-warning" style="width: 110px;height: 50px">
-                    <a href="#/login" style="color:#000000">Login In</a></button>-->
+
             </a>
             <div class="dropdown-menu notifications list-group" role="menu" aria-labelledby="dLabel">
                 <a href="" class="list-group-item" data-original-title="" title="">
@@ -89,7 +144,7 @@
                     <p class="list-group-item-text">With greater details!</p>
                 </a>
             </div>
-        </div>
+        </div>-->
 
         <!--- Main menu --->
         <a ui-sref="adminlab" style="display: block;padding: 20px 8px 8px;" ng-if="userdata.position">Admin Lab</a>
@@ -210,6 +265,7 @@
                     <h4><b>{{section.title}}</b></h4>
                     <div class="course_sub_menu">
                         <h5><b>{{section.title}}</b></h5>
+                        <p class="ng-binding">{{section.description}}</p>
                         <ul>
                             <li ng-class="markOfCompleteUnit(unit.unitId,section.specialId)"  data-original-title="" title=""
                                 ng-repeat="unit in showUnitsList(section.specialId) track by $id(unit)"
@@ -222,18 +278,18 @@
             </ul>
         </div>
         <div class="dropdown options">
-            <a data-toggle="dropdown" href="" data-original-title="" title="">
-                <i class="fa fa-cogs icon"></i>
+            <a  href="" tooltip-placement="top" tooltip="Help">
+                <i class="fa fa-question icon"></i>
             </a>
-            <a href="/logout">
+            <a href="/logout" tooltip-placement="top" tooltip="Signout">
                 <i class="fa fa-sign-out icon"></i>
             </a>
-            <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <!--<div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <ul class="main_menu">
                     <li data-toggle="tooltip" data-placement="top" title="" class="btn-default" data-original-title="Help"><i class="fa fa-question"></i></li>
                     <li data-toggle="tooltip" data-placement="top" title="" class="btn-default" data-original-title="Settings"><i class="fa fa-cog"></i></li>
                 </ul>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
@@ -261,9 +317,9 @@
     <img ng-src="{{imgBadge}}">
     <p style="color:black">{{desc}}</p>
 </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12" id="fullConteiner"><div ui-view ></div></div>
+    <div style="height: 100%" >
+        <div class="row" style="height: 100%">
+            <div class="col-md-12" id="fullConteiner" style="height: 100%"><div ui-view  style="height: 100%" ></div></div>
         </div>
     </div>
 

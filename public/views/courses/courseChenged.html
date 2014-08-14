@@ -1,8 +1,31 @@
-<div class="col-md-10" style="margin-top: 100px;border: 1px solid red;width: 902px;"><img
+<!--<div class="col-md-10" style="margin-top: 100px;border: 1px solid red;width: 902px;"><img
         ng-src="{{courseNowChanged.img}}"
         width="900" style="margin-left: -15px">
         <div ng-repeat="module in courseNowChanged.modules"
              ng-class="markOfCompleteModule(module._id)"
                 ng-style="module.map" ng-style="{'background-color':'green'}"
                 ng-click="moduleNowChange(module._id)"><h2>{{$index+1}}</h2></div>
+</div>-->
+
+<div class="course_map_cont ng-scope" style="background-image: url({{courseNowChanged.img}})">
+    <div class="title">
+        <h1><b class="ng-binding">{{courseNowChanged.title}}</b></h1>
+        <p class="ng-binding">{{courseNowChanged.description}}</p>
+    </div>
+
+    <div class="map" style="width: 900px;height: 600px;position: absolute; left: 0;top:10px;right: 0;margin: 0 auto">
+        <ul>
+           <li  class="ng-scope" ng-repeat="module in courseNowChanged.modules" ng-style="module.map" >
+            <a ng-click="moduleNowChange(module._id)">
+                <div class="marker" >
+                    <i class="fa fa-map-marker" ng-style="markOfCompleteModule(module._id)"></i>
+                    <h4><b class="ng-binding">{{module.title}}</b></h4>
+                    <p class="ng-binding">{{module.description}}</p>
+                </div>
+            </a>
+        </li>
+
+        </ul>
+    </div>
+
 </div>

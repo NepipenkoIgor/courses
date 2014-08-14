@@ -53,44 +53,46 @@
     </div>
     <button type="button" class="btn btn-success" ng-click="postProfile(userdata)">Save profile</button>
 </form>-->
-<div class="container" style="text-align: center" ng-if="userdata">
 
-    <form editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: xx-large">
-        <div class="userInput">
-            <span class="title">Username: </span>
-            <span editable-text="userdata.username" >{{ userdata.username || 'empty' }}</span>
-        </div>
-        <div class="userInput">
-            <span class="title">User password: </span>
-            <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
-        </div>
-        <div class="userInput">
-            <span class="title">User firstname: </span>
-            <span editable-text="userdata.firstname" >{{userdata.firstname || 'empty' }}</span>
-        </div>
-        <div class="userInput">
-            <span class="title">User lastname: </span>
-            <span editable-text="userdata.lastname" >{{ userdata.lastname|| 'empty' }}</span>
-        </div >
-        <div class="userInput">
-            <span class="title">Phone: </span>
-            <span editable-text="userdata.birth" >{{ userdata.birth|| 'empty' }}</span>
-        </div>
-        <div class="userInput">
-            <span class="title"> Email:</span>
-            <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
-        </div>
-        <div class="userInput">
-            <span class="title">User name: </span>
-            <span editable-text="userdata.phone" >{{ userdata.phone || 'empty' }}</span>
-        </div>
-        <div class="buttons">
-            <!-- button to show form -->
-            <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
-                    ng-show="!editableForm.$visible" ng-if="userdata">
-                Edit
-            </button>
-            <!-- buttons to submit / cancel form -->
+<div ui-view="Main" class="content ng-scope"><img gravatar-src="'igornepipenko@gmail.com'" gravatar-size="150" class="ng-scope" src="https://secure.gravatar.com/avatar/0733b20f447fe87ca56dff983adb45db?size=150&amp;default=mm">
+    <div class="container" style="text-align: left" ng-if="userdata">
+
+        <form editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: x-large">
+            <div class="userInput">
+                <span class="title">Username: </span>
+                <span editable-text="userdata.username" >{{ userdata.username || 'empty' }}</span>
+            </div>
+            <div class="userInput">
+                <span class="title">User password: </span>
+                <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
+            </div>
+            <div class="userInput">
+                <span class="title">User firstname: </span>
+                <span editable-text="userdata.firstname" >{{userdata.firstname || 'empty' }}</span>
+            </div>
+            <div class="userInput">
+                <span class="title">User lastname: </span>
+                <span editable-text="userdata.lastname" >{{ userdata.lastname|| 'empty' }}</span>
+            </div >
+            <div class="userInput">
+                <span class="title">Phone: </span>
+                <span editable-text="userdata.birth" >{{ userdata.birth|| 'empty' }}</span>
+            </div>
+            <div class="userInput">
+                <span class="title"> Email:</span>
+                <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
+            </div>
+            <div class="userInput">
+                <span class="title">User name: </span>
+                <span editable-text="userdata.phone" >{{ userdata.phone || 'empty' }}</span>
+            </div>
+            <div class="buttons">
+                <!-- button to show form -->
+                <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
+                        ng-show="!editableForm.$visible" ng-if="userdata">
+                    Edit
+                </button>
+                <!-- buttons to submit / cancel form -->
       <span ng-show="editableForm.$visible">
         <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" >
             Save
@@ -99,7 +101,10 @@
             Cancel
         </button>
       </span>
-        </div>
-    </form>
+            </div>
+        </form>
 
-</div>
+    </div>
+    </div>
+
+

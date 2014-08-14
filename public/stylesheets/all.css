@@ -1,12 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Mono);
 
-html {min-height:100%;}
+html {height:100%;}
 body {
-	margin:0 0 100px;
+	/*margin:0 0 100px;*/
 	color:#3d434b;
 	font:14px  Arial, Helvetica, sans-serif;
 	height:100%;
     color: #fff;
+    min-width: 1024px;
 	/*background:#e5e5e5;*/
 	
 }
