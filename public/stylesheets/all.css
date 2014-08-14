@@ -4,7 +4,6 @@ html {height:100%;}
 body {
 	/*margin:0 0 100px;*/
 	color:#3d434b;
-	font:14px  Arial, Helvetica, sans-serif;
 	height:100%;
     color: #fff;
     min-width: 1024px;
@@ -25,10 +24,16 @@ form fieldset {
 	padding:0;
 	border:none;
 }
-p, h1, h2, h3, h4, h5, h6 {margin:0;}
+.module_start_cont .right .section_list li h4 {
+     font-size: 35px;
+ }
+.module_start_cont .right .section_list li p {
+      font-size: 25px;
+      margin-left: 40px;
+  }
 ul, menu {
 	margin:0;
-	padding:0;
+	/*padding:0;*/
 	list-style:none;
 	display:block;
 }

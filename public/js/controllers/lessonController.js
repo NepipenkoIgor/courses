@@ -2,13 +2,17 @@
  * Created by igor on 7/15/14.
  */
 app.controller('lessonController', function ($scope, $http, $stateParams, $state, $sce, $location, courseEdit) {
+
     $("#blockwindow").hide();
+
+    /*************init of lesson config*********************/
+
     function init() {
         $http.get('/courses').success(function (courses) {
 
             if (courses.length > 0) {
                 $scope.courses = courses;
-                console.log("courses", $scope.courses);
+
             } else {
                 $scope.courses = [];
                 courseEdit.course = " ";
@@ -28,7 +32,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
 
             courseEdit.courses = $scope.courses;
-            //  courseEdit.course=$scope.course;
+
             $http.get('/units').success(function (units) {
 
                 if (units.length > 0) {
@@ -54,21 +58,23 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                             arrUnits.push($scope.units[i]);
                         }
                     }
-                    // console.log("sort unit", arrUnits.sort(sortArr));
+
                     return arrUnits.sort(sortArr);
                 };
 
                 $scope.disabled = false;
-                //  console.log($scope.units)
+
             });
 
         });
 
-        $scope.url = $location.$$url
+        $scope.url = $location.$$url;
     }
 
     init();
 
+
+    /***save course***/
 
     $scope.saveCourse = function (action) {
         $("#blockwindow").show();
@@ -84,15 +90,12 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         $http.post('/subjects', data).success(function (data) {
             $scope.unitsDelete = [];
             $scope.unitsNew = null;
-            console.log(data);
             if (action === 'deletecourse') {
-                // $state.go('lesson',{courseTitle:$scope.courses[0].title});
-                // $state.go('adminlab');
+
                 init();
 
             } else {
-                //  $state.go('adminlab.lesson.module', {courseTitle: $scope.course.title});
-                // $state.go('adminlab')
+
                 init();
                 courseEdit.initTab();
             }
@@ -101,6 +104,9 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         });
     };
     courseEdit.saveCourse = $scope.saveCourse;
+
+
+    /*************section of delete unit section module course**************/
 
     $scope.unitsDelete = [];
     $scope.deleteUnit = function (parent, unitId) {
@@ -158,8 +164,6 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                     $scope.deleteUnit($scope.course.modules[i].sections[j].specialId);
                 }
                 $scope.course.modules.splice(i, 1);
-                //return;
-                //j--;
             }
         }
 
@@ -182,10 +186,12 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                     }
 
                 }
-                //$scope.course.modules.splice(i,1);
             }
         }
     };
+
+
+    /**************************section of add module section unit course*****************************/
 
 
     $scope.addModule = function (id, position) {
@@ -195,23 +201,19 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             if ($scope.course.modules[i]._id === id) {
 
                 if (position === 'after') {
-                    //console.log(l)
                     var specialId = Date.now();
                     $scope.course.modules.splice(i + 1, 0, {title: "New Module", description: "", sections: [
                         {title: "New Section", description: "", specialId: specialId}
                     ]});
-                    // console.log( $scope.course.modules);
                     $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                     $scope.saveCourse();
                     return;
                 }
                 if (position === 'before') {
-                    // console.log(l)
                     var specialId = Date.now();
                     $scope.course.modules.splice(i, 0, {title: "New Module", description: "", sections: [
                         {title: "New Section", description: "", specialId: specialId}
                     ]});
-                    // console.log( $scope.course.modules);
                     $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                     $scope.saveCourse();
                     return;
@@ -228,7 +230,6 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                     if (position === 'after') {
                         var specialId = Date.now();
                         $scope.course.modules[i].sections.splice(j + 1, 0, {title: "New Section", description: "", specialId: specialId});
-                        // console.log( $scope.course.modules);
                         $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                         $scope.saveCourse();
                         return;
@@ -236,7 +237,6 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                     if (position === 'before') {
                         var specialId = Date.now();
                         $scope.course.modules[i].sections.splice(j, 0, {title: "New Section", description: "", specialId: specialId});
-                        console.log($scope.course.modules[i].sections);
                         $scope.units.push({parent: specialId, title: "New Unit", unitId: specialId, description: "", lims: []});
                         $scope.saveCourse();
                         return;
@@ -260,7 +260,6 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                             unitArray.push($scope.units[i].unitId);
                         }
                     }
-                    console.log(unitArray);
                     unitArray.sort();
                     var positionArr = unitArray.indexOf(unitsOrderId);
                     if (position === 'after') {
@@ -276,7 +275,6 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                             if ($scope.units[z].unitId !== newUnit.unitId) {
                                 $scope.units.push(newUnit);
                                 $scope.saveCourse();
-                                console.log("after", $scope.units)
                                 return;
                             }
 
@@ -298,7 +296,6 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                             if ($scope.units[z].unitId !== newUnit.unitId) {
                                 $scope.units.push(newUnit);
                                 $scope.saveCourse();
-                                console.log($scope.units);
                                 return;
                             }
 
@@ -311,6 +308,8 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
     };
 
+/*************change unit section module****************/
+
 
     $scope.changeInit = function (id) {
         if ($scope.disabled === false) {
@@ -321,7 +320,6 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 $scope.unitNow = $scope.units[i];
             }
 
-            //console.log("unit now", $scope.unitNow);
             if (!$scope.unitNow.lims[0]) {
                 $scope.typeLim = {
                     type: "quiz"
@@ -332,7 +330,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 };
                 $scope.points.count = $scope.unitNow.lims[0].points;
             }
-            //console.log($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0]));
+
             if ($scope.unitNow.lims[0] === undefined || !angular.isObject($scope.unitNow.lims[0].content[0])) {
                 $scope.quizInEdit = [
                     {description: "", quiz: [
@@ -343,22 +341,21 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             } else {
                 $scope.quizInEdit = $scope.unitNow.lims[0].content;
             }
-            if($scope.unitNow.lims[0]&&$scope.unitNow.lims[0].typeLim==="video"){
-                console.log( $scope.videoSource,$scope.unitNow.lims[0].content[0])
-                $scope.videoSource=$scope.unitNow.lims[0].content[0];
+            if ($scope.unitNow.lims[0] && $scope.unitNow.lims[0].typeLim === "video") {
+
+                $scope.videoSource = $scope.unitNow.lims[0].content[0];
             }
         }
     };
     $scope.changeSection = function (id) {
         if ($scope.disabled === false) {
             for (var i = 0; i < $scope.course.modules.length; i++) {
-                for(var j=0;j<$scope.course.modules[i].sections.length;j++){
-                    if($scope.course.modules[i].sections[j]._id===id){
+                for (var j = 0; j < $scope.course.modules[i].sections.length; j++) {
+                    if ($scope.course.modules[i].sections[j]._id === id) {
                         $scope.sectionNow = $scope.course.modules[i].sections[j];
                     }
                 }
-            };
-            //console.log("$scope.sectionNow",$scope.sectionNow)
+            }
         }
 
     };
@@ -366,15 +363,16 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         if ($scope.disabled === false) {
             for (var i = 0; i < $scope.course.modules.length; i++) {
 
-                    if($scope.course.modules[i]._id===id){
-                        $scope.moduleNow = $scope.course.modules[i];
-                    }
+                if ($scope.course.modules[i]._id === id) {
+                    $scope.moduleNow = $scope.course.modules[i];
+                }
 
-            };
-            console.log("$scope.sectionNow", $scope.moduleNow)
+            }
         }
 
     };
+
+    /***********add new content***************/
 
     $scope.statuses = [
         {value: 'static', text: 'static'},
@@ -384,19 +382,14 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     ];
 
     $scope.formatVideoUrl = function (url) {
-
-        $scope.videoSaveSource=url;
+        $scope.videoSaveSource = url;
         return $sce.trustAsResourceUrl(url);
     };
 
     $scope.saveVideo = function () {
-        //console.log("save video",$scope.videoSource)
-        var obj = {typeLim: $scope.typeLim.type, content:  $scope.videoSaveSource, points: parseInt($scope.points.count)};
+        var obj = {typeLim: $scope.typeLim.type, content: $scope.videoSaveSource, points: parseInt($scope.points.count)};
         $scope.unitNow.lims[0] = obj;
-
-        // console.log("new unit seeeee", $scope.unitNow);
-      $scope.saveCourse();
-        //$scope.points.count=0;
+        $scope.saveCourse();
     };
 
     $scope.addQuiz = function (id, position) {
@@ -430,11 +423,9 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
     $scope.saveQuiz = function () {
         var obj = {typeLim: $scope.typeLim.type, content: [$scope.quizInEdit[0]], points: parseInt($scope.points.count)};
-        console.log(obj)
         $scope.unitNow.lims[0] = obj;
-        console.log($scope.unitNow.lims[0]);
         $scope.saveCourse();
-        // $scope.points.count=0;
+
     };
 
     $scope.aceLoaded = function (_editor) {
@@ -449,12 +440,10 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             content = $scope.unitNow.lims[0].content[0];
         }
         _editor.setValue(reverseEscapeHtml(content));
-        // Options
-        // _editor.setReadOnly(true);
+
         _session.setUndoManager(new ace.UndoManager());
         _renderer.setShowGutter(false);
-        // Events
-        // _editor.on("changeSession", function(data){console.log("iam changed",data)});
+
         function escapeHtml(unsafe) {
             return unsafe
                 .replace(/&/g, "&amp;")
@@ -462,7 +451,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#39;");
-        };
+        }
         function reverseEscapeHtml(unsafe) {
             return unsafe
                 .replace(/&amp/g, "&;")
@@ -470,22 +459,21 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 .replace(/&gt;/g, ">")
                 .replace(/&quot;/g, '"')
                 .replace(/&#39;/g, "'");
-        };
+        }
         _session.on("change", function (inputData) {
 
             $scope.editView = escapeHtml(_editor.getValue());
 
         });
-        //_editor.on("blur", function(event,data){console.log(_editor.getValue())});
+
     };
     $scope.saveStatic = function () {
-        console.log($scope.editView);
+
         var obj = {typeLim: $scope.typeLim.type, content: [$scope.editView], points: parseInt($scope.points.count)};
         $scope.unitNow.lims[0] = obj;
         $scope.saveCourse();
     };
     $scope.saveCodeQuest = function () {
-        console.log($scope.editView);
         var lessons = {
             levels: [
                 {
@@ -694,23 +682,22 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         $scope.saveCourse();
     };
 
+/**********start points*****************/
+
     $scope.points = {
         count: 0
     };
 
-    /*$scope.getPoints=function(num){
-     console.log($scope.points.count,num)
-     };*/
-
+/*************map manipulation***********************/
     $scope.saveMap = function () {
 
         init();
         courseEdit.initTab();
 
-    }
+    };
 
     $scope.DragMap = (function () {
-        var dragObject
+        var dragObject;
         var pos = {};
         var margin = {};
         var mapDiv;
@@ -720,25 +707,17 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         var onMap;
         var margeL;
         var fullConteiner;
-        // console.log(menuDiv.offsetLeft)
-        /*    function getPosition(element) {
-         return {left: element.offsetLeft, top: element.offsetTop}
-         }
-         */
 
         function mouseDown(event) {
             var target = event.target;
             mapDiv = document.getElementById("viewEdition");
             menuDiv = document.getElementById("menuEdition");
             fullConteiner = document.getElementById("fullConteiner");
-            // console.log("asdsad",mapDiv.offsetLeft,mapDiv.offsetTop)
             if (target.parentNode.getAttribute("class") === "pointOfTheMap") {
 
                 target = target.parentNode;
-                console.log(target)
-                console.log(target.parentNode.parentNode)
-                if (target.parentNode.getAttribute("id") === "mapDiv"||target.parentNode.parentNode.getAttribute("id") === "mapDiv") {
-                    console.log(margin.left);
+                if (target.parentNode.getAttribute("id") === "mapDiv" || target.parentNode.parentNode.getAttribute("id") === "mapDiv") {
+
                     onMap = true;
                 }
                 dragObject = target;
@@ -751,10 +730,10 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 pos.top = event.pageY;
                 drag = true;
                 document.ondragstart = function () {
-                    return false
+                    return false;
                 }
                 document.body.onselectstart = function () {
-                    return false
+                    return false;
                 }
                 return false;
             }
@@ -764,17 +743,17 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
             if (dragObject) {
                 if (onMap) {
-                    console.log("asdasd", fullConteiner.offsetLeft)
+
                     dragObject.style.position = "absolute";
                     dragObject.style.left = event.pageX - fullConteiner.offsetLeft - mapDiv.offsetLeft - 35 + "px";
                     dragObject.style.top = event.pageY - pos.top + topMargin + "px";
-                    return false
+                    return false;
                 }
                 dragObject.style.position = "absolute";
                 dragObject.style.left = event.pageX - pos.left + "px";
                 dragObject.style.top = event.pageY - pos.top + topMargin + "px";
             }
-            return false
+            return false;
         }
 
         function mouseUp(event) {
@@ -815,30 +794,30 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             makeDrag: function () {
                 document.onmousedown = mouseDown;
             }
-        }
-    })()
+        };
+    })();
     $scope.DragMap.init();
-   $scope.DragMap.makeDrag();
+    $scope.DragMap.makeDrag();
 
     $scope.savePointsMap = function (course) {
         var node = document.getElementById("mapDiv");
         var objPointMap = {}
         for (var i = 0; i < node.childNodes.length; i++) {
 
-            if (node.childNodes[i].nodeType !== 3&&node.childNodes[i].nodeType!==8) {
-                for(var j=0;j<node.childNodes[i].childNodes.length;j++){
-                    if (node.childNodes[i].childNodes[j].nodeType !== 3&&node.childNodes[i].childNodes[j].nodeType!==8) {
-                        if(node.childNodes[i].childNodes[j].getAttribute("style")!==null){
+            if (node.childNodes[i].nodeType !== 3 && node.childNodes[i].nodeType !== 8) {
+                for (var j = 0; j < node.childNodes[i].childNodes.length; j++) {
+                    if (node.childNodes[i].childNodes[j].nodeType !== 3 && node.childNodes[i].childNodes[j].nodeType !== 8) {
+                        if (node.childNodes[i].childNodes[j].getAttribute("style") !== null) {
 
                             var objPosition = {left: node.childNodes[i].childNodes[j].offsetLeft, top: node.childNodes[i].childNodes[j].offsetTop};
-                            console.log("NGREPEAT ", j,objPosition);
+
                             objPointMap[node.childNodes[i].childNodes[j].childNodes[1].innerHTML] = objPosition;
                         }
 
                     }
                 }
 
-          if (node.childNodes[i].getAttribute("class") === "pointOfTheMap") {
+                if (node.childNodes[i].getAttribute("class") === "pointOfTheMap") {
 
                     var objPosition = {left: node.childNodes[i].offsetLeft, top: node.childNodes[i].offsetTop};
                     objPointMap[node.childNodes[i].childNodes[1].innerHTML] = objPosition;
@@ -846,139 +825,11 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             }
 
         }
-        console.log("!!!!!!!!!",objPointMap);
+
         for (var i = 0; i < course.modules.length; i++) {
             course.modules[i].map = objPointMap[i + 1]
         }
-        console.log($scope.course);
+
         $scope.saveCourse();
-    }
-})/*.directive('mapPoint',function($document){
-    return function (scope,element,attr) {
-        //console.log("1",scope,"2",element,"3",attr);
-        element.css({
-        width: '40px',
-        height: '40px',
-        'border-radius': '16px',
-        'background-color': 'red',
-        float:'left',
-        cursor:'pointer',
-        'z-index': '1000',
-        color: '#ffffff',
-        'text-align': 'center'
-        })
-        console.log(element);
-
-        element.on("mousedown",mouseDown)
-        var dragObject
-        var pos = {};
-        var margin = {};
-        var mapDiv;
-        var menuDiv;
-        var topMargin;
-        var leftMargin;
-        var onMap;
-        var margeL;
-        var fullConteiner;
-        // console.log(menuDiv.offsetLeft)
-            function getPosition(element) {
-         return {left: element.offsetLeft, top: element.offsetTop}
-         }
-
-
-        function mouseDown(event) {
-            var target = event.target.parentNode;
-            dragObject = target;
-            pos.left = event.pageX;
-            pos.top = event.pageY;
-            *//*var target = event.target;
-            mapDiv = $document.getElementById("viewEdition");
-            menuDiv = $document.getElementById("menuEdition");
-            fullConteiner = $document.getElementById("fullConteiner");
-            // console.log("asdsad",mapDiv.offsetLeft,mapDiv.offsetTop)
-            if (target.parentNode.getAttribute("class") === "ng-scope") {
-                console.log("POBEDA",event.target)
-            }
-            if (target.parentNode.getAttribute("class") === "pointOfTheMap") {
-                // getPosition(target);
-                target = target.parentNode;
-                // console.log("PARENT",target.parentNode)
-                if (target.parentNode.getAttribute("id") === "mapDiv") {
-                    console.log(margin.left);
-                    onMap = true;
-                }
-                dragObject = target;
-                topMargin = target.offsetTop;
-                margin.left = event.pageX + mapDiv.offsetLeft;
-                pos.left = event.pageX;
-                if (margeL != undefined) {
-                    margeL = event.pageX;
-                }
-                pos.top = event.pageY;
-                drag = true;
-
-                return false;
-            }*//*
-
-            $document.on('mousemove', mouseMove);
-            $document.on('mouseup', mouseUp);
-            *//*$document.ondragstart = function () {
-                return false
-            }
-            $document.body.onselectstart = function () {
-                return false
-            }*//*
-        }
-
-        function mouseMove(event) {
-
-            dragObject.style.position = "absolute";
-            dragObject.style.left = event.pageX - pos.left + "px";
-            dragObject.style.top = event.pageY + "px";
-            return false
-        }
-
-        function mouseUp(event) {
-            $document.off('mousemove', mouseMove);
-            $document.off('mouseup', mouseUp);
-            if (dragObject) {
-                var el = dragObject.cloneNode(true);
-                var parent = $document.getElementById("mapDiv");
-                parent.appendChild(el)
-                dragObject.remove();
-                dragObject = null;
-
-
-                if (!onMap) {
-                    el.style.position = "absolute";
-                    el.style.left = event.pageX - margin.left - 15 + "px";
-                    el.style.top = event.pageY - pos.top + topMargin + "px";
-                }
-                if (onMap) {
-                    el.style.position = "absolute";
-                    el.style.left = event.pageX - fullConteiner.offsetLeft - mapDiv.offsetLeft - 35 + "px";
-                    el.style.top = event.pageY - pos.top + topMargin + "px";
-                }
-                onMap = false
-                mapDiv = {};
-                pos = {};
-                margin = {};
-                menuDiv = undefined;
-                topMargin = undefined;
-                leftMargin = undefined;
-                onMap = undefined;
-
-            }
-        }
-        *//*element.onmousedown = mouseDown;*//*
-      *//*  return {
-            init: function () {
-                $document.onmousemove = mouseMove;
-                $document.onmouseup = mouseUp;
-            },
-            makeDrag: function () {
-
-            }
-        }*//*
-    }
-})*/
+    };
+});

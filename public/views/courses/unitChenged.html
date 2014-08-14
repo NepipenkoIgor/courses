@@ -22,7 +22,7 @@
                 <hr>
             </div>
             <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
-                    ng-click="nextUnit(unitNowChanged.unitId)" style="margin-top: 10px" >Next unit</button>
+                    ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
         </div>
         <div ng-switch-when="quiz">
             <div style="" >
@@ -37,13 +37,13 @@
                         ng-click="checkQuiz()" style="margin-top: 10px"
                         ng-if="markOfCompleteUnit(unitNowChanged.unitId)!=='complete'">check answer</button>
                 <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
-                        ng-click="nextUnit(unitNowChanged.unitId)" style="margin-top: 10px" >Next unit</button>
+                        ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
             </div>
             <hr>
         </div>
         <div ng-switch-when="static">
             <div ng-bind-html="trustHtml(unitNowChanged.lims[0].content[0])" style="color:white"></div>
-            <button type="" class="btn btn-success btn" ng-click="completeStatic()" style="margin-top: 10px" >Next unit</button>
+            <button type="" class="btn btn-success btn" ng-click="completeStatic(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
         </div>
         <div ng-switch-when="code quest">
             <div class="holder">
