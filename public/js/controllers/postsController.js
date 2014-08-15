@@ -7,9 +7,11 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     /****************config post**********************/
 
     $scope.comment = "";
+    $scope.postdata=[];
     function reqPosts() {
         $http.get('/posts').success(function (data) {
 
+          //      console.log("postdata",data);
                 $scope.postdata = data.reverse();
                 // console.log($scope.postdata);
                 // $scope.likes=data.likes||[];
@@ -210,7 +212,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         });
     };
 
-    /********some serch logic other in tabcontroller**************/
+
 
     $scope.searchPosts=function(searchObj){
         $http.post('/post/search', searchObj).success(function (data) {
@@ -222,6 +224,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     };
     courseEdit.searchPosts=$scope.searchPosts;
     $scope.searchByTag=function(tag){
+        //console.log(tag);
         var searchObj={type:"tags",tag:tag};
         courseEdit.searchPosts(searchObj);
     };
@@ -231,8 +234,6 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
     }
 
 
-
-    /***triger type of posts**/
 
     $scope.typeCheck=true;
     $scope.chekNewPost=function(bool){
@@ -250,13 +251,18 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
 
 });
 
-app.directive('masonry', function() {
+app.directive('masonrypost', function() {
     return {
+        priority:0,
         restrict: 'AC',
         controller: function($scope) {
             return $scope.$watch(function(e) {
                 $scope.masonry.reloadItems();
                 return $scope.masonry.layout();
+                /*return $scope.postdata;*/
+            }, function(val) {
+                $scope.masonry.reloadItems();
+                $scope.masonry.layout();
             });
         },
         link: function(scope, elem, attrs) {
@@ -267,3 +273,28 @@ app.directive('masonry', function() {
     };
 
 });
+
+/*
+return {
+    priority:0,
+    restrict: 'AC',
+    link: function(scope, elem, attrs) {
+        var container=elem[0];
+        var options={
+            itemSelector: '.postConteiner'
+        };
+        scope.masonry = new Masonry(container,options);
+
+        scope.masonry.reloadItems();
+        scope.masonry.layout();
+
+        scope.$watch(function(e) {
+            return scope.postdata;
+        }, function(val) {
+            scope.masonry.reloadItems();
+            scope.masonry.layout();
+        });
+    }
+};
+
+});*/

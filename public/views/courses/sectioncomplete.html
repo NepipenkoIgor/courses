@@ -1,0 +1,42 @@
+<div class="content_container section_complete_cont ng-scope" >
+
+    <div class="title" style="background-image: url({{courseNowChanged.img}})">
+        <h1>Section complete</h1>
+    </div>
+
+    <div class="left">
+        <div class="sections_complete">
+            <h2><b class="ng-binding">{{sectionNowChanged.title}}</b></h2>
+            <ul>
+                <li ng-repeat="unit in showUnitsList(sectionNowChanged.specialId) track by $id(unit)">
+                <h4 class="ng-binding"><i class="fa fa-check"></i> {{unit.title}}</h4>
+            </li>
+            </ul>
+        </div>
+
+        <div class="gamify">
+            <h1>Achievements</h1>
+        </div>
+    </div>
+
+    <div class="right" ng-if="nextSection">
+        <div class="next_section ng-scope" >
+        <h2>Next section:</h2>
+        <h1 class="ng-binding">{{nextSection.title}}</h1>
+        <a style="cursor: pointer">
+            <div class="nextButton" ng-click="unitNowChange(nextUnitBe.unitId,nextSection.specialId)">Next</div>
+        </a>
+    </div><!-- end ngIf: showNext -->
+    </div>
+
+    <div class="right" ng-if="!nextSection">
+        <div class="next_section ng-scope" >
+            <h2>Module complete:</h2>
+            <h1 class="ng-binding">{{moduleNowChanged.title}}</h1>
+            <a style="cursor: pointer" ng-click="goTocompleteMod()">
+                <div class="nextButton" >Next</div>
+            </a>
+        </div>
+    </div>
+
+</div>

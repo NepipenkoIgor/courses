@@ -1,0 +1,29 @@
+<div class="content_container module_complete_cont ng-scope">
+
+    <div class="top">
+        <h1>Module complete</h1>
+        <div class="chart">
+            progress chart
+        </div>
+    </div>
+
+    <div class="left">
+        <div class="mod_complete">
+            <h2><b class="ng-binding">{{moduleNowChanged.title}}</b></h2>
+            <ul>
+                <li ng-repeat="section in moduleNowChanged.sections" class="ng-scope">
+                <h4 class="ng-binding"><i class="fa fa-check"></i>{{section.title}}</h4>
+            </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="right" style="background-image: url({{courseNowChanged.img}})">
+        <a style="cursor: pointer" ng-click="mapModule()" >
+            <div class="map">
+                <h1><i class="fa fa-map-marker"></i> MAP</h1>
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,28 +1,21 @@
-<div class="row" style="padding-bottom: 100px;">
-    <div class="col-md-12">
-        <h1 style="color:white; margin: 21px 0;">Lesson Title : {{unitNowChanged.title}}</h1>
-        <div class="progress" ng-if="userdata">
-            <div class="progress-bar progress-bar-danger" ng-style="progress.red">
-                <span class="sr-only">35% Complete (success)</span>
-            </div>
-            <div class="progress-bar progress-bar-warning " ng-style="progress.orange">
-                <span class="sr-only">20% Complete (warning)</span>
-            </div>
-            <div class="progress-bar progress-bar-success" ng-style="progress.green">
-                <span class="sr-only">30% Complete (danger)</span>
-            </div>
-        </div>
-        <hr>
+
+
+<div class="lesson_cont ng-scope">
+
+    <div class="top">
+        <h3 class="ng-binding">{{unitNowChanged.title}}</h3>
+        <p class="ng-binding">Lesson {{positionInCourse.module+"."+positionInCourse.section+"."+positionInCourse.unit}}</p>
     </div>
-    <div class="col-md-8 col-md-offset-2" style="padding-bottom: 50px" ng-switch on="unitNowChanged.lims[0].typeLim">
-        <div ng-switch-when="video" >
+<div ng-if="checkType('video')" class="video ng-scope">
+    <iframe id="best-vid" video-url="video_url" class="ng-isolate-scope" frameborder="0" allowfullscreen="1" title="YouTube video player" width="640" height="390" src="https://www.youtube.com/embed/X-qZ7kcOEa0?enablejsapi=1&amp;origin=http%3A%2F%2Fstudent.iscoding.net"></iframe>
+</div>
+    <div  ng-switch on="unitNowChanged.lims[0].typeLim">
+        <div ng-switch-when="video" class="video">
             <div class="embed-responsive embed-responsive-16by9" id="videoConteiner">
                 <div id="lessonVideoPlayer" class="embed-responsive-item">You need Flash player 8+ and JavaScript enabled to view this video.</div>
-                <!--<iframe  class="embed-responsive-item" ng-src='{{formatVideoUrl(unitNowChanged.lims[0].content[0])}}'></iframe>-->
-                <hr>
             </div>
-            <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
-                    ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
+           <!-- <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
+                    ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>-->
         </div>
         <div ng-switch-when="quiz">
             <div style="" >
@@ -82,7 +75,7 @@
                         </tab>
                         <tab>
                             <tab-heading>
-                                <i class="fa fa-question fa-fw"></i>Help<!--<sup>{{}}</sup>-->
+                                <i class="fa fa-question fa-fw"></i>Help
                             </tab-heading>
                             <div class="b_wrap_text">
                                 <p ng-repeat="less in lesson.tests" ng-bind-html="less.help"></p>
@@ -94,73 +87,178 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-md-offset-2" ng-controller="posts"  ng-if="userdata">
-        <div class="row">
-            <div class="col-sm-12" style="color:white">
-                <button type="" class="btn btn-warning btn-xs" ng-click="showAddQuestion()" style="float: right;margin-top: 7px;">
-                    <span class="fa fa-sort-up fa-fw" ng-show="addQuestionFlag" style="width: 150px">   don't ask question</span>
-                    <span class="fa fa-sort-down fa-fw" ng-hide="addQuestionFlag" style="width: 150px">   ask question</span>
-                </button>
-                <h2><span class="fa fa-bullhorn fa-fw" style="float: left"></span> Add new question</h2>
-                <form style="min-width: 300px" ng-show="addQuestionFlag">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" class="form-control" ng-model="title" ng-click="showTemplatePost()">
-                    </div>
-                    <div class="form-group">
-                        <label>Content</label>
-                        <textarea class="form-control" ng-model="content" rows="10"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>tags</label>
-                        <input type="textarea" class="form-control" ng-model="tags">
-                    </div>
-                    <button type="" class="btn btn-success btn-lg" ng-click="saveNewQuestion(userdata._id,unitNowChanged.unitId)">add new question</button>
-                </form>
-                <hr>
+    <div  class="nextLesson_Button ng-scope" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='curentactive'">
+    <a ng-click="nextUnit(unitNowChanged)" style="cursor: pointer">
+        <div class="nextButton" ng-click="nextUnit(unitNowChanged)" ng-if="!nextFinish(sectionNowChanged.specialId)">Next</div>
+        <div class="nextButton" ng-click="nextUnit(unitNowChanged)" ng-if="nextFinish(sectionNowChanged.specialId)">Finish</div>
+    </a>
+</div>
+</div>
+
+
+<!--<div class="row" style="padding-bottom: 100px;">
+<div class="col-md-12">
+<h1 style="color:white; margin: 21px 0;">Lesson Title : {{unitNowChanged.title}}</h1>
+<div class="progress" ng-if="userdata">
+    <div class="progress-bar progress-bar-danger" ng-style="progress.red">
+        <span class="sr-only">35% Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-warning " ng-style="progress.orange">
+        <span class="sr-only">20% Complete (warning)</span>
+    </div>
+    <div class="progress-bar progress-bar-success" ng-style="progress.green">
+        <span class="sr-only">30% Complete (danger)</span>
+    </div>
+</div>
+<hr>
+</div>
+<div class="col-md-8 col-md-offset-2" style="padding-bottom: 50px" ng-switch on="unitNowChanged.lims[0].typeLim">
+<div ng-switch-when="video" >
+    <div class="embed-responsive embed-responsive-16by9" id="videoConteiner">
+        <div id="lessonVideoPlayer" class="embed-responsive-item">You need Flash player 8+ and JavaScript enabled to view this video.</div>
+
+        <hr>
+    </div>
+    <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
+            ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
+</div>
+<div ng-switch-when="quiz">
+    <div style="" >
+        <h3 style="color:white">{{ unitNowChanged.lims[0].content[0].description}}</h3>
+        <div ng-repeat="quiz in unitNowChanged.lims[0].content[0].quiz" style="margin-left: 30px;margin-top: 15px;margin-bottom: 15px">
+            <input type="checkbox" ng-model="quiz.answer" ng-change="quizCheck()" style="float: left;width: 20px; height: 20px;margin-right: 10px;">
+            <div>
+                <p style="color:white">{{ quiz.title || 'empty quiz' }}</p>
             </div>
         </div>
-        <div ng-repeat="data in postdata" class="postConteiner" ng-if="postsOfUnit(data.lesson,unitNowChanged.unitId)" style="color:black;margin-bottom: 15px;">
-            <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
-            <div class="post">
-                <img ng-src="{{postAvatar(data.creator)}}" width="150" style="float: left;margin-right: 10px;"/>
-                <div>
-                    <h3 style="color:red">{{getCreator(data.creator)}}</h3>
-                    <h2>{{data.title}}</h2>
-                    <hr>
-                    <p>{{data.content}}</p>
-                    <hr>
-                </div>
-                <div class="tagConteiner">
-                    <b style="float:left;margin-top: 4px;">Tags:</b>
-                    <a ng-repeat="tag in data.tags" class="tag">{{tag}}</a>
-                </div>
-                <div style="float: right;margin-top: -25px;">{{data.likes.length}}<img src="http://www.studentenpand.nl/duim.png" style="width: 30px;margin-top: -16px;cursor:pointer" ng-click="like(userdata._id,data.likes,data._id)"/></div>
-                <div class="comment">
-                    <div ng-repeat="comment in data.comments" style="">
-                        <span class="close" ng-click="deleteComment(comment,data._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
-                        <img ng-src="{{postAvatar(comment.creator)}}" width="50" style="float: left;margin-right: 10px;"/>
-                        <div>
-                            <h5 style="color:red">{{getCreator(comment.creator)}}</h5>
-                            <div class="oneComment"><p class="">{{comment.content}}</p></div>
-                        </div>
-                        <!--<div >0 <img src="http://www.studentenpand.nl/duim.png" width="30px" style="margin-top: -16px;cursor:pointer"/></div>-->
+        <button type="" class="btn btn-success btn"
+                ng-click="checkQuiz()" style="margin-top: 10px"
+                ng-if="markOfCompleteUnit(unitNowChanged.unitId)!=='complete'">check answer</button>
+        <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
+                ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
+    </div>
+    <hr>
+</div>
+<div ng-switch-when="static">
+    <div ng-bind-html="trustHtml(unitNowChanged.lims[0].content[0])" style="color:white"></div>
+    <button type="" class="btn btn-success btn" ng-click="completeStatic(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
+</div>
+<div ng-switch-when="code quest">
+    <div class="holder">
+        <div class="row center">
+            <ul class="breadcrumbs">
+                <li ng-class="{'active': lesson.isActive, 'current':lesson.isCurrent}"
+                    ng-repeat="lesson in unitNowChanged.lims[0].content[0].levels"><span></span>
+                    <a href="">{{lesson.id}}</a>
+                </li>
+            </ul>
+            <h2 class="b_title" >Level {{lessonId}}</h2>
+        </div>
+        <div class="console_cont col-xs-6">
+            <div class="outline">
+                <div class="console" scroll-glue>
+                    <div class="msg">
+                        <p class="{{message.class}}"
+                           ng-repeat="message in messages"
+                           ng-bind="message.text">
+                        </p>
                     </div>
                 </div>
+                <input type="text" ng-model="console" value=""/>
             </div>
-            <div class="contentInput">
-                <div class="form-group" ng-show="data._id===id">
-                    <label>Content</label>
-                    <textarea class="form-control" rows="10" ng-model="comment"></textarea>
-                </div>
-                <button type="" class="btn btn-success btn-lg" ng-click="addComment(data._id,userdata._id)" ng-show="data._id===id">add
-                    new comment
-                </button>
-                <button type="" class="btn btn-warning btn-xs" ng-click="setId(data._id)" style="float: right;">
-                    <span class="fa fa-sort-up" ng-show="data._id===id"></span>
-                    <span class="fa fa-sort-down" ng-hide="data._id===id"></span>
-                </button>
-            </div>
+        </div>
+        <div class="tabbable col-xs-6"  >
+            <a href="#" class="btn_red">Answer</a>
+            <tabset>
+                <tab heading="Code">
+                    <div style="position:relative;">
+                        <div ui-ace="aceOption" ng-model="lesson.code"></div>
+                    </div>
+                </tab>
+                <tab heading="Preview" >
+                    <div class="b_wrap_text" id="preview" ng-bind-html="loadEx(lesson.code)"></div>
+                </tab>
+                <tab>
+                    <tab-heading>
+                        <i class="fa fa-question fa-fw"></i>Help
+                    </tab-heading>
+                    <div class="b_wrap_text">
+                        <p ng-repeat="less in lesson.tests" ng-bind-html="less.help"></p>
+                    </div>
+                </tab>
+            </tabset>
+            <button type="button" ng-click="check()" ng-init="n=-1" class="btn_red diff" >{{btnText}}</button>
         </div>
     </div>
 </div>
+</div>
+<div class="col-md-8 col-md-offset-2" ng-controller="posts"  ng-if="userdata">
+<div class="row">
+    <div class="col-sm-12" style="color:white">
+        <button type="" class="btn btn-warning btn-xs" ng-click="showAddQuestion()" style="float: right;margin-top: 7px;">
+            <span class="fa fa-sort-up fa-fw" ng-show="addQuestionFlag" style="width: 150px">   don't ask question</span>
+            <span class="fa fa-sort-down fa-fw" ng-hide="addQuestionFlag" style="width: 150px">   ask question</span>
+        </button>
+
+        <form style="min-width: 300px" ng-show="addQuestionFlag">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" ng-model="title" ng-click="showTemplatePost()">
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea class="form-control" ng-model="content" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label>tags</label>
+                <input type="textarea" class="form-control" ng-model="tags">
+            </div>
+            <button type="" class="btn btn-success btn-lg" ng-click="saveNewQuestion(userdata._id,unitNowChanged.unitId)">add new question</button>
+        </form>
+
+    </div>
+</div>
+<div ng-repeat="data in postdata" class="postConteiner" ng-if="postsOfUnit(data.lesson,unitNowChanged.unitId)" style="color:black;margin-bottom: 15px;">
+    <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
+    <div class="post">
+        <img ng-src="{{postAvatar(data.creator)}}" width="150" style="float: left;margin-right: 10px;"/>
+        <div>
+            <h3 style="color:red">{{getCreator(data.creator)}}</h3>
+            <h2>{{data.title}}</h2>
+            <hr>
+            <p>{{data.content}}</p>
+            <hr>
+        </div>
+        <div class="tagConteiner">
+            <b style="float:left;margin-top: 4px;">Tags:</b>
+            <a ng-repeat="tag in data.tags" class="tag">{{tag}}</a>
+        </div>
+        <div style="float: right;margin-top: -25px;">{{data.likes.length}}<img src="http://www.studentenpand.nl/duim.png" style="width: 30px;margin-top: -16px;cursor:pointer" ng-click="like(userdata._id,data.likes,data._id)"/></div>
+        <div class="comment">
+            <div ng-repeat="comment in data.comments" style="">
+                <span class="close" ng-click="deleteComment(comment,data._id)" ng-if="ifThisIsAvtor(userdata,comment.creator)">X</span>
+                <img ng-src="{{postAvatar(comment.creator)}}" width="50" style="float: left;margin-right: 10px;"/>
+                <div>
+                    <h5 style="color:red">{{getCreator(comment.creator)}}</h5>
+                    <div class="oneComment"><p class="">{{comment.content}}</p></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="contentInput">
+        <div class="form-group" ng-show="data._id===id">
+            <label>Content</label>
+            <textarea class="form-control" rows="10" ng-model="comment"></textarea>
+        </div>
+        <button type="" class="btn btn-success btn-lg" ng-click="addComment(data._id,userdata._id)" ng-show="data._id===id">add
+            new comment
+        </button>
+        <button type="" class="btn btn-warning btn-xs" ng-click="setId(data._id)" style="float: right;">
+            <span class="fa fa-sort-up" ng-show="data._id===id"></span>
+            <span class="fa fa-sort-down" ng-hide="data._id===id"></span>
+        </button>
+    </div>
+</div>
+</div>
+</div>-->

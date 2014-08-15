@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/1/14.
  */
-var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate','akoenig.deckgrid']);
+var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate','akoenig.deckgrid',]);
 app.run(function(editableOptions) {
     'use strict';
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -83,6 +83,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/courses/unitChenged.html"
 
+        }).state('sectioncomplete', {
+            url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/complete",
+            templateUrl: "views/courses/sectioncomplete.html"
+        }).state('modulecomplete', {
+            url: "/courses/:courseTitle/:moduleTitle/complete",
+            templateUrl: "views/courses/modulecomplete.html"
         });
 });
-

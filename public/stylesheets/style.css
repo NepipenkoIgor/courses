@@ -120,8 +120,9 @@ width: 1000px;
    /* border:solid 2px green;
     margin-top: 2px;*/
 }
-.grid>div{width: 30.5%;clear: both}
-.grid>div.postConteiner{margin: .5%;}
+.postConteiner{width: 30.5%;clear: both;margin: 10px}
+.item { width: 25%; margin: .5%}
+.item.w2 { width: 50%; }
 .close{
     float: right;
     background-color: indianred;
@@ -576,6 +577,335 @@ margin-left: 100px;
     line-height: 18px;
     padding: 5px;
     margin: 0;
+}
+.lesson_cont {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.lesson_cont .top {
+
+    width: 100%;
+    height: 60px;
+    background: #681E1E;
+    border-bottom: 4px solid #0e151d;
+}
+.lesson_cont .top h3 {
+    float: left;
+    line-height: 50px;
+    padding: 0;
+    padding-left: 50px;
+    margin: 0;
+}
+.lesson_cont .top p {
+    float: right;
+    line-height: 50px;
+    padding-right: 50px;
+}
+.lesson_cont .video {
+/*    position: relative;*/
+    padding-bottom: 56.25%;
+width: 100%;
+    height: 0;
+    overflow: hidden;
+}
+.lesson_cont .nextButton {
+    top: 50%;
+    left: 90%;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 30px;
+    margin: -50px 0 0 -50px;
+}
+.nextButton {
+    position: absolute;
+    top: 75%;
+    left: 60%;
+    width: 250px;
+    height: 250px;
+    background: #eee;
+    border-radius: 130px;
+    text-align: center;
+    line-height: 250px;
+    font-size: 70px;
+    color: #666;
+    margin: -125px 0 0 -125px;
+    transition: all 0.2s;
+}
+.lesson_cont .nextButton:hover {
+    background: #fff;
+    width: 110px;
+    height: 110px;
+    line-height: 110px;
+    font-size: 35px;
+    color: #222;
+    margin: -55px 0 0 -55px;
+}
+
+.lesson_menu_cont {
+    text-align: center;
+}
+.lesson_menu_cont > h4 {
+    font-size: 16px;
+    background: #4e5d6c;
+    padding: 15px 0;
+    margin: 0;
+}
+.course_menu ul, .course_menu ul ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.lesson_menu{padding: 0}
+.lesson_menu li i {
+    font-size: 40px;
+    line-height: 60px;
+    background: #1f2f3f;
+    border-radius: 30px;
+    width: 60px;
+}
+.lesson_menu li{
+    position: relative;
+    margin: 20px 0;
+}
+.lesson_menu li .lesson_title p {
+    padding: 18px 15px 10px 15px;
+    font-size: 18px;
+    min-width: 175px;
+}
+.course_menu ul, .course_menu ul ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.lesson_menu li span.active i {
+    color: #fff;
+    background: #681E1E;
+}
+.lesson_menu li.complete:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #4fa544;
+    font-size: 26px;
+    top: 1px;
+    left: 12px;
+    position: absolute;
+}
+.lesson_menu li.complete i {
+    color: #eee;
+    font-size: 28px;
+    background: #285521;
+}
+.lesson_menu li.active:before {
+    content: "\f017";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #a5342a;
+    font-size: 26px;
+    top: 1px;
+    left: 12px;
+    position: absolute;
+}
+
+.lesson_menu li.curentactive:before {
+    content: "\f017";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #a5342a;
+    font-size: 26px;
+    top: 1px;
+    left: 12px;
+    position: absolute;
+}
+.lesson_menu li.curentactive i {
+    color: #fff;
+    background: #681E1E;
+}
+.lesson_menu li .lesson_title:after {
+     content: "";
+     height: 0px;
+     position: absolute;
+     right: -5px;
+     top: 50%;
+     margin-top: -5px;
+     width: 0px;
+     border-top: 5px solid transparent;
+     border-bottom: 5px solid transparent;
+     border-left: 5px solid #4e5d6c;
+ }
+.lesson_menu li.active i {
+    color: #fff;
+    background: #681E1E;
+}
+.lesson_menu li .lesson_title {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    display: none;
+    background: #4e5d6c;
+}
+.lesson_menu li .lesson_title p {
+    padding: 18px 15px 10px 15px;
+    font-size: 18px;
+    min-width: 175px;
+}
+.lesson_menu li:hover .lesson_title {
+    display: block;
+}
+.content_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.section_complete_cont .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+
+}
+.section_complete_cont .title h1 {
+    margin: 0;
+    padding: 0;
+    margin-top: 4%;
+    margin-left: 10%;
+    font-size: 60px;
+    color: #fff;
+}
+.section_complete_cont .left {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 60%;
+    height: 80%;
+    background: #0e151d;
+}
+.section_complete_cont .sections_complete {
+    margin: 5% 0 5% 15%;
+    color: #ddd;
+}
+.section_complete_cont .sections_complete ul {
+    list-style-type: none;
+}
+.section_complete_cont .sections_complete ul li h4 {
+    font-size: 30px;
+    padding: 10px 0;
+}
+.section_complete_cont .sections_complete ul li h4 i {
+    color: green;
+}
+.section_complete_cont .gamify {
+    margin-left: 15%;
+}
+.section_complete_cont .right {
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    width: 40%;
+    height: 80%;
+    background: #aaa;
+    color: #333;
+}
+.section_complete_cont .next_section h2 {
+    margin: 15% 0 1% 15%;
+}
+.section_complete_cont .next_section h1 {
+    margin: 5% 0 0 25%;
+}
+.section_complete_cont .next_section .nextButton {
+    top: 60%;
+    left: 0;
+}
+.nextButton:hover {
+    background: #fff;
+    width: 260px;
+    height: 260px;
+    line-height: 260px;
+    font-size: 75px;
+    color: #222;
+    margin: -130px 0 0 -130px;
+}
+.content_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.module_complete_cont .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #aaa;
+    color: #333;
+}
+.module_complete_cont .top h1 {
+    margin: 0;
+    padding: 0;
+    margin-top: 4%;
+    margin-left: 10%;
+    font-size: 60px;
+}
+.module_complete_cont .left {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 60%;
+    height: 50%;
+    background: #0e151d;
+    color: #ddd;
+}
+.module_complete_cont .mod_complete {
+    margin: 5% 0 5% 15%;
+    color: #ddd;
+}
+.module_complete_cont .mod_complete ul {
+    list-style-type: none;
+}
+.module_complete_cont .mod_complete ul li h4 {
+    font-size: 30px;
+    padding: 10px 0;
+}
+.module_complete_cont .mod_complete ul li h4 i {
+    color: green;
+}
+.module_complete_cont .right {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    width: 40%;
+    height: 50%;
+    background: url(../img/star_bk.jpg) 0px -10px;
+    color: #fff;
+}
+.module_complete_cont .map h1 {
+    color: #fff;
+    font-size: 110px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -160px;
+    margin-top: -60px;
+}
+.module_complete_cont .map i {
+    color: red;
+    font-size: 110px;
+    position: relative;
 }
 /*.login_cont {
     width: 300px;

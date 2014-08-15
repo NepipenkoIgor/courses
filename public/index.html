@@ -32,7 +32,7 @@
    <script src="javascripts/jslayot/ace.js" type="text/javascript" charset="utf-8"></script>
     <!---->
     <!--<script  src="javascripts/angular.min.js"></script>-->
-    <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
+
    <!-- <script  src="javascripts/angular.min.js"></script>-->
     <script src="javascripts/ui-ace.min.js"></script>
     <script  src="javascripts/angular-ui-router.min.js"></script>
@@ -52,6 +52,7 @@
      <script  src="js/controllers/postsController.js"></script>
     <script  src="js/controllers/badgeController.js"></script>
     <!-- <script  src="javascripts/front.js"></script>-->
+    <script src="javascripts/masonry.pkgd.min.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
     <!--<script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
@@ -120,31 +121,6 @@
             </div>
         </div>
 
-
-        <!--- User menu --->
-<!--        <div class="dropdown notify" >
-            <a data-toggle="dropdown" ng-click="profileGo(userdata.username)" data-original-title="" title="">
-
-                <div class="user_menu" ng-if="userdata">
-                    <div class="avatar" ng-style="userAvatar(userdata.avatar)">
-                       <div class="notify_num progress-bar-danger" ng-show="false" >
-                            <p>2</p>
-                        </div>
-                    </div>
-                    <span>{{userdata.username}}</span>
-                </div>
-
-            </a>
-            <div class="dropdown-menu notifications list-group" role="menu" aria-labelledby="dLabel">
-                <a href="" class="list-group-item" data-original-title="" title="">
-                    <h4 class="list-group-item-heading">Notification 1</h4>
-                </a>
-                <a href="" class="list-group-item" data-original-title="" title="">
-                    <h4 class="list-group-item-heading">Notification 2</h4>
-                    <p class="list-group-item-text">With greater details!</p>
-                </a>
-            </div>
-        </div>-->
 
         <!--- Main menu --->
         <a ui-sref="adminlab" style="display: block;padding: 20px 8px 8px;" ng-if="userdata.position">Admin Lab</a>
@@ -259,7 +235,7 @@
                 <h4 >Module</h4>
             </div>
 
-            <ul class="section_menu">
+            <ul class="section_menu" ng-if="!stateNow()">
                 <li ng-class="markOfCompleteSection(section.specialId)" data-original-title="" title="" ng-repeat="section in moduleNowChanged.sections">
                     <h4 style="color:orange" >Section {{$index + 1}}</h4>
                     <h4><b>{{section.title}}</b></h4>
@@ -277,6 +253,37 @@
 
             </ul>
         </div>
+
+
+        <div class="lesson_menu_cont" ng-if="stateNow()">
+            <h4><b class="ng-binding">{{sectionNowChanged.title}}</b></h4>
+            <ul class="lesson_menu">
+                <li ng-repeat="unit in showUnitsList(sectionNowChanged.specialId) track by $id(unit)" ng-class="markOfCompleteUnit(unit.unitId,sectionNowChanged.specialId)">
+                <span >
+                    <i ng-class="faUnitClass(unit.lims[0].typeLim)"></i>
+                </span>
+                <div class="lesson_title">
+                    <p class="ng-binding">{{unit.title}}</p>
+                </div>
+            </li>
+                <li ng-class="markOfCompleteSection(sectionNowChanged.specialId)" >
+                    <i class="fa fa-check-circle-o"></i>
+                    <div class="lesson_title">
+                        <p>Section complete</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+
         <div class="dropdown options">
             <a  href="" tooltip-placement="top" tooltip="Help">
                 <i class="fa fa-question icon"></i>
@@ -293,23 +300,7 @@
         </div>
     </div>
 </div>
-    <!--<div style="" class=""  ng-animate="{show: 'example-show', hide: 'example-hide'}">
-       &lt;!&ndash; <img src="img/1.gif" />&ndash;&gt;
 
-
-    </div>
-
-    <div class="animate-show" ng-controller="badgeController" ng-show="showBadges">
-        <span class=""></span> I show up when your checkbox is checked.
-    </div>-->
-    <!--<div>
-
-        <div class="check-element animate-show" ng-controller="badgeController" ng-show="showBadges">
-           &lt;!&ndash; <span class="glyphicon glyphicon-thumbs-up"></span> I show up when your checkbox is checked.&ndash;&gt;
-            <img ng-src="{{imgBadge}}" />
-            <span style="cursor: pointer" ng-click="hideBadge()"><h1>X</h1></span>
-        </div>
-    </div>-->
 
 <div  class="check-element animate-show a-card" ng-controller="badgeController"
       ng-show="showBadges" style="opacity: 1;cursor: pointer" ng-click="hideBadge()">
