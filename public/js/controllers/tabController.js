@@ -116,7 +116,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
                 return arrUnits.sort(sortArr);
             };
-            console.log("!courseEdit.userdata",$location)
+
 
 
             if(courseEdit.userdata){
@@ -801,11 +801,8 @@ $scope.nextFinish=function(id){
 
         $state.go('posts').then(function () {
 
-          //  $location.$$hash= "/post/all?type=1";
             $location.url("/post/all?type=question") ;
-           // $location.path("/post/all?type=1")
-            //$location.reload();
-            console.log($location.search());
+
         });
     };
     $scope.goToCourse = function () {
@@ -828,7 +825,7 @@ $scope.nextFinish=function(id){
             case "myquestion":return false;
                 break;
         }
-
+return true;
 
 
     };
