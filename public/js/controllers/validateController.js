@@ -24,10 +24,10 @@ app.controller('validateController', function ($scope, $http) {
     });
     $scope.trueValidate=function(){
     if($scope.firstname&&$scope.lastname&&$scope.email&&$scope.password&&$scope.comfpassword){
-        $("#submit").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
+        $("#submitSignUp").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
         return;
     }
-        $("#submit").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
+        $("#submitSignUp").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
         return;
     };
     var req = function (data,event,name) {
@@ -46,7 +46,7 @@ app.controller('validateController', function ($scope, $http) {
             $scope.trueValidate();
             return;
         });
-    }
+    };
     var deferredReq = _.debounce(req, 300);
     $scope.validMail = function (event, name) {
         if (event.currentTarget.value.length === 0) {
