@@ -10,7 +10,7 @@ app.controller('validateController', function ($scope, $http) {
     var num = /\d/;
     var validmail = /([\w\-]{1,20}\.)*([\w\-]{1,20})\@([\w\-]{1,20}\.)*([\w\-]{1,20})\.([a-z]{2,5})$/;
 //console.log("iam vupoln")
-    $("#submit").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
+    $("#submitSignUp").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
     $("#alertFirstName").hide();
     $("#alertLastName").hide();
     $("#alertEmail").hide();
@@ -27,6 +27,10 @@ app.controller('validateController', function ($scope, $http) {
         $("#submitSignUp").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
         return;
     }
+        $("#submitSignUp").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
+        return;
+    };
+    $scope.nullSubmit=function(){
         $("#submitSignUp").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
         return;
     };

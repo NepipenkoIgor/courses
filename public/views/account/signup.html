@@ -1,7 +1,7 @@
 
 
 
-<div class="login_cont ng-scope" ng-controller="validateController">
+<div class="login_cont ng-scope" ng-controller="validateController" ng>
     <form action="/signup" method="post"    id="formsign">
         <h2 class="form-heading">Please Sign Up</h2>
         <div class="form-fields">
@@ -24,7 +24,7 @@
 
             <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="submitSignUp">
+        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="submitSignUp" ng-click="nullSubmit()">
             <span ng-show="!loading" class="">Sign Up</span>
         </button>
 
