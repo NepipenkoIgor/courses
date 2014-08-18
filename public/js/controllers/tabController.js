@@ -146,6 +146,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
 
 
+
             /*function of redirect on reload window*/
             /*function reloadLink() {
 
@@ -797,8 +798,14 @@ $scope.nextFinish=function(id){
     /************************************COMMUNITY and FILTERS***********************************************/
 
     $scope.goToCommunity = function () {
-        $location.$$url = "/post/all";
+
         $state.go('posts').then(function () {
+
+          //  $location.$$hash= "/post/all?type=1";
+            $location.url("/post/all?type=question") ;
+           // $location.path("/post/all?type=1")
+            //$location.reload();
+            console.log($location.search());
         });
     };
     $scope.goToCourse = function () {
@@ -806,11 +813,26 @@ $scope.nextFinish=function(id){
         });
     };
     $scope.ifCommunity = function () {
-        if ($location.$$url === "/post/all" || $location.$$url === "/post/new") {
+       /* if ($location.$$url === "/post/all" || $location.$$url === "/post/new") {
             return false;
         }
-        return true;
+        return true;*/
+       // console.log($location.search().type)
+        switch( $location.search().type){
+            case "allposts":return false;
+            break;
+            case "question":return false;
+                break;
+            case "myposts":return false;
+                break;
+            case "myquestion":return false;
+                break;
+        }
+
+
+
     };
+
 
     $scope.searchType = ['All Posts', 'My Posts', 'My Questions', 'Only Questions'];
     $scope.search = {
@@ -821,23 +843,25 @@ $scope.nextFinish=function(id){
             type: type
         };
     };
-    $scope.postFilter = function (user, postData) {
+
+    $scope.postFilter = function (user, typeData) {
         var searchObj = {};
-        switch ($scope.search.type) {
+        typeData=typeData||$scope.search.type;
+        switch (typeData) {
             case 'All Posts':
-                searchObj.type = 'All Posts';
+                searchObj.type = 'allposts';
                 break;
             case 'My Posts':
-                searchObj.type = 'My Posts';
+                searchObj.type = 'myposts';
                 searchObj.creator = user._id;
                 break;
             case 'My Questions':
-                searchObj.type = 'My Questions';
+                searchObj.type = 'myquestions';
                 searchObj.creator = user._id;
                 searchObj.typePost = "question";
                 break;
             case 'Only Questions':
-                searchObj.type = 'Only Questions';
+                searchObj.type = 'questions';
                 searchObj.typePost = "question";
                 break;
         }
@@ -851,6 +875,9 @@ $scope.nextFinish=function(id){
         searchObj.text = $scope.textOfSearch.text;
         courseEdit.searchPosts(searchObj);
     };
+
+
+
 
     /***********************************************************************************/
 

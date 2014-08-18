@@ -9,45 +9,65 @@ function router(app, hasUser) {
     //'use strict'
     app.post('/post/search', hasUser, function (req, res) {
 
-        if (req.body.type === 'All Posts') {
+        if (req.body.type === 'allposts') {
             Posts.find({}, function (err, data) {
                 //console.log("searchData", data)
-                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
-        if (req.body.type === 'My Posts') {
+        if (req.body.type === 'myposts') {
             Posts.find({creator: req.body.creator}, function (err, data) {
                 //console.log("searchData", data)
-                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
-        if (req.body.type === 'My Questions') {
+        if (req.body.type === 'myquestions') {
             Posts.find({creator: req.body.creator,typePost:req.body.typePost}, function (err, data) {
                 //console.log("searchData", data)
-                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
-        if (req.body.type === 'Only Questions') {
+        if (req.body.type === 'questions') {
             Posts.find({typePost:req.body.typePost}, function (err, data) {
                // console.log("searchData", data)
-                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
         if (req.body.type === 'tags') {
            Posts.find({"tags":req.body.tag},function(err,data){
                 //console.log("UNWINDDDDDD",data);
-                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
         if (req.body.type === 'text') {
             //console.log(req.body);
-            Posts.find({$text:{ $search:req.body.text }},function(err,data){
-               // if(err) return err;
-                //console.log("text search",data);
-                res.json({success: !err, msg: [], data: data, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            /*Posts.find({$text:{ $search:req.body.text }},function(err,data){
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            });*/
+            Posts.find({},function(err,data){
+                //console.log("req.body.text",req.body.text)
+                var reg=new RegExp(req.body.text);
+                //console.log("reg",reg)
+                var  resData=[];
+
+                for(var i=0;i<data.length;i++){
+                  //  console.log("data",reg.test(data[i].content))
+                    if(reg.test(data[i].content)){
+                        resData.push(data[i]);
+                    }
+                }
+                res.json({success: !err, msg: [], data: resData,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
     });
+  app.get('/post/all', hasUser, function (req, res) {
+      var urlMass=req.url.split("?");
+      if(urlMass[1]){
+console.log(urlMass[1]);
+          return;
+      }
+      res.redirect("/#/post/all");
+  });
 
 }
 module.exports = router;

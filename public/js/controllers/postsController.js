@@ -1,11 +1,12 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
+app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdit) {
     'user strict';
 
     /****************config post**********************/
-
+   // $location.$$path="/post/all?type=question"
+//console.log($location)
     $scope.comment = "";
     $scope.postdata=[];
     function reqPosts() {
@@ -13,6 +14,33 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
 
           //      console.log("postdata",data);
                 $scope.postdata = data.reverse();
+
+
+
+            if($location.$$path==="/post/all"){
+                var searchObj = {};
+               // console.log("courseEdit",courseEdit.userdata._id);
+                switch ($location.search().type) {
+                    case 'allposts':
+                        searchObj.type = 'allposts';
+                        break;
+                    case 'myposts':
+                        searchObj.type = 'myposts';
+                        searchObj.creator = courseEdit.userdata._id;
+                        break;
+                    case 'myquestions':
+                        searchObj.type = 'myquestions';
+                        searchObj.creator = courseEdit.userdata._id;
+                        searchObj.typePost = "question";
+                        break;
+                    case 'questions':
+                        searchObj.type = 'questions';
+                        searchObj.typePost = "question";
+                        break;
+                }
+               // console.log("courseEdit",courseEdit,"searchObj",searchObj);
+                courseEdit.searchPosts(searchObj);
+            }
                 // console.log($scope.postdata);
                 // $scope.likes=data.likes||[];
                 $scope.countUserPost = function(id){
@@ -218,6 +246,7 @@ app.controller('posts', function ($scope, $http, $sce,$state,courseEdit) {
         $http.post('/post/search', searchObj).success(function (data) {
             if(data.data!==undefined){
                 $scope.postdata=data.data;
+                $location.url("/post/all?type="+data.type);
             }
 
         });

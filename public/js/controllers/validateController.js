@@ -9,7 +9,7 @@ app.controller('validateController', function ($scope, $http) {
     var notextnum = /[^\w\-]/;
     var num = /\d/;
     var validmail = /([\w\-]{1,20}\.)*([\w\-]{1,20})\@([\w\-]{1,20}\.)*([\w\-]{1,20})\.([a-z]{2,5})$/;
-console.log("iam vupoln")
+//console.log("iam vupoln")
     $("#submit").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
     $("#alertFirstName").hide();
     $("#alertLastName").hide();
@@ -24,7 +24,7 @@ console.log("iam vupoln")
     });
     $scope.trueValidate=function(){
     if($scope.firstname&&$scope.lastname&&$scope.email&&$scope.password&&$scope.comfpassword){
-        $("#submit").removeClass("button-bad").addClass("btn-primary").removeClass("disabled");
+        $("#submit").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
         return;
     }
         $("#submit").removeClass("btn-primary").addClass("button-bad").addClass("disabled");

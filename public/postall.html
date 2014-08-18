@@ -2,7 +2,7 @@
     <input type="text" placeholder="Search" class="form-control" style="" ng-model="textOfSearch.text">
     <button class="btn btn-default" style="width: 100%;" type="button" ng-click="textSearch()">Go!</button>
 </div>
-<div class="container grid" masonrypost  ng-controller="posts">
+<div class="container grid" masonrypost  >
     <div ng-repeat="data in postdata" class="postConteiner" style="color:black;">
     <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
 

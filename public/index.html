@@ -84,7 +84,7 @@
             </a>
             <div class="dropdown-menu notifications list-group" role="menu" aria-labelledby="dLabel" ng-if="userdata" style="cursor: pointer">
                 <div class="user_controls">
-                    <ul>
+                    <ul >
                         <li class="notify_icon">
                             <i class="fa fa-bell icon"></i>
                             <div class="notify_num progress-bar-danger">
@@ -124,8 +124,11 @@
 
         <!--- Main menu --->
         <a ui-sref="adminlab" style="display: block;padding: 20px 8px 8px;" ng-if="userdata.position">Admin Lab</a>
+
+
+
             <div class="dropdown menu" ng-controller="mainMenu">
-                 <a data-toggle="dropdown" href="" data-original-title="" title="">
+                 <a  href="" data-original-title="" title=""  class="dropdown-toggle menu_but" aria-haspopup="true" aria-expanded="false">
                       <h4>Menu</h4>
                       <i class="fa fa-bars"></i>
                  </a>
@@ -148,15 +151,9 @@
             <a class="btn btn-primary" href="#/post/new" style="color:#000000;width: 100%">Add new post</a>
         </div >
 
-        <!--<div ng-if="!ifCommunity()" style="overflow: hidden;margin: 20px 8px;">
-            <input type="text" placeholder="Search" class="form-control" style="" ng-model="textOfSearch.text">
-            <button class="btn btn-default" style="width: 100%;" type="button" ng-click="textSearch()">Go!</button>
-        </div>-->
-       <!-- <div ng-if="!ifCommunity()" class="filterMenu">
-            <a href="#" editable-select="search.type" e-ng-options="s.value as s.text for s in searchType">
-                {{ search.type }}
-            </a>
-        </div>-->
+
+
+
         <div ng-if="!ifCommunity()" style="margin: 20px 8px;">
             <a class="btn btn-warning" >{{ search.type }}</a>
         </div >
@@ -166,7 +163,6 @@
         <div ng-if="!ifCommunity()" style="margin: 20px 8px;">
             <a class="btn btn-success" ng-click="postFilter(userdata)">apply filter</a>
         </div >
-
 
 
 

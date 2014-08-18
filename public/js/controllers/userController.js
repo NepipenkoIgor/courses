@@ -36,11 +36,11 @@ app.controller('profile', function ($scope,$state, $http, courseEdit) {
                 $scope.userdata = $scope.userdata||{};
                 _.extend($scope.userdata, data);
                 courseEdit.userdata=$scope.userdata;
-                courseEdit.eqvalBadges()
+                courseEdit.eqvalBadges();
             }else{
                 $scope.userdata=data;
                 courseEdit.userdata=$scope.userdata;
-                courseEdit.eqvalBadges()
+                courseEdit.eqvalBadges();
             }
 
             if (typeof $scope.userdata === 'string') {

@@ -47,7 +47,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('posts', {
             url: "/post/all",
-            templateUrl: "postall.html"
+            templateUrl: "postall.html",
+            controller:"posts"
         }).state('adminlab', {
             url: "/adminlab",
             templateUrl: "views/adminlab/adminlab.html"
