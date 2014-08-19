@@ -46,14 +46,29 @@ function router(app, hasUser) {
             });*/
             Posts.find({},function(err,data){
                 //console.log("req.body.text",req.body.text)
-                var reg=new RegExp(req.body.text);
-                //console.log("reg",reg)
-                var  resData=[];
+                var textSearch=req.body.text.split(" ");
+               // console.log(textSearch)
+                var strSerch="";
+                for(var i=0;i<textSearch.length;i++){
+                    if(i!==(textSearch.length-1)){
+                        strSerch=strSerch+textSearch[i]+'\\'+"s*";
+                        continue;
+                    }
+                    strSerch=strSerch+textSearch[i];
+                }
+                var reg=new RegExp(strSerch);
 
+                var  resData=[];
                 for(var i=0;i<data.length;i++){
-                  //  console.log("data",reg.test(data[i].content))
-                    if(reg.test(data[i].content)){
+                    if(reg.test(data[i].content)||reg.test(data[i].title)){
                         resData.push(data[i]);
+                        continue;
+                    }
+                    for(var j=0;j<data[i].comments.length;j++){
+                        if(reg.test(data[i].comments[j].content)){
+                            resData.push(data[i]);
+                            continue;
+                        }
                     }
                 }
                 res.json({success: !err, msg: [], data: resData,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});

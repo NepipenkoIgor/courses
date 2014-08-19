@@ -16,6 +16,7 @@ app.controller('validateController', function ($scope, $http) {
     $("#alertEmail").hide();
     $("#alertPassword").hide();
     $("#alertComfPassword").hide();
+    $("#alertCode").hide();
 
     $("#formsign").keypress(function(event){
         if(event.keyCode===13){
@@ -23,7 +24,7 @@ app.controller('validateController', function ($scope, $http) {
         }
     });
     $scope.trueValidate=function(){
-    if($scope.firstname&&$scope.lastname&&$scope.email&&$scope.password&&$scope.comfpassword){
+    if($scope.firstname&&$scope.lastname&&$scope.email&&$scope.password&&$scope.comfpassword&&$scope.code){
         $("#submitSignUp").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
         return;
     }
@@ -34,6 +35,28 @@ app.controller('validateController', function ($scope, $http) {
         $("#submitSignUp").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
         return;
     };
+    var reqCode = function (data,event,name) {
+        $http.post("/true/code", {"code": data}).success(function (promisedate) {
+            if (promisedate.success === true) {
+                //console.log($(event.currentTarget).next().show());
+                $(event.currentTarget).next().show().removeClass("alert-danger").addClass("alert-success");
+                $scope.name[name] = "success validation";
+                $scope.code=true;
+                $scope.trueValidate();
+                return;
+            }
+            $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
+            $scope.name[name] = "this code not true";
+            $scope.code=false;
+            $scope.trueValidate();
+            return;
+        });
+    };
+    var deferredCode = _.debounce(reqCode, 300);
+    $scope.validCode=function(event,name){
+        deferredCode(event.currentTarget.value,event,name);
+    };
+
     var req = function (data,event,name) {
         $http.post("/true/email", {"email": data}).success(function (promisedate) {
             if (promisedate.length === 0) {

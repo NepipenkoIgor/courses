@@ -23,8 +23,8 @@ function router(app,hasUser) {
         console.log(req.body.email);
         Users.find({email:req.body.email},function(err,data){
             res.json(data);
-        })
-       // res.json({data:req.body.email});
+        });
+
     });
 
     app.post('/progress',hasUser ,function (req, res) {

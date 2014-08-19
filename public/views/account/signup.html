@@ -20,8 +20,8 @@
             <input type="password" class="form-control" name="comfpassword" id="comfpassword" ng-keyup="comfPassword($event,'comfpassword')"  placeholder="Password confirm">
             <div class="alert alert-danger alertMessage" role="alert" id="alertComfPassword">{{name.comfpassword}}</div>
 
-            <input type="text" class="form-control" name="code" id="code" placeholder="Registration code">
-
+            <input type="text" class="form-control" name="code" id="code" placeholder="Registration code" ng-keyup="validCode($event,'code')">
+            <div class="alert alert-danger alertMessage" role="alert" id="alertCode">{{name.code}}</div>
             <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit"  id="submitSignUp" ng-click="nullSubmit()">

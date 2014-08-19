@@ -4,6 +4,9 @@
 
     <div class="top">
         <h3 class="ng-binding">{{unitNowChanged.title}}</h3>
+        <a  href="" tooltip-placement="bottom" tooltip="Ask" style="float:right" ng-click="showBlockQuestion(true)">
+            <i class="fa fa-question fa-3x" style="height: 20px;margin-right: 50px;margin-top: 5px"></i>
+        </a>
         <p class="ng-binding">Lesson {{positionInCourse.module+"."+positionInCourse.section+"."+positionInCourse.unit}}</p>
     </div>
 <div ng-if="checkType('video')" class="video ng-scope">
@@ -29,14 +32,15 @@
                 <button type="" class="btn btn-success btn"
                         ng-click="checkQuiz()" style="margin-top: 10px"
                         ng-if="markOfCompleteUnit(unitNowChanged.unitId)!=='complete'">check answer</button>
-                <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
-                        ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
+                <!--<button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
+                        ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>-->
             </div>
             <hr>
         </div>
         <div ng-switch-when="static">
             <div ng-bind-html="trustHtml(unitNowChanged.lims[0].content[0])" style="color:white"></div>
-            <button type="" class="btn btn-success btn" ng-click="completeStatic(unitNowChanged)" style="margin-top: 10px" >Next unit</button>
+           <!-- <button type="" class="btn btn-success btn" ng-if="unitNowChanged.lims[0].typeLim==='static'"
+                    ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>-->
         </div>
         <div ng-switch-when="code quest">
             <div class="holder">
@@ -88,11 +92,30 @@
         </div>
     </div>
     <div  class="nextLesson_Button ng-scope" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='curentactive'">
-    <a ng-click="nextUnit(unitNowChanged)" style="cursor: pointer">
+    <a ng-click="nextUnit(unitNowChanged)" style="cursor: pointer" style="z-index: 9999">
         <div class="nextButton" ng-click="nextUnit(unitNowChanged)" ng-if="!nextFinish(sectionNowChanged.specialId)">Next</div>
         <div class="nextButton" ng-click="nextUnit(unitNowChanged)" ng-if="nextFinish(sectionNowChanged.specialId)">Finish</div>
     </a>
 </div>
+</div>
+
+<div id="blockquestion" ng-show="true" style="color: #000000" ng-if="showQuestionBlock" ng-controller="posts">
+    <span class="close" ng-click="showBlockQuestion(false)" style="margin-top: -20px;margin-right: -20px">X</span>
+    <form style="min-width: 300px" >
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" ng-model="title" ng-click="showTemplatePost()">
+        </div>
+        <div class="form-group">
+            <label>Content</label>
+            <textarea class="form-control" ng-model="content" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            <label>tags</label>
+            <input type="textarea" class="form-control" ng-model="tags">
+        </div>
+        <button type="" class="btn btn-success btn-lg" ng-click="saveNewQuestion(userdata._id,unitNowChanged.unitId)">add new question</button>
+    </form>
 </div>
 
 

@@ -181,7 +181,9 @@ app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdi
         var tag=courseEdit.positionInCourse.course+"."+courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section+"."+courseEdit.positionInCourse.unit;
         var newQuestion = {title: $scope.title, content: $scope.content, tags: tag+","+$scope.tags, creator: creator, unit: unit,typePost:"question"};
         $http.post('/post/new', newQuestion).success(function (data) {
+           // $scope.showQuestionBlock=false;
             reqPosts();
+
         });
 
     };

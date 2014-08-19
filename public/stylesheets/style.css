@@ -907,6 +907,24 @@ width: 100%;
     font-size: 110px;
     position: relative;
 }
+
+#blockquestion{
+    color: #000000;
+    position: fixed;
+    left: 0;
+    top: 150px;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 550px;
+    z-index: 25000;
+    opacity: 1;
+    background-color: ghostwhite;
+    margin: 0 auto;
+    vertical-align: middle;
+    padding: 23px;
+}
+
 /*.login_cont {
     width: 300px;
     margin: 0 auto;

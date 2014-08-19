@@ -118,70 +118,33 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             };
 
 
+            if (courseEdit.userdata) {
+                var url = $location.$$url;
+                url = url.split("/")
 
-            if(courseEdit.userdata){
-                var url=$location.$$url;
-                url=url.split("/")
-                // console.log(url)
-                if(url[1]&&url[1]==='courses'){
-                    // console.log($scope.listOfCourses[url[2]-1])
-                    $scope.courseNowChange($scope.listOfCourses[url[2]-1]._id);
-                    if(url[3]){
-                        $scope.moduleNowChange($scope.courseNowChanged.modules[url[3]-1]._id);
-                        if(url[5]){
-                            var sectionUrl=url[4].split(".");
-                            var unitUrl=url[5].split(".");
-                            console.log(sectionUrl,unitUrl,$scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1]-1].specialId)[unitUrl[2]].unitId)
+                if (url[1] && url[1] === 'courses') {
 
-                            $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1]-1].specialId)[unitUrl[2]-1].unitId,$scope.moduleNowChanged.sections[sectionUrl[1]-1].specialId);
+                    $scope.courseNowChange($scope.listOfCourses[url[2] - 1]._id);
+                    if (url[3]) {
+                        $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 1]._id);
+                        if (url[5]) {
+                            var sectionUrl = url[4].split(".");
+                            var unitUrl = url[5].split(".");
+                            console.log(sectionUrl, unitUrl, $scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2]].unitId)
+
+                            $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
                         }
-                        if(url[5]&&url[1]==='complete'){
-
+                        if (url[5] && url[1] === 'complete') {
+console.log("dsdasdasdsd");
                         }
                     }
                 }
             }
-            if(courseEdit.userdata===undefined){
+            if (courseEdit.userdata === undefined) {
                 $state.go("login");
             }
 
 
-
-            /*function of redirect on reload window*/
-            /*function reloadLink() {
-
-             if ($location.$$url.split("/")[1] !== "adminlab") {
-
-             if ($scope.listOfCourses) {
-             for (var i = 0; i < $scope.listOfCourses.length; i++) {
-             if ($stateParams.courseTitle && $scope.listOfCourses[i].title === i+1) {
-             $scope.courseNowChange($scope.listOfCourses[i]._id);
-
-             for (var j = 0; j < $scope.courseNowChanged.modules.length; j++) {
-
-             if ($stateParams.moduleTitle && $scope.courseNowChanged.modules[j].title === $stateParams.moduleTitle) {
-             $scope.moduleNowChange($scope.courseNowChanged.modules[j]._id);
-
-             for (var l = 0; l < $scope.listOfUnits.length; l++) {
-
-             if ($stateParams.unitTitle && $scope.listOfUnits[l].unitId === parseInt($stateParams.unitTitle)) {
-
-             $scope.unitNowChange($scope.listOfUnits[l].unitId);
-
-             }
-             }
-             }
-
-             }
-             }
-             }
-             }
-
-             }
-
-             }
-
-             reloadLink();*/
         });
 
 
@@ -206,9 +169,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 if ($scope.listOfCourses[i]._id === id) {
                     $scope.courseNowChanged = $scope.listOfCourses[i];
                     $scope.positionInCourse.course = i + 1;
-
+                    $scope.background={'background-image': 'url('+$scope.courseNowChanged.img+')'};
                     $scope.moduleNowChanged = "";
-                    $state.go('course', {courseTitle:  $scope.positionInCourse.course});
+                    $state.go('course', {courseTitle: $scope.positionInCourse.course});
                     return;
                 }
             }
@@ -227,7 +190,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
 
                 $scope.positionInCourse.module = i + 1;
-                $state.go("modules", {courseTitle:  $scope.positionInCourse.course, moduleTitle: $scope.positionInCourse.module})
+                $state.go("modules", {courseTitle: $scope.positionInCourse.course, moduleTitle: $scope.positionInCourse.module})
                 $scope.dangerUnit = {};
                 $scope.dangerSection = [];
             }
@@ -236,16 +199,17 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
     $scope.unitNowChange = function (id, specialId) {
-        console.log("$scope.dangerSection",$scope.dangerSection);
-        console.log("$scope.dangerUnit",$scope.dangerUnit);
-        console.log("id",id);
-        if($scope.dangerSection){
+        /*      console.log("$scope.dangerSection", $scope.dangerSection);
+         console.log("$scope.dangerUnit", $scope.dangerUnit);
+         console.log("id", id);*/
+
+        if ($scope.dangerSection) {
             if ($scope.dangerSection.indexOf(specialId) > 0) {
                 alert("you must complete the previous section");
                 return;
             }
         }
-        if($scope.dangerUnit[specialId]){
+        if ($scope.dangerUnit[specialId]) {
             if ($scope.dangerUnit[specialId].indexOf(id) > 0) {
                 alert("you must complete the previous lesson");
                 return;
@@ -262,6 +226,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             // console.log($scope.listOfUnits[i]);
             if ($scope.listOfUnits[i].unitId === id) {
                 $scope.unitNowChanged = $scope.listOfUnits[i];
+
 
                 for (var j = 0; j < $scope.moduleNowChanged.sections.length; j++) {
                     if ($scope.moduleNowChanged.sections[j].specialId === $scope.unitNowChanged.parent) {
@@ -289,16 +254,16 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
                 }
 
-                $state.go('sectioncomplete', {
+                /*$state.go('sectioncomplete', {
                     courseTitle: courseEdit.positionInCourse.course,
                     moduleTitle: courseEdit.positionInCourse.module,
-                    sectionTitle: courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section
-                });
+                    sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
+                });*/
                 $state.go('unit', {
                     courseTitle: courseEdit.positionInCourse.course,
                     moduleTitle: courseEdit.positionInCourse.module,
-                    sectionTitle: courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section,
-                    unitTitle:courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section+"." +courseEdit.positionInCourse.unit
+                    sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section,
+                    unitTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit
                 }).then(function () {
                     setTimeout(function getEl() {
                         if ($scope.unitNowChanged.lims[0].typeLim === "video") {
@@ -332,6 +297,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                             courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata)
                             $scope.saveProgress($scope.unitNowChanged.unitId);
                         };
+                    }
+                    if ($scope.unitNowChanged.lims[0].typeLim === "static") {
+                        $scope.saveProgress($scope.unitNowChanged.unitId);
+                        console.log('vupolnil');
                     }
                 });
                 refresh();
@@ -419,7 +388,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     $scope.dangerUnit = {};
     $scope.markOfCompleteUnit = function (unitId, sectionId) {
         var unitArr = [];
-        if($scope){
+        if ($scope) {
             for (var i = 0; i < $scope.showUnitsList(sectionId).length; i++) {
                 unitArr.push($scope.showUnitsList(sectionId)[i].unitId);
             }
@@ -431,7 +400,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         if (!courseEdit.userdata) {
             return;
         }
-        //console.log()
+
         if ($scope.unitNowChanged !== undefined && unitId === $scope.unitNowChanged.unitId) {
 
             if ($state.current.name === 'sectioncomplete') {
@@ -489,6 +458,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             var index = $scope.dangerSection.indexOf(sectionId);
             $scope.dangerSection.splice(index, 1);
         }
+        if($state.current.name==='unit'){
+            return " ";
+        }
         return "complete";
 
     };
@@ -527,14 +499,15 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /********logic of complete unit************/
 
-    $scope.completeStatic = function (unit) {
+    /*$scope.completeStatic = function (unit) {
         $scope.saveProgress(unit.unitId);
-        function timeOut() {
+        $scope.nextUnit(unit);
+        *//*function timeOut() {
             $scope.nextUnit(unit);
         }
 
-        setTimeout(timeOut, 1500);
-    };
+        setTimeout(timeOut, 1500);*//*
+    };*/
 
     $scope.nextUnit = function (unit) {
 
@@ -551,30 +524,29 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                 $state.go('sectioncomplete', {
                                     courseTitle: courseEdit.positionInCourse.course,
                                     moduleTitle: courseEdit.positionInCourse.module,
-                                    sectionTitle: courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section
+                                    sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
                                 });
-                                console.log($location)
-                               // $location.$$absUrl=$location.$$absUrl;
-                                //$scope.mapModule();
+
                                 return;
                             }
                             $scope.nextUnitBe = $scope.showUnitsList($scope.moduleNowChanged.sections[j + 1].specialId)[0];
                             $scope.nextSection = $scope.moduleNowChanged.sections[j + 1];
-                            //courseEdit.positionInCourse
+
                             $state.go('sectioncomplete', {
                                 courseTitle: courseEdit.positionInCourse.course,
                                 moduleTitle: courseEdit.positionInCourse.module,
-                                sectionTitle: courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section
+                                sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
                             });
 
                             //$scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[j+1].specialId)[0].unitId,$scope.moduleNowChanged.sections[j+1].specialId);
-                            return;
+                           // return;
 
 
                         }
                     }
                     return;
                 }
+
                 $scope.unitNowChange($scope.showUnitsList(unit.parent)[i + 1].unitId, unit.parent);
 
                 break;
@@ -582,6 +554,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
         }
         //console.log(unitArr)
+
     };
 
     $scope.stateNow = function () {
@@ -592,20 +565,20 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return false;
 
     };
-    $scope.goTocompleteMod=function(){
-        $state.go("modulecomplete",{
+    $scope.goTocompleteMod = function () {
+        $state.go("modulecomplete", {
             courseTitle: courseEdit.positionInCourse.course,
             moduleTitle: courseEdit.positionInCourse.module
         });
     };
 
-$scope.nextFinish=function(id){
-    var arr=$scope.showUnitsList(id);
-    if($scope.markOfCompleteSection(id)==='complete'&&$scope.unitNowChanged.unitId===arr[arr.length-1].unitId){
-        return true;
-    }
-    return false;
-};
+    $scope.nextFinish = function (id) {
+        var arr = $scope.showUnitsList(id);
+        if ($scope.unitNowChanged.unitId === arr[arr.length - 1].unitId) {
+            return true;
+        }
+        return false;
+    };
 
 
     /****************video controll and registrate*******************/
@@ -801,7 +774,7 @@ $scope.nextFinish=function(id){
 
         $state.go('posts').then(function () {
 
-            $location.url("/post/all?type=question") ;
+            $location.url("/post/all?type=allposts");
 
         });
     };
@@ -810,22 +783,28 @@ $scope.nextFinish=function(id){
         });
     };
     $scope.ifCommunity = function () {
-       /* if ($location.$$url === "/post/all" || $location.$$url === "/post/new") {
-            return false;
+
+        switch ($location.search().type) {
+            case "allposts":
+                return false;
+                break;
+            case "questions":
+                return false;
+                break;
+            case "myposts":
+                return false;
+                break;
+            case "myquestions":
+                return false;
+                break;
+            case "tags":
+                return false;
+                break;
+            case "text":
+                return false;
+                break;
         }
-        return true;*/
-       // console.log($location.search().type)
-        switch( $location.search().type){
-            case "allposts":return false;
-            break;
-            case "question":return false;
-                break;
-            case "myposts":return false;
-                break;
-            case "myquestion":return false;
-                break;
-        }
-return true;
+        return true;
 
 
     };
@@ -835,15 +814,17 @@ return true;
     $scope.search = {
         type: "All Posts"
     };
-    $scope.typeSearch = function (type) {
+    $scope.typeSearch = function (type, data) {
         $scope.search = {
             type: type
         };
+        $scope.postFilter(data);
+
     };
 
     $scope.postFilter = function (user, typeData) {
         var searchObj = {};
-        typeData=typeData||$scope.search.type;
+        typeData = typeData || $scope.search.type;
         switch (typeData) {
             case 'All Posts':
                 searchObj.type = 'allposts';
@@ -872,8 +853,6 @@ return true;
         searchObj.text = $scope.textOfSearch.text;
         courseEdit.searchPosts(searchObj);
     };
-
-
 
 
     /***********************************************************************************/
@@ -923,5 +902,10 @@ return true;
             return "fa fa-pencil";
         }
     };
+    $scope.showQuestionBlock = false;
+    $scope.showBlockQuestion = function (bool) {
+        $scope.showQuestionBlock = bool;
+    };
+
 
 });
