@@ -3,11 +3,20 @@
  */
 var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
-
+function dataReg(data){
+    var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+    var newDataDate = data.getDate();
+    var newDataMonth = monthNames[data.getMonth()];
+    var newDataYear = data.getFullYear();
+    return newDataDate + " " + newDataMonth + " " + newDataYear;
+}
 function router(app, hasUser) {
     'use strict'
     app.post('/post/new', hasUser, function (req, res) {
         console.log(req.body);
+        var newData = new Date();
+
+
        Posts.count(function(err,count){
            console.log("doc in base",count);
            var Post = new Posts;
@@ -15,6 +24,7 @@ function router(app, hasUser) {
            Post.title=req.body.title;
            Post.content=req.body.content;
            Post.creator=req.body.creator;
+           Post.created=dataReg(newData);
            Post.lesson=req.body.unit;
            Post.typePost=req.body.typePost||"";
            if(req.body.tags){

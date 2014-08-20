@@ -1,25 +1,24 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdit) {
+app.controller('posts', function ($scope, $http, $sce, $state, $location, courseEdit) {
     'user strict';
 
     /****************config post**********************/
-   // $location.$$path="/post/all?type=question"
+        // $location.$$path="/post/all?type=question"
 //console.log($location)
     $scope.comment = "";
-    $scope.postdata=[];
+    $scope.postdata = [];
     function reqPosts() {
         $http.get('/posts').success(function (data) {
 
-          //      console.log("postdata",data);
-                $scope.postdata = data.reverse();
+            //      console.log("postdata",data);
+            $scope.postdata = data;//.reverse();
 
 
-
-            if($location.$$path==="/post/all"){
+            if ($location.$$path === "/post/all") {
                 var searchObj = {};
-               // console.log("courseEdit",courseEdit.userdata._id);
+                // console.log("courseEdit",courseEdit.userdata._id);
                 switch ($location.search().type) {
                     case 'allposts':
                         searchObj.type = 'allposts';
@@ -38,33 +37,33 @@ app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdi
                         searchObj.typePost = "question";
                         break;
                 }
-               // console.log("courseEdit",courseEdit,"searchObj",searchObj);
+                // console.log("courseEdit",courseEdit,"searchObj",searchObj);
                 courseEdit.searchPosts(searchObj);
             }
-                // console.log($scope.postdata);
-                // $scope.likes=data.likes||[];
-                $scope.countUserPost = function(id){
-                    var count = 0;
-                    if($scope.postdata !== undefined){
-                        for(var i=0; i<$scope.postdata.length; i++){
-                            if($scope.postdata[i].creator === id){
-                                count++;
-                            }
+            // console.log($scope.postdata);
+            // $scope.likes=data.likes||[];
+            $scope.countUserPost = function (id) {
+                var count = 0;
+                if ($scope.postdata !== undefined) {
+                    for (var i = 0; i < $scope.postdata.length; i++) {
+                        if ($scope.postdata[i].creator === id) {
+                            count++;
                         }
                     }
-                    return count;
-                };
-
+                }
+                return count;
+            };
 
 
         });
 
     }
+
     function reqUsers() {
         $http.get('/users').success(function (data) {
             $scope.postUsersdata = data;
             $scope.postAvatar = function (id) {
-                for (var i=0; i < $scope.postUsersdata.length; i++) {
+                for (var i = 0; i < $scope.postUsersdata.length; i++) {
                     if ($scope.postUsersdata[i]._id === id) {
                         var userPostAvatar = $scope.postUsersdata[i].avatar;
                     }
@@ -79,8 +78,8 @@ app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdi
 
     reqPosts();
     reqUsers();
-    courseEdit.reqPosts=reqPosts;
-    courseEdit.reqUsers=reqUsers;
+    courseEdit.reqPosts = reqPosts;
+    courseEdit.reqUsers = reqUsers;
 
 
     /************post and  comment**************/
@@ -102,27 +101,19 @@ app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdi
 
         }
     };
-    $scope.deleteComment = function (comment, id) {
+    $scope.deleteComment = function (comment, id, card) {
+        for (var j = 0; j < card.comments.length; j++) {
 
-        for (var i = 0; i < $scope.postdata.length; i++) {
+            if (card.comments[j].postId === comment.postId) {
 
-            if ($scope.postdata[i]._id === id) {
+                var commentt = card.comments.splice(j, 1);
+                var data = {"_id": id, "comments": card.comments};
 
-                for (var j = 0; j < $scope.postdata[i].comments.length; j++) {
-
-                    if ($scope.postdata[i].comments[j] === comment) {
-                        $scope.postdata[i].comments.splice(j, 1);
-                        var data = {"_id": id, "comments": $scope.postdata[i].comments};
-                        $http.post('/comment/new', data).success(function () {
-
-                        });
-                    }
-
-
-                }
-
+                $http.post('/comment/new', data).success(function () {
+                    reqPosts();
+                    reqUsers();
+                });
             }
-
         }
 
     };
@@ -130,36 +121,36 @@ app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdi
     /********save post**********/
 
 
-    $scope.saveNewPost=function(creator){
+    $scope.saveNewPost = function (creator) {
         courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata)
         var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
         $http.post('/post/new', newPost).success(function (data) {
 
             reqPosts();
-            $state.go('posts');
+            $state.go('posts').then(function () {
+                console.log("goood redirect")
+                $location.url("/post/all?type=allposts");
+
+            });
         });
     };
 
 
+    $scope.addComment = function (idPost, creator, card) {
 
-    $scope.addComment = function (idPost, creator) {
 
-        for (var i = 0; i < $scope.postdata.length; i++) {
-            if ($scope.postdata[i]._id === idPost && this.comment !== "") {
+        if (card._id === idPost && this.comment !== "") {
+            var date = Date.now();
+            card.comments.push({content: this.comment, creator: creator, postId: date});
 
-                $scope.postdata[i].comments.push({content: this.comment, creator: creator});
-                //  console.log($scope.postdata[i].comments);
-                var data = {"_id": idPost, "comments": $scope.postdata[i].comments};
-                $http.post('/comment/new', data).success(function () {
-                   // console.log("good  comment request");
-                    reqPosts();
-                    reqUsers();
-                    //$scope.setId(idPost);
-                });
-            }
+            var data = {"_id": idPost, "comments": card.comments};
+            $http.post('/comment/new', data).success(function () {
 
+                reqPosts();
+                reqUsers();
+
+            });
         }
-
     };
 
     $scope.setId = function (id) {
@@ -178,10 +169,10 @@ app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdi
     };
     $scope.saveNewQuestion = function (creator, unit) {
         courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata)
-        var tag=courseEdit.positionInCourse.course+"."+courseEdit.positionInCourse.module+"."+courseEdit.positionInCourse.section+"."+courseEdit.positionInCourse.unit;
-        var newQuestion = {title: $scope.title, content: $scope.content, tags: tag+","+$scope.tags, creator: creator, unit: unit,typePost:"question"};
+        var tag = courseEdit.positionInCourse.course + "." + courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit;
+        var newQuestion = {title: $scope.title, content: $scope.content, tags: tag + "," + $scope.tags, creator: creator, unit: unit, typePost: "question"};
         $http.post('/post/new', newQuestion).success(function (data) {
-           // $scope.showQuestionBlock=false;
+            // $scope.showQuestionBlock=false;
             reqPosts();
 
         });
@@ -222,110 +213,108 @@ app.controller('posts', function ($scope, $http, $sce,$state,$location,courseEdi
 
     /****************logic of likes*******************/
 
-    $scope.like = function (userId, arrayLikes,postId) {
+    $scope.like = function (userId, arrayLikes, postId) {
         if (arrayLikes.indexOf(userId) === (-1)) {
             arrayLikes.push(userId);
-            $scope.updateLikes(postId,arrayLikes);
+            $scope.updateLikes(postId, arrayLikes);
             return;
         }
         for (var i = 0; i < arrayLikes.length; i++) {
             if (arrayLikes[i] === userId) {
                 arrayLikes.splice(i, 1);
-                $scope.updateLikes(postId,arrayLikes);
+                $scope.updateLikes(postId, arrayLikes);
                 return;
             }
         }
     };
-    $scope.updateLikes=function(postId,likes){
-        var date={_id:postId,likes:likes};
+    $scope.updateLikes = function (postId, likes) {
+        var date = {_id: postId, likes: likes};
         $http.post('/postslikes', date).success(function (num) {
         });
     };
 
 
-
-    $scope.searchPosts=function(searchObj){
+    $scope.searchPosts = function (searchObj) {
         $http.post('/post/search', searchObj).success(function (data) {
-            if(data.data!==undefined){
-                $scope.postdata=data.data;
-                $location.url("/post/all?type="+data.type);
+            if (data.data !== undefined) {
+                $scope.postdata = data.data;
+                $location.url("/post/all?type=" + data.type);
             }
 
         });
     };
-    courseEdit.searchPosts=$scope.searchPosts;
-    $scope.searchByTag=function(tag){
+    courseEdit.searchPosts = $scope.searchPosts;
+    $scope.searchByTag = function (tag) {
         //console.log(tag);
-        var searchObj={type:"tags",tag:tag};
+        var searchObj = {type: "tags", tag: tag};
         courseEdit.searchPosts(searchObj);
     };
-    if( document.getElementById("post")&&document.getElementById("question")){
-        document.getElementById("post").checked=true;
-        document.getElementById("question").checked=false;
+    if (document.getElementById("post") && document.getElementById("question")) {
+        document.getElementById("post").checked = true;
+        document.getElementById("question").checked = false;
     }
 
 
-
-    $scope.typeCheck=true;
-    $scope.chekNewPost=function(bool){
-        if(bool){
-            document.getElementById("post").checked=true;
-            document.getElementById("question").checked=false;
-            $scope.typeCheck=true
+    $scope.typeCheck = true;
+    $scope.chekNewPost = function (bool) {
+        if (bool) {
+            document.getElementById("post").checked = true;
+            document.getElementById("question").checked = false;
+            $scope.typeCheck = true
             return;
         }
-        document.getElementById("post").checked=false;
-        document.getElementById("question").checked=true;
-        $scope.typeCheck=false;
+        document.getElementById("post").checked = false;
+        document.getElementById("question").checked = true;
+        $scope.typeCheck = false;
     };
 
 
 });
 
-app.directive('masonrypost', function() {
-    return {
-        priority:0,
-        restrict: 'AC',
-        controller: function($scope) {
-            return $scope.$watch(function(e) {
-                $scope.masonry.reloadItems();
-                return $scope.masonry.layout();
-                /*return $scope.postdata;*/
-            }, function(val) {
-                $scope.masonry.reloadItems();
-                $scope.masonry.layout();
-            });
-        },
-        link: function(scope, elem, attrs) {
-            var container=elem[0];
-            var options='';
-            return scope.masonry = new Masonry(container,options);
-        }
-    };
+/*app.directive('masonrypost', function() {
+ return {
+ priority:0,
+ restrict: 'AC',
+ controller: function($scope) {
+ return $scope.$watch(function(e) {
+ $scope.masonry.reloadItems();
+ return $scope.masonry.layout();
+ *//*return $scope.postdata;*//*
+ }, function(val) {
+ $scope.masonry.reloadItems();
+ $scope.masonry.layout();
+ });
+ },
+ link: function(scope, elem, attrs) {
+ var container=elem[0];
+ var options='';
+ return scope.masonry = new Masonry(container,options);
+ }
+ };
 
-});
+ });*/
 
 /*
-return {
-    priority:0,
-    restrict: 'AC',
-    link: function(scope, elem, attrs) {
-        var container=elem[0];
-        var options={
-            itemSelector: '.postConteiner'
-        };
-        scope.masonry = new Masonry(container,options);
+ return {
+ priority:0,
+ restrict: 'AC',
+ link: function(scope, elem, attrs) {
+ var container=elem[0];
+ var options={
+ itemSelector: '.postConteiner'
+ };
+ scope.masonry = new Masonry(container,options);
 
-        scope.masonry.reloadItems();
-        scope.masonry.layout();
+ scope.masonry.reloadItems();
+ scope.masonry.layout();
 
-        scope.$watch(function(e) {
-            return scope.postdata;
-        }, function(val) {
-            scope.masonry.reloadItems();
-            scope.masonry.layout();
-        });
-    }
-};
+ scope.$watch(function(e) {
+ return scope.postdata;
+ }, function(val) {
+ scope.masonry.reloadItems();
+ scope.masonry.layout();
+ });
+ }
+ };
 
-});*/
+ });*/

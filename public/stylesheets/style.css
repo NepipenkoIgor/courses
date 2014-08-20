@@ -925,6 +925,258 @@ width: 100%;
     padding: 23px;
 }
 
+
+
+
+.a-postcard {
+
+    min-height: 200px;
+    margin: 25px;
+    font-family: arial;
+    font-size: 14px;
+    color: #555;
+    background: #fff;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    margin-bottom: 150px;
+}
+.a-postcard .contain {
+}
+.a-postcard .header {
+     position: relative;
+     height: 50px;
+ }
+.a-postcard .author {
+    position: absolute;
+    top: 8px;
+    left: 60px;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    color: #666;
+}
+.a-postcard .avatar {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 0;
+    padding: 0;
+    -webkit-filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.75));
+}
+.a-postcard .date {
+    position: absolute;
+    top: 30px;
+    left: 60px;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    color: #aaa;
+}
+.a-postcard .title {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    color: #555;
+    margin: 0 10px 10px 10px;
+}
+.a-postcard .content {
+    padding: 10px;
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+.a-postcard .img {
+    padding: 5px;
+    width: 250px;
+}
+.footer {
+    list-style-type: none;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+}
+.footer li {
+    float: left;
+    padding: 5px 10%;
+}
+.comments {
+    position: relative;
+    background: #d8d8d8;
+}
+.comments .avatar {
+    top: 5px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
+.comments textarea {
+    margin-top: 10px;
+    width: 75%;
+    margin-left: 20%;
+    outline: none;
+    border-radius: 5px;
+    resize: none;
+    overflow: auto;
+}
+
+.commentsCom{
+    margin-top: 10px;
+    margin-bottom: 10px;
+overflow: hidden;
+    background-color: ghostwhite;
+}
+.commentsCom img {
+    margin: 0 0 0 5px;
+    width: 15%;
+    border-radius: 50%;
+    float: left;
+}
+.commentsCom div{
+float: right;
+    width: 80%;
+}
+.commentsCom h5{
+    margin: 0 0 5px;
+}
+.commentsCom p{
+padding: 0 5px 0 0!important;
+}
+.deckgrid1{
+    overflow: hidden;
+    width: 935px;
+    margin: 0 auto;
+}
+.deckgrid1[deckgrid]::before {
+    /* Specifies that the grid should have a maximum of 4 columns. Each column will have the classes 'column' and 'column-1-4' */
+    content: '3 .column.column-1-3';
+    font-size: 0; /* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
+    visibility: hidden;
+}
+.deckgrid1 .column {
+    float: left;
+}
+
+.deckgrid1 .column-1-3 {
+    width: 33%;
+}
+@media screen and (max-width: 520px){
+    .deckgrid1[deckgrid]::before {
+        content: '1 .column.column-1-1';
+    }
+
+    .deckgrid1 .column-1-1 {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 1024px){
+    .deckgrid1{
+        width: 100%;
+    }
+}
+
+.deckgrid[deckgrid]::before {
+    /* Specifies that the grid should have a maximum of 4 columns. Each column will have the classes 'column' and 'column-1-4' */
+    content: '6 .column.column-1-6';
+    font-size: 0; /* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
+    visibility: hidden;
+}
+
+.deckgrid .column {
+    float: left;
+}
+
+.deckgrid .column-1-6 {
+    width: 16%;
+}
+@media screen and (max-width: 520px){
+    .deckgrid[deckgrid]::before {
+        content: '1 .column.column-1-1';
+    }
+
+    .deckgrid .column-1-1 {
+        width: 100%;
+    }
+}
+
+
+
+
+.profile {
+    height: 375px;
+}
+.banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("../img/back.svg");
+    width: 100%;
+    height:250px;
+    z-index: 89;
+}
+.profile .avatar {
+    position: absolute;
+    top: 125px;
+    left: 40%;
+    width: 250px;
+    height: 250px;
+    border-radius: 125px;
+    margin-left: -125px;
+    z-index: 99;
+    -webkit-filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.75));
+}
+.bar {
+    position: absolute;
+    top: 250px;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    background: #ddd;
+    margin-top: -20px;
+    z-index: 90;
+}
+.bar div {
+    position: relative;
+}
+.bar h1 {
+    font-size: 28px;
+    color: #666;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0px;
+    right: 60%;
+    line-height: 36px;
+    margin-right: 150px;
+}
+.bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0px;
+    left: 40%;
+    margin-left: 150px;
+}
+.bar ul li {
+    float: left;
+    padding: 0 5px;
+    color: #666;
+    line-height: 40px;
+    font-size: 16px;
+}
+.bar a {
+    text-decoration: none;
+    color: #666;
+    padding: 11px 20px;
+}
+.bar a:hover {
+    background: #aaa;
+    text-decoration: none;
+    color: #fff;
+}
 /*.login_cont {
     width: 300px;
     margin: 0 auto;

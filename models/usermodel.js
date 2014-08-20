@@ -10,6 +10,7 @@ var userSchema=new Schema({
   gid:Number,
   lid:Number,
   username:String,
+    regCode:String,
   password:String,
   userlevel:Number,
   firstname:String,

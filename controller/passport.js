@@ -67,6 +67,9 @@ var config=app.get('config');
                newUser.lid = date.getTime();
                newUser.password = req.body.password;
                newUser.dataReg = dataReg(newData);
+               newUser.regCode = req.body.code;
+               var firstLater=req.body.firstname.split("");
+               newUser.username=firstLater[0].toLowerCase()+"_"+req.body.lastname;
                newUser.firstname = req.body.firstname;
                newUser.lastname = req.body.lastname;
                newUser.save(function (err) {

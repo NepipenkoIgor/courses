@@ -1,4 +1,4 @@
-app.controller('profile', function ($scope,$state, $http, courseEdit) {
+app.controller('profile', function ($scope,$state, $http,$sce, courseEdit) {
     'user strict';
 
     $scope.reqUser=function(cb){
@@ -60,7 +60,11 @@ app.controller('profile', function ($scope,$state, $http, courseEdit) {
             $scope.reqUser();
         });
     };
-
+    $scope.userImgAvatar=function(img){
+        img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
+        console.log(img);
+        return $sce.trustAsResourceUrl(img);
+    }
     $scope.userAvatar = function (img) {
         img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
         var background = "url('" + img + "') center";
@@ -68,6 +72,6 @@ app.controller('profile', function ($scope,$state, $http, courseEdit) {
         return obj;
     };
     $scope.profileGo=function(user){
-        $state.go('editprofile',({username:user}))
+        $state.go('editprofile',({username:user}));
     }
 });

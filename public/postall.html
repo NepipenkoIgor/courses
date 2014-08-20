@@ -2,7 +2,7 @@
     <input type="text" placeholder="Search" class="form-control" style="" ng-model="textOfSearch.text">
     <button class="btn btn-default" style="width: 100%;" type="button" ng-click="textSearch()">Go!</button>
 </div>
-<div class="container grid" masonrypost  >
+<!--<div class="container grid" masonrypost  >
     <div ng-repeat="data in postdata" class="postConteiner" style="color:black;">
     <span class="close" ng-click="deletePost(data._id)" ng-if="ifThisIsAvtor(userdata,data.creator)">X</span>
 
@@ -52,7 +52,7 @@
     </div>
 
 </div>
-</div>
+</div>-->
 
 
 <!--<div ng-controller="posts">
@@ -62,3 +62,14 @@
 
     </div>
 </div>-->
+<!--<div class="container grid" masonrypost  >
+<div class="a-postcard  ng-scope" ng-repeat="data in postdata" >
+
+
+</div>
+</div>-->
+
+
+<div deckgrid source="postdata"
+     cardTemplate="/views/templates/deckgrid-post.html" style=""
+     class="deckgrid1" ng-if="userdata" ></div>

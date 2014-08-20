@@ -45,6 +45,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/post/new",
             templateUrl: "newpost.html"
         })
+        .state('completeSection', {
+            url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/complete",
+            templateUrl: "views/courses/completeSection.html"
+        })
         .state('posts', {
             url: "/post/all",
             templateUrl: "postall.html",
@@ -80,15 +84,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state('modules', {
             url: "/courses/:courseTitle/:moduleTitle",
             templateUrl: "views/courses/moduleChanged.html"
+        }).state('modulecomplete', {
+            url: "/courses/:courseTitle/:moduleTitle/complete",
+            templateUrl: "views/courses/modulecomplete.html"
         }).state('unit', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/courses/unitChenged.html"
 
-        }).state('sectioncomplete', {
-            url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/complete",
-            templateUrl: "views/courses/sectioncomplete.html"
-        }).state('modulecomplete', {
-            url: "/courses/:courseTitle/:moduleTitle/complete",
-            templateUrl: "views/courses/modulecomplete.html"
         });
 });

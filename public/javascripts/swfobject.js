@@ -365,7 +365,7 @@ var swfobject = function () {
 
                     }
                 }
-                aa.outerHTML = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' + ah + ">" + '<param name="'+'wmode"'+'value="opaque">' + "</object>";
+                aa.outerHTML = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' + ah + "><param name='wmode' value='transparent'><param name='wmode' value='opaque'/>" + '<param name="'+'wmode"'+'value="opaque">' + "</object>";
                 N[N.length] = ai.id;
                 X = c(ai.id)
             } else {

@@ -1,67 +1,38 @@
-<!--<style>
-    .title{
-        text-align: center;
-        margin: 60px 0;
-        color: #fff;
-    }
-    .editprofile{
-        width: 450px;
-        margin: 60px auto;
-    }
-    .editprofile>div{
-        width: 100%;
-        margin-top: 20px;
-    }
-    .editprofile>div:first-child{margin-top: 0;}
-    .editprofile>button{
-        margin: 25px auto 0;
-        display: block;
-    }
-    .editprofile div h3{
-        width: 30%;
-        float: left;
-        font-size: 18px;
-        color: #fff;
-    }
-    .editprofile div input{
-        width: 70%!important;
-        float: right!important;
-    }
-</style>
-<h1 class="title">Edit profile</h1>
-<form name="userForm" class="editprofile"> &lt;!&ndash;ng-show="this.flag"&ndash;&gt;
-    <div class="input-group">
-        <h3>Username:</h3><input type="text" class="form-control" ng-model="userdata.username" name="username" >
+<div class="profile">
+    <div class="banner"></div>
+    <img ng-src="{{userImgAvatar(userdata.avatar)}}" class="avatar">
+    <div class="bar">
+        <div>
+            <h1>{{userdata.firstname}} {{userdata.lastname}}</h1>
+            <ul>
+                <li>@{{userdata.username}}</li>
+                <li>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Posts">
+                        <i class="fa fa-pencil"> 253</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Questions">
+                        <i class="fa fa-question"> 28</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="input-group">
-        <h3>Password:</h3><input type="password" class="form-control" ng-model="userdata.password" name="firstname">
-    </div>
-    <div class="input-group">
-        <h3>Firstname:</h3><input type="text" class="form-control" ng-model="userdata.firstname" name="firstname">
-    </div>
-    <div class="input-group" >
-        <h3>Lastname:</h3><input type="text" class="form-control" ng-model="userdata.lastname" name="lastname">
-    </div>
-    <div class="input-group">
-        <h3>Birth:</h3><input type="text" class="form-control" ng-model="userdata.birth" name="firstname">
-    </div>
-    <div class="input-group">
-        <h3>Email:</h3><input type="email" class="form-control" ng-model="userdata.email" name="email">
-    </div>
-    <div class="input-group" >
-        <h3>Phone:</h3><input type="text" class="form-control" ng-model="userdata.phone" name="phone">
-    </div>
-    <button type="button" class="btn btn-success" ng-click="postProfile(userdata)">Save profile</button>
-</form>-->
+</div>
 
+<!--
 <div ui-view="Main" class="content ng-scope"><img gravatar-src="'igornepipenko@gmail.com'" gravatar-size="150" class="ng-scope" src="https://secure.gravatar.com/avatar/0733b20f447fe87ca56dff983adb45db?size=150&amp;default=mm">
+-->
+
+
     <div class="container" style="text-align: left" ng-if="userdata">
 
         <form editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: x-large">
-            <div class="userInput">
+            <!--<div class="userInput">
                 <span class="title">Username: </span>
                 <span editable-text="userdata.username" >{{ userdata.username || 'empty' }}</span>
-            </div>
+            </div>-->
             <div class="userInput">
                 <span class="title">User password: </span>
                 <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
@@ -82,10 +53,10 @@
                 <span class="title"> Email:</span>
                 <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
             </div>
-            <div class="userInput">
+           <!-- <div class="userInput">
                 <span class="title">User name: </span>
                 <span editable-text="userdata.phone" >{{ userdata.phone || 'empty' }}</span>
-            </div>
+            </div>-->
             <div class="buttons">
                 <!-- button to show form -->
                 <button type="button" class="btn btn-default" ng-click="editableForm.$show()"

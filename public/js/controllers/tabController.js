@@ -130,9 +130,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         if (url[5]) {
                             var sectionUrl = url[4].split(".");
                             var unitUrl = url[5].split(".");
-                            console.log(sectionUrl, unitUrl, $scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2]].unitId)
+                            //console.log(sectionUrl, unitUrl)
+                           console.log(sectionUrl, unitUrl, $scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2]-1].unitId)
 
-                            $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
+                          $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
                         }
                         if (url[5] && url[1] === 'complete') {
 console.log("dsdasdasdsd");
@@ -239,7 +240,7 @@ console.log("dsdasdasdsd");
                         for (var t = 0; t < mass.length; t++) {
                             if (mass[t].unitId === $scope.unitNowChanged.unitId) {
                                 $scope.positionInCourse.unit = t + 1;
-                                console.log($scope.positionInCourse.unit)
+                               // console.log($scope.positionInCourse.unit)
                             }
                         }
 
@@ -269,7 +270,7 @@ console.log("dsdasdasdsd");
                         if ($scope.unitNowChanged.lims[0].typeLim === "video") {
                             var url = $scope.unitNowChanged.lims[0].content[0];
                             url = "http:" + url + "?enablejsapi=1&playerapiid=ytplayer";
-                            var params = { allowScriptAccess: "always" };
+                            var params = { allowScriptAccess: "always", wmode:"transparent"};
                             var atts = { id: "myytplayer" };
                             swfobject.embedSWF(url, "lessonVideoPlayer", "425", "356", "8", null, null, params, atts);
                         }
@@ -403,7 +404,7 @@ console.log("dsdasdasdsd");
 
         if ($scope.unitNowChanged !== undefined && unitId === $scope.unitNowChanged.unitId) {
 
-            if ($state.current.name === 'sectioncomplete') {
+            if ($state.current.name === 'completeSection') {
                 return "complete";
             }
             if (courseEdit.userdata.progress.indexOf(unitId) !== (-1)) {
@@ -509,7 +510,12 @@ console.log("dsdasdasdsd");
         setTimeout(timeOut, 1500);*//*
     };*/
 
-    $scope.nextUnit = function (unit) {
+    $scope.unitNext = function (unit) {
+        /*$state.go('completeSection').then(function(){
+            $location.path("/section/1/1/1/complete")
+            console.log($location.$$path)
+            //$location.url("/course/"+courseEdit.positionInCourse.course+"/"+courseEdit.positionInCourse.module+"/"+courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section+"/complete")
+        })*/
 
         for (var i = 0; i < $scope.showUnitsList(unit.parent).length; i++) {
             if (unit.unitId === $scope.showUnitsList(unit.parent)[i].unitId) {
@@ -521,7 +527,7 @@ console.log("dsdasdasdsd");
                             //console.log("na sled section", $scope.moduleNowChanged.sections[j + 1]);
                             if ($scope.moduleNowChanged.sections[j + 1] === undefined) {
                                 $scope.nextSection = null;
-                                $state.go('sectioncomplete', {
+                                $state.go('completeSection', {
                                     courseTitle: courseEdit.positionInCourse.course,
                                     moduleTitle: courseEdit.positionInCourse.module,
                                     sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
@@ -532,7 +538,7 @@ console.log("dsdasdasdsd");
                             $scope.nextUnitBe = $scope.showUnitsList($scope.moduleNowChanged.sections[j + 1].specialId)[0];
                             $scope.nextSection = $scope.moduleNowChanged.sections[j + 1];
 
-                            $state.go('sectioncomplete', {
+                            $state.go('completeSection',{
                                 courseTitle: courseEdit.positionInCourse.course,
                                 moduleTitle: courseEdit.positionInCourse.module,
                                 sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
@@ -559,7 +565,7 @@ console.log("dsdasdasdsd");
 
     $scope.stateNow = function () {
         //console.log($state.current)
-        if ($state.current.name === "unit" || $state.current.name === "sectioncomplete") {
+        if ($state.current.name === "unit" || $state.current.name === "completeSection") {
             return true;
         }
         return false;

@@ -92,14 +92,14 @@
         </div>
     </div>
     <div  class="nextLesson_Button ng-scope" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='curentactive'">
-    <a ng-click="nextUnit(unitNowChanged)" style="cursor: pointer" style="z-index: 9999">
-        <div class="nextButton" ng-click="nextUnit(unitNowChanged)" ng-if="!nextFinish(sectionNowChanged.specialId)">Next</div>
-        <div class="nextButton" ng-click="nextUnit(unitNowChanged)" ng-if="nextFinish(sectionNowChanged.specialId)">Finish</div>
+    <a  style="cursor: pointer" style="z-index: 9999">
+        <div class="nextButton" ng-click="unitNext(unitNowChanged)" >Next</div>
+        <!--<div class="nextButton" ng-click="unitNext(unitNowChanged)" ng-if="nextFinish(sectionNowChanged.specialId)">Finish</div>-->
     </a>
 </div>
 </div>
 
-<div id="blockquestion" ng-show="true" style="color: #000000" ng-if="showQuestionBlock" ng-controller="posts">
+<div id="blockquestion"  style="color: #000000" ng-if="showQuestionBlock" ng-controller="posts" >
     <span class="close" ng-click="showBlockQuestion(false)" style="margin-top: -20px;margin-right: -20px">X</span>
     <form style="min-width: 300px" >
         <div class="form-group">
@@ -114,7 +114,7 @@
             <label>tags</label>
             <input type="textarea" class="form-control" ng-model="tags">
         </div>
-        <button type="" class="btn btn-success btn-lg" ng-click="saveNewQuestion(userdata._id,unitNowChanged.unitId)">add new question</button>
+        <button type="" class="btn btn-success btn-lg" ng-click="[saveNewQuestion(userdata._id,unitNowChanged.unitId),showBlockQuestion(false),content='',title='',tags='']">add new question</button>
     </form>
 </div>
 
