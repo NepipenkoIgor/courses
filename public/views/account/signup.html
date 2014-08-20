@@ -5,7 +5,7 @@
     <form action="/signup" method="post"    id="formsign">
         <h2 class="form-heading">Please Sign Up</h2>
         <div class="form-fields">
-            <input type="text" class="form-control" name="firstname" id="firstname" ng-keyup="validName($event,'firstname')"  placeholder="Firstname" ng-past="alert('as')">
+            <input type="text" class="form-control" name="firstname" id="firstname" ng-keyup="validName($event,'firstname')"  placeholder="Firstname" >
             <div class="alert alert-danger alertMessage" role="alert" id="alertFirstName">{{name.firstname}}</div>
 
             <input type="text" class="form-control" name="lastname" id="lastname" ng-keyup="validName($event,'lastname')"  placeholder="Lastname">
