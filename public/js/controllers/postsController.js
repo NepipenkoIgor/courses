@@ -135,13 +135,20 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         });
     };
 
-
+    function dataReg(data){
+        var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        var newDataDate = data.getDate();
+        var newDataMonth = monthNames[data.getMonth()];
+        var newDataYear = data.getFullYear();
+        return newDataDate + " " + newDataMonth + " " + newDataYear;
+    }
     $scope.addComment = function (idPost, creator, card) {
 
 
         if (card._id === idPost && this.comment !== "") {
             var date = Date.now();
-            card.comments.push({content: this.comment, creator: creator, postId: date});
+            var newDate=new Date()
+            card.comments.push({content: this.comment, creator: creator, postId: date,dataReg:dataReg(newDate)});
 
             var data = {"_id": idPost, "comments": card.comments};
             $http.post('/comment/new', data).success(function () {

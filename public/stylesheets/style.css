@@ -98,13 +98,13 @@ width: 1000px;
     overflow: hidden;
     clear: both;
     padding-bottom: 10px;
-
+margin-left: 13px;
 }
 .tag{
     background-color: crimson;
     text-decoration: none;
     color:white;
-    margin: 5px 5px;
+    margin: 3px 1px;
     padding: 5px 5px;
     border-radius: 3px;
 }
@@ -1023,10 +1023,17 @@ width: 100%;
 }
 
 .commentsCom{
+    position: relative;
     margin-top: 10px;
     margin-bottom: 10px;
 overflow: hidden;
-    background-color: ghostwhite;
+/*    background-color: ghostwhite;*/
+}
+.commentsCom .close {
+    opacity: 0.4;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .commentsCom img {
     margin: 0 0 0 5px;

@@ -448,7 +448,7 @@ body{
     display: inline-block;
     vertical-align: top;
     text-decoration: none!important;
-    margin: 0 10px;
+   /* margin: 0 10px;*/
 }
 .contentInput .btn-xs{
     padding: 0 5px;

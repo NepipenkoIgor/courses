@@ -12,13 +12,14 @@
     <img src="http://lorempixel.com/400/300/abstract" class="img" style="width: 100%">
     <div class="tagConteiner">
         <b style="float:left;margin-top: 4px;">Tags:</b>
-        <a class="tag" ng-repeat="tag in card.tags" ng-click="mother.searchByTag(tag)" style="cursor:pointer">{{tag}}</a>
+        <a class="tag" ng-repeat="tag in card.tags" ng-click="mother.searchByTag(tag)" style="cursor:pointer;font-size: x-small">{{tag}}</a>
     </div>
     <div class="commentsCom" ng-repeat="comment in card.comments" style="overflow: hidden">
         <span class="close" ng-click="mother.deleteComment(comment,card._id, card)" ng-if="mother.ifThisIsAvtor(mother.userdata,comment.creator)">X</span>
         <img ng-src="{{mother.postAvatar(comment.creator)}}">
         <div>
             <h5 style="color:red">{{mother.getCreator(comment.creator)}}</h5>
+            <p class="content" style="font-size: 10px;color: #aaa">{{comment.dataReg}}</p>
             <p class="content">{{comment.content}}</p>
         </div>
     </div>
