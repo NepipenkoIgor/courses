@@ -8,7 +8,7 @@ var Posts = mongoose.model('Posts');
 function router(app, hasUser) {
     //'use strict'
     app.post('/post/search', hasUser, function (req, res) {
-
+console.log(req.body)
         if (req.body.type === 'allposts') {
             Posts.find({}, function (err, data) {
                 //console.log("searchData", data)
@@ -19,6 +19,20 @@ function router(app, hasUser) {
             Posts.find({creator: req.body.creator}, function (err, data) {
                 //console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            });
+        }
+        if (req.body.type === 'onlyposts') {
+            Posts.find({creator: req.body.creator}, function (err, data) {
+                //console.log("searchData", data)
+                var postMass=[];
+                for(var i=0;i<data.length;i++){
+                  if(data[i].typePost===''){
+                      postMass.push(data[i]);
+                    }
+
+                }
+
+                res.json({success: !err, msg: [], data: postMass,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
         if (req.body.type === 'myquestions') {

@@ -62,7 +62,7 @@ app.controller('profile', function ($scope,$state, $http,$sce, courseEdit) {
     };
     $scope.userImgAvatar=function(img){
         img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
-        console.log(img);
+      //  console.log(img);
         return $sce.trustAsResourceUrl(img);
     }
     $scope.userAvatar = function (img) {
@@ -74,4 +74,6 @@ app.controller('profile', function ($scope,$state, $http,$sce, courseEdit) {
     $scope.profileGo=function(user){
         $state.go('editprofile',({username:user}));
     }
+   // setInterval(function(){console.log(courseEdit)},1000);
+
 });

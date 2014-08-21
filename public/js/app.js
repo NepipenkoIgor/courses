@@ -24,11 +24,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
 
     $stateProvider
-        .state('editprofile', {
-            url: "/profile/:username",
-            templateUrl: "views/account/profile.html",
-            controller: 'profile'
-        })
+
         .state('login', {
             url: "/login",
             templateUrl: "views/account/login.html"
@@ -74,6 +70,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/dashboard",
             templateUrl: "views/main/welcome.html",
             controller: ''
+        }).state('editprofile', {
+            url: "/profile/:username",
+            templateUrl: "views/account/profile.html",
+            controller: 'posts'
         }).state('course', {
             url: "/courses/:courseTitle",
             templateUrl: "views/courses/courseChenged.html",

@@ -1,4 +1,4 @@
-<div class="profile">
+<div class="profile" >
     <div class="banner"></div>
     <img ng-src="{{userImgAvatar(userdata.avatar)}}" class="avatar">
     <div class="bar">
@@ -6,14 +6,14 @@
             <h1>{{userdata.firstname}} {{userdata.lastname}}</h1>
             <ul>
                 <li>@{{userdata.username}}</li>
-                <li>
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Posts">
-                        <i class="fa fa-pencil"> 253</i>
+                <li  style="cursor: pointer" ng-click="[typeSearch('Only Posts',userdata),test()]">
+                    <a  tooltip-placement="bottom" tooltip="Posts"  >
+                        <i class="fa fa-pencil" > {{countUserPost(userdata._id)}}</i>
                     </a>
                 </li>
-                <li>
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Questions">
-                        <i class="fa fa-question"> 28</i>
+                <li ng-click="typeSearch('My Questions',userdata)" style="cursor: pointer">
+                    <a  tooltip-placement="bottom" tooltip="Questions"  >
+                        <i class="fa fa-question"> {{countUserQuestion(userdata._id)}}</i>
                     </a>
                 </li>
             </ul>
@@ -79,3 +79,6 @@
     </div>
 
 
+<div deckgrid source="postdata"
+     cardTemplate="/views/templates/deckgrid-post.html" style=""
+     class="deckgrid1" ng-if="userdata" ></div>

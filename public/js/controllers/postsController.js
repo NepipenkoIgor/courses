@@ -14,7 +14,14 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
             //      console.log("postdata",data);
             $scope.postdata = data;//.reverse();
+            courseEdit.postdata=$scope.postdata;
 
+            if ($location.$$path.split("/")[1] === 'profile') {
+                var searchObj = {};
+                searchObj.type = 'myposts';
+                searchObj.creator = courseEdit.userdata._id;
+                courseEdit.searchPosts(searchObj);
+            }
 
             if ($location.$$path === "/post/all") {
                 var searchObj = {};
@@ -37,27 +44,38 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         searchObj.typePost = "question";
                         break;
                 }
-                // console.log("courseEdit",courseEdit,"searchObj",searchObj);
+
                 courseEdit.searchPosts(searchObj);
             }
-            // console.log($scope.postdata);
-            // $scope.likes=data.likes||[];
+
             $scope.countUserPost = function (id) {
                 var count = 0;
                 if ($scope.postdata !== undefined) {
-                    for (var i = 0; i < $scope.postdata.length; i++) {
-                        if ($scope.postdata[i].creator === id) {
+                    for (var i = 0; i < courseEdit.postdata.length; i++) {
+                        if (courseEdit.postdata[i].creator === id &&courseEdit.postdata[i].typePost !== "question") {
                             count++;
                         }
                     }
                 }
                 return count;
             };
-
+            $scope.countUserQuestion = function (id) {
+                var count = 0;
+                if ($scope.postdata !== undefined) {
+                    for (var i = 0; i < courseEdit.postdata.length; i++) {
+                        if (courseEdit.postdata[i].creator === id && courseEdit.postdata[i].typePost === "question") {
+                            count++;
+                        }
+                    }
+                }
+                return count;
+            };
+            courseEdit.countUserPost = $scope.countUserPost;
 
         });
 
     }
+
 
     function reqUsers() {
         $http.get('/users').success(function (data) {
@@ -80,6 +98,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     reqUsers();
     courseEdit.reqPosts = reqPosts;
     courseEdit.reqUsers = reqUsers;
+
+
+    $scope.test = function () {
+        console.log('test');
+    };
 
 
     /************post and  comment**************/
@@ -135,24 +158,28 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         });
     };
 
-    function dataReg(data){
+    function dataReg(data) {
         var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
         var newDataDate = data.getDate();
         var newDataMonth = monthNames[data.getMonth()];
         var newDataYear = data.getFullYear();
         return newDataDate + " " + newDataMonth + " " + newDataYear;
     }
+
     $scope.addComment = function (idPost, creator, card) {
 
 
         if (card._id === idPost && this.comment !== "") {
             var date = Date.now();
-            var newDate=new Date()
-            card.comments.push({content: this.comment, creator: creator, postId: date,dataReg:dataReg(newDate)});
+            var newDate = new Date()
+            card.comments.push({content: this.comment, creator: creator, postId: date, dataReg: dataReg(newDate)});
 
             var data = {"_id": idPost, "comments": card.comments};
             $http.post('/comment/new', data).success(function () {
-
+                if ($location.$$path.split("/")[1] === 'profile') {
+                    //$scope.postdata = data.data;
+                    return;
+                }
                 reqPosts();
                 reqUsers();
 
@@ -243,16 +270,22 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     $scope.searchPosts = function (searchObj) {
         $http.post('/post/search', searchObj).success(function (data) {
+            //console.log('$location',)
+            if ($location.$$path.split("/")[1] === 'profile') {
+                $scope.postdata = data.data;
+                return;
+            }
             if (data.data !== undefined) {
                 $scope.postdata = data.data;
                 $location.url("/post/all?type=" + data.type);
+                return;
             }
 
         });
     };
     courseEdit.searchPosts = $scope.searchPosts;
+
     $scope.searchByTag = function (tag) {
-        //console.log(tag);
         var searchObj = {type: "tags", tag: tag};
         courseEdit.searchPosts(searchObj);
     };
@@ -278,50 +311,3 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
 });
 
-/*app.directive('masonrypost', function() {
- return {
- priority:0,
- restrict: 'AC',
- controller: function($scope) {
- return $scope.$watch(function(e) {
- $scope.masonry.reloadItems();
- return $scope.masonry.layout();
- *//*return $scope.postdata;*//*
- }, function(val) {
- $scope.masonry.reloadItems();
- $scope.masonry.layout();
- });
- },
- link: function(scope, elem, attrs) {
- var container=elem[0];
- var options='';
- return scope.masonry = new Masonry(container,options);
- }
- };
-
- });*/
-
-/*
- return {
- priority:0,
- restrict: 'AC',
- link: function(scope, elem, attrs) {
- var container=elem[0];
- var options={
- itemSelector: '.postConteiner'
- };
- scope.masonry = new Masonry(container,options);
-
- scope.masonry.reloadItems();
- scope.masonry.layout();
-
- scope.$watch(function(e) {
- return scope.postdata;
- }, function(val) {
- scope.masonry.reloadItems();
- scope.masonry.layout();
- });
- }
- };
-
- });*/

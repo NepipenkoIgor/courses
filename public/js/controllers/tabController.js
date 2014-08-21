@@ -848,6 +848,10 @@ console.log("dsdasdasdsd");
                 searchObj.type = 'questions';
                 searchObj.typePost = "question";
                 break;
+            case 'Only Posts':
+                searchObj.type = 'onlyposts';
+                searchObj.creator = user._id;
+                break;
         }
         courseEdit.searchPosts(searchObj);
     };
