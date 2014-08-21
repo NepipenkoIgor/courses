@@ -123,6 +123,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
             if (!courseEdit.userdata) {
+                if($location.$$path.split("/")[1]!=="/signup"||$location.$$path.split("/")[1]!=="/signup/admin")
                 $location.url("/login");
             }
             if (courseEdit.userdata) {
