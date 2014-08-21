@@ -1,13 +1,13 @@
-<div style="margin: 100px 100px;" ng-if="!userdata">
+<!--<div style="margin: 100px 100px;" ng-if="!userdata">
     <div class="jumbotron text-center">
         <p style="color:#fff;">Login or Register with:</p>
         <a href="#/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
         <a href="#/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-        <!--<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span>Sign in with Google</a>
+        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span>Sign in with Google</a>
         <a href="/auth/twitter" class="btn btn-info" ng-if="false"><span class="fa fa-twitter"></span>Sign in with Twitter</a>
-        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span>Sign in with Facebook</a>-->
+        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span>Sign in with Facebook</a>
     </div>
-</div>
+</div>-->
 <style>
     .statistic{margin: 60px 0;}
     .statistic>div{
@@ -33,7 +33,7 @@
     .statistic>div:hover h3{color: #000;}
 </style>
 
-<h3>Welcome <span style="color:#1EDAFB">{{userdata.username}}</span> ! It's your dashborad</h3>
+<h3  ng-if="userdata">Welcome <span style="color:#1EDAFB">{{userdata.username}}</span> ! It's your dashborad</h3>
 <div class="row statistic" ng-if="userdata">
     <div class="col-md-3">
         <h3>{{userdata.userlevel}}</h3>

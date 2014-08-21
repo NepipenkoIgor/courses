@@ -118,17 +118,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             };
 
 
-            if ($location.$$path.split("/")[1] === 'adminlab' && courseEdit.userdata) {
-                if (!courseEdit.userdata) {
-                    $location.url("/login");
 
-                }
+
+
+
+            if (!courseEdit.userdata) {
+                $location.url("/login");
+            }
+            if (courseEdit.userdata) {
+                if ($location.$$path.split("/")[1] === 'adminlab' && courseEdit.userdata) {
                 if (!courseEdit.userdata.position) {
                     $location.url("/dashboard");
                 }
-            }
-
-            if (courseEdit.userdata) {
+                }
                 var url = $location.$$url;
                 url = url.split("/");
 
