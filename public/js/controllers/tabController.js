@@ -118,25 +118,33 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             };
 
 
+            if ($location.$$path.split("/")[1] === 'adminlab' && courseEdit.userdata) {
+                if (!courseEdit.userdata) {
+                    $location.url("/login");
+
+                }
+                if (!courseEdit.userdata.position) {
+                    $location.url("/dashboard");
+                }
+            }
+
             if (courseEdit.userdata) {
                 var url = $location.$$url;
-                url = url.split("/")
+                url = url.split("/");
 
                 if (url[1] && url[1] === 'courses') {
-
-                    $scope.courseNowChange($scope.listOfCourses[url[2] - 1]._id);
-                    if (url[3]) {
-                        $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 1]._id);
-                        if (url[5]) {
-                            var sectionUrl = url[4].split(".");
-                            var unitUrl = url[5].split(".");
-                            //console.log(sectionUrl, unitUrl)
-                           console.log(sectionUrl, unitUrl, $scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2]-1].unitId)
-
-                          $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
-                        }
-                        if (url[5] && url[1] === 'complete') {
-console.log("dsdasdasdsd");
+                    if ($scope.listOfCourses[url[2] - 1]) {
+                        $scope.courseNowChange($scope.listOfCourses[url[2] - 1]._id);
+                        if (url[3]) {
+                            $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 1]._id);
+                            if (url[5]) {
+                                var sectionUrl = url[4].split(".");
+                                var unitUrl = url[5].split(".");
+                                $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
+                            }
+                            if (url[5] && url[1] === 'complete') {
+                               // console.log("dsdasdasdsd");
+                            }
                         }
                     }
                 }
@@ -170,7 +178,7 @@ console.log("dsdasdasdsd");
                 if ($scope.listOfCourses[i]._id === id) {
                     $scope.courseNowChanged = $scope.listOfCourses[i];
                     $scope.positionInCourse.course = i + 1;
-                    $scope.background={'background-image': 'url('+$scope.courseNowChanged.img+')'};
+                    $scope.background = {'background-image': 'url(' + $scope.courseNowChanged.img + ')'};
                     $scope.moduleNowChanged = "";
                     $state.go('course', {courseTitle: $scope.positionInCourse.course});
                     return;
@@ -191,7 +199,7 @@ console.log("dsdasdasdsd");
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
 
                 $scope.positionInCourse.module = i + 1;
-                $state.go("modules", {courseTitle: $scope.positionInCourse.course, moduleTitle: $scope.positionInCourse.module})
+                $state.go("modules", {courseTitle: $scope.positionInCourse.course, moduleTitle: $scope.positionInCourse.module});
                 $scope.dangerUnit = {};
                 $scope.dangerSection = [];
             }
@@ -240,7 +248,7 @@ console.log("dsdasdasdsd");
                         for (var t = 0; t < mass.length; t++) {
                             if (mass[t].unitId === $scope.unitNowChanged.unitId) {
                                 $scope.positionInCourse.unit = t + 1;
-                               // console.log($scope.positionInCourse.unit)
+                                // console.log($scope.positionInCourse.unit)
                             }
                         }
 
@@ -256,10 +264,10 @@ console.log("dsdasdasdsd");
                 }
 
                 /*$state.go('sectioncomplete', {
-                    courseTitle: courseEdit.positionInCourse.course,
-                    moduleTitle: courseEdit.positionInCourse.module,
-                    sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
-                });*/
+                 courseTitle: courseEdit.positionInCourse.course,
+                 moduleTitle: courseEdit.positionInCourse.module,
+                 sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
+                 });*/
                 $state.go('unit', {
                     courseTitle: courseEdit.positionInCourse.course,
                     moduleTitle: courseEdit.positionInCourse.module,
@@ -270,7 +278,7 @@ console.log("dsdasdasdsd");
                         if ($scope.unitNowChanged.lims[0].typeLim === "video") {
                             var url = $scope.unitNowChanged.lims[0].content[0];
                             url = "http:" + url + "?enablejsapi=1&playerapiid=ytplayer";
-                            var params = { allowScriptAccess: "always", wmode:"transparent"};
+                            var params = { allowScriptAccess: "always", wmode: "transparent"};
                             var atts = { id: "myytplayer" };
                             swfobject.embedSWF(url, "lessonVideoPlayer", "425", "356", "8", null, null, params, atts);
                         }
@@ -295,13 +303,13 @@ console.log("dsdasdasdsd");
                                     return;
                                 }
                             }
-                            courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata)
+                            courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
                             $scope.saveProgress($scope.unitNowChanged.unitId);
                         };
                     }
                     if ($scope.unitNowChanged.lims[0].typeLim === "static") {
                         $scope.saveProgress($scope.unitNowChanged.unitId);
-                        console.log('vupolnil');
+                        //console.log('vupolnil');
                     }
                 });
                 refresh();
@@ -445,9 +453,9 @@ console.log("dsdasdasdsd");
             return;
         }
         if ($scope.listOfUnits) {
-            for (var i = 0; i < $scope.listOfUnits.length; i++) {
-                if ($scope.listOfUnits[i].parent === sectionId) {
-                    if (courseEdit.userdata.progress.indexOf($scope.listOfUnits[i].unitId) === (-1)) {
+            for (var j = 0; j < $scope.listOfUnits.length; j++) {
+                if ($scope.listOfUnits[j].parent === sectionId) {
+                    if (courseEdit.userdata.progress.indexOf($scope.listOfUnits[j].unitId) === (-1)) {
                         return " ";
                     }
 
@@ -459,7 +467,7 @@ console.log("dsdasdasdsd");
             var index = $scope.dangerSection.indexOf(sectionId);
             $scope.dangerSection.splice(index, 1);
         }
-        if($state.current.name==='unit'){
+        if ($state.current.name === 'unit') {
             return " ";
         }
         return "complete";
@@ -467,7 +475,7 @@ console.log("dsdasdasdsd");
     };
     $scope.dangerModule = [];
     $scope.markOfCompleteModule = function (id) {
-        var moduleArr = []
+        var moduleArr = [];
         if ($scope.courseNowChanged) {
             for (var i = 0; i < $scope.courseNowChanged.modules.length; i++) {
                 moduleArr.push($scope.courseNowChanged.modules[i]._id);
@@ -501,21 +509,23 @@ console.log("dsdasdasdsd");
     /********logic of complete unit************/
 
     /*$scope.completeStatic = function (unit) {
-        $scope.saveProgress(unit.unitId);
-        $scope.nextUnit(unit);
-        *//*function timeOut() {
-            $scope.nextUnit(unit);
-        }
+     $scope.saveProgress(unit.unitId);
+     $scope.nextUnit(unit);
+     */
+    /*function timeOut() {
+     $scope.nextUnit(unit);
+     }
 
-        setTimeout(timeOut, 1500);*//*
-    };*/
+     setTimeout(timeOut, 1500);*/
+    /*
+     };*/
 
     $scope.unitNext = function (unit) {
         /*$state.go('completeSection').then(function(){
-            $location.path("/section/1/1/1/complete")
-            console.log($location.$$path)
-            //$location.url("/course/"+courseEdit.positionInCourse.course+"/"+courseEdit.positionInCourse.module+"/"+courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section+"/complete")
-        })*/
+         $location.path("/section/1/1/1/complete")
+         console.log($location.$$path)
+         //$location.url("/course/"+courseEdit.positionInCourse.course+"/"+courseEdit.positionInCourse.module+"/"+courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section+"/complete")
+         })*/
 
         for (var i = 0; i < $scope.showUnitsList(unit.parent).length; i++) {
             if (unit.unitId === $scope.showUnitsList(unit.parent)[i].unitId) {
@@ -538,14 +548,14 @@ console.log("dsdasdasdsd");
                             $scope.nextUnitBe = $scope.showUnitsList($scope.moduleNowChanged.sections[j + 1].specialId)[0];
                             $scope.nextSection = $scope.moduleNowChanged.sections[j + 1];
 
-                            $state.go('completeSection',{
+                            $state.go('completeSection', {
                                 courseTitle: courseEdit.positionInCourse.course,
                                 moduleTitle: courseEdit.positionInCourse.module,
                                 sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
                             });
 
                             //$scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[j+1].specialId)[0].unitId,$scope.moduleNowChanged.sections[j+1].specialId);
-                           // return;
+                            // return;
 
 
                         }
@@ -793,22 +803,22 @@ console.log("dsdasdasdsd");
         switch ($location.search().type) {
             case "allposts":
                 return false;
-                break;
+
             case "questions":
                 return false;
-                break;
+
             case "myposts":
                 return false;
-                break;
+
             case "myquestions":
                 return false;
-                break;
+
             case "tags":
                 return false;
-                break;
+
             case "text":
                 return false;
-                break;
+
         }
         return true;
 
@@ -883,7 +893,7 @@ console.log("dsdasdasdsd");
 
     $scope.eqvalBadges = function () {
         if (courseEdit.userdata.badges && courseEdit.listOfBadges) {
-            $scope.countBadges = 0
+            $scope.countBadges = 0;
             for (var i = 0; i < courseEdit.userdata.badges.length; i++) {
                 $scope.countBadges++;
                 courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};

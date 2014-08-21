@@ -63,10 +63,6 @@ function router(app, hasUser) {
         });
     });
 
-    /*app.get('/post/new/*',hasUser ,function (req, res) {
-        res.redirect("#/post/all");
-    });*/
-
 
 
 }

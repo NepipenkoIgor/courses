@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-if="userdata.position">
     <div class="col-md-12">
         <h1>Lesson Title : {{unitNow.title}}</h1>
 
@@ -16,7 +16,7 @@
         <hr>
     </div>
 </div>
-<div class="row" ng-switch on="typeLim.type">
+<div class="row" ng-switch on="typeLim.type" ng-if="userdata.position">
     <div class="col-md-12">
         <div ng-switch-when="video" style="padding-bottom: 50px">
 
@@ -74,7 +74,7 @@
         <hr>
     </div>
 </div>
-<div class="row">
+<div class="row" ng-if="userdata.position">
     <div class="col-md-12">
         coments/ask
     </div>

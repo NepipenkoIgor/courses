@@ -1,4 +1,4 @@
-app.controller('profile', function ($scope,$state, $http,$sce, courseEdit) {
+app.controller('profile', function ($scope,$state, $http,$sce,$location, courseEdit) {
     'user strict';
 
     $scope.reqUser=function(cb){
@@ -73,7 +73,14 @@ app.controller('profile', function ($scope,$state, $http,$sce, courseEdit) {
     };
     $scope.profileGo=function(user){
         $state.go('editprofile',({username:user}));
-    }
+    };
    // setInterval(function(){console.log(courseEdit)},1000);
+   /* if(!$scope.userdata){
+       console.log($location.$$path.split("/")[1]);
+        if($location.$$path.split("/")[1]!=='signup'){
+            $location.url("/login");
+            return;
+        }
 
+    }*/
 });

@@ -1,3 +1,4 @@
+<div ng-if="userdata.position">
 <form action="/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="fileimg" style="color: #ffffff"/>
     <input type="hidden" name="courseId" value="{{course._id}}"/>
@@ -20,6 +21,6 @@
     <button type="submit"  class="btn btn-success">upload</button>
 </form>
 <button   class="btn btn-success" style="" ng-click="savePointsMap(course)">Save point on map</button>
-
+</div>
 
 

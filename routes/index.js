@@ -5,23 +5,27 @@
 function router(app) {
 
     function isAdmin(req, res, next) {
-        console.log("USER",req.user.position)
-       // if (req.isAuthenticated()&&req.user.position) return next();
-        return next();
-        res.redirect("/#/dashboard");
-    };
+       // console.log("USER",req.user.position!==undefined)
+        if (req.isAuthenticated()&&req.user) {
+            if(req.user.position){
+                return next()
+            }
+        }
+
+        res.redirect("/#/login");
+    }
   function hasUser(req, res, next) {
     if (req.isAuthenticated()){
         return next();
     }
     res.redirect("/#/login");
-  };
+  }
  function hasAccess(req,res,next){
-     console.log(req.isAuthenticated());
+     //console.log(req.isAuthenticated());
      if (!req.isAuthenticated()) {
          return next();
      }
-     res.redirect("/#/welcome");
+     res.redirect("/#/login");
 
  }
   var google = require('./account/google')(app);
@@ -35,7 +39,7 @@ function router(app) {
     var deletePost=require('./posts/deletpost')(app,hasUser);
     var postcomment=require('./posts/postcomment')(app,hasUser);
     var postsearch=require('./posts/postsearch')(app,hasUser);
-    var subject = require('./courses/subject')(app,isAdmin);
+    var subject = require('./courses/subject')(app,isAdmin,hasUser);
   var logout=require('./account/logout')(app);
 }
 

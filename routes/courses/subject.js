@@ -9,11 +9,11 @@ var path = require('path');
 var util = require('util');
 var Stream = require('stream').Stream;
 
-function router(app, isAdmin) {
-    app.post('/upload',function (req, res) {
+function router(app, isAdmin,hasUser) {
+    app.post('/upload',isAdmin,function (req, res) {
 
         var old="public/"+req.body.oldImg;
-        console.log(old);
+      //  console.log(old);
         fs.unlink(old,function(err) {
             fs.createReadStream(req.files.fileimg.path)
                 .pipe(fs.createWriteStream("public/img/" + req.files.fileimg.originalFilename))
@@ -30,7 +30,7 @@ function router(app, isAdmin) {
 
     })
     //'use strict'
-    app.get('/courses', function (req, res) {
+    app.get('/courses',hasUser, function (req, res) {
 
         Courses.find({}, function (err, data) {
             console.log(data);
@@ -38,7 +38,7 @@ function router(app, isAdmin) {
         });
 
     });
-    app.get('/units', function (req, res) {
+    app.get('/units',hasUser, function (req, res) {
 
         Units.find({}, function (err, data) {
             console.log(data);
@@ -47,9 +47,9 @@ function router(app, isAdmin) {
 
     });
 
-    app.post('/subjects', function (req, res) {
+    app.post('/subjects',isAdmin, function (req, res) {
 
-        console.log("iam here", req.body[0]);
+       // console.log("iam here", req.body[0]);
 
 
         updateCourse(req.body[0], req.body[1], function (err) {

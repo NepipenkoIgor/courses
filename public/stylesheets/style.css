@@ -1037,9 +1037,14 @@ overflow: hidden;
 }
 .commentsCom img {
     margin: 0 0 0 5px;
-    width: 15%;
-    border-radius: 50%;
+    /*width: 15%;
+    border-radius: 50%;*/
     float: left;
+    top: 5px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
 }
 .commentsCom div{
 float: right;
@@ -1184,7 +1189,7 @@ padding: 0 5px 0 0!important;
     text-decoration: none;
     color: #fff;
 }
-.tooltip{
+.bar .tooltip.bottom{
     top:0!important;
     left:0!important;
 }
