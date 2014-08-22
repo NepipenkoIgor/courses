@@ -213,8 +213,14 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
                                 context.beginPath();
                                 context.moveTo(point[j-1].left-21,point[j-1].top+65);
+/*context.bezierCurveTo(
+        point[j-1].left-21,Math.abs(point[j].top-21+point[j-1].top+65),
+    Math.abs(point[j].left-21+point[j-1].left+65)/2,Math.abs(point[j].top-21+point[j-1].top+65)/2,
+        point[j].left-21,point[j].top+65);*/
+                               // context.quadraticCurveTo(point[j].left-21+point[j-1].left+65, point[j].top-21+point[j-1].top+65,  point[j].left-21,point[j].top+65);
                                 context.lineTo(point[j].left-21,point[j].top+65);
-                                context.lineWidth = 2;
+                                context.lineWidth = 3;
+                                context.setLineDash([6,4])
                                 context.stroke();
                             }
 
