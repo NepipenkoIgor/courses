@@ -120,7 +120,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
 
-
+/**************some rout logic***********************/
 
             if (!courseEdit.userdata) {
                 if($location.$$path.split("/")[1]!=="/signup"||$location.$$path.split("/")[1]!=="/signup/admin"){
@@ -153,9 +153,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     }
                 }
             }
-            if (courseEdit.userdata === undefined) {
+           /* if (courseEdit.userdata === undefined) {
                 $state.go("login");
-            }
+            }*/
 
 
         });
@@ -184,7 +184,44 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     $scope.positionInCourse.course = i + 1;
                     $scope.background = {'background-image': 'url(' + $scope.courseNowChanged.img + ')'};
                     $scope.moduleNowChanged = "";
-                    $state.go('course', {courseTitle: $scope.positionInCourse.course});
+                    $state.go('course', {courseTitle: $scope.positionInCourse.course}).then(function(){
+                        var drawingCanvas = document.getElementById('canvasMap');
+                        var  point=[];
+                        for(var i=0;i<$scope.courseNowChanged.modules.length;i++){
+                            point[i] =$scope.courseNowChanged.modules[i].map;
+                        }
+
+                       /* var  second=$scope.courseNowChanged.modules[1].map;
+                        var  third=$scope.courseNowChanged.modules[2].map;*/
+
+                        if(drawingCanvas && drawingCanvas.getContext) {
+                            var context = drawingCanvas.getContext('2d');
+                            $(drawingCanvas).prop('width', 900);
+                            $(drawingCanvas).prop('height', 600);
+                            context.strokeStyle = "red";
+
+
+                            for(var j=1;j<$scope.courseNowChanged.modules.length;j++){
+                               // console.log()
+                                if($scope.markOfCompleteModule($scope.courseNowChanged.modules[j-1]._id)){
+                                    if($scope.markOfCompleteModule($scope.courseNowChanged.modules[j-1]._id).color==="green"){
+                                        context.strokeStyle = "green";
+                                    }
+                                }else{
+                                    context.strokeStyle = "red";
+                                }
+
+                                context.beginPath();
+                                context.moveTo(point[j-1].left-21,point[j-1].top+65);
+                                context.lineTo(point[j].left-21,point[j].top+65);
+                                context.lineWidth = 2;
+                                context.stroke();
+                            }
+
+                            /*context.lineTo(third.left-21,third.top+63);*/
+
+                        }
+                    });
                     return;
                 }
             }
@@ -212,10 +249,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
     $scope.unitNowChange = function (id, specialId) {
-        /*      console.log("$scope.dangerSection", $scope.dangerSection);
-         console.log("$scope.dangerUnit", $scope.dangerUnit);
-         console.log("id", id);*/
-
         if ($scope.dangerSection) {
             if ($scope.dangerSection.indexOf(specialId) > 0) {
                 alert("you must complete the previous section");
@@ -229,14 +262,13 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
         }
 
-        //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         $scope.addQuestionFlag = false;
         $scope.progress.red = {};
         $scope.progress.orange = {};
         $scope.progress.green = {};
 
         for (var i = 0; i < $scope.listOfUnits.length; i++) {
-            // console.log($scope.listOfUnits[i]);
+
             if ($scope.listOfUnits[i].unitId === id) {
                 $scope.unitNowChanged = $scope.listOfUnits[i];
 
@@ -267,11 +299,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
                 }
 
-                /*$state.go('sectioncomplete', {
-                 courseTitle: courseEdit.positionInCourse.course,
-                 moduleTitle: courseEdit.positionInCourse.module,
-                 sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
-                 });*/
+
                 $state.go('unit', {
                     courseTitle: courseEdit.positionInCourse.course,
                     moduleTitle: courseEdit.positionInCourse.module,
@@ -321,7 +349,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 return;
             }
         }
-        //  $state.go('welcome');
+
     };
 
 
@@ -512,24 +540,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /********logic of complete unit************/
 
-    /*$scope.completeStatic = function (unit) {
-     $scope.saveProgress(unit.unitId);
-     $scope.nextUnit(unit);
-     */
-    /*function timeOut() {
-     $scope.nextUnit(unit);
-     }
 
-     setTimeout(timeOut, 1500);*/
-    /*
-     };*/
 
     $scope.unitNext = function (unit) {
-        /*$state.go('completeSection').then(function(){
-         $location.path("/section/1/1/1/complete")
-         console.log($location.$$path)
-         //$location.url("/course/"+courseEdit.positionInCourse.course+"/"+courseEdit.positionInCourse.module+"/"+courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section+"/complete")
-         })*/
 
         for (var i = 0; i < $scope.showUnitsList(unit.parent).length; i++) {
             if (unit.unitId === $scope.showUnitsList(unit.parent)[i].unitId) {
@@ -558,10 +571,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                 sectionTitle: courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section
                             });
 
-                            //$scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[j+1].specialId)[0].unitId,$scope.moduleNowChanged.sections[j+1].specialId);
-                            // return;
-
-
                         }
                     }
                     return;
@@ -573,12 +582,12 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
 
         }
-        //console.log(unitArr)
+
 
     };
 
     $scope.stateNow = function () {
-        //console.log($state.current)
+
         if ($state.current.name === "unit" || $state.current.name === "completeSection") {
             return true;
         }

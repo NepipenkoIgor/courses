@@ -13,7 +13,8 @@
         <p class="ng-binding">{{courseNowChanged.description}}</p>
     </div>
 
-    <div class="map" style="width: 900px;height: 600px;position: absolute; left: 0;top:10px;right: 0;margin: 0 auto">
+    <div class="map" style="width: 900px;height: 600px;position: absolute; left: 0;top:10px;right: 0;margin: 0 auto;" >
+        <canvas id="canvasMap" style="width: 900px;height: 600px;"></canvas>
         <ul>
            <li  class="ng-scope" ng-repeat="module in courseNowChanged.modules" ng-style="module.map" >
             <a ng-click="moduleNowChange(module._id)">
@@ -26,6 +27,7 @@
         </li>
 
         </ul>
+
     </div>
 
 </div>
