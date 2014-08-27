@@ -5,7 +5,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     'user strict';
     $("#blockwindow").hide();
     /**/
-
+    $scope.userNowView={};
     $scope.positionInCourse = {};
     $scope.progress = {};
 
@@ -951,9 +951,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     var notifymass = [];
     $http.get("/user/notify").success(function (data) {
         //console.log(data)
-        if(typeof data!=='string'){
+        if (typeof data !== 'string') {
             for (var i = 0; i < data.data.length; i++) {
-                console.log(data.data[i].user === courseEdit.userdata._id)
+              //  console.log(data.data[i].user === courseEdit.userdata._id)
                 if (data.data[i].user === courseEdit.userdata._id) {
                     notifymass = data.data[i].content;
                     $scope.notification = notifymass;
@@ -978,7 +978,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             if (notify.notifyId === $scope.notification[i].notifyId) {
                 $scope.number = $scope.notification[i].postId;
                 $scope.notification.splice(i, 1);
-                $http.post("/notify/delete",[notify,$scope.notification]).success(function(){
+                $http.post("/notify/delete", [notify, $scope.notification]).success(function () {
                     $state.go('refresh').then(function () {
                         $state.go('posts').then(function () {
                             $location.url("/post/all?type=notifypost&post=" + $scope.number);
@@ -989,22 +989,31 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
         }
     };
-    $scope.httpUsersList=function(){
+    $scope.httpUsersList = function () {
         $http.get('/users').success(function (data) {
 
-        $scope.listOfUsers=data;
-           // console.log("$scope.listOfUsers",$scope.listOfUsers)
+            $scope.listOfUsers = data;
+            // console.log("$scope.listOfUsers",$scope.listOfUsers)
         });
     };
     $scope.httpUsersList();
-    $scope.howIsThis=function(id){
+    $scope.howIsThis = function (id) {
 
-        if( $scope.listOfUsers){
-            for(var i=0;i<$scope.listOfUsers.length;i++) {
+        if ($scope.listOfUsers) {
+            for (var i = 0; i < $scope.listOfUsers.length; i++) {
                 if ($scope.listOfUsers[i]._id === id) {
                     return $scope.listOfUsers[i];
                 }
             }
         }
     };
+    $scope.editionType={};
+    $scope.editionType.type = false;
+    $scope.showProfileEdition = function (bool) {
+        setTimeout(function (){
+            $scope.editionType.type = !$scope.editionType.type;
+            $scope.$apply();
+        },25);
+    };
+
 });

@@ -1,19 +1,30 @@
 <div class="profile" >
     <div class="banner"></div>
-    <img ng-src="{{userImgAvatar(userdata.avatar)}}" class="avatar">
+    <img ng-src="{{userImgAvatar(userNowView.avatar)}}" class="avatar">
     <div class="bar">
         <div>
-            <h1>{{userdata.firstname}} {{userdata.lastname}}</h1>
+
+
+            <h1 ng-style="styleName(userNowView._id,userdata._id)"><div class="profEdit" style="height: 40px;display: inline-block;cursor: pointer;">
+                <a style="display: inline-block; padding: 10px 20px;display: inline-block;
+padding: 11px 20px 9px;
+line-height: 1;
+font-size: 16px;
+vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click="showProfileEdition(editionType.type)" ng-if="userNowView._id===userdata._id" >
+                    <i style="font-size: 20px;line-height: 1;" class="fa fa-pencil-square-o" > </i>
+                </a>
+            </div>
+                {{userNowView.firstname}} {{userNowView.lastname}}</h1>
             <ul>
-                <li>@{{userdata.username}}</li>
-                <li  style="cursor: pointer" ng-click="[typeSearch('Only Posts',userdata),test()]">
+                <li>@{{userNowView.username}}</li>
+                <li  style="cursor: pointer" ng-click="[typeSearch('Only Posts',userNowView),test()]">
                     <a  tooltip-placement="bottom" tooltip="Posts"  >
-                        <i class="fa fa-pencil" > {{countUserPost(userdata._id)}}</i>
+                        <i class="fa fa-pencil" > {{countUserPost(userNowView._id)}}</i>
                     </a>
                 </li>
-                <li ng-click="typeSearch('My Questions',userdata)" style="cursor: pointer">
+                <li ng-click="typeSearch('My Questions',userNowView)" style="cursor: pointer">
                     <a  tooltip-placement="bottom" tooltip="Questions"  >
-                        <i class="fa fa-question"> {{countUserQuestion(userdata._id)}}</i>
+                        <i class="fa fa-question"> {{countUserQuestion(userNowView._id)}}</i>
                     </a>
                 </li>
             </ul>
@@ -26,13 +37,34 @@
 -->
 
 
-    <div class="container" style="text-align: left" ng-if="userdata">
+    <div class="container " style="text-align: left" ng-if="editionType.type">
+    <!--    <div class="userInput">
+            <span class="title" >User Email: </span>
+            <a href="#" editable-text="userdata.email" onaftersave="postProfile(userdata)">{{ userdata.email || 'empty' }}</a>
+        </div>
+        <div class="userInput">
+            <span class="title">User password: </span>
+            <a href="#" editable-text="userdata.password" onaftersave="postProfile(userdata)">{{ userdata.password || 'empty' }}</a>
+        </div>
+        <div class="userInput">
+            <span class="title">User firstname: </span>
+            <a href="#" editable-text="userdata.firstname" onaftersave="postProfile(userdata)">{{ userdata.firstname || 'empty' }}</a>
+        </div>
+        <div class="userInput">
+            <span class="title">User lastname: </span>
+            <a href="#" editable-text="userdata.lastname" onaftersave="postProfile(userdata)">{{ userdata.lastname || 'empty' }}</a>
+        </div>
+        <div class="userInput">
+            <span class="title">User phone: </span>
+            <a href="#" editable-text="userdata.phone" onaftersave="postProfile(userdata)">{{ userdata.phone || 'empty' }}</a>
+        </div>-->
 
-        <form editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: x-large">
-            <!--<div class="userInput">
-                <span class="title">Username: </span>
-                <span editable-text="userdata.username" >{{ userdata.username || 'empty' }}</span>
-            </div>-->
+        <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: x-large">
+
+            <div class="userInput">
+                <span class="title"> Email:</span>
+                <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
+            </div>
             <div class="userInput">
                 <span class="title">User password: </span>
                 <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
@@ -47,28 +79,22 @@
             </div >
             <div class="userInput">
                 <span class="title">Phone: </span>
-                <span editable-text="userdata.birth" >{{ userdata.birth|| 'empty' }}</span>
+                <span editable-text="userdata.phone" >{{ userdata.phone|| 'empty' }}</span>
             </div>
-            <div class="userInput">
-                <span class="title"> Email:</span>
-                <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
-            </div>
-           <!-- <div class="userInput">
-                <span class="title">User name: </span>
-                <span editable-text="userdata.phone" >{{ userdata.phone || 'empty' }}</span>
-            </div>-->
+
+
             <div class="buttons">
-                <!-- button to show form -->
+
                 <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
                         ng-show="!editableForm.$visible" ng-if="userdata">
                     Edit
                 </button>
-                <!-- buttons to submit / cancel form -->
+
       <span ng-show="editableForm.$visible">
-        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" >
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="showProfileEdition()" >
             Save
         </button>
-        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="[editableForm.$cancel(),showProfileEdition()]">
             Cancel
         </button>
       </span>

@@ -58,6 +58,7 @@ app.controller('profile', function ($scope,$state, $http,$sce,$location, courseE
     $scope.postProfile = function (data) {
         $http.post('/main', data).success(function (data) {
             $scope.reqUser();
+
         });
     };
     $scope.userImgAvatar=function(img){

@@ -1193,6 +1193,31 @@ padding: 0 5px 0 0!important;
     top:0!important;
     left:0!important;
 }
+.bar h1 .profEdit .tooltip{
+    position: absolute;
+    top:100% !important;
+    left:0!important;
+
+}
+.editProfi>div{
+    margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+}
+.editProfi>div>span:first-child{
+    text-align: right;
+    width: 200px;
+    display: block;
+    float: left;
+    margin-right: 10px;
+    font-size: 25px;
+}
+.editProfi>div>form{
+    margin-top: -7px;
+}
+.editProfi>div>span+span{
+    color:#428bca;
+}
 /*.login_cont {
     width: 300px;
     margin: 0 auto;
