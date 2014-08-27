@@ -118,20 +118,18 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             };
 
 
-
-
-/**************some rout logic***********************/
+            /**************some rout logic***********************/
 
             if (!courseEdit.userdata) {
-                if($location.$$path.split("/")[1]!=="/signup"||$location.$$path.split("/")[1]!=="/signup/admin"){
+                if ($location.$$path.split("/")[1] !== "/signup" || $location.$$path.split("/")[1] !== "/signup/admin") {
                     $location.url("/login");
                 }
             }
             if (courseEdit.userdata) {
                 if ($location.$$path.split("/")[1] === 'adminlab' && courseEdit.userdata) {
-                if (!courseEdit.userdata.position) {
-                    $location.url("/dashboard");
-                }
+                    if (!courseEdit.userdata.position) {
+                        $location.url("/dashboard");
+                    }
                 }
                 var url = $location.$$url;
                 url = url.split("/");
@@ -147,15 +145,15 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                 $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
                             }
                             if (url[5] && url[1] === 'complete') {
-                               // console.log("dsdasdasdsd");
+                                // console.log("dsdasdasdsd");
                             }
                         }
                     }
                 }
             }
-           /* if (courseEdit.userdata === undefined) {
-                $state.go("login");
-            }*/
+            /* if (courseEdit.userdata === undefined) {
+             $state.go("login");
+             }*/
 
 
         });
@@ -184,43 +182,43 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     $scope.positionInCourse.course = i + 1;
                     $scope.background = {'background-image': 'url(' + $scope.courseNowChanged.img + ')'};
                     $scope.moduleNowChanged = "";
-                    $state.go('course', {courseTitle: $scope.positionInCourse.course}).then(function(){
+                    $state.go('course', {courseTitle: $scope.positionInCourse.course}).then(function () {
                         var drawingCanvas = document.getElementById('canvasMap');
-                        var  point=[];
-                        for(var i=0;i<$scope.courseNowChanged.modules.length;i++){
-                            point[i] =$scope.courseNowChanged.modules[i].map;
+                        var point = [];
+                        for (var i = 0; i < $scope.courseNowChanged.modules.length; i++) {
+                            point[i] = $scope.courseNowChanged.modules[i].map;
                         }
 
-                       /* var  second=$scope.courseNowChanged.modules[1].map;
-                        var  third=$scope.courseNowChanged.modules[2].map;*/
+                        /* var  second=$scope.courseNowChanged.modules[1].map;
+                         var  third=$scope.courseNowChanged.modules[2].map;*/
 
-                        if(drawingCanvas && drawingCanvas.getContext) {
+                        if (drawingCanvas && drawingCanvas.getContext) {
                             var context = drawingCanvas.getContext('2d');
                             $(drawingCanvas).prop('width', 900);
                             $(drawingCanvas).prop('height', 600);
                             context.strokeStyle = "red";
 
 
-                            for(var j=1;j<$scope.courseNowChanged.modules.length;j++){
-                               // console.log()
-                                if($scope.markOfCompleteModule($scope.courseNowChanged.modules[j-1]._id)){
-                                    if($scope.markOfCompleteModule($scope.courseNowChanged.modules[j-1]._id).color==="green"){
+                            for (var j = 1; j < $scope.courseNowChanged.modules.length; j++) {
+                                // console.log()
+                                if ($scope.markOfCompleteModule($scope.courseNowChanged.modules[j - 1]._id)) {
+                                    if ($scope.markOfCompleteModule($scope.courseNowChanged.modules[j - 1]._id).color === "green") {
                                         context.strokeStyle = "green";
                                     }
-                                }else{
+                                } else {
                                     context.strokeStyle = "red";
                                 }
 
                                 context.beginPath();
-                                context.moveTo(point[j-1].left-21,point[j-1].top+65);
-/*context.bezierCurveTo(
-        point[j-1].left-21,Math.abs(point[j].top-21+point[j-1].top+65),
-    Math.abs(point[j].left-21+point[j-1].left+65)/2,Math.abs(point[j].top-21+point[j-1].top+65)/2,
-        point[j].left-21,point[j].top+65);*/
-                               // context.quadraticCurveTo(point[j].left-21+point[j-1].left+65, point[j].top-21+point[j-1].top+65,  point[j].left-21,point[j].top+65);
-                                context.lineTo(point[j].left-21,point[j].top+65);
+                                context.moveTo(point[j - 1].left - 21, point[j - 1].top + 65);
+                                /*context.bezierCurveTo(
+                                 point[j-1].left-21,Math.abs(point[j].top-21+point[j-1].top+65),
+                                 Math.abs(point[j].left-21+point[j-1].left+65)/2,Math.abs(point[j].top-21+point[j-1].top+65)/2,
+                                 point[j].left-21,point[j].top+65);*/
+                                // context.quadraticCurveTo(point[j].left-21+point[j-1].left+65, point[j].top-21+point[j-1].top+65,  point[j].left-21,point[j].top+65);
+                                context.lineTo(point[j].left - 21, point[j].top + 65);
                                 context.lineWidth = 3;
-                                context.setLineDash([6,4])
+                                context.setLineDash([6, 4])
                                 context.stroke();
                             }
 
@@ -881,6 +879,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 searchObj.type = 'onlyposts';
                 searchObj.creator = user._id;
                 break;
+            case 'notifypost':
+                searchObj.type = 'notifypost';
+                searchObj.post = $scope.number;
+                break;
         }
         courseEdit.searchPosts(searchObj);
     };
@@ -946,5 +948,63 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $scope.showQuestionBlock = bool;
     };
 
+    var notifymass = [];
+    $http.get("/user/notify").success(function (data) {
+        //console.log(data)
+        if(typeof data!=='string'){
+            for (var i = 0; i < data.data.length; i++) {
+                console.log(data.data[i].user === courseEdit.userdata._id)
+                if (data.data[i].user === courseEdit.userdata._id) {
+                    notifymass = data.data[i].content;
+                    $scope.notification = notifymass;
+                    return;
+                }
+            }
+            $scope.notification = notifymass;
+        }
+    });
 
+    var socket = io("http://localhost");
+    socket.on("notify", function (data) {
+        if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id) {
+            notifymass.push(data);
+            $scope.$apply();
+        }
+        socket.emit('my other event', { my: 'data' });
+    });
+
+    $scope.clickNotify = function (notify) {
+        for (var i = 0; i < $scope.notification.length; i++) {
+            if (notify.notifyId === $scope.notification[i].notifyId) {
+                $scope.number = $scope.notification[i].postId;
+                $scope.notification.splice(i, 1);
+                $http.post("/notify/delete",[notify,$scope.notification]).success(function(){
+                    $state.go('refresh').then(function () {
+                        $state.go('posts').then(function () {
+                            $location.url("/post/all?type=notifypost&post=" + $scope.number);
+
+                        });
+                    });
+                });
+            }
+        }
+    };
+    $scope.httpUsersList=function(){
+        $http.get('/users').success(function (data) {
+
+        $scope.listOfUsers=data;
+           // console.log("$scope.listOfUsers",$scope.listOfUsers)
+        });
+    };
+    $scope.httpUsersList();
+    $scope.howIsThis=function(id){
+
+        if( $scope.listOfUsers){
+            for(var i=0;i<$scope.listOfUsers.length;i++) {
+                if ($scope.listOfUsers[i]._id === id) {
+                    return $scope.listOfUsers[i];
+                }
+            }
+        }
+    };
 });

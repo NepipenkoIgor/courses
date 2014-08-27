@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
+var Notify = mongoose.model('Notify');
 function dataReg(data){
     var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
     var newDataDate = data.getDate();
@@ -10,7 +11,7 @@ function dataReg(data){
     var newDataYear = data.getFullYear();
     return newDataDate + " " + newDataMonth + " " + newDataYear;
 }
-function router(app, hasUser) {
+function router(app, hasUser,io) {
     'use strict'
     app.post('/post/new', hasUser, function (req, res) {
         console.log(req.body);
@@ -57,11 +58,38 @@ function router(app, hasUser) {
         });
     });
     app.post('/postslikes',hasUser ,function (req, res) {
-        console.log(req.body);
+        console.log(req.body.userHowLike);
        Posts.update({_id:req.body._id},{$set:{likes:req.body.likes}},function (err, num) {
-            res.json(num);
+if(req.body.post){
+           Notify.find({user: req.body.post.creator}, function (err, data) {
+               var notify;
+               notify = {notifyId: Date.now(), type: "+1 your post", creatorOfPost: req.body.post.creator, postId: req.body._id, creatorComment: req.body.userHowLike};
+               if (req.body.post.typePost === "question") {
+                   notify.type = "+1 your question";
+               }
+               if (data.length > 0) {
+                   Notify.update({user: req.body.post.creator}, {$push: {content: notify}}, function (num) {
+                       io.sockets.emit("notify", notify);
+                       res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                   });
+                   return;
+               } else {
+                   Notify.create({user: req.body.post.creator, content: [notify]}, function (num) {
+                       io.sockets.emit("notify", notify);
+                       res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                   });
+                   return;
+               }
+
+           });
+       }
+
         });
     });
+
+
+
+
 
 
 

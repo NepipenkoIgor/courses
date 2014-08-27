@@ -43,6 +43,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         searchObj.type = 'questions';
                         searchObj.typePost = "question";
                         break;
+                    case 'notifypost':
+                        searchObj.type = 'notifypost';
+                        searchObj.post = $location.search().post;
+                        break;
+
                 }
 
                 courseEdit.searchPosts(searchObj);
@@ -174,7 +179,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             var newDate = new Date()
             card.comments.push({content: this.comment, creator: creator, postId: date, dataReg: dataReg(newDate)});
 
-            var data = {"_id": idPost, "comments": card.comments};
+            var data = {"_id": idPost, "comments": card.comments,creator:card.creator,creatorComment:creator,typePost:card.typePost};
             $http.post('/comment/new', data).success(function () {
                 if ($location.$$path.split("/")[1] === 'profile') {
                     //$scope.postdata = data.data;
@@ -247,10 +252,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     /****************logic of likes*******************/
 
-    $scope.like = function (userId, arrayLikes, postId) {
+    $scope.like = function (userId, arrayLikes, postId,post) {
         if (arrayLikes.indexOf(userId) === (-1)) {
             arrayLikes.push(userId);
-            $scope.updateLikes(postId, arrayLikes);
+            $scope.updateLikes(postId, arrayLikes,userId,post);
             return;
         }
         for (var i = 0; i < arrayLikes.length; i++) {
@@ -261,8 +266,8 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             }
         }
     };
-    $scope.updateLikes = function (postId, likes) {
-        var date = {_id: postId, likes: likes};
+    $scope.updateLikes = function (postId, likes,userId,post) {
+        var date = {_id: postId, likes: likes,userHowLike:userId,post:post};
         $http.post('/postslikes', date).success(function (num) {
         });
     };

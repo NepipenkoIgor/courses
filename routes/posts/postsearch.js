@@ -53,6 +53,12 @@ console.log(req.body)
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
+        if (req.body.type === 'notifypost') {
+            Posts.find({_id:req.body.post},function(err,data){
+                //console.log("UNWINDDDDDD",data);
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            });
+        }
         if (req.body.type === 'text') {
             //console.log(req.body);
             /*Posts.find({$text:{ $search:req.body.text }},function(err,data){

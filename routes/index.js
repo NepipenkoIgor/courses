@@ -2,7 +2,7 @@
  * Created by Игорь on 17.06.2014.
  */
 
-function router(app) {
+function router(app,io) {
 
     function isAdmin(req, res, next) {
        // console.log("USER",req.user.position!==undefined)
@@ -35,12 +35,13 @@ function router(app) {
   var user = require('./account/user')(app,hasUser);
   var main = require('./account/main')(app,hasUser);
   var autorization=require('./account/autorization')(app,hasAccess);
-  var newPost=require('./posts/newpost')(app,hasUser);
+  var newPost=require('./posts/newpost')(app,hasUser,io);
     var deletePost=require('./posts/deletpost')(app,hasUser);
-    var postcomment=require('./posts/postcomment')(app,hasUser);
+    var postcomment=require('./posts/postcomment')(app,hasUser,io);
     var postsearch=require('./posts/postsearch')(app,hasUser);
     var subject = require('./courses/subject')(app,isAdmin,hasUser);
   var logout=require('./account/logout')(app);
+    var notify=require('./notify/notify')(app,hasUser);
 }
 
 module.exports = router;

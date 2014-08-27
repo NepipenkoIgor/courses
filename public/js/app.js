@@ -91,5 +91,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/courses/unitChenged.html"
 
+        }).state('refresh', {
+            url: "/refresh",
+            templateUrl: "views/main/refresh.html"
+
         });
 });

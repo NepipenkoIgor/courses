@@ -14,72 +14,108 @@
 <button onclick="play()">play</button>-->
 <canvas id="map" width="800" height="600" style="border: solid 2px red">
 
-</canvas >
+</canvas>
 
 <script type="text/javascript">
 
-  /*  var params = { allowScriptAccess: "always" };
-    var atts = { id: "myytplayer" };
-    swfobject.embedSWF("http://www.youtube.com/v/5-RszQzQCvg?enablejsapi=1&playerapiid=ytplayer",
-            "ytapiplayer", "425", "356", "8", null, null, params, atts);
-    function play() {
-        if (ytplayer) {
-            ytplayer.playVideo();
-        }
-    }
-    function onYouTubePlayerReady(playerId) {
-        console.log("gotov",playerId)
-        ytplayer = document.getElementById("myytplayer");
-        console.log(ytplayer.getDuration())
-        //ytplayer.addEventListener("onStateChange","onytplayerStateChange");
-    }
-    function onytplayerStateChange(newState) {
-        if(newState===0){
-            console.log("conec")
-        }
-    }*/
-  window.onload = function() {
-      var drawingCanvas = document.getElementById('map');
-      if(drawingCanvas && drawingCanvas.getContext) {
-          var context = drawingCanvas.getContext('2d');
-          // Рисуем окружность
-       /*   context.strokeStyle = "#000";
-          context.fillStyle = "#fc0";
-          context.beginPath();
-          context.arc(100,100,50,0,Math.PI*2,true);
-          context.closePath();
-          context.stroke();
-          context.fill();
-          // Рисуем левый глаз
-          context.fillStyle = "#fff";
-          context.beginPath();
-          context.arc(84,90,8,0,Math.PI*2,true);
-          context.closePath();
-          context.stroke();
-          context.fill();
-          // Рисуем правый глаз
-          context.beginPath();
-          context.arc(116,90,8,0,Math.PI*2,true);
-          context.closePath();
-          context.stroke();
-          context.fill();
-          // Рисуем рот
-          context.beginPath();
-          context.moveTo(70,115);
-          context.quadraticCurveTo(100,130,130,115);
-          context.quadraticCurveTo(100,150,70,115);
-          context.closePath();
-          context.stroke();
-          context.fill();*/
+    /*  var params = { allowScriptAccess: "always" };
+     var atts = { id: "myytplayer" };
+     swfobject.embedSWF("http://www.youtube.com/v/5-RszQzQCvg?enablejsapi=1&playerapiid=ytplayer",
+     "ytapiplayer", "425", "356", "8", null, null, params, atts);
+     function play() {
+     if (ytplayer) {
+     ytplayer.playVideo();
+     }
+     }
+     function onYouTubePlayerReady(playerId) {
+     console.log("gotov",playerId)
+     ytplayer = document.getElementById("myytplayer");
+     console.log(ytplayer.getDuration())
+     //ytplayer.addEventListener("onStateChange","onytplayerStateChange");
+     }
+     function onytplayerStateChange(newState) {
+     if(newState===0){
+     console.log("conec")
+     }
+     }*/
+    window.onload = function () {
+        /*    var drawingCanvas = document.getElementById('map');
+         if(drawingCanvas && drawingCanvas.getContext) {
+         var context = drawingCanvas.getContext('2d');*/
+        // Рисуем окружность
+        /*   context.strokeStyle = "#000";
+         context.fillStyle = "#fc0";
+         context.beginPath();
+         context.arc(100,100,50,0,Math.PI*2,true);
+         context.closePath();
+         context.stroke();
+         context.fill();
+         // Рисуем левый глаз
+         context.fillStyle = "#fff";
+         context.beginPath();
+         context.arc(84,90,8,0,Math.PI*2,true);
+         context.closePath();
+         context.stroke();
+         context.fill();
+         // Рисуем правый глаз
+         context.beginPath();
+         context.arc(116,90,8,0,Math.PI*2,true);
+         context.closePath();
+         context.stroke();
+         context.fill();
+         // Рисуем рот
+         context.beginPath();
+         context.moveTo(70,115);
+         context.quadraticCurveTo(100,130,130,115);
+         context.quadraticCurveTo(100,150,70,115);
+         context.closePath();
+         context.stroke();
+         context.fill();*/
+        var canvas = document.getElementById('map');
+        var context = canvas.getContext('2d');
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius = 150;
 
-          context.strokeStyle = "#000";
-          context.beginPath();
-          context.moveTo(0,0);
-          context.lineTo(800,600);
-          context.stroke();
-      }
+        context.beginPath();
+        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = 'green';
+        context.fill();
+        context.lineWidth = 5;
+        context.strokeStyle = '#003300';
+        context.stroke();
+        /* for(var i=1;i<7;i++){
+         context.strokeStyle = "blue";
+         context.moveTo(centerX,centerY);
+         context.lineTo(centerX+Math.cos(i*Math.PI/3)*150,centerY-Math.sin(i*Math.PI/3)*150)
+         context.stroke();
+         }*/
+        var i = 0;
+        var canvas = document.getElementById('map');
+        var context = canvas.getContext('2d');
+        function colesso() {
 
-  }
+            context.strokeStyle = "blue";
+            context.moveTo(centerX, centerY);
+            context.lineTo(centerX + Math.cos(i * Math.PI / 3) * 150, centerY - Math.sin(i * Math.PI / 3) * 150)
+            context.stroke();
+            i++;
+            if (i > 6) {
+                for(var j=1;j<7;j++){
+                    context.strokeStyle = "green";
+                    context.moveTo(centerX,centerY);
+                    context.lineTo(centerX+Math.cos(j*Math.PI/3)*150,centerY-Math.sin(j*Math.PI/3)*150)
+                    context.stroke();
+                }
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                i = 0;
+            }
+
+        }
+        setInterval(colesso, 500)
+        //   }
+
+    }
 </script>
 </body>
 </html>
