@@ -964,7 +964,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
     });
 
-    var socket = io("http://localhost");
+    var socket = io();
     socket.on("notify", function (data) {
         if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id) {
             notifymass.push(data);
