@@ -724,17 +724,17 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 topMargin = target.offsetTop;
                 margin.left = event.pageX + mapDiv.offsetLeft;
                 pos.left = event.pageX;
-                if (margeL != undefined) {
+                if (margeL !== undefined) {
                     margeL = event.pageX;
                 }
                 pos.top = event.pageY;
                 drag = true;
                 document.ondragstart = function () {
                     return false;
-                }
+                };
                 document.body.onselectstart = function () {
                     return false;
-                }
+                };
                 return false;
             }
         }
@@ -760,7 +760,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             if (dragObject) {
                 var el = dragObject.cloneNode(true);
                 var parent = document.getElementById("mapDiv");
-                parent.appendChild(el)
+                parent.appendChild(el);
                 dragObject.remove();
                 dragObject = null;
 
@@ -775,7 +775,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                     el.style.left = event.pageX - fullConteiner.offsetLeft - mapDiv.offsetLeft - 35 + "px";
                     el.style.top = event.pageY - pos.top + topMargin + "px";
                 }
-                onMap = false
+                onMap = false;
                 mapDiv = {};
                 pos = {};
                 margin = {};
@@ -801,7 +801,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
     $scope.savePointsMap = function (course) {
         var node = document.getElementById("mapDiv");
-        var objPointMap = {}
+        var objPointMap = {};
         for (var i = 0; i < node.childNodes.length; i++) {
 
             if (node.childNodes[i].nodeType !== 3 && node.childNodes[i].nodeType !== 8) {
@@ -827,7 +827,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         }
 
         for (var i = 0; i < course.modules.length; i++) {
-            course.modules[i].map = objPointMap[i + 1]
+            course.modules[i].map = objPointMap[i + 1];
         }
 
         $scope.saveCourse();

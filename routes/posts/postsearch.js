@@ -8,15 +8,25 @@ var Posts = mongoose.model('Posts');
 function router(app, hasUser) {
     //'use strict'
     app.post('/post/search', hasUser, function (req, res) {
-console.log(req.body)
+        console.log(req.body)
+
         if (req.body.type === 'allposts') {
-            Posts.find({}, function (err, data) {
+            Posts.find({}).sort({postId:-1}).exec(function (err, data) {
                 //console.log("searchData", data)
+                console.log("searchData", data)
+                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            });
+        }
+        if(req.body.type === 'popular'){
+            Posts.find({}).sort({likesNum:-1}).lean().exec(function (err, data) {
+                console.log("searchData", data)
+
+                //data=data;
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }
         if (req.body.type === 'myposts') {
-            Posts.find({creator: req.body.creator}, function (err, data) {
+            Posts.find({creator: req.body.creator}).sort({postId:-1}).exec(function (err, data) {
                 //console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
@@ -60,14 +70,11 @@ console.log(req.body)
             });
         }
         if (req.body.type === 'text') {
-            //console.log(req.body);
-            /*Posts.find({$text:{ $search:req.body.text }},function(err,data){
-                res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
-            });*/
+
             Posts.find({},function(err,data){
-                //console.log("req.body.text",req.body.text)
+
                 var textSearch=req.body.text.split(" ");
-               // console.log(textSearch)
+
                 var strSerch="";
                 for(var i=0;i<textSearch.length;i++){
                     if(i!==(textSearch.length-1)){
@@ -98,7 +105,6 @@ console.log(req.body)
   app.get('/post/all', hasUser, function (req, res) {
       var urlMass=req.url.split("?");
       if(urlMass[1]){
-console.log(urlMass[1]);
           return;
       }
       res.redirect("/#/post/all");

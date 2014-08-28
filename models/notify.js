@@ -8,7 +8,4 @@ var notifySchema=new Schema({
     user:String,
     content:[]
 });
-//postSchema.plugin(textSearch);
-//postSchema.index({content:"text"});
-
 mongoose.model('Notify',notifySchema);

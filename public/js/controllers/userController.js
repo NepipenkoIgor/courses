@@ -63,9 +63,9 @@ app.controller('profile', function ($scope,$state, $http,$sce,$location, courseE
     };
     $scope.userImgAvatar=function(img){
         img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
-      //  console.log(img);
+
         return $sce.trustAsResourceUrl(img);
-    }
+    };
     $scope.userAvatar = function (img) {
         img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
         var background = "url('" + img + "') center";
@@ -75,13 +75,5 @@ app.controller('profile', function ($scope,$state, $http,$sce,$location, courseE
     $scope.profileGo=function(user){
         $state.go('editprofile',({username:user}));
     };
-   // setInterval(function(){console.log(courseEdit)},1000);
-   /* if(!$scope.userdata){
-       console.log($location.$$path.split("/")[1]);
-        if($location.$$path.split("/")[1]!=='signup'){
-            $location.url("/login");
-            return;
-        }
 
-    }*/
 });

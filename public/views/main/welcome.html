@@ -8,7 +8,7 @@
         <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span>Sign in with Facebook</a>
     </div>
 </div>-->
-<style>
+<!--<style>
     .statistic{margin: 60px 0;}
     .statistic>div{
         text-align: center;
@@ -66,7 +66,57 @@
 </div>
 
 
-            <!--<div ng-repeat="badge in listOfBadges" ng-style="eqvalBadges(badge.badgeId)" >
-            <img ng-src="{{badge.img}}" />
-            </div>-->
-<div deckgrid source="listOfBadges" cardTemplate="views/templates/deckgrid-card.html" class="deckgrid" ng-if="userdata" ></div>
+
+<div deckgrid source="listOfBadges" cardTemplate="views/templates/deckgrid-card.html" class="deckgrid" ng-if="userdata" ></div>-->
+
+
+<div class="general_cont dashboard ng-scope">
+    <div class="banner2">
+        <h1 class="ng-binding">Welcome <!-- ngIf: !first_visit --><span ng-if="!first_visit" class="ng-scope">back </span>{{userdata.username}}</h1>
+    </div>
+    <div class="row stats">
+        <div class="col-md-4 points">
+            <h1 class="ng-binding">{{pointsCalculate(userdata.progress)}}</h1>
+            <div class="title">
+                <h2>Points</h2>
+            </div>
+        </div>
+        <div class="col-md-4 course_progress">
+            <canvas width="300" height="200" data-round-progress-model="user_progress"></canvas>
+            <div class="title">
+                <h2>Progress</h2>
+            </div>
+        </div>
+        <div class="col-md-4 comm">
+            <div class="nums">
+                <div>
+                    <div class="num ng-binding">
+                        {{countUserPost(userdata._id)}}
+                    </div>
+                    <i class="fa fa-pencil"></i>
+                    <h3>Posts</h3>
+                </div>
+                <div>
+                    <div class="num ng-binding">
+                        {{countUserQuestion(userdata._id)}}
+                    </div>
+                    <i class="fa fa-question"></i>
+                    <h3>Questions</h3>
+                </div>
+            </div>
+            <div class="title">
+                <h2>Community</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row acheive row-centered">
+        <div class="col-md-2 abadge col-centered ng-scope" ng-repeat="badge in listOfBadges" ng-style="badge.opasity||{'opacity':0.5}">
+        <img ng-src="{{badge.img}}" tooltip="{{badge.name}}" tooltip-placement="top" class="ng-scope">
+        <h3 class="ng-binding">{{badge.description}}</h3>
+    </div>
+
+        <div class="col-md-12 title">
+            <h2>Acheivements</h2>
+        </div>
+    </div>
+</div>

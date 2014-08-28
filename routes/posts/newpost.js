@@ -28,7 +28,8 @@ function router(app, hasUser,io) {
            Post.created=dataReg(newData);
            Post.lesson=req.body.unit;
            Post.typePost=req.body.typePost||"";
-           if(req.body.tags){
+           Post.postId=Date.now();
+           /*if(req.body.tags){
 
                var tags=req.body.tags.split(",");
                var resTags=[];
@@ -39,7 +40,8 @@ function router(app, hasUser,io) {
                    }
                }
            }
-           Post.tags=resTags||null;
+           Post.tags=resTags||null;*/
+           Post.tags=req.body.tags;
            // console.log("postNew", postNew);
            Post.save(function (err, post) {
                console.log("good new post");
@@ -59,7 +61,7 @@ function router(app, hasUser,io) {
     });
     app.post('/postslikes',hasUser ,function (req, res) {
         console.log(req.body.userHowLike);
-       Posts.update({_id:req.body._id},{$set:{likes:req.body.likes}},function (err, num) {
+       Posts.update({_id:req.body._id},{$set:{likes:req.body.likes,likesNum:req.body.likesNum}},function (err, num) {
 if(req.body.post){
            Notify.find({user: req.body.post.creator}, function (err, data) {
                var notify;

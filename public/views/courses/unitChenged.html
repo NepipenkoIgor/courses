@@ -112,7 +112,10 @@
         </div>
         <div class="form-group">
             <label>tags</label>
-            <input type="textarea" class="form-control" ng-model="tags">
+            <tags-input ng-model="tags">
+
+            </tags-input>
+            <!--<input type="textarea" class="form-control" ng-model="tags">-->
         </div>
         <button type="" class="btn btn-success btn-lg" ng-click="[saveNewQuestion(userdata._id,unitNowChanged.unitId),showBlockQuestion(false),content='',title='',tags='']">add new question</button>
     </form>

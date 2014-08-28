@@ -27,6 +27,13 @@
    <!-- <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+
+    <script src="javascripts/ng-tags-input.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/ng-tags-input.css">
+
+    <script src="javascripts/ng-infinite-scroll.min.js"></script>
+
+
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular-animate.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
    <script src="javascripts/jslayot/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -40,6 +47,7 @@
     <script src="javascripts/xeditable.min.js"></script>
     <script src="javascripts/angular-deckgrid.js"></script>
    <script src="javascripts/ng-flow-standalone.min.js"></script>
+    <script src="javascripts/elastic.js"></script>
   <!--  <script src="javascripts/provider.js"></script>-->
     <!--  <script src="javascripts/flow.js"></script>-->
     <!--<script src="javascripts/angular-animate.min.js"></script>-->
@@ -81,6 +89,10 @@
                         <img ng-src="{{userImgAvatar(userdata.avatar)}}">
                         <div class="notify_num notify_user_num progress-bar-danger" ng-show="notification.length>0">
                             <p>{{notification.length}}</p>
+                        </div>
+
+                        <div class="notify_num notify_user_num progress-bar-danger" ng-show="notification.length===0">
+                            <i class="fa fa-bell-o icon2"  ></i>
                         </div>
                     </div>
                     <span class="ng-binding">{{userdata.username}}</span>

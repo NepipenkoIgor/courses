@@ -890,7 +890,7 @@ width: 100%;
     left: 60%;
     width: 40%;
     height: 50%;
-    background: url(../img/star_bk.jpg) 0px -10px;
+   /* background: url(../img/star_bk.jpg) 0px -10px;*/
     color: #fff;
 }
 .module_complete_cont .map h1 {
@@ -998,8 +998,11 @@ width: 100%;
     padding: 0;
 }
 .footer li {
+    text-align: center;
     float: left;
-    padding: 5px 10%;
+    /*padding: 5px 10%;*/
+    padding: 5px 0;
+    width: 33%;
 }
 .comments {
     position: relative;
@@ -1046,9 +1049,12 @@ overflow: hidden;
     height: 30px;
     border-radius: 15px;
 }
-.commentsCom div{
+/*.commentsCom div{
 float: right;
     width: 80%;
+}*/
+.footer1 li {
+    margin-bottom: 15px;
 }
 .commentsCom h5{
     margin: 0 0 5px;
@@ -1218,714 +1224,161 @@ padding: 0 5px 0 0!important;
 .editProfi>div>span+span{
     color:#428bca;
 }
-/*.login_cont {
-    width: 300px;
-    margin: 0 auto;
-}
 
 
-.tall {
-    width: 200px;
-    height: 2000px;
-    background: #999;
-}
+/* ******************   Dashboard **********************  */
 
-.sidemenu {
-    width: 110px;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1001;
-}
+/*.general_cont {*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*right: 110px;*/
+/*}*/
 
-.sidemenu .open:before {
-    content: "";
-    height: 0px;
-    position: absolute;
-    left: 0px;
-    top: 20px;
-    width: 0px;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid #4e5d6c;
-}
-
-body,
-.menu_cont {
-    margin: 0;
-    padding: 0;
-    color: #cfcfcf;
-}
-
-*//************** User Menu *****************//*
-
-.notify {
-    height: 50px;
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid #1f2f3f;
-}
-
-.notify .notify_viewall {
-    background: #7C8C9C;
-    text-align: center;
-    cursor: pointer;
-    color: #ddd;
-}
-
-.notify .notify_viewall:hover {
-    background: #657585;
-    color: #eee;
-}
-
-.notify .notify_viewall p {
-    padding-top: 5px;
-    font-size: 16px;
-}
-
-.user_menu {
-    position: relative;
-}
-
-.open .notify_user_num {
-    display: none;
-}
-
-.notify a {
-    text-decoration: none;
-}
-
-.notify a .user_menu span {
-    line-height: 50px;
-    color: #ddd;
-    margin-left: 60px;
-}
-
-.avatar {
-    width: 34px;
-    height: 34px;
-    top: 8px;
-    left: 8px;
-    position: absolute;
-}
-
-.avatar img {
-    border-radius: 34px;
-    width: 34px;
-    height: 34px;
-}
-
-.notify .dropdown-menu {
-    width: 200px;
-    left: -200px;
-    top: 0;
-    padding: 0;
-}
-
-.notify_num {
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-radius: 10px;
+.dashboard {
     text-align: center;
 }
 
-.notify_num p {
-    font-size: 11px;
+.banner2 {
+    height: 272px;
     color: #fff;
-    line-height: 15px;
+    background: url("../img/back.svg");
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -21px;
+    padding-top: 93px;
+}
+
+
+.banner2 h1 {
+    line-height: 180px;
     margin: 0;
-    padding: 0;
-}
-
-.list-group-item {
-    text-align: left;
-}
-
-.icon {
-    width: 50px;
-    height: 50px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    line-height: 50px;
-    font-size: 20px;
-}
-
-
-
-*//************** Main Menu *****************//*
-.menu {
-    position: relative;
-}
-
-
-.menu a {
-    text-decoration: none;
-    height: 50px;
-    display: block;
-    position: relative;
-    line-height: 50px;
-}
-
-.menu a h4 {
-    width: 60px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    line-height: inherit;
-    font-size: 16px;
-    position: absolute;
-    top: 0;
-    left: 10px;
-}
-
-.menu a i {
-    position: absolute;
-    top: 17px;
-    left: 70px;
-    font-size: 17px;
-}
-
-.tool_menu {
-    height: 50px;
-    width: 150px;
-}
-
-.main_menu,
-.tool_menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.main_menu li,
-.main_menu li a,
-.tool_menu li,
-.tool_menu li a {
-    width: 50px;
-    height: 50px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    float: left;
-    color: #ddd;
-    position: initial;
-}
-
-.main_menu li a i,
-.tool_menu li a i {
-    position: initial;
-}
-
-.main_menu li i,
-.tool_menu li i {
-    line-height: 50px;
-    font-size: 20px;
-}
-
-.tool_menu {
-    display: none;
-}
-
-.tools:hover + ul.tool_menu,
-.tools:hover + div + ul.tool_menu,
-.tool_menu:hover {
-    display: block;
-}
-
-.tools:hover {
-
-}
-
-.notify .open,
-.menu_cont .open {
-
-}
-
-.menu .dropdown-menu {
-    top: 0px;
-    min-width: 150px;
-    left: -150px;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    background: none;
-}
-
-.course_menu {
-    position: relative;
-}
-
-.mod_title {
-    height: 50px;
-    border-top: 1px solid #1f2f3f;
-}
-
-*//* Course Map icon *//*
-.mod_title i {
-    width: 25px;
-    height: 25px;
-    background-color: #1f2f3f;
-    border-radius: 15px;
-    color: #ddd;
-    text-align: center;
-    line-height: 27px;
-    font-size: 16px;
-    margin: 12.5px 5px;
-}
-
-.mod_title i:hover {
-    background-color: #17222e;
-}
-
-.mod_title h4 {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    position: absolute;
-    top: 0;
-    left: 40px;
-    line-height: 50px;
-    height: 50px;
-}
-
-.section_menu ul li {
-
-}
-
-.course_menu ul,
-.course_menu ul ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.course_menu .section_menu li {
-    position: relative;
-}
-
-.course_menu .section_menu li a:hover {
-    text-decoration: none;
-}
-
-.course_menu .section_menu > li > a > h4 {
-    font-size: 15px;
-    color: #ddd;
-    margin: 0;
-    padding: 15px 0 2px 12px;
-}
-
-.course_menu .section_menu li h4:nth-child(2) {
-    padding: 2px 0 15px 12px;
-}
-
-.course_menu .section_menu > li:hover {
-    background-color: #1f2f3f;
-}
-
-.course_menu .section_menu > li:hover:before {
-    content: "";
-    height: 0px;
-    position: absolute;
-    left: 0px;
-    top: 40%;
-    width: 0px;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid #4e5d6c;
-}
-
-.course_menu .section_menu li div.course_sub_menu {
-    display: none;
-    position: absolute;
-    top: 0px;
-    right: 110px;
-}
-
-.course_menu .section_menu li:hover div.course_sub_menu {
-    display: block;
-}
-
-.course_menu .section_menu > li.active:hover:after,
-.section_menu li.active:before,
-.course_sub_menu li.active:before {
-    content: "\f017";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    *//*--adjust as necessary--*//*
-    color: #a5342a;
-    font-size: 14px;
-    position: absolute;
-    top: 4px;
-    left: 2px;
-}
-
-.course_menu .section_menu > li.complete:hover:after,
-.section_menu li.complete:before,
-.course_sub_menu li.complete:before {
-    content: "\f00c";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    *//*--adjust as necessary--*//*
-    color: #4fa544;
-    font-size: 14px;
-    position: absolute;
-    top: 4px;
-    left: 2px;
-}
-
-.section_menu li.complete h4,
-.course_sub_menu li.complete,
-.course_sub_menu li.complete i {
-    color: #888;
-}
-
-.course_sub_menu li.active {
-    color: #fff;
-}
-
-.course_sub_menu {
-    width: 194px;
-    background-color: #4e5d6c;
-    text-align: left;
-    border-left: 4px solid #0e151d;
-}
-
-.course_sub_menu ul {
-    background-color: #36414D;
-}
-
-.course_sub_menu ul li {
-    width: auto;
-    height: 40px;
-    border-top: 1px solid #17222e;
-}
-
-.course_sub_menu ul li a {
-    font-size: 16px;
-    text-align: left;
-    padding-left: 10px;
-    height: 40px;
-    line-height: 40px;
-    color: #aaa;
-}
-
-.course_sub_menu ul li a:hover {
-    text-decoration: none;
-}
-
-.course_sub_menu ul li:hover {
-    background-color: #17222e;
-}
-
-.course_sub_menu h5 {
-    margin: 0;
-    padding: 0;
-    padding-left: 15px;
-    line-height: 50px;
-    height: 50px;
-    font-size: 16px;
-}
-
-.course_sub_menu > p {
-    background-color: #0e151d;
-    font-size: 14px;
-    color: #ddd;
-    line-height: 18px;
-    padding: 5px;
-    margin: 0;
-}
-
-.course_sub_menu ul li i {
-    font-size: 14px;
-    padding-right:10px;
-}
-
-
-.user_but,
-.menu_but,
-.settings_but,
-.logout_but {
-    cursor: pointer;
-}
-
-#editor {
-    width: 600px;
-    height: 400px;
-}
-
-.logout_but {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 55px;
-    height: 50px;
-    text-align: center;
-}
-
-.logout_but:hover,
-.options:hover {
-    background-color: #15202B;
-}
-
-.options {
-    position: absolute;
-    bottom: 0;
-    width: 55px;
-}
-
-.options a {
-    width: 110px;
-    height: 50px;
-    display: block;
-}
-
-.options h4 {
-    width: 60px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    line-height: inherit;
-    font-size: 14px;
-    position: absolute;
-    top: 15px;
-    left: 40px;
-}
-
-.options .dropdown-menu {
-    min-width: 100px;
-    left: -100px;
-    top: 0px;
-    padding: 0;
-}
-
-
-
-.dropdown a {
-    outline: none;
-}
-
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
-.content {
-    *//* position: relative;
-    width: calc(100% - 110px);
-    height: 100%; *//*
-}
-
-
-*//************** Course *****************//*
-
-*//** Course map **//*
-
-.course_map_cont {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 110px;
-    background: url(../img/star_bk.jpg);
-}
-
-.course_map_cont .title {
-    position: absolute;
-    bottom: 15%;
-    right: 5%;
-    width: 45%;
-}
-
-.course_map_cont .map ul {
-    list-style-type: none;
-}
-
-.course_map_cont .map ul li {
-    position: absolute;
-}
-
-*//***************** Marker Positions *******************//*
-
-.course_map_cont .map ul li:nth-child(1) {
-    top: 50%;
-    left: 25%;
-}
-
-.course_map_cont .map ul li:nth-child(2) {
-    top: 40%;
-    left: 65%;
-}
-
-.course_map_cont .map ul li i {
-    font-size: 50px;
-    color: red;
-    position: absolute;
-    top: 20px;
-    left: -35px;
-    transition: all 0.2s;
-}
-
-.course_map_cont .map ul li h4 {
-    font-size: 18px;
-    color: #bbb;
-    transition: all 0.2s;
-}
-
-.course_map_cont .map ul li p {
-    font-size: 14px;
-    color: #bbb;
-    margin-top: -10px;
-    transition: all 0.2s;
-}
-
-.course_map_cont .map ul li a {
-    font-size: 10px;
-    color: #bbb;
-    margin-top: -10px;
-}
-
-.course_map_cont .map ul li a:hover {
-    text-decoration: none;
-}
-
-.course_map_cont .map ul li .marker:hover i {
-    font-size: 56px;
-    color: red;
-    top: 17px;
-    left: -38px;
-}
-
-.course_map_cont .map ul li .marker:hover h4,
-.course_map_cont .map ul li .marker:hover p {
-    color: #fff;
-}
-
-*//** Module start **//*
-
-.module_start_cont {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 110px;
-}
-
-.module_start_cont .left {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-}
-
-.module_start_cont .left .course_title {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 100%;
-}
-
-.module_start_cont .left .course_title h1 {
-    margin: 0 0 0 10%;
-    padding: 0;
-    line-height: 170px;
     font-size: 50px;
 }
 
-.module_start_cont .left .map_cont {
-    background: #0e151d;
-    background: url(../img/star_bk.jpg);
-    height: 100%;
+.stats h1 {
+    margin: 0;
 }
 
-.module_start_cont .left .map_cont .marker_cont {
-    position: absolute;
-    top: 45%;
-    left: 30%;
-}
-
-.module_start_cont .left .map_cont .marker {
-    position: relative;
-}
-
-.module_start_cont .left .map_cont i {
-    font-size: 110px;
-    color: red;
-    position: absolute;
-    top: 50px;
-    left: -75px;
-}
-
-.module_start_cont .right {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    background: #aaa;
-}
-
-.module_start_cont .right .section_cont {
-    margin: 20% 10% 0 20%;
-}
-
-.module_start_cont .right .section_cont h2 {
-    font-size: 50px;
-    color: #333;
-}
-
-.module_start_cont .right .section_list {
-    list-style-type: none;
-}
-
-.module_start_cont .right .section_list li {
-    padding: 10px;
-    color: #333;
-}
-
-.module_start_cont .right .section_list li h4 {
-    font-size: 35px;
-}
-
-.module_start_cont .right .section_list li p {
-    font-size: 25px;
-    margin-left: 40px;
-}
-
-
-.module_start_cont .start {
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    width: 250px;
+.stats > div {
+    background: #4e5d6c;
     height: 250px;
-    background: #eee;
-    border-radius: 130px;
-    text-align: center;
-    line-height: 250px;
-    font-size: 70px;
-    color: #666;
-    margin: -125px 0 0 -125px;
-    transition: all 0.2s;
+    position: relative;
 }
 
-.module_start_cont .start:hover {
-    background: #fff;
-    width: 260px;
-    height: 260px;
-    line-height: 260px;
-    font-size: 75px;
-    color: #222;
-    margin: -130px 0 0 -130px;
-}*/
+.stats > div > .title {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+}
 
-/** Section template **/
+.title h2 {
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 100;
+    margin: 0 0 15px 0;
+    letter-spacing: 3px;
+}
 
+.stats .points h1 {
+    line-height: 200px;
+    font-size: 150px;
+    color: #DBDB6E;
+}
+
+.comm .nums {
+    padding-top: 40px;
+}
+
+.comm .nums > div {
+    width: 75%;
+    margin: 0 auto;
+    height: 50px;
+    background: red;
+    margin-bottom: 30px;
+    text-align: left;
+    position: relative;
+}
+
+.comm .nums > div:nth-child(1) {
+    background: #3FA6C0;
+}
+
+.comm .nums > div:nth-child(2) {
+    background: #C03F3F;
+}
+
+.comm .nums .num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 75px;
+    height: 50px;
+    background: #313F4E;
+    line-height: 50px;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+}
+
+.comm .nums i {
+    position: absolute;
+    top: 0;
+    left: 75px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    color: #fff;
+    text-align: center;
+    font-size: 25px;
+}
+
+.comm .nums h3 {
+    position: absolute;
+    top: 0;
+    left: 125px;
+    height: 50px;
+    margin: 0;
+    line-height: 50px;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+}
+
+.abadge {
+    padding-top: 50px;
+}
+
+.abadge img {
+    width: 100px;
+    height: 100px;
+}
+
+.abadge h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 100;
+    margin-top: -3px;
+}
+
+.acheive .title h2 {
+    padding-top: 25px;
+}
+.acheive div{
+    float: none;
+}
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    /* inline-block space fix */
+    margin-right:-4px;
+}
 
 

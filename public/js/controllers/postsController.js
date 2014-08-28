@@ -5,8 +5,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     'user strict';
 
     /****************config post**********************/
-        // $location.$$path="/post/all?type=question"
-//console.log($location)
+
     $scope.comment = "";
     $scope.postdata = [];
     function reqPosts() {
@@ -26,7 +25,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
             if ($location.$$path === "/post/all") {
                 var searchObj = {};
-                // console.log("courseEdit",courseEdit.userdata._id);
                 switch ($location.search().type) {
                     case 'allposts':
                         searchObj.type = 'allposts';
@@ -48,9 +46,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         searchObj.type = 'notifypost';
                         searchObj.post = $location.search().post;
                         break;
-
+                    case 'popular':
+                        searchObj.type = 'popular';
+                        break;
                 }
-
                 courseEdit.searchPosts(searchObj);
             }
 
@@ -87,7 +86,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         $http.get('/users').success(function (data) {
             $scope.postUsersdata = data;
 
-            var loc = $location.$$path.split("/")
+            var loc = $location.$$path.split("/");
             if (loc[1] === 'profile') {
                 if (loc[2]) {
                     for (var i = 0; i < data.length; i++) {
@@ -130,29 +129,28 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     courseEdit.reqUsers = reqUsers;
 
 
-    $scope.test = function () {
-        console.log('test');
-    };
-
 
     /************post and  comment**************/
 
 
     $scope.deletePost = function (id) {
-        for (var i = 0; i < $scope.postdata.length; i++) {
-            if ($scope.postdata[i]._id === id) {
+        if(confirm("you really want to delete?????")){
+            for (var i = 0; i < $scope.postdata.length; i++) {
+                if ($scope.postdata[i]._id === id) {
 
-                $scope.postdata.splice(i, 1);
+                    $scope.postdata.splice(i, 1);
 
-                var id = {"_id": id};
-                $http.post('/post/delete', id).success(function () {
+                    var id = {"_id": id};
+                    $http.post('/post/delete', id).success(function () {
 
-                    reqPosts();
-                    reqUsers();
-                });
+                        reqPosts();
+                        reqUsers();
+                    });
+                }
+
             }
-
         }
+
     };
     $scope.deleteComment = function (comment, id, card) {
         for (var j = 0; j < card.comments.length; j++) {
@@ -172,16 +170,15 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     };
 
     /********save post**********/
-
+    $scope.tags = [];
 
     $scope.saveNewPost = function (creator) {
-        courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata)
+        console.log($scope.tags)
+        courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
         var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
         $http.post('/post/new', newPost).success(function (data) {
-
             reqPosts();
             $state.go('posts').then(function () {
-                console.log("goood redirect")
                 $location.url("/post/all?type=allposts");
 
             });
@@ -201,7 +198,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
         if (card._id === idPost && this.comment !== "") {
             var date = Date.now();
-            var newDate = new Date()
+            var newDate = new Date();
             card.comments.push({content: this.comment, creator: creator, postId: date, dataReg: dataReg(newDate)});
 
             var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost};
@@ -232,9 +229,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     };
     $scope.saveNewQuestion = function (creator, unit) {
-        courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata)
-        var tag = courseEdit.positionInCourse.course + "." + courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit;
-        var newQuestion = {title: $scope.title, content: $scope.content, tags: tag + "," + $scope.tags, creator: creator, unit: unit, typePost: "question"};
+        courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
+        $scope.tags.unshift({"text":courseEdit.positionInCourse.course + "." + courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit});
+console.log($scope.tags)
+        var newQuestion = {title: $scope.title, content: $scope.content, tags:  $scope.tags, creator: creator, unit: unit, typePost: "question"};
         $http.post('/post/new', newQuestion).success(function (data) {
             // $scope.showQuestionBlock=false;
             reqPosts();
@@ -292,7 +290,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         }
     };
     $scope.updateLikes = function (postId, likes, userId, post) {
-        var date = {_id: postId, likes: likes, userHowLike: userId, post: post};
+        var date = {_id: postId, likes: likes, userHowLike: userId, post: post,likesNum:likes.length};
         $http.post('/postslikes', date).success(function (num) {
         });
     };
@@ -300,14 +298,29 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     $scope.searchPosts = function (searchObj) {
         $http.post('/post/search', searchObj).success(function (data) {
-            //console.log('$location',)
+
             if ($location.$$path.split("/")[1] === 'profile') {
                 $scope.postdata = data.data;
                 return;
             }
             if (data.data !== undefined) {
-                $scope.postdata = data.data;
+
+                $scope.postdata=data.data;
                 $location.url("/post/all?type=" + data.type);
+
+                if(data.type==="popular"){
+                    $scope.postdata.push([null])
+                    setTimeout(function(){
+                        $scope.postdata.splice($scope.postdata.length-1,1);
+                        $scope.$apply();
+                    },4);
+                    return
+                }
+                $scope.postdata.push([null])
+                setTimeout(function(){
+                    $scope.postdata.splice($scope.postdata.length-1,1);
+                    $scope.$apply();
+                },4);
                 return;
             }
 
@@ -330,7 +343,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         if (bool) {
             document.getElementById("post").checked = true;
             document.getElementById("question").checked = false;
-            $scope.typeCheck = true
+            $scope.typeCheck = true;
             return;
         }
         document.getElementById("post").checked = false;

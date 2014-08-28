@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/1/14.
  */
-var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate','akoenig.deckgrid',]);
+var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate','akoenig.deckgrid','monospaced.elastic','ngTagsInput','infinite-scroll']);
 app.run(function(editableOptions) {
     'use strict';
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -69,7 +69,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state('dashboard', {
             url: "/dashboard",
             templateUrl: "views/main/welcome.html",
-            controller: ''
+            controller: 'posts'
         }).state('editprofile', {
             url: "/profile/:username",
             templateUrl: "views/account/profile.html",

@@ -7,6 +7,7 @@ var Schema=mongoose.Schema;
 var postSchema=new Schema({
     title:String,
     creator:String,
+    postId:Number,
     created:String,
     lesson:Number,
     votes:[
@@ -19,6 +20,7 @@ var postSchema=new Schema({
     tags:[],
     comments:[],
     likes:[],
+    likesNum:Number,
     replies:[
         {creator:String},
         {created:Date},

@@ -38,10 +38,7 @@ app.controller('mainMenu', function ($scope, $http, $state,courseEdit) {
             ]}
         ]};
         $scope.units = [
-            {parent: specialId, title: "unit1", unitId: specialId},
-            /*{parent: specialId, title: "unit2", unitId: specialId+200},
-            {parent: specialId, title: "unit3", unitId: specialId+300},
-            {parent: specialId, title: "unit4", unitId: specialId+400}*/
+            {parent: specialId, title: "unit1", unitId: specialId}
         ];
         var data = [
             {action: 'edit'},
@@ -51,7 +48,6 @@ app.controller('mainMenu', function ($scope, $http, $state,courseEdit) {
             $scope.unitsNew
         ];
         $http.post('/subjects', data).success(function (data) {
-            console.log(data);
             $state.go('adminlab.lesson.module', {courseTitle: "New Course"});
             courseEdit.initTab();
             //init()
