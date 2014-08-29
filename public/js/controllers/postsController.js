@@ -364,8 +364,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
             courseEdit.totalPointsOfAllCourse()
             //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
+            console.log(courseEdit.pointsCalculate(user.progress),courseEdit.totalPointsOfAllCourse())
             var attitude = courseEdit.pointsCalculate(user.progress) / courseEdit.totalPointsOfAllCourse();
             console.log(attitude)
+            if(isNaN(attitude)){
+                attitude=0;
+            }
             var progressProcent = Math.round(attitude * 100);
             var arcle = attitude * 2 * Math.PI;
             var rotation;
