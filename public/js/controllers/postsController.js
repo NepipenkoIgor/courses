@@ -350,7 +350,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         $scope.typeCheck = false;
     };
     $http.get("/user").success(function(user){
-        console.log(user)
+        $scope.user=user;
+
+        $http.get("/units").success(function(list){
+        console.log(list)
         var progressCanvas = document.getElementById("progreesCanvas");
         if (progressCanvas) {
 
@@ -364,11 +367,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
             courseEdit.totalPointsOfAllCourse()
             //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
-            console.log(courseEdit.pointsCalculate(user.progress),courseEdit.totalPointsOfAllCourse())
-            var attitude = courseEdit.pointsCalculate(user.progress) / courseEdit.totalPointsOfAllCourse();
+            console.log(courseEdit.pointsCalculate($scope.user.progress), courseEdit.totalPointsOfAllCourse(list))
+            var attitude = courseEdit.pointsCalculate($scope.user.progress) / courseEdit.totalPointsOfAllCourse(list);
             console.log(attitude)
-            if(isNaN(attitude)){
-                attitude=0;
+            if (isNaN(attitude)) {
+                attitude = 0;
             }
             var progressProcent = Math.round(attitude * 100);
             var arcle = attitude * 2 * Math.PI;
@@ -399,6 +402,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             progressContext.fillStyle = 'white';
             progressContext.fillText(progressProcent, x, y);
         }
+        })
     })
 
     /*

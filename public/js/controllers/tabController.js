@@ -386,14 +386,14 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /*** calculate point and progress****/
 
-    $scope.totalPointsOfAllCourse = function () {
+    $scope.totalPointsOfAllCourse = function (list) {
         var totalPoints = 0;
-        if($scope.listOfUnits){
-            for (var i = 0; i < $scope.listOfUnits.length; i++) {
-                if ($scope.listOfUnits[i].lims[0]) {
+        if(list){
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].lims[0]) {
 
-                    if (!$scope.listOfUnits[i].lims[0].points) {
-                        $scope.listOfUnits[i].lims[0].points = 0;
+                    if (!list[i].lims[0].points) {
+                        list[i].lims[0].points = 0;
                     }
                 } else {
                     totalPoints += 0;
@@ -951,19 +951,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     count = count + $scope.listOfUnits[i].lims[0].points;
                 }
             }
-            return count;
-        }else{
-            $http.get("/units").success(function(listOfUnits){
-                for (var i = 0; i < listOfUnits.length; i++) {
-                    if (userProgresArr.indexOf(listOfUnits[i].unitId) !== (-1)) {
-                        count = count + listOfUnits[i].lims[0].points;
-                    }
-                }
-                return count;
-            })
         }
 
-
+        return count;
     };
     courseEdit.pointsCalculate = $scope.pointsCalculate;
 
