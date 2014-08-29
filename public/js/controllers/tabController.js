@@ -951,9 +951,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     count = count + $scope.listOfUnits[i].lims[0].points;
                 }
             }
+            return count;
+        }else{
+            $http.get("/units").success(function(listOfUnits){
+                for (var i = 0; i < listOfUnits.length; i++) {
+                    if (userProgresArr.indexOf(listOfUnits[i].unitId) !== (-1)) {
+                        count = count + listOfUnits[i].lims[0].points;
+                    }
+                }
+                return count;
+            })
         }
 
-        return count;
+
     };
     courseEdit.pointsCalculate = $scope.pointsCalculate;
 
