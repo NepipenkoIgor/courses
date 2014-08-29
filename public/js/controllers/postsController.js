@@ -349,50 +349,54 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         document.getElementById("question").checked = true;
         $scope.typeCheck = false;
     };
-    var progressCanvas = document.getElementById("progreesCanvas");
-    if (progressCanvas) {
+    $http.get("/user").success(function(user){
+        console.log(user)
+        var progressCanvas = document.getElementById("progreesCanvas");
+        if (progressCanvas) {
 
-        var progressContext = progressCanvas.getContext('2d');
+            var progressContext = progressCanvas.getContext('2d');
 
-        progressContext.beginPath();
-        progressContext.arc(150, 100, 80, 0, 2 * Math.PI);
-        progressContext.strokeStyle = '#313F4E';
-        progressContext.lineWidth = 20;
-        progressContext.stroke();
+            progressContext.beginPath();
+            progressContext.arc(150, 100, 80, 0, 2 * Math.PI);
+            progressContext.strokeStyle = '#313F4E';
+            progressContext.lineWidth = 20;
+            progressContext.stroke();
 
-        courseEdit.totalPointsOfAllCourse()
-        //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
-        var attitude = courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse();
-        console.log(attitude)
-        var progressProcent = Math.round(attitude * 100);
-        var arcle = attitude * 2 * Math.PI;
-        var rotation;
-        if (arcle < 0.5) {
-            rotation = 1.5 * Math.PI + arcle;
-        }
-        if (arcle > 0.5) {
-            rotation = arcle - 0.5 * Math.PI;
-        }
-        //console.log(arcle);
-        progressContext.beginPath();
-        progressContext.arc(150, 100, 80, 1.5 * Math.PI, rotation);
-        progressContext.strokeStyle = 'green';
-        progressContext.lineWidth = 20;
-        progressContext.stroke();
-        var x, y;
+            courseEdit.totalPointsOfAllCourse()
+            //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
+            var attitude = courseEdit.pointsCalculate(user.progress) / courseEdit.totalPointsOfAllCourse();
+            console.log(attitude)
+            var progressProcent = Math.round(attitude * 100);
+            var arcle = attitude * 2 * Math.PI;
+            var rotation;
+            if (arcle < 0.5) {
+                rotation = 1.5 * Math.PI + arcle;
+            }
+            if (arcle > 0.5) {
+                rotation = arcle - 0.5 * Math.PI;
+            }
+            //console.log(arcle);
+            progressContext.beginPath();
+            progressContext.arc(150, 100, 80, 1.5 * Math.PI, rotation);
+            progressContext.strokeStyle = 'green';
+            progressContext.lineWidth = 20;
+            progressContext.stroke();
+            var x, y;
 
-        if (progressProcent < 10) {
-            x = 125;
-            y = 125;
+            if (progressProcent < 10) {
+                x = 125;
+                y = 125;
+            }
+            if (progressProcent > 10) {
+                x = 103;
+                y = 125;
+            }
+            progressContext.font = ' 70pt Calibri';
+            progressContext.fillStyle = 'white';
+            progressContext.fillText(progressProcent, x, y);
         }
-        if (progressProcent > 10) {
-            x = 103;
-            y = 125;
-        }
-        progressContext.font = ' 70pt Calibri';
-        progressContext.fillStyle = 'white';
-        progressContext.fillText(progressProcent, x, y);
-    }
+    })
+
     /*
      $scope.remove=$scope.postdata.splice(0,5)*/
     /*
