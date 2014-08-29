@@ -91,12 +91,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 if (loc[2]) {
                     for (var i = 0; i < data.length; i++) {
                         if (data[i].username === loc[2]) {
-                            if (data[i]._id ===$scope.userdata._id) {
+                            if (data[i]._id === $scope.userdata._id) {
                                 $scope.userNowView = $scope.userdata;
                                 break;
                             }
                             $scope.userNowView = data[i];
-                            $scope.editionType.type=false;
+                            $scope.editionType.type = false;
                             break;
                         }
                     }
@@ -129,12 +129,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     courseEdit.reqUsers = reqUsers;
 
 
-
     /************post and  comment**************/
 
 
     $scope.deletePost = function (id) {
-        if(confirm("you really want to delete?????")){
+        if (confirm("you really want to delete?????")) {
             for (var i = 0; i < $scope.postdata.length; i++) {
                 if ($scope.postdata[i]._id === id) {
 
@@ -230,9 +229,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     };
     $scope.saveNewQuestion = function (creator, unit) {
         courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
-        $scope.tags.unshift({"text":courseEdit.positionInCourse.course + "." + courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit});
-console.log($scope.tags)
-        var newQuestion = {title: $scope.title, content: $scope.content, tags:  $scope.tags, creator: creator, unit: unit, typePost: "question"};
+        $scope.tags.unshift({"text": courseEdit.positionInCourse.course + "." + courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit});
+        console.log($scope.tags)
+        var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit, typePost: "question"};
         $http.post('/post/new', newQuestion).success(function (data) {
             // $scope.showQuestionBlock=false;
             reqPosts();
@@ -290,7 +289,7 @@ console.log($scope.tags)
         }
     };
     $scope.updateLikes = function (postId, likes, userId, post) {
-        var date = {_id: postId, likes: likes, userHowLike: userId, post: post,likesNum:likes.length};
+        var date = {_id: postId, likes: likes, userHowLike: userId, post: post, likesNum: likes.length};
         $http.post('/postslikes', date).success(function (num) {
         });
     };
@@ -305,22 +304,22 @@ console.log($scope.tags)
             }
             if (data.data !== undefined) {
 
-                $scope.postdata=data.data;
+                $scope.postdata = data.data;
                 $location.url("/post/all?type=" + data.type);
 
-                if(data.type==="popular"){
+                if (data.type === "popular") {
                     $scope.postdata.push([null])
-                    setTimeout(function(){
-                        $scope.postdata.splice($scope.postdata.length-1,1);
+                    setTimeout(function () {
+                        $scope.postdata.splice($scope.postdata.length - 1, 1);
                         $scope.$apply();
-                    },4);
+                    }, 4);
                     return
                 }
                 $scope.postdata.push([null])
-                setTimeout(function(){
-                    $scope.postdata.splice($scope.postdata.length-1,1);
+                setTimeout(function () {
+                    $scope.postdata.splice($scope.postdata.length - 1, 1);
                     $scope.$apply();
-                },4);
+                }, 4);
                 return;
             }
 
@@ -350,7 +349,77 @@ console.log($scope.tags)
         document.getElementById("question").checked = true;
         $scope.typeCheck = false;
     };
+    var progressCanvas = document.getElementById("progreesCanvas");
+    if (progressCanvas) {
 
+        var progressContext = progressCanvas.getContext('2d');
 
+        progressContext.beginPath();
+        progressContext.arc(150, 100, 80, 0, 2 * Math.PI);
+        progressContext.strokeStyle = '#313F4E';
+        progressContext.lineWidth = 20;
+        progressContext.stroke();
+
+        courseEdit.totalPointsOfAllCourse()
+        //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
+        var attitude = courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse();
+        console.log(attitude)
+        var progressProcent = Math.round(attitude * 100);
+        var arcle = attitude * 2 * Math.PI;
+        var rotation;
+        if (arcle < 0.5) {
+            rotation = 1.5 * Math.PI + arcle;
+        }
+        if (arcle > 0.5) {
+            rotation = arcle - 0.5 * Math.PI;
+        }
+        //console.log(arcle);
+        progressContext.beginPath();
+        progressContext.arc(150, 100, 80, 1.5 * Math.PI, rotation);
+        progressContext.strokeStyle = 'green';
+        progressContext.lineWidth = 20;
+        progressContext.stroke();
+        var x, y;
+
+        if (progressProcent < 10) {
+            x = 125;
+            y = 125;
+        }
+        if (progressProcent > 10) {
+            x = 103;
+            y = 125;
+        }
+        progressContext.font = ' 70pt Calibri';
+        progressContext.fillStyle = 'white';
+        progressContext.fillText(progressProcent, x, y);
+    }
+    /*
+     $scope.remove=$scope.postdata.splice(0,5)*/
+    /*
+     $scope.myPagingFunction=function(){
+     $scope.postdata=$scope.postdata.concat($scope.postdata)
+     console.log($scope.postdata)
+     }*/
+
+    /*$scope.hidePosts = function (numPost, numTrue) {
+
+        if (numPost < numTrue) {
+            return true;
+        }
+        return false;
+    };
+    $scope.numTrue=2;
+    var scrolling = 800;
+    window.onscroll = function (event) {
+        // console.log(scrolling,window.scrollY)
+        if (scrolling < window.scrollY) {
+            console.log(event, window.scrollY)
+            scrolling += 800;
+            $scope.numTrue+=3
+            $scope.postdata.splice(0,7);
+            $scope.$apply()
+        }
+
+    }*/
 });
 

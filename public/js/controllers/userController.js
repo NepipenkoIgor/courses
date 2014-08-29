@@ -76,4 +76,6 @@ app.controller('profile', function ($scope,$state, $http,$sce,$location, courseE
         $state.go('editprofile',({username:user}));
     };
 
+/****on support by browser*****/
+
 });

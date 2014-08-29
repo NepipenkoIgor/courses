@@ -5,7 +5,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     'user strict';
     $("#blockwindow").hide();
     /**/
-    $scope.userNowView={};
+    $scope.userNowView = {};
     $scope.positionInCourse = {};
     $scope.progress = {};
 
@@ -25,95 +25,95 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
     /*********** develop badge config*-*****************/
     $scope.listOfBadges = [
-       {
-      "badgeId":0,
-      'name':'Complete Module',
-      'img':'img/badges/download.png',
-      'description':'module 1'
-      },
+        {
+            "badgeId": 0,
+            'name': 'Complete Module',
+            'img': 'img/badges/download.png',
+            'description': 'module 1'
+        },
         {
 
             "badgeId": 1,
-            'name':'Make a post',
-            'img':'img/badges/first.png',
-            'description':'First Post'
+            'name': 'Make a post',
+            'img': 'img/badges/first.png',
+            'description': 'First Post'
         },
         {
 
             "badgeId": 2,
-            'name':'Ask a question',
-            'img':'img/badges/first.png',
-            'description':'First Question'
+            'name': 'Ask a question',
+            'img': 'img/badges/first.png',
+            'description': 'First Question'
         },
         {
             "badgeId": 3,
-            'name':'50 Answers',
-            'img':'img/badges/answer.png',
-            'description':'Helper'
+            'name': '50 Answers',
+            'img': 'img/badges/answer.png',
+            'description': 'Helper'
         }
     ];
     /*$scope.listOfBadges = [
-        {
-            "badgeId": 0,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first lesson "
-        },
-        {
-            "badgeId": 1,
-            "img": "http://www.auplod.com/u/oupdal37d51.png",
-            "description": "your first answer for quiz"
-        },
-        {
-            "badgeId": 2,
-            "img": "http://www.auplod.com/u/dalopu37d54.png",
-            "description": "your first viewed video"
-        },
-        {
-            "badgeId": 3,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first post"
-        },
-        {
-            "badgeId": 4,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first question"
-        },
-        {
-            "badgeId": 5,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first lesson"
-        },
-        {
-            "badgeId": 0,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first lesson"
-        },
-        {
-            "badgeId": 1,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first answer for quiz sgdfghh hhhhhh hhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhh hhhhhhh hhhhhh hhhhhhhhhhh hhhhhh hhhhhh hhhhhhhh"
-        },
-        {
-            "badgeId": 2,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first viewed video"
-        },
-        {
-            "badgeId": 3,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first post dsgdfghhhhhh hhhhhhhhh hhhhhhhhh hhhhhhhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhhhh hhhhhh"
-        },
-        {
-            "badgeId": 4,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first question"
-        },
-        {
-            "badgeId": 5,
-            "img": "http://www.auplod.com/u/lpauod37c05.png",
-            "description": "your first lesson"
-        }
-    ];*/
+     {
+     "badgeId": 0,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first lesson "
+     },
+     {
+     "badgeId": 1,
+     "img": "http://www.auplod.com/u/oupdal37d51.png",
+     "description": "your first answer for quiz"
+     },
+     {
+     "badgeId": 2,
+     "img": "http://www.auplod.com/u/dalopu37d54.png",
+     "description": "your first viewed video"
+     },
+     {
+     "badgeId": 3,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first post"
+     },
+     {
+     "badgeId": 4,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first question"
+     },
+     {
+     "badgeId": 5,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first lesson"
+     },
+     {
+     "badgeId": 0,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first lesson"
+     },
+     {
+     "badgeId": 1,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first answer for quiz sgdfghh hhhhhh hhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhh hhhhhhh hhhhhh hhhhhhhhhhh hhhhhh hhhhhh hhhhhhhh"
+     },
+     {
+     "badgeId": 2,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first viewed video"
+     },
+     {
+     "badgeId": 3,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first post dsgdfghhhhhh hhhhhhhhh hhhhhhhhh hhhhhhhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhhhh hhhhhh"
+     },
+     {
+     "badgeId": 4,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first question"
+     },
+     {
+     "badgeId": 5,
+     "img": "http://www.auplod.com/u/lpauod37c05.png",
+     "description": "your first lesson"
+     }
+     ];*/
 
     courseEdit.listOfBadges = $scope.listOfBadges;
 
@@ -318,9 +318,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
                 courseEdit.unitNowChanged = $scope.unitNowChanged;
 
-               /* if (courseEdit.listOfBadges && courseEdit.userdata) {
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
-                }*/
+                /* if (courseEdit.listOfBadges && courseEdit.userdata) {
+                 courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
+                 }*/
 
 
                 $state.go('unit', {
@@ -386,7 +386,23 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /*** calculate point and progress****/
 
+    $scope.totalPointsOfAllCourse = function () {
+        var totalPoints = 0;
+        for (var i = 0; i < $scope.listOfUnits.length; i++) {
+            if ($scope.listOfUnits[i].lims[0]) {
 
+                if (!$scope.listOfUnits[i].lims[0].points) {
+                    $scope.listOfUnits[i].lims[0].points = 0;
+                }
+            } else {
+                totalPoints += 0;
+                continue;
+            }
+            totalPoints += $scope.listOfUnits[i].lims[0].points;
+        }
+        return totalPoints;
+    };
+    courseEdit.totalPointsOfAllCourse = $scope.totalPointsOfAllCourse;
 
     $scope.totalSectionPoint = function (sectionId) {
         var totalPoints = 0;
@@ -423,7 +439,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 realpointsOfSection += $scope.listOfUnits[i].lims[0].points;
             }
         }
-
+        courseEdit.realpointsOfSection = realpointsOfSection;
         var percentage = realpointsOfSection / totalPoints;
 
         if (percentage >= 0 && percentage < 0.4) {
@@ -865,7 +881,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
 
-    $scope.searchType = ['All Posts', 'My Posts', 'My Questions', 'Only Questions','Popular'];
+    $scope.searchType = ['All Posts', 'My Posts', 'My Questions', 'Only Questions', 'Popular'];
     $scope.search = {
         type: "All Posts"
     };
@@ -936,13 +952,18 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
         return count;
     };
+    courseEdit.pointsCalculate = $scope.pointsCalculate;
+
 
     $scope.eqvalBadges = function () {
         if (courseEdit.userdata.badges && courseEdit.listOfBadges) {
             $scope.countBadges = 0;
             for (var i = 0; i < courseEdit.userdata.badges.length; i++) {
                 $scope.countBadges++;
-                courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};
+                if (courseEdit.listOfBadges[courseEdit.userdata.badges[i]]) {
+                    courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};
+                }
+
             }
         }
 
@@ -980,7 +1001,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         //console.log(data)
         if (typeof data !== 'string') {
             for (var i = 0; i < data.data.length; i++) {
-              //  console.log(data.data[i].user === courseEdit.userdata._id)
+                //  console.log(data.data[i].user === courseEdit.userdata._id)
                 if (data.data[i].user === courseEdit.userdata._id) {
                     notifymass = data.data[i].content;
                     $scope.notification = notifymass;
@@ -993,7 +1014,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     var socket = io();
     socket.on("notify", function (data) {
-        if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id) {
+        if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id && data.creatorComment !== data.creatorOfPost) {
             notifymass.push(data);
             $scope.$apply();
         }
@@ -1037,13 +1058,47 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /**************************Profile edition******************************************/
 
-    $scope.editionType={};
+    $scope.editionType = {};
     $scope.editionType.type = false;
     $scope.showProfileEdition = function (bool) {
-        setTimeout(function (){
+        setTimeout(function () {
             $scope.editionType.type = !$scope.editionType.type;
             $scope.$apply();
-        },25);
+
+            var photoDropZone = $('#photoDropZone');
+            if (typeof(window.FileReader) == 'undefined') {
+                photoDropZone.text('Не поддерживается браузером!');
+                photoDropZone.addClass('error');
+            }
+            var photoArea = document.getElementById("photoDropZone")
+            photoArea.ondragover = function () {
+                photoDropZone.addClass('hover');
+                return false;
+            };
+            photoArea.ondragleave = function () {
+                photoDropZone.removeClass('hover');
+                return false;
+            };
+            photoArea.ondrop = function (event) {
+                event.preventDefault();
+                photoDropZone.removeClass('hover');
+                photoDropZone.addClass('drop');
+                var file = event.dataTransfer.files[0];
+                var formData = new FormData();
+                formData.append("userfile", file);
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener('load', function () {
+                    courseEdit.reqUser();
+                    courseEdit.reqPosts();
+                    courseEdit.reqUsers();
+                }, false)
+                xhr.open("POST", "/user/upload", true);
+                xhr.send(formData);
+
+
+            };
+        }, 25);
     };
+
 
 });

@@ -68,9 +68,10 @@
 
 </div>
 </div>-->
+<!--<div infinite-scroll="myPagingFunction()" infinite-scroll-distance="0">-->
+    <div deckgrid source="postdata"
+         ng-if="postdata.length"
+         cardTemplate="/views/templates/deckgrid-post.html" style=""
+         class="deckgrid1" ng-if="userdata" ></div>
+<!--</div>-->
 
-
-<div deckgrid source="postdata"
-     ng-if="postdata.length"
-     cardTemplate="/views/templates/deckgrid-post.html" style=""
-     class="deckgrid1" ng-if="userdata" ></div>

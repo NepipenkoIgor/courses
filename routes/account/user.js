@@ -4,9 +4,34 @@
 var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
 var Badges=mongoose.model('Badges');
-
+var fs =require('fs');
 function router(app,hasUser) {
-
+    app.post('/user/upload',hasUser,function (req, res) {
+        console.log(req.files,'req.body',req.user);
+        if(req.user.avatar){
+            var old="public/"+req.user.avatar;
+            console.log(old);
+            fs.unlink(old,function(err) {
+                fs.createReadStream(req.files.userfile.path)
+                    .pipe(fs.createWriteStream("public/img/user/avatar/" + req.files.userfile.originalFilename))
+                    .on('finish', function () {
+                        Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (num) {
+                           // res.redirect("/#/profile/" + req.user.username);
+                            res.json({a:"B"})
+                        });
+                    });
+            });
+            return;
+        }
+        fs.createReadStream(req.files.userfile.path)
+            .pipe(fs.createWriteStream("public/img/user/avatar/" + req.files.userfile.originalFilename))
+            .on('finish', function () {
+                Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (num) {
+                    res.json({a:"B"})
+                    //res.json({a:"B"});
+                });
+            });
+    });
 
   app.get('/user',hasUser ,function (req, res) {
     res.json(req.user);
