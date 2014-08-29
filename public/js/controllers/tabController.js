@@ -388,19 +388,22 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.totalPointsOfAllCourse = function () {
         var totalPoints = 0;
-        for (var i = 0; i < $scope.listOfUnits.length; i++) {
-            if ($scope.listOfUnits[i].lims[0]) {
+        if($scope.listOfUnits){
+            for (var i = 0; i < $scope.listOfUnits.length; i++) {
+                if ($scope.listOfUnits[i].lims[0]) {
 
-                if (!$scope.listOfUnits[i].lims[0].points) {
-                    $scope.listOfUnits[i].lims[0].points = 0;
+                    if (!$scope.listOfUnits[i].lims[0].points) {
+                        $scope.listOfUnits[i].lims[0].points = 0;
+                    }
+                } else {
+                    totalPoints += 0;
+                    continue;
                 }
-            } else {
-                totalPoints += 0;
-                continue;
+                totalPoints += $scope.listOfUnits[i].lims[0].points;
             }
-            totalPoints += $scope.listOfUnits[i].lims[0].points;
+            return totalPoints;
         }
-        return totalPoints;
+
     };
     courseEdit.totalPointsOfAllCourse = $scope.totalPointsOfAllCourse;
 
