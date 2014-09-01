@@ -1,10 +1,10 @@
-<div class="container">
+<!--<div class="container">-->
 
-    <div class="col-sm-6 col-sm-offset-3">
+    <!--<div class="col-sm-6 col-sm-offset-3">
 
         <h1 style="color: #fff;margin: 60px 0;"><span class="fa fa-sign-in"></span> Signup as admin</h1>
 
-        <!-- LOGIN FORM -->
+
         <form action="/signup/admin" method="post">
             <div class="form-group">
                 <label style="color: #fff;">Email</label>
@@ -16,6 +16,32 @@
             </div>
             <button type="submit" class="btn btn-warning btn-lg">Signup</button>
         </form>
-    </div>
+    </div>-->
+    <div class="login_cont ng-scope"  >
+    <form action="/signup/admin" method="post"    id="formsign">
+        <h2 class="form-heading">Please Sign Up</h2>
+        <div class="form-fields">
+            <input type="text" class="form-control" name="firstname" id="firstname" ng-keyup="validName($event,'firstname')"  placeholder="Firstname" >
 
-</div>
+
+            <input type="text" class="form-control" name="lastname" id="lastname" ng-keyup="validName($event,'lastname')"  placeholder="Lastname">
+
+
+            <input type="text" class="form-control" name="email" id="email" ng-keyup="validMail($event,'email')"  placeholder="Email">
+
+
+            <input type="password" class="form-control" name="password" id="password" ng-keyup="validPassword($event,'password')"  placeholder="Password">
+
+
+      <!--      <input type="password" class="form-control" name="comfpassword" id="comfpassword" ng-keyup="comfPassword($event,'comfpassword')"  placeholder="Password confirm">
+
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">-->
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="submitSignUp" ng-click="nullSubmit()">
+            <span ng-show="!loading" class="">Sign Up</span>
+        </button>
+
+    </form>
+
+<!--</div>-->
+    </div>

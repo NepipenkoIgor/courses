@@ -69,9 +69,10 @@ var config=app.get('config');
                newUser.dataReg = dataReg(newData);
                newUser.regCode = req.body.code;
                var firstLater=req.body.firstname.split("");
-               newUser.username=firstLater[0].toLowerCase()+"_"+req.body.lastname;
+               newUser.username=firstLater[0].toLowerCase()+"_"+req.body.lastname.toLowerCase();
                newUser.firstname = req.body.firstname;
                newUser.lastname = req.body.lastname;
+               newUser.phone = req.body.phone;
                newUser.save(function (err) {
                    if (err) {
                        console.log(err);
@@ -79,29 +80,6 @@ var config=app.get('config');
                    newUser.id = newUser['_id'];
                    return done(null, newUser);
                });
-                /*User.findOne({ 'email': email }, function (err, user) {
-                    if (err) {
-                        return done(err);
-                    }
-                    if (user) {
-                        //return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-                        return done(null, user);
-                    } else {
-                        var newUser = new User();
-                        newUser.email = email;
-                        var date = new Date();
-                        newUser.lid = date.getTime();
-                        newUser.password = password;
-                        newUser.dataReg = dataReg(newData);
-                        newUser.save(function (err) {
-                            if (err) {
-                                console.log(err);
-                            }
-                            newUser.id = newUser['_id'];
-                            return done(null, newUser);
-                        });
-                    }
-                });*/
             });
         }));
     passport.use('local-admin', new LocalStrategy({
@@ -128,6 +106,11 @@ var config=app.get('config');
                         newUser.password = password;
                         newUser.position = true;
                         newUser.dataReg = dataReg(newData);
+                        var firstLater=req.body.firstname.split("");
+                        newUser.username=firstLater[0].toLowerCase()+"_"+req.body.lastname.toLowerCase();
+                        newUser.firstname = req.body.firstname;
+                        newUser.lastname = req.body.lastname;
+                        newUser.phone = req.body.phone;
                         newUser.save(function (err) {
                             if (err) {
                                 console.log(err);
