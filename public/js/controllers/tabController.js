@@ -387,6 +387,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     /*** calculate point and progress****/
 
     $scope.totalPointsOfAllCourse = function (list) {
+        //console.log(list)
         var totalPoints = 0;
         if(list){
             for (var i = 0; i < list.length; i++) {

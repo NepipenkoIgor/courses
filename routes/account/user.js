@@ -7,7 +7,13 @@ var Badges=mongoose.model('Badges');
 var fs =require('fs');
 function router(app,hasUser) {
     app.post('/user/upload',hasUser,function (req, res) {
-        console.log(req.files,'req.body',req.user);
+       console.log(req.files,'req.body',req.user);
+       // console.log(req.files)
+        var type=req.files.userfile.type;
+        if(req.files.userfile.size===0||type!=="image/png"&&type!=="image/jpeg"){
+            res.json({});
+            return;
+        }
         if(req.user.avatar){
             var old="public/"+req.user.avatar;
             console.log(old);

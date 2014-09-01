@@ -100,7 +100,10 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 courseEdit.initTab();
             }
             $("#blockwindow").hide();
-
+            for(var l=0;l<$scope.arrMapPoint.length;l++){
+                $scope.arrMapPoint[l].remove();
+            }
+            $scope.arrMapPoint=[];
         });
     };
     courseEdit.saveCourse = $scope.saveCourse;
@@ -756,9 +759,13 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
             return false;
         }
 
+      $scope.arrMapPoint=[];
         function mouseUp(event) {
             if (dragObject) {
                 var el = dragObject.cloneNode(true);
+                $scope.arrMapPoint.push(el);
+                //console.log($scope.arrMapPoint)
+               // $scope.arrMapPoint[0]
                 var parent = document.getElementById("mapDiv");
                 parent.appendChild(el);
                 dragObject.remove();

@@ -63,6 +63,10 @@ function router(app, hasUser,io) {
         console.log(req.body.userHowLike);
        Posts.update({_id:req.body._id},{$set:{likes:req.body.likes,likesNum:req.body.likesNum}},function (err, num) {
 if(req.body.post){
+    if(req.body.creator===req.body.userHowLike){
+        res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+        return;
+    }
            Notify.find({user: req.body.post.creator}, function (err, data) {
                var notify;
                notify = {notifyId: Date.now(), type: "+1 your post", creatorOfPost: req.body.post.creator, postId: req.body._id, creatorComment: req.body.userHowLike};

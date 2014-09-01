@@ -1,4 +1,5 @@
 <div ng-if="userdata.position">
+    <p>Select a picture, format must be jpg/png</p>
 <form action="/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="fileimg" style="color: #ffffff"/>
     <input type="hidden" name="courseId" value="{{course._id}}"/>

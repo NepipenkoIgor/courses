@@ -307,6 +307,17 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 $scope.postdata = data.data;
                 $location.url("/post/all?type=" + data.type);
 
+                $scope.page = $scope.postdata.length / 10;
+                $scope.scrolling = 800;
+                console.log($scope.postdata.length);
+                $scope.down = false;
+                $scope.remove = $scope.postdata.splice(10, $scope.postdata.length);
+
+                //  console.log("$scope.page",$scope.page);
+                // console.log("$scope.postdata",$scope.postdata,$scope.postdata.length);
+                // console.log("$scope.remove",$scope.remove);
+
+
                 if (data.type === "popular") {
                     $scope.postdata.push([null])
                     setTimeout(function () {
@@ -349,89 +360,103 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         document.getElementById("question").checked = true;
         $scope.typeCheck = false;
     };
-    $http.get("/user").success(function(user){
-        $scope.user=user;
+    $http.get("/user").success(function (user) {
+        $scope.user = user;
 
-        $http.get("/units").success(function(list){
-        console.log(list)
-        var progressCanvas = document.getElementById("progreesCanvas");
-        if (progressCanvas) {
+        $http.get("/units").success(function (list) {
+          //  console.log(list);
+            var progressCanvas = document.getElementById("progreesCanvas");
+            if (progressCanvas) {
 
-            var progressContext = progressCanvas.getContext('2d');
+                var progressContext = progressCanvas.getContext('2d');
 
-            progressContext.beginPath();
-            progressContext.arc(150, 100, 80, 0, 2 * Math.PI);
-            progressContext.strokeStyle = '#313F4E';
-            progressContext.lineWidth = 20;
-            progressContext.stroke();
+                progressContext.beginPath();
+                progressContext.arc(150, 100, 80, 0, 2 * Math.PI);
+                progressContext.strokeStyle = '#313F4E';
+                progressContext.lineWidth = 20;
+                progressContext.stroke();
 
-            courseEdit.totalPointsOfAllCourse()
-            //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
-            console.log(courseEdit.pointsCalculate($scope.user.progress), courseEdit.totalPointsOfAllCourse(list))
-            var attitude = courseEdit.pointsCalculate($scope.user.progress) / courseEdit.totalPointsOfAllCourse(list);
-            console.log(attitude)
-            if (isNaN(attitude)) {
-                attitude = 0;
+                courseEdit.totalPointsOfAllCourse()
+                //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
+              //  console.log(courseEdit.pointsCalculate($scope.user.progress), courseEdit.totalPointsOfAllCourse(list))
+                var attitude = courseEdit.pointsCalculate($scope.user.progress) / courseEdit.totalPointsOfAllCourse(list);
+               // console.log(attitude)
+                if (isNaN(attitude)) {
+                    attitude = 0;
+                }
+                if(attitude>0.99&&attitude<1){
+                    attitude=0.99
+                }
+                var progressProcent = Math.round(attitude * 100);
+                var arcle = attitude * 2 * Math.PI;
+               // console.log("arcle",arcle)
+                var rotation;
+                if (arcle < 0.5) {
+                    rotation = 1.5 * Math.PI + arcle;
+                }
+                if (arcle > 0.5) {
+                    rotation = arcle - 0.5 * Math.PI;
+                }
+
+              //  console.log("rotation",rotation)
+                //console.log(arcle);
+                progressContext.beginPath();
+
+                if(arcle>6.28){
+                    progressContext.arc(150, 100, 80, 0, 0.5*Math.PI+rotation);
+                }else{
+                    progressContext.arc(150, 100, 80, 1.5 * Math.PI, rotation);
+                }
+                progressContext.strokeStyle = 'green';
+                progressContext.lineWidth = 20;
+                progressContext.stroke();
+                var x, y;
+
+                if (progressProcent < 10) {
+                    x = 125;
+                    y = 125;
+                }
+                if (progressProcent > 10) {
+                    x = 103;
+                    y = 125;
+                }
+                if (progressProcent===100){
+                    x = 78;
+                    y = 125;
+                }
+                progressContext.font = ' 70pt Calibri';
+                progressContext.fillStyle = 'white';
+                progressContext.fillText(progressProcent, x, y);
             }
-            var progressProcent = Math.round(attitude * 100);
-            var arcle = attitude * 2 * Math.PI;
-            var rotation;
-            if (arcle < 0.5) {
-                rotation = 1.5 * Math.PI + arcle;
-            }
-            if (arcle > 0.5) {
-                rotation = arcle - 0.5 * Math.PI;
-            }
-            //console.log(arcle);
-            progressContext.beginPath();
-            progressContext.arc(150, 100, 80, 1.5 * Math.PI, rotation);
-            progressContext.strokeStyle = 'green';
-            progressContext.lineWidth = 20;
-            progressContext.stroke();
-            var x, y;
+        });
+    });
 
-            if (progressProcent < 10) {
-                x = 125;
-                y = 125;
-            }
-            if (progressProcent > 10) {
-                x = 103;
-                y = 125;
-            }
-            progressContext.font = ' 70pt Calibri';
-            progressContext.fillStyle = 'white';
-            progressContext.fillText(progressProcent, x, y);
-        }
-        })
-    })
+    $scope.scrolling = 800;
 
-    /*
-     $scope.remove=$scope.postdata.splice(0,5)*/
-    /*
-     $scope.myPagingFunction=function(){
-     $scope.postdata=$scope.postdata.concat($scope.postdata)
-     console.log($scope.postdata)
-     }*/
-
-    /*$scope.hidePosts = function (numPost, numTrue) {
-
-        if (numPost < numTrue) {
-            return true;
-        }
-        return false;
-    };
-    $scope.numTrue=2;
-    var scrolling = 800;
     window.onscroll = function (event) {
-        // console.log(scrolling,window.scrollY)
-        if (scrolling < window.scrollY) {
-            console.log(event, window.scrollY)
-            scrolling += 800;
-            $scope.numTrue+=3
-            $scope.postdata.splice(0,7);
-            $scope.$apply()
+        console.log("after scroll", $scope.postdata.length);
+        //console.log(window.scrollY,$scope.down)
+        if ($scope.scrolling < window.scrollY) {
+            if ($scope.down) {
+                return;
+            }
+           // console.log("tytytyty", $scope.remove)
+           var mass = $scope.remove.splice(10, $scope.remove.length);
+            //console.log("mass", mass)
+            //console.log(event, window.scrollY)
+            $scope.scrolling += 1200;
+            $scope.postdata = $scope.postdata.concat($scope.remove)
+            $scope.remove = mass;
+            $scope.postdata.push([null])
+            setTimeout(function () {
+                $scope.postdata.splice($scope.postdata.length - 1, 1);
+                $scope.$apply();
+            }, 4);
+            if (mass.length === 0) {
+                $scope.down = true;
+            }
         }
 
-    }*/
+    };
 });
 

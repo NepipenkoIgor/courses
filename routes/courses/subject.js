@@ -11,7 +11,11 @@ var Stream = require('stream').Stream;
 
 function router(app, isAdmin,hasUser) {
     app.post('/upload',isAdmin,function (req, res) {
-
+var type=req.files.fileimg.type;
+        if(req.files.fileimg.size===0||type!=="image/png"&&type!=="image/jpeg"){
+            res.redirect("/#" + req.body.url);
+            return;
+        }
         var old="public/"+req.body.oldImg;
       //  console.log(old);
         fs.unlink(old,function(err) {

@@ -8,7 +8,10 @@ var Notify = mongoose.model('Notify');
 function router(app, hasUser,io) {
     app.post('/comment/new', hasUser, function (req, res) {
         Posts.update({_id: req.body._id}, {$set: {comments: req.body.comments}}, function(err, num) {
-
+if(req.body.creator===req.body.creatorComment){
+    res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+    return;
+}
             Notify.find({user:req.body.creator},function(err,data){
                 var notify;
                 notify={notifyId:Date.now(),type:"comment your post",creatorOfPost:req.body.creator,postId:req.body._id,creatorComment:req.body.creatorComment};
