@@ -1018,7 +1018,14 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     var socket = io();
     socket.on("notify", function (data) {
+        if(data.notify&& data.creatorOfPost === courseEdit.userdata._id){
+            //console.log("notify",data.creatorComment);
+            notifymass.push(data);
+            $scope.$apply();
+            return;
+        }
         if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id && data.creatorComment !== data.creatorOfPost) {
+            console.log(data)
             notifymass.push(data);
             $scope.$apply();
         }
@@ -1095,6 +1102,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     courseEdit.reqUser();
                     courseEdit.reqPosts();
                     courseEdit.reqUsers();
+                    console.log("Sdaasdsd")
+                    photoDropZone.html("uploaded");
+
                 }, false)
                 xhr.open("POST", "/user/upload", true);
                 xhr.send(formData);
@@ -1103,6 +1113,24 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             };
         }, 25);
     };
+    $scope.menuOpen=false;
+ $scope.openMenu=function(){
+  /*   console.log($("#menuUser").hasClass("open"))
+    if(!$scope.menuOpen||!$("#menuUser").hasClass("open")){
 
+        $scope.menuOpen=true;
+        return;
+     }
+     $scope.menuOpen=false;*/
 
+ };
+    setInterval(function(){
+        if($("#menuUser").hasClass("open")){
+            $scope.menuOpen=true;
+            $scope.$apply();
+            return;
+        }
+        $scope.menuOpen=false;
+        $scope.$apply();
+    },100)
 });

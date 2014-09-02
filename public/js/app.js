@@ -86,7 +86,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "views/courses/moduleChanged.html"
         }).state('modulecomplete', {
             url: "/courses/:courseTitle/:moduleTitle/complete",
-            templateUrl: "views/courses/modulecomplete.html"
+            templateUrl: "views/courses/modulecomplete.html",
+            controller: 'progress'
         }).state('unit', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
             templateUrl: "views/courses/unitChenged.html"

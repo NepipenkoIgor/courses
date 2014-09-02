@@ -78,7 +78,7 @@ app.controller('validateController', function ($scope, $http) {
     $scope.validMail = function (event, name) {
         if (event.currentTarget.value.length === 0) {
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-            $scope.name[name] = "name can not be zero length";
+            $scope.name[name] = "email can not be zero length";
             $scope.email=false;
             $scope.trueValidate();
             return;
@@ -126,14 +126,14 @@ app.controller('validateController', function ($scope, $http) {
         //
         if (event.currentTarget.value.length === 0) {
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-            $scope.name[name] = "name can not be zero length";
+            $scope.name[name] = "password can not be zero length";
             $scope.password=false;
             $scope.trueValidate();
 
         }
         if (notextnum.test(event.currentTarget.value) === true) {
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-            $scope.name[name] = "name can only contain letters and numbers";
+            $scope.name[name] = "password can only contain letters and numbers";
             $scope.password=false;
             $scope.trueValidate();
             return;
@@ -149,14 +149,14 @@ app.controller('validateController', function ($scope, $http) {
         }
         if (text.test(event.currentTarget.value) === true) {
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-            $scope.name[name] = "name can't only contain letters ,add numbers";
+            $scope.name[name] = "password can't only contain letters ,add numbers";
             $scope.password=false;
             $scope.trueValidate();
             return;
         }
         if (num.test(event.currentTarget.value) === true) {
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-            $scope.name[name] = "name can't only contain numbers ,add letters";
+            $scope.name[name] = "password can't only contain numbers ,add letters";
             $scope.password=false;
             $scope.trueValidate();
             return;

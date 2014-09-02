@@ -58,37 +58,39 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
             <span class="title">User phone: </span>
             <a href="#" editable-text="userdata.phone" onaftersave="postProfile(userdata)">{{ userdata.phone || 'empty' }}</a>
         </div>-->
+        <div class="row">
+            <div class="col-md-7">
 
-        <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: x-large">
+                <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: x-large">
 
-            <div class="userInput">
-                <span class="title"> Email:</span>
-                <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
-            </div>
-            <div class="userInput">
-                <span class="title">User password: </span>
-                <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
-            </div>
-            <div class="userInput">
-                <span class="title">User firstname: </span>
-                <span editable-text="userdata.firstname" >{{userdata.firstname || 'empty' }}</span>
-            </div>
-            <div class="userInput">
-                <span class="title">User lastname: </span>
-                <span editable-text="userdata.lastname" >{{ userdata.lastname|| 'empty' }}</span>
-            </div >
-            <div class="userInput">
-                <span class="title">Phone: </span>
-                <span editable-text="userdata.phone" >{{ userdata.phone|| 'empty' }}</span>
-            </div>
+                    <div class="userInput">
+                        <span class="title"> Email:</span>
+                        <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
+                    </div>
+                    <div class="userInput">
+                        <span class="title">User password: </span>
+                        <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
+                    </div>
+                    <div class="userInput">
+                        <span class="title">User firstname: </span>
+                        <span editable-text="userdata.firstname" >{{userdata.firstname || 'empty' }}</span>
+                    </div>
+                    <div class="userInput">
+                        <span class="title">User lastname: </span>
+                        <span editable-text="userdata.lastname" >{{ userdata.lastname|| 'empty' }}</span>
+                    </div >
+                    <div class="userInput">
+                        <span class="title">Phone: </span>
+                        <span editable-text="userdata.phone" >{{ userdata.phone|| 'empty' }}</span>
+                    </div>
 
 
-            <div class="buttons">
+                    <div class="buttons">
 
-                <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
-                        ng-show="!editableForm.$visible" ng-if="userdata">
-                    Edit
-                </button>
+                        <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
+                                ng-show="!editableForm.$visible" ng-if="userdata">
+                            Edit
+                        </button>
 
       <span ng-show="editableForm.$visible">
         <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="showProfileEdition()" >
@@ -98,25 +100,34 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
             Cancel
         </button>
       </span>
+                    </div>
+                </form>
+
             </div>
-        </form>
+            <div class="col-md-5">
 
+                <form action="/user/upload" >
+                    <p>Select a picture, format must be jpg/png</p>
+                    <div id="photoDropZone" >
+                        drag your photo here
+                    </div>
 
+                    <!--  <button type="submit"></button>-->
+                </form>
 
-
-        <form action="/user/upload" style="float: right;position: absolute ;top:422px;left: 1230px">
-            <p>Select a picture, format must be jpg/png</p>
-            <div id="photoDropZone" style="border: 1px solid red;width: 200px;height: 200px">
-                drag your photo here
             </div>
+        </div>
 
-          <!--  <button type="submit"></button>-->
-        </form>
+
+
+
+
+
     </div>
 
    <!--</div>-->
 
-
+<h1 style="text-align: center;color:red">{{postTitle}}</h1>
 <div deckgrid source="postdata"
      cardTemplate="/views/templates/deckgrid-post.html" style=""
      class="deckgrid1" ng-if="userdata" ></div>

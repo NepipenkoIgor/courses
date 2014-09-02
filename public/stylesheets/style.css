@@ -1386,13 +1386,13 @@ padding: 0 5px 0 0!important;
     color: #555;
     font-size: 18px;
     text-align: center;
-
-    width: 400px;
+    /*style="border: 1px solid red;width: 200px;"*/
+    background: transparent;
+    border:4px dashed red;
+    width: 200px;
+    height: 200px;
     padding: 50px 0;
     margin: 50px auto;
-
-    background: #eee;
-    border: 1px solid #ccc;
 
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -1401,8 +1401,8 @@ padding: 0 5px 0 0!important;
 
 #photoDropZone.hover {
     background: #ddd;
-    border-color: #aaa;
-    //text-align: left;
+    border:4px dashed green;
+
 }
 
 #photoDropZone.error {
@@ -1413,4 +1413,20 @@ padding: 0 5px 0 0!important;
 #photoDropZone.drop {
     background: #afa;
     border-color: #0f0;
+}
+
+
+
+
+
+.commentHeader{margin: 0!important;}
+.commentHeader>div{
+    padding: 0;
+}
+.commentHeader>div ul li{
+    float: left;
+    margin: 0 7px 0 0;
+}
+.editable-buttons{
+    display: block!important;
 }
