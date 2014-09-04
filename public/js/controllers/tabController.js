@@ -428,7 +428,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     $scope.totalPointsOfAllCourse = function (list) {
         //console.log(list)
         var totalPoints = 0;
-        if(list){
+        if (list) {
             for (var i = 0; i < list.length; i++) {
                 if (list[i].lims[0]) {
 
@@ -999,23 +999,24 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.eqvalBadges = function (badge) {
-        if (courseEdit.userdata.badges && courseEdit.listOfBadges&&badge) {
-        /*    $scope.countBadges = 0;
-            for (var i = 0; i < courseEdit.userdata.badges.length; i++) {
-                $scope.countBadges++;
-                if (courseEdit.listOfBadges[courseEdit.userdata.badges[i]]) {
-                    courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};
+        if (courseEdit.userdata) {
+            if (courseEdit.userdata.badges && courseEdit.listOfBadges && badge) {
+                /*    $scope.countBadges = 0;
+                 for (var i = 0; i < courseEdit.userdata.badges.length; i++) {
+                 $scope.countBadges++;
+                 if (courseEdit.listOfBadges[courseEdit.userdata.badges[i]]) {
+                 courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};
+                 }
+
+                 }*/
+                //console.log(badge)
+                if (courseEdit.userdata.badges.indexOf(badge.badgeId) !== (-1)) {
+                    return true;
                 }
+                return false;
 
-            }*/
-            //console.log(badge)
-            if(courseEdit.userdata.badges.indexOf(badge.badgeId)!==(-1)){
-                return true;
             }
-            return false;
-
         }
-
     };
     courseEdit.eqvalBadges = $scope.eqvalBadges;
 
@@ -1063,14 +1064,13 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     var socket = io();
     socket.on("notify", function (data) {
-        if(data.notify&& data.creatorOfPost === courseEdit.userdata._id){
+        if (data.notify && data.creatorOfPost === courseEdit.userdata._id) {
             //console.log("notify",data.creatorComment);
             notifymass.push(data);
             $scope.$apply();
             return;
         }
         if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id && data.creatorComment !== data.creatorOfPost) {
-            console.log(data)
             notifymass.push(data);
             $scope.$apply();
         }
@@ -1122,13 +1122,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             $scope.$apply();
 
             /*$("#inputUser").onchange(function(event){
-                console.log(event)
-            })*/
-            var inputUser= $("#inputUser")
+             console.log(event)
+             })*/
+            var inputUser = $("#inputUser")
 
-            inputUser.bind("change",function(event){
-                console.log("asdasdsd")
-                console.log(event,event.currentTarget.files[0])
+            inputUser.bind("change", function (event) {
                 var file = event.currentTarget.files[0];
                 var formData = new FormData();
                 formData.append("userfile", file);
@@ -1137,19 +1135,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     courseEdit.reqUser();
                     courseEdit.reqPosts();
                     courseEdit.reqUsers();
-                    console.log("Sdaasdsd")
+
                     photoDropZone.html("uploaded");
 
-                }, false)
+                }, false);
                 xhr.open("POST", "/user/upload", true);
                 xhr.send(formData);
-            })
+            });
             var photoDropZone = $('#photoDropZone');
             if (typeof(window.FileReader) == 'undefined') {
                 photoDropZone.text('Не поддерживается браузером!');
                 photoDropZone.addClass('error');
             }
-            var photoArea = document.getElementById("photoDropZone")
+            var photoArea = document.getElementById("photoDropZone");
             photoArea.ondragover = function () {
                 photoDropZone.addClass('hover');
                 return false;
@@ -1170,10 +1168,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     courseEdit.reqUser();
                     courseEdit.reqPosts();
                     courseEdit.reqUsers();
-                    console.log("Sdaasdsd")
+                   // console.log("Sdaasdsd")
                     photoDropZone.html("uploaded");
 
-                }, false)
+                }, false);
                 xhr.open("POST", "/user/upload", true);
                 xhr.send(formData);
 
@@ -1184,19 +1182,17 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }, 25);
 
 
-
-
     };
 
-   /* $scope.menuOpen=false;
+    $scope.menuOpen = false;
 
-    setInterval(function(){
-        if($("#menuUser").hasClass("open")){
-            $scope.menuOpen=true;
+    setInterval(function () {
+        if ($("#menuUser").hasClass("open")) {
+            $scope.menuOpen = true;
             $scope.$apply();
             return;
         }
-        $scope.menuOpen=false;
+        $scope.menuOpen = false;
         $scope.$apply();
-    },100)*/
+    }, 100);
 });
