@@ -1188,7 +1188,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     };
 
-    $scope.menuOpen=false;
+   /* $scope.menuOpen=false;
 
     setInterval(function(){
         if($("#menuUser").hasClass("open")){
@@ -1198,5 +1198,5 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
         $scope.menuOpen=false;
         $scope.$apply();
-    },100)
+    },100)*/
 });

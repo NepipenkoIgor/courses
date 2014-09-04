@@ -20,6 +20,9 @@ app.controller('validateController', function ($scope, $http) {
 
     $("#formsign").keypress(function(event){
         if(event.keyCode===13){
+            if(!!$scope.firstname&&!!$scope.lastname&&!!$scope.email&&!!$scope.password&&!!$scope.comfpassword&&!!$scope.code){
+                return;
+            }
             event.preventDefault();
         }
     });
@@ -97,12 +100,12 @@ app.controller('validateController', function ($scope, $http) {
 
 
     };
-    $scope.validName = function (event, name) {
+   $scope.validName = function (event, name) {
 
         if (event.currentTarget.value.length === 0) {
             $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
             $scope.name[name] = "name can not be zero length";
-            $scope.firstname=false;
+            $scope[name]=false;
             $scope.trueValidate();
             return;
         }
@@ -123,6 +126,8 @@ app.controller('validateController', function ($scope, $http) {
 
 
     };
+
+
     $scope.validPassword = function (event, name) {
         //
         if (event.currentTarget.value.length === 0) {
