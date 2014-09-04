@@ -107,14 +107,19 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
             <div class="col-md-5">
 
                 <form action="/user/upload" >
-                    <p>Select a picture, format must be jpg/png</p>
+
                     <div id="photoDropZone" >
-                        drag your photo here
+                        drag your photo here, format must be jpg/png
                     </div>
 
                     <!--  <button type="submit"></button>-->
                 </form>
 
+                <div class="form-group" action="/user/upload" type="multipart" enctype="multipart/form-data" method="post" >
+<p>browse photo,format must be jpg/png</p>
+                    <input type="file" id="inputUser" style="color:#ffffff" >
+                    <!--<button type="submit" class="btn vtn-primary"> upload</button>-->
+                </div>
             </div>
         </div>
 

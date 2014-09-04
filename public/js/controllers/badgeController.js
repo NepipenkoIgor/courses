@@ -16,9 +16,9 @@ app.controller("badgeController",function($scope,$http,courseEdit){
          $scope.showBadges=true;
      }
        return ;
-     }
+     };
     courseEdit.userHasBadge=$scope.userHasBadge;
     $scope.hideBadge=function(){
         $scope.showBadges=false;
-    }
+    };
 });

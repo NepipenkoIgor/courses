@@ -50,7 +50,46 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             'name': '50 Answers',
             'img': 'img/badges/answer.png',
             'description': 'Helper'
+        },
+        {
+            "badgeId": 4,
+            'name': '50 Comments',
+            'img': 'img/badges/answer.png',
+            'description': 'Active'
+        },
+        {
+
+            "badgeId": 5,
+            'name': '50 questions',
+            'img': 'img/badges/answer.png',
+            'description': 'Curious'
+        },
+        {
+            "badgeId": 6,
+            'name': '100 Answers',
+            'img': 'img/badges/answer.png',
+            'description': 'Guru'
+        },
+        {
+            "badgeId": 7,
+            'name': '100 posts',
+            'img': 'img/badges/answer.png',
+            'description': 'Conversation King'
+        },
+        {
+
+            "badgeId": 8,
+            'name': '100 questions',
+            'img': 'img/badges/answer.png',
+            'description': 'Inquisitor'
+        },
+        {
+            "badgeId": 9,
+            'name': '100 Comments',
+            'img': 'img/badges/answer.png',
+            'description': 'Active+'
         }
+
     ];
     /*$scope.listOfBadges = [
      {
@@ -959,16 +998,22 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     courseEdit.pointsCalculate = $scope.pointsCalculate;
 
 
-    $scope.eqvalBadges = function () {
-        if (courseEdit.userdata.badges && courseEdit.listOfBadges) {
-            $scope.countBadges = 0;
+    $scope.eqvalBadges = function (badge) {
+        if (courseEdit.userdata.badges && courseEdit.listOfBadges&&badge) {
+        /*    $scope.countBadges = 0;
             for (var i = 0; i < courseEdit.userdata.badges.length; i++) {
                 $scope.countBadges++;
                 if (courseEdit.listOfBadges[courseEdit.userdata.badges[i]]) {
                     courseEdit.listOfBadges[courseEdit.userdata.badges[i]].opasity = {"opacity": 1};
                 }
 
+            }*/
+            //console.log(badge)
+            if(courseEdit.userdata.badges.indexOf(badge.badgeId)!==(-1)){
+                return true;
             }
+            return false;
+
         }
 
     };
@@ -1076,6 +1121,29 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             $scope.editionType.type = !$scope.editionType.type;
             $scope.$apply();
 
+            /*$("#inputUser").onchange(function(event){
+                console.log(event)
+            })*/
+            var inputUser= $("#inputUser")
+
+            inputUser.bind("change",function(event){
+                console.log("asdasdsd")
+                console.log(event,event.currentTarget.files[0])
+                var file = event.currentTarget.files[0];
+                var formData = new FormData();
+                formData.append("userfile", file);
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener('load', function () {
+                    courseEdit.reqUser();
+                    courseEdit.reqPosts();
+                    courseEdit.reqUsers();
+                    console.log("Sdaasdsd")
+                    photoDropZone.html("uploaded");
+
+                }, false)
+                xhr.open("POST", "/user/upload", true);
+                xhr.send(formData);
+            })
             var photoDropZone = $('#photoDropZone');
             if (typeof(window.FileReader) == 'undefined') {
                 photoDropZone.text('Не поддерживается браузером!');
@@ -1111,19 +1179,17 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
             };
+
+
         }, 25);
+
+
+
+
     };
+
     $scope.menuOpen=false;
- $scope.openMenu=function(){
-  /*   console.log($("#menuUser").hasClass("open"))
-    if(!$scope.menuOpen||!$("#menuUser").hasClass("open")){
 
-        $scope.menuOpen=true;
-        return;
-     }
-     $scope.menuOpen=false;*/
-
- };
     setInterval(function(){
         if($("#menuUser").hasClass("open")){
             $scope.menuOpen=true;

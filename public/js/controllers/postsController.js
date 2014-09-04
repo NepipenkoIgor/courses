@@ -52,7 +52,52 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 }
                 courseEdit.searchPosts(searchObj);
             }
-
+            $scope.countUserComments=function(){
+                var count = 0;
+                if ($scope.postdata !== undefined) {
+                    for (var i = 0; i < courseEdit.postdata.length; i++) {
+                        for (var j = 0; j < courseEdit.postdata[i].comments.length; j++) {
+                            if(courseEdit.postdata[i].comments[j]!==0) {
+                                if (courseEdit.postdata[i].comments[j].creator === courseEdit.userdata._id && courseEdit.postdata[i].typePost !== "question") {
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                }
+                if(count===50){
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata);
+                }
+                if(count===100){
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[9], courseEdit.userdata);
+                }
+               // console.log("count",count);
+                return count;
+            };
+            $scope.countUserComments();
+            $scope.countUserAnswers=function(){
+                var count = 0;
+                if ($scope.postdata !== undefined) {
+                    for (var i = 0; i < courseEdit.postdata.length; i++) {
+                        for (var j = 0; j < courseEdit.postdata[i].comments.length; j++) {
+                            if(courseEdit.postdata[i].comments[j]!==0) {
+                                if (courseEdit.postdata[i].comments[j].creator === courseEdit.userdata._id && courseEdit.postdata[i].typePost === "question") {
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                }
+                if(count===50){
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata);
+                }
+                if(count===100){
+                   // courseEdit.userHasBadge(courseEdit.listOfBadges[9], courseEdit.userdata);
+                }
+               // console.log("count",count);
+                return count;
+            };
+            $scope.countUserAnswers();
             $scope.countUserPost = function (id) {
                 var count = 0;
                 if ($scope.postdata !== undefined) {
@@ -61,6 +106,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                             count++;
                         }
                     }
+                }
+                if(count===50){
+                   // courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
+                }
+                if(count===100){
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[7], courseEdit.userdata);
                 }
                 return count;
             };
@@ -72,6 +123,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                             count++;
                         }
                     }
+                }
+                if(count===50){
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[5], courseEdit.userdata);
+                }
+                if(count===100){
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[8], courseEdit.userdata);
                 }
                 return count;
             };
