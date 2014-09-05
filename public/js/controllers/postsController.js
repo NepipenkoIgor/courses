@@ -66,10 +66,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     }
                 }
                 if(count===50){
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata);
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata);
                 }
                 if(count===100){
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[9], courseEdit.userdata);
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[8], courseEdit.userdata);
                 }
                // console.log("count",count);
                 return count;
@@ -89,7 +89,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     }
                 }
                 if(count===50){
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata);
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
                 }
                 if(count===100){
                    // courseEdit.userHasBadge(courseEdit.listOfBadges[9], courseEdit.userdata);
@@ -111,7 +111,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                    // courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
                 }
                 if(count===100){
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[7], courseEdit.userdata);
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[6], courseEdit.userdata);
                 }
                 return count;
             };
@@ -125,10 +125,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     }
                 }
                 if(count===50){
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[5], courseEdit.userdata);
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata);
                 }
                 if(count===100){
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[8], courseEdit.userdata);
+                    courseEdit.userHasBadge(courseEdit.listOfBadges[7], courseEdit.userdata);
                 }
                 return count;
             };
@@ -230,10 +230,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     $scope.saveNewPost = function (creator) {
         console.log($scope.tags)
-        courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
+        courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
         var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
         $http.post('/post/new', newPost).success(function (data) {
-            reqPosts();
+           // reqPosts();
             $state.go('posts').then(function () {
                 $location.url("/post/all?type=allposts");
 
@@ -285,7 +285,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     };
     $scope.saveNewQuestion = function (creator, unit) {
-        courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
+        courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
         $scope.tags.unshift({"text": courseEdit.positionInCourse.course + "." + courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit});
         console.log($scope.tags)
         var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit, typePost: "question"};

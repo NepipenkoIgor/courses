@@ -77,6 +77,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state('course', {
             url: "/courses/:courseTitle",
             templateUrl: "views/courses/courseChenged.html",
+            onEnter: function(){
+                $("body").addClass("withMap");
+                //console.log("sasdasd")
+            },
+            onExit: function(){
+                $("body").removeClass("withMap");
+                //console.log("sasdasd")
+            },
             controller: ''
         }).state('courses', {
             url: "/courses",

@@ -27,10 +27,10 @@
 
 
     <ul class="footer">
-        <li ><a href="" ng-click="mother.like(mother.userdata._id,card.likes,card._id,card)" ><i class="fa fa-plus"></i> {{card.likes.length}}</a></li>
-        <li>
-            <a href="" ng-click="commenting = !commenting" style="display: block;">
-                <span style="float: left;margin-right: 5px;margin-left: 20%;" ng-show="card.comments.length>0">{{card.comments.length}}</span>
+        <li class="col-md-4 col-xs-4"><a href="" ng-click="mother.like(mother.userdata._id,card.likes,card._id,card)" ><i class="fa fa-plus"></i> {{card.likes.length}}</a></li>
+        <li class="col-md-4 col-xs-4">
+            <a href="" ng-click="commenting = !commenting" style="display: inline-block;">
+                <span style="float: left;margin-right: 5px;" ng-show="card.comments.length>0">{{card.comments.length}}</span>
                 <div ng-hide="commenting" class="" style="float: left">
                     <i class="fa fa-comments" style="margin-right: 5px"></i><i class="fa fa-caret-down"></i>
                 </div>
@@ -39,7 +39,7 @@
                 </div>
             </a>
         </li>
-        <li><a href=""><i class="fa fa-flag"></i></a></li>
+        <li class="col-md-4 col-xs-4"><a href=""><i class="fa fa-flag"></i></a></li>
     </ul>
 
     <div class="comments ng-hide" ng-show="commenting" style="overflow: hidden;">
@@ -53,14 +53,14 @@
     <div class="commentsCom" ng-repeat="comment in card.comments" style="overflow: hidden" ng-show="commenting">
         <!--<span class="close" ng-click="mother.deleteComment(comment,card._id, card)" ng-if="mother.ifThisIsAvtor(mother.userdata,comment.creator)">X</span>-->
         <div class="row commentHeader">
-<div class="col-md-2">
+<div class="col-md-2 col-xs-2">
     <img ng-src="{{mother.postAvatar(comment.creator)}}" style="float:none">
 </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
                 <h5 style="color:red">{{mother.getCreator(comment.creator)}}</h5>
                 <p class="content" style="font-size: 10px;color: #aaa" >{{comment.dataReg}}</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-4">
                 <ul class="footer1" style="padding: 0">
                     <li><a ng-click="mother.commentLike($index,mother.userdata._id,comment.likes,card._id,card)"
                             style="cursor: pointer"><i class="fa fa-plus"></i> {{comment.likes.length}}</a></li>

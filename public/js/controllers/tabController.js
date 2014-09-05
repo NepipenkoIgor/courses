@@ -24,135 +24,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         percentage: 0.5
     };
     /*********** develop badge config*-*****************/
-    $scope.listOfBadges = [
-        {
-            "badgeId": 0,
-            'name': 'Complete Module',
-            'img': 'img/badges/download.png',
-            'description': 'module 1'
-        },
-        {
 
-            "badgeId": 1,
-            'name': 'Make a post',
-            'img': 'img/badges/first.png',
-            'description': 'First Post'
-        },
-        {
 
-            "badgeId": 2,
-            'name': 'Ask a question',
-            'img': 'img/badges/first.png',
-            'description': 'First Question'
-        },
-        {
-            "badgeId": 3,
-            'name': '50 Answers',
-            'img': 'img/badges/answer.png',
-            'description': 'Helper'
-        },
-        {
-            "badgeId": 4,
-            'name': '50 Comments',
-            'img': 'img/badges/answer.png',
-            'description': 'Active'
-        },
-        {
-
-            "badgeId": 5,
-            'name': '50 questions',
-            'img': 'img/badges/answer.png',
-            'description': 'Curious'
-        },
-        {
-            "badgeId": 6,
-            'name': '100 Answers',
-            'img': 'img/badges/answer.png',
-            'description': 'Guru'
-        },
-        {
-            "badgeId": 7,
-            'name': '100 posts',
-            'img': 'img/badges/answer.png',
-            'description': 'Conversation King'
-        },
-        {
-
-            "badgeId": 8,
-            'name': '100 questions',
-            'img': 'img/badges/answer.png',
-            'description': 'Inquisitor'
-        },
-        {
-            "badgeId": 9,
-            'name': '100 Comments',
-            'img': 'img/badges/answer.png',
-            'description': 'Active+'
-        }
-
-    ];
-    /*$scope.listOfBadges = [
-     {
-     "badgeId": 0,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first lesson "
-     },
-     {
-     "badgeId": 1,
-     "img": "http://www.auplod.com/u/oupdal37d51.png",
-     "description": "your first answer for quiz"
-     },
-     {
-     "badgeId": 2,
-     "img": "http://www.auplod.com/u/dalopu37d54.png",
-     "description": "your first viewed video"
-     },
-     {
-     "badgeId": 3,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first post"
-     },
-     {
-     "badgeId": 4,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first question"
-     },
-     {
-     "badgeId": 5,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first lesson"
-     },
-     {
-     "badgeId": 0,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first lesson"
-     },
-     {
-     "badgeId": 1,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first answer for quiz sgdfghh hhhhhh hhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhh hhhhhhh hhhhhh hhhhhhhhhhh hhhhhh hhhhhh hhhhhhhh"
-     },
-     {
-     "badgeId": 2,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first viewed video"
-     },
-     {
-     "badgeId": 3,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first post dsgdfghhhhhh hhhhhhhhh hhhhhhhhh hhhhhhhhhhhh hhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhhhh hhhhhh"
-     },
-     {
-     "badgeId": 4,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first question"
-     },
-     {
-     "badgeId": 5,
-     "img": "http://www.auplod.com/u/lpauod37c05.png",
-     "description": "your first lesson"
-     }
-     ];*/
 
     courseEdit.listOfBadges = $scope.listOfBadges;
 
@@ -160,7 +33,83 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     function initTab() {
 
         $http.get('/courses').success(function (courses) {
+            $scope.listOfBadges = [
+                {
+
+                    "badgeId": 0,
+                    'name': 'Make a post',
+                    'img': 'img/badges/first.png',
+                    'description': 'First Post'
+                },
+                {
+
+                    "badgeId": 1,
+                    'name': 'Ask a question',
+                    'img': 'img/badges/first.png',
+                    'description': 'First Question'
+                },
+                {
+                    "badgeId": 2,
+                    'name': '50 Answers',
+                    'img': 'img/badges/answer.png',
+                    'description': 'Helper'
+                },
+                {
+                    "badgeId": 3,
+                    'name': '50 Comments',
+                    'img': 'img/badges/answer.png',
+                    'description': 'Active'
+                },
+                {
+
+                    "badgeId": 4,
+                    'name': '50 questions',
+                    'img': 'img/badges/answer.png',
+                    'description': 'Curious'
+                },
+                {
+                    "badgeId": 5,
+                    'name': '100 Answers',
+                    'img': 'img/badges/answer.png',
+                    'description': 'Guru'
+                },
+                {
+                    "badgeId": 6,
+                    'name': '100 posts',
+                    'img': 'img/badges/answer.png',
+                    'description': 'Conversation King'
+                },
+                {
+
+                    "badgeId": 7,
+                    'name': '100 questions',
+                    'img': 'img/badges/answer.png',
+                    'description': 'Inquisitor'
+                },
+                {
+                    "badgeId": 8,
+                    'name': '100 Comments',
+                    'img': 'img/badges/answer.png',
+                    'description': 'Active+'
+                }
+
+            ];
+            courseEdit.listOfBadges=$scope.listOfBadges
             $scope.listOfCourses = courses;
+            if(typeof $scope.listOfCourses  !== 'string') {
+                for (var i = 0; i < $scope.listOfCourses.length; i++) {
+                    for (var j = 0; j < $scope.listOfCourses[i].modules.length; j++) {
+                        var badge = {
+                            "badgeId": 9 + j,
+                            'name': 'Complete Module',
+                            'img': 'img/badges/download.png',
+                            'description': 'module ' + (j + 1)
+                        };
+                        courseEdit.listOfBadges.push(badge);
+
+                    }
+                }
+            }
         });
 
         $http.get('/units').success(function (units) {
@@ -584,7 +533,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     };
     $scope.dangerModule = [];
-    $scope.markOfCompleteModule = function (id) {
+    $scope.markOfCompleteModule = function (id,modIndex) {
         var moduleArr = [];
         if ($scope.courseNowChanged) {
             for (var i = 0; i < $scope.courseNowChanged.modules.length; i++) {
@@ -612,10 +561,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         if ($scope.dangerModule.indexOf(id) !== (-1)) {
             var index = $scope.dangerModule.indexOf(id);
             $scope.dangerModule.splice(index, 1);
+           // courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
         }
-        if (courseEdit.listOfBadges && courseEdit.userdata) {
-            courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
-        }
+
+      // console.log(modIndex)
         return {'color': 'green'};
     };
 
@@ -1168,7 +1117,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     courseEdit.reqUser();
                     courseEdit.reqPosts();
                     courseEdit.reqUsers();
-                   // console.log("Sdaasdsd")
+                    // console.log("Sdaasdsd")
                     photoDropZone.html("uploaded");
 
                 }, false);
