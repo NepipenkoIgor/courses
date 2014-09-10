@@ -27,23 +27,28 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
         .state('login', {
             url: "/login",
-            templateUrl: "views/account/login.html"
+            templateUrl: "views/account/login.html",
+            controller:"refreshController"
         })
         .state('signup', {
             url: "/signup",
-            templateUrl: "views/account/signup.html"
+            templateUrl: "views/account/signup.html",
+            controller:"refreshController"
         })
         .state('signupadmin', {
             url: "/signup/admin",
-            templateUrl: "views/account/signupadmin.html"
+            templateUrl: "views/account/signupadmin.html",
+            controller:"refreshController"
         })
         .state('post', {
             url: "/post/new",
-            templateUrl: "newpost.html"
+            templateUrl: "newpost.html",
+            controller:"refreshController"
         })
         .state('completeSection', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/complete",
-            templateUrl: "views/courses/completeSection.html"
+            templateUrl: "views/courses/completeSection.html",
+            controller:"refreshController"
         })
         .state('posts', {
             url: "/post/all",
@@ -51,21 +56,25 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller:"posts"
         }).state('adminlab', {
             url: "/adminlab",
-            templateUrl: "views/adminlab/adminlab.html"
+            templateUrl: "views/adminlab/adminlab.html",
+            controller:"refreshController"
         }).state('adminlab.lesson', {
             url: "/courses/:courseTitle",
             templateUrl: "views/adminlab/course.html",
             controller: 'lessonController'
         }).state('adminlab.lesson.module', {
             url: "/main",
-            templateUrl: "views/adminlab/coursedesc.html"
+            templateUrl: "views/adminlab/coursedesc.html",
+            controller:"refreshController"
 
         }).state('adminlab.lesson.unit', {
             url: "/:moduleTitle/:sectionTitle/:unitTitle",
-            templateUrl: "views/adminlab/courseunit.html"
+            templateUrl: "views/adminlab/courseunit.html",
+            controller:"refreshController"
         }).state('adminlab.lesson.description', {
             url: "/description",
-            templateUrl: "views/adminlab/description.html"
+            templateUrl: "views/adminlab/description.html",
+            controller:"refreshController"
         }).state('dashboard', {
             url: "/dashboard",
             templateUrl: "views/main/welcome.html",
@@ -79,30 +88,35 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "views/courses/courseChenged.html",
             onEnter: function(){
                 $("body").addClass("withMap");
-                //console.log("sasdasd")
             },
             onExit: function(){
                 $("body").removeClass("withMap");
-                //console.log("sasdasd")
             },
-            controller: ''
+            controller:"refreshController"
         }).state('courses', {
             url: "/courses",
-            templateUrl: "views/courses/courses.html"
+            templateUrl: "views/courses/courses.html",
+            controller:"refreshController"
         }).state('modules', {
             url: "/courses/:courseTitle/:moduleTitle",
-            templateUrl: "views/courses/moduleChanged.html"
+            templateUrl: "views/courses/moduleChanged.html",
+            controller:"refreshController"
         }).state('modulecomplete', {
             url: "/courses/:courseTitle/:moduleTitle/complete",
             templateUrl: "views/courses/modulecomplete.html",
             controller: 'progress'
         }).state('unit', {
             url: "/courses/:courseTitle/:moduleTitle/:sectionTitle/:unitTitle",
-            templateUrl: "views/courses/unitChenged.html"
+            templateUrl: "views/courses/unitChenged.html",
+            controller:"refreshController"
 
         }).state('refresh', {
             url: "/refresh",
             templateUrl: "views/main/refresh.html"
+
+        }).state('404', {
+            url: "/404",
+            templateUrl: "404.html"
 
         });
 });

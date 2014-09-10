@@ -20,6 +20,7 @@ function router(app, hasUser, io) {
 
         Posts.count(function (err, count) {
             console.log("doc in base", count);
+            console.log(req.body)
             var Post = new Posts;
             Post.id = count;
             Post.title = req.body.title;

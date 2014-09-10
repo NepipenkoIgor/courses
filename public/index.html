@@ -60,6 +60,7 @@
      <script  src="js/controllers/postsController.js"></script>
     <script  src="js/controllers/badgeController.js"></script>
     <script  src="js/controllers/progressController.js"></script>
+    <script  src="js/controllers/refreshController.js"></script>
     <!-- <script  src="javascripts/front.js"></script>-->
     <script src="javascripts/masonry.pkgd.min.js"></script>
     <!--<script src="javascripts/swfobject.js"></script>-->
@@ -162,7 +163,8 @@
         </div>
 
         <div class="dropdown notify" ng-if="!ifCommunity()" style="margin: 10px 8px;">
-            <a class="btn btn-primary" href="#/post/new" style="color:#000000;width: 100%">Add new post</a>
+            <!--<a class="btn btn-primary" href="#/post/new" style="color:#000000;width: 100%">Add new post</a>-->
+            <a class="btn btn-primary" ng-click="openModal('myModalContent.html')" style="color:#000000;width: 100%">Add new post</a>
         </div >
 
 
@@ -327,12 +329,107 @@
 
 
 <div id="blockwindow"></div>
+<div class="postLoad">
+<div class="designori">
+    <div class="red"></div>
+    <div class="blue"></div>
+    <div class="green"></div>
+    <div class="yellow"></div>
+</div>
+</div>
+</div>
+
+
+<div >
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-content" >        <div class="modal-header ng-scope">
+            <h3 class="modal-title">Which type?</h3>
+        </div>
+            <div class="modal-body ng-scope">
+                <div class="newCommCont">
+                    <div class="newComm" ng-click="openPost()">
+                        <i class="fa fa-comment"></i>
+                        <h2>Post</h2>
+                    </div>
+                    <div class="newComm" ng-click="openQuestion()">
+                        <i class="fa fa-question"></i>
+                        <h2>Question</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ng-scope">
+            </div>
+        </div>
+    </script>
 
 
 </div>
-<script>
+
+<div >
+    <script type="text/ng-template" id="myModalContentPost.html">
+        <div class="modal-content">        <div class="modal-header ng-scope">
+            <h3 class="modal-title">New Post</h3>
+        </div>
+            <div class="modal-body ng-scope">
+                <form role="form" class="ng-pristine ng-valid">
+                    <div class="form-group">
+                        <label for="content">Post content</label>
+                        <textarea class="form-control" rows="3" ng-model="text.content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Add an image</label>
+                        <input type="file" id="postInputFile">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer ng-scope">
+                <button class="btn btn-primary btn-lg" ng-click="ok()">Post</button>
+                <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+            </div></div>
+    </script>
 
 
-</script>
+</div>
+
+
+<div >
+    <script type="text/ng-template" id="myModalContentQuestion.html">
+        <div class="modal-content" >        <div class="modal-header ng-scope">
+            <h3 class="modal-title">New Question</h3>
+        </div>
+            <div class="modal-body ng-scope">
+                <form role="form" class="ng-pristine ng-valid">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Short Question</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="How to embed image in html?" ng-model="text.title">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Detailed Question</label>
+                        <textarea class="form-control" rows="3" ng-model="text.content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Add an image</label>
+                        <input type="file" id="questInputFile">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer ng-scope">
+                <button class="btn btn-primary btn-lg" ng-click="ok()">Ask</button>
+                <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+            </div>
+    </script>
+
+
+
+</div>
+
+
 </body>
 </html>
+
+
+
+
+
+
+</div>

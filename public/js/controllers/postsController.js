@@ -5,7 +5,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     'user strict';
 
     /****************config post**********************/
-
+    $scope.triggerBool=true;
     $scope.comment = "";
     $scope.postdata = [];
     function reqPosts() {
@@ -14,15 +14,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             //      console.log("postdata",data);
             $scope.postdata = data;//.reverse();
             courseEdit.postdata = $scope.postdata;
-            var loc = $location.$$path.split("/")
-            if (loc[1] === 'profile') {
-
-                var searchObj = {};
-                searchObj.type = 'myposts';
-                searchObj.creator = courseEdit.userdata._id;
-                courseEdit.searchPosts(searchObj);
-            }
-
+            var loc = $location.$$path.split("/");
             if ($location.$$path === "/post/all") {
                 var searchObj = {};
                 switch ($location.search().type) {
@@ -52,12 +44,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 }
                 courseEdit.searchPosts(searchObj);
             }
-            $scope.countUserComments=function(){
+            $scope.countUserComments = function () {
                 var count = 0;
                 if ($scope.postdata !== undefined) {
                     for (var i = 0; i < courseEdit.postdata.length; i++) {
                         for (var j = 0; j < courseEdit.postdata[i].comments.length; j++) {
-                            if(courseEdit.postdata[i].comments[j]!==0) {
+                            if (courseEdit.postdata[i].comments[j] !== 0) {
                                 if (courseEdit.postdata[i].comments[j].creator === courseEdit.userdata._id && courseEdit.postdata[i].typePost !== "question") {
                                     count++;
                                 }
@@ -65,22 +57,22 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         }
                     }
                 }
-                if(count===50){
+                if (count === 50) {
                     courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata);
                 }
-                if(count===100){
+                if (count === 100) {
                     courseEdit.userHasBadge(courseEdit.listOfBadges[8], courseEdit.userdata);
                 }
-               // console.log("count",count);
+                // console.log("count",count);
                 return count;
             };
             $scope.countUserComments();
-            $scope.countUserAnswers=function(){
+            $scope.countUserAnswers = function () {
                 var count = 0;
                 if ($scope.postdata !== undefined) {
                     for (var i = 0; i < courseEdit.postdata.length; i++) {
                         for (var j = 0; j < courseEdit.postdata[i].comments.length; j++) {
-                            if(courseEdit.postdata[i].comments[j]!==0) {
+                            if (courseEdit.postdata[i].comments[j] !== 0) {
                                 if (courseEdit.postdata[i].comments[j].creator === courseEdit.userdata._id && courseEdit.postdata[i].typePost === "question") {
                                     count++;
                                 }
@@ -88,13 +80,13 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         }
                     }
                 }
-                if(count===50){
+                if (count === 50) {
                     courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
                 }
-                if(count===100){
-                   // courseEdit.userHasBadge(courseEdit.listOfBadges[9], courseEdit.userdata);
+                if (count === 100) {
+                    // courseEdit.userHasBadge(courseEdit.listOfBadges[9], courseEdit.userdata);
                 }
-               // console.log("count",count);
+                // console.log("count",count);
                 return count;
             };
             $scope.countUserAnswers();
@@ -107,10 +99,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         }
                     }
                 }
-                if(count===50){
-                   // courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
+                if (count === 50) {
+                    // courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
                 }
-                if(count===100){
+                if (count === 100) {
                     courseEdit.userHasBadge(courseEdit.listOfBadges[6], courseEdit.userdata);
                 }
                 return count;
@@ -124,10 +116,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         }
                     }
                 }
-                if(count===50){
+                if (count === 50) {
                     courseEdit.userHasBadge(courseEdit.listOfBadges[4], courseEdit.userdata);
                 }
-                if(count===100){
+                if (count === 100) {
                     courseEdit.userHasBadge(courseEdit.listOfBadges[7], courseEdit.userdata);
                 }
                 return count;
@@ -137,12 +129,17 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         });
 
     }
+    courseEdit.reqPosts=reqPosts;
+
+    $scope.triggerView=function(bool){
+        $scope.triggerBool=bool;
+    };
 
 
     function reqUsers() {
         $http.get('/users').success(function (data) {
             $scope.postUsersdata = data;
-
+            var init = false;
             var loc = $location.$$path.split("/");
             if (loc[1] === 'profile') {
                 if (loc[2]) {
@@ -150,13 +147,32 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         if (data[i].username === loc[2]) {
                             if (data[i]._id === $scope.userdata._id) {
                                 $scope.userNowView = $scope.userdata;
+                                init = true;
                                 break;
                             }
                             $scope.userNowView = data[i];
                             $scope.editionType.type = false;
+                            init = true;
                             break;
                         }
+
+
                     }
+                    if (!init) {
+
+                        $state.go('404');
+                        init = false;
+                    }
+
+                    var searchObj = {};
+                    searchObj.type = 'myposts';
+                    searchObj.creator = $scope.userNowView._id;
+                    courseEdit.searchPosts(searchObj);
+
+                    $scope.viewBadgeOfUser=function(user){
+                        $scope.profileBadge=courseEdit.eqvalBadges(user);
+
+                    };
                 }
             }
             $scope.styleName = function (user1, user2) {
@@ -228,18 +244,8 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     /********save post**********/
     $scope.tags = [];
 
-    $scope.saveNewPost = function (creator) {
-        console.log($scope.tags)
-        courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
-        var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
-        $http.post('/post/new', newPost).success(function (data) {
-           // reqPosts();
-            $state.go('posts').then(function () {
-                $location.url("/post/all?type=allposts");
 
-            });
-        });
-    };
+
 
     function dataReg(data) {
         var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -284,35 +290,19 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
 
     };
-    $scope.saveNewQuestion = function (creator, unit) {
-        courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
-        $scope.tags.unshift({"text": courseEdit.positionInCourse.course + "." + courseEdit.positionInCourse.module + "." + courseEdit.positionInCourse.section + "." + courseEdit.positionInCourse.unit});
-        console.log($scope.tags)
-        var newQuestion = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator, unit: unit, typePost: "question"};
-        $http.post('/post/new', newQuestion).success(function (data) {
-            // $scope.showQuestionBlock=false;
-            reqPosts();
 
+    /****************update comment**********************/
+
+
+
+
+
+    $scope.updateComment = function (post) {
+       // console.log(post)
+        $http.post("/comment/update", post).success(function (data) {
+           // console.log(data)
         });
-
     };
-/****************update comment**********************/
-
-
-
-
-
-$scope.updateComment=function(post){
-    console.log(post)
-    $http.post("/comment/update",post).success(function(data){
-        console.log(data)
-    })
-}
-
-
-
-
-
 
 
     /******************logic differences of posts**********************/
@@ -365,49 +355,57 @@ $scope.updateComment=function(post){
     $scope.updateLikes = function (postId, likes, userId, post) {
         var date = {_id: postId, likes: likes, userHowLike: userId, post: post, likesNum: likes.length};
         $http.post('/postslikes', date).success(function (num) {
-            console.log("num",num)
+            console.log("num", num)
         });
     };
     $scope.commentLike = function (index, user, likes, userId, post) {
         var likes = post.comments[index].likes;
         if (likes.indexOf(user) == (-1)) {
             likes.push(user);
-            $scope.updateCommentLikes(post,post.comments[index].creator,user,true);
+            $scope.updateCommentLikes(post, post.comments[index].creator, user, true);
         } else {
             likes.splice(likes.indexOf(user), 1);
-            $scope.updateCommentLikes(post,post.comments[index].creator,user,false);
+            $scope.updateCommentLikes(post, post.comments[index].creator, user, false);
         }
 
-      //  console.log(index, likes, userId, post)
+        //  console.log(index, likes, userId, post)
     };
 
-    $scope.updateCommentLikes = function (post,user,usersHowLike,cillLike) {
-        console.log(post,user,usersHowLike,cillLike)
+    $scope.updateCommentLikes = function (post, user, usersHowLike, cillLike) {
+        console.log(post, user, usersHowLike, cillLike)
         //var date = {_id: postId, likes: likes, userHowLike: userId, post: post, likesNum: likes.length};
-        $http.post('/commentlikes', [post,user,usersHowLike,cillLike]).success(function (num) {
+        $http.post('/commentlikes', [post, user, usersHowLike, cillLike]).success(function (num) {
         });
     };
 
 
     $scope.searchPosts = function (searchObj) {
+        $(".postLoad").show();
         $http.post('/post/search', searchObj).success(function (data) {
-
+            //$scope.triggerBool=true;
             if ($location.$$path.split("/")[1] === 'profile') {
                 $scope.postdata = data.data;
-               // console.log( data)
-                if($scope.postdata.length===0){
-                    if(data.type==="myposts"){
-                        $scope.postTitle="user has made no posts and questions";
-                       // $scope.$apply();
+
+                $scope.postdata.push([null]);
+                setTimeout(function () {
+                    $scope.postdata.splice($scope.postdata.length - 1, 1);
+                    $scope.$apply();
+                    $(".postLoad").hide();
+                }, 4);
+               // console.log($scope.postdata)
+                if ($scope.postdata.length === 0) {
+                    if (data.type === "myposts") {
+                        $scope.postTitle = "user has made no posts and questions";
+                        // $scope.$apply();
                         return;
                     }
-                    if(data.type==="myquestions"){
-                        $scope.postTitle="user has asked no questions";
-                       // $scope.$apply();
+                    if (data.type === "myquestions") {
+                        $scope.postTitle = "user has asked no questions";
+                        //$scope.$apply();
                         return;
                     }
-                    if(data.type==="onlyposts"){
-                        $scope.postTitle="user has made no posts";
+                    if (data.type === "onlyposts") {
+                        $scope.postTitle = "user has made no posts";
                         // $scope.$apply();
                         return;
                     }
@@ -421,22 +419,24 @@ $scope.updateComment=function(post){
 
                 $scope.page = $scope.postdata.length / 10;
                 $scope.scrolling = 800;
-              //  console.log($scope.postdata.length);
+                //  console.log($scope.postdata.length);
                 $scope.down = false;
                 $scope.remove = $scope.postdata.splice(10, $scope.postdata.length);
 
                 if (data.type === "popular") {
-                    $scope.postdata.push([null])
+                    $scope.postdata.push([null]);
                     setTimeout(function () {
                         $scope.postdata.splice($scope.postdata.length - 1, 1);
                         $scope.$apply();
+                        $(".postLoad").hide();
                     }, 4);
-                    return
+                    return;
                 }
-                $scope.postdata.push([null])
+                $scope.postdata.push([null]);
                 setTimeout(function () {
                     $scope.postdata.splice($scope.postdata.length - 1, 1);
                     $scope.$apply();
+                    $(".postLoad").hide();
                 }, 4);
                 return;
             }
@@ -483,16 +483,15 @@ $scope.updateComment=function(post){
                 progressContext.lineWidth = 20;
                 progressContext.stroke();
 
-                courseEdit.totalPointsOfAllCourse()
-                //console.log(Math.round(courseEdit.pointsCalculate(courseEdit.userdata.progress) / courseEdit.totalPointsOfAllCourse() * 100))
-                //  console.log(courseEdit.pointsCalculate($scope.user.progress), courseEdit.totalPointsOfAllCourse(list))
+                courseEdit.totalPointsOfAllCourse();
+
                 var attitude = courseEdit.pointsCalculate($scope.user.progress) / courseEdit.totalPointsOfAllCourse(list);
                 // console.log(attitude)
                 if (isNaN(attitude)) {
                     attitude = 0;
                 }
                 if (attitude > 0.99 && attitude < 1) {
-                    attitude = 0.99
+                    attitude = 0.99;
                 }
                 var progressProcent = Math.round(attitude * 100);
                 var arcle = attitude * 2 * Math.PI;
@@ -541,20 +540,17 @@ $scope.updateComment=function(post){
     $scope.scrolling = 800;
 
     window.onscroll = function (event) {
-        console.log("after scroll", $scope.postdata.length);
-        //console.log(window.scrollY,$scope.down)
         if ($scope.scrolling < window.scrollY) {
             if ($scope.down) {
                 return;
             }
-            // console.log("tytytyty", $scope.remove)
+
             var mass = $scope.remove.splice(10, $scope.remove.length);
-            //console.log("mass", mass)
-            //console.log(event, window.scrollY)
+
             $scope.scrolling += 1200;
-            $scope.postdata = $scope.postdata.concat($scope.remove)
+            $scope.postdata = $scope.postdata.concat($scope.remove);
             $scope.remove = mass;
-            $scope.postdata.push([null])
+            $scope.postdata.push([null]);
             setTimeout(function () {
                 $scope.postdata.splice($scope.postdata.length - 1, 1);
                 $scope.$apply();
@@ -564,6 +560,37 @@ $scope.updateComment=function(post){
             }
         }
 
+    };
+
+    $scope.postProfileGo = function (id) {
+        //console.log(id, $scope.postUsersdata);
+        for (var i = 0; i < $scope.postUsersdata.length; i++) {
+
+       if($scope.postUsersdata[i]._id===id){
+
+            $state.go('editprofile',({username:$scope.postUsersdata[i].username}));
+       }
+        }
+
+    };
+    $scope.postType=function(type){
+        if(type==="question"){
+            return {
+                'margin-bottom': '15px',
+                'border-top': '5px solid #C03F3F'
+            };
+        }
+        return {
+            'margin-bottom': '15px',
+            'border-top': '5px solid #3FA6C0'
+        };
+    };
+    $scope.answerTrigger=function(type){
+        //console.log(type)
+        if(type==="question"){
+            return true;
+        }
+        return false;
     };
 });
 

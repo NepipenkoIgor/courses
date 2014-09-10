@@ -16,15 +16,23 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
             </div>
                 {{userNowView.firstname}} {{userNowView.lastname}}</h1>
             <ul>
-                <li>@{{userNowView.username}}</li>
-                <li  style="cursor: pointer" ng-click="[typeSearch('Only Posts',userNowView),test()]">
+                <li style="cursor: pointer" ng-click="[typeSearch('My Posts',userNowView),triggerView(true)]">
+                    <a  tooltip-placement="bottom" tooltip="Posts and Questions"  >
+                        @{{userNowView.username}}
+                    </a></li>
+                <li  style="cursor: pointer" ng-click="[typeSearch('Only Posts',userNowView),triggerView(true)]">
                     <a  tooltip-placement="bottom" tooltip="Posts"  >
                         <i class="fa fa-pencil" > {{countUserPost(userNowView._id)}}</i>
                     </a>
                 </li>
-                <li ng-click="typeSearch('My Questions',userNowView)" style="cursor: pointer">
+                <li ng-click="[typeSearch('My Questions',userNowView),triggerView(true)]" style="cursor: pointer">
                     <a  tooltip-placement="bottom" tooltip="Questions"  >
                         <i class="fa fa-question"> {{countUserQuestion(userNowView._id)}}</i>
+                    </a>
+                </li>
+                <li   ng-click="[viewBadgeOfUser(userNowView),triggerView(false)]" style="cursor: pointer">
+                    <a  tooltip-placement="bottom" tooltip="Achievement"  >
+                        <i class="fa fa-check-circle"> </i>
                     </a>
                 </li>
             </ul>
@@ -135,4 +143,18 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
 <h1 style="text-align: center;color:red">{{postTitle}}</h1>
 <div deckgrid source="postdata"
      cardTemplate="/views/templates/deckgrid-post.html" style=""
-     class="deckgrid1" ng-if="userdata" ></div>
+     class="deckgrid1" ng-if="userdata" ng-show="triggerBool" ></div>
+
+
+<div class="row acheive row-centered" ng-show="!triggerBool">
+    <h3 class="ng-binding" ng-show=" profileBadge.length===0" style="color: red">No achievements yet</h3>
+    <div class="col-md-2 abadge col-centered ng-scope" ng-repeat="badge in profileBadge" >
+        <img ng-src="{{badge.img}}" tooltip="{{badge.name}}" tooltip-placement="top" class="ng-scope" >
+        <h3 class="ng-binding" >{{badge.description}}</h3>
+
+    </div>
+
+    <div class="col-md-12 title">
+        <h2>Acheivements</h2>
+    </div>
+</div>
