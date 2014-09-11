@@ -19,7 +19,7 @@
     </div>
     <h1 class="title ng-binding">{{card.title}}</h1>
     <p class="content ng-binding">{{card.content}}</p>
-    <!--<img src="http://lorempixel.com/400/300/abstract" class="img" style="width: 100%">-->
+    <img ng-src="{{card.img}}" class="img" style="width: 100%">
     <div class="tagConteiner">
         <b style="float:left;margin-top: 4px;">Tags:</b>
         <a class="tag" ng-repeat="tag in card.tags" ng-click="mother.searchByTag(tag)" style="cursor:pointer;font-size: x-small">{{tag.text}}</a>

@@ -378,7 +378,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Add an image</label>
-                        <input type="file" id="postInputFile">
+                        <input type="file" id="postInputFile" ng-model="file" onchange="angular.element(this).scope().consolka()">
                     </div>
                 </form>
             </div>
@@ -408,8 +408,8 @@
                         <textarea class="form-control" rows="3" ng-model="text.content"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputFile">Add an image</label>
-                        <input type="file" id="questInputFile">
+                        <label for="exampleInputFile" >Add an image</label>
+                        <input type="file" id="questInputFile" onchange="angular.element(this).scope().consolkaQuest()">
                     </div>
                 </form>
             </div>

@@ -20,14 +20,38 @@ function router(app,io) {
     }
     res.redirect("/#/login");
   }
+
+    var jwt   = require('jwt-simple');
+
  function hasAccess(req,res,next){
-     //console.log(req.isAuthenticated());
+
      if (!req.isAuthenticated()) {
          return next();
      }
      res.redirect("/#/login");
+   /*  if (!req.headers.authorization) {
+         res.redirect("/#/login");
+         return
+     }
+
+     var token = req.headers.authorization.split(' ')[1];
+     var payload = jwt.decode(token, TheSecret);
+
+     if (payload.exp <= Date.now()) {
+         return res.status(401).send({
+             message: 'Token has expired'
+         });
+     }
+
+     req.user = payload.sub;
+     return next();*/
 
  }
+
+
+
+
+
   var google = require('./account/google')(app);
   var facebook = require('./account/facebook')(app);
   var twitter = require('./account/twitter')(app);

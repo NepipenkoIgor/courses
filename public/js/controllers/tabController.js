@@ -105,10 +105,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
             $scope.eqvalBadges = function (user) {
                 if (courseEdit.userdata) {
-                    var user=user||courseEdit.userdata
+                    var user = user || courseEdit.userdata
                     if (user.badges && courseEdit.listOfBadges) {
                         var trueBadge = []
-                        for (var i = 0; i <user.badges.length; i++) {
+                        for (var i = 0; i < user.badges.length; i++) {
                             for (var j = 0; j < courseEdit.listOfBadges.length; j++) {
                                 if (user.badges[i] === courseEdit.listOfBadges[j].badgeId) {
                                     trueBadge.push(courseEdit.listOfBadges[j]);
@@ -123,7 +123,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
             };
 
-            courseEdit.eqvalBadges=$scope.eqvalBadges;
+            courseEdit.eqvalBadges = $scope.eqvalBadges;
         });
 
         $http.get('/units').success(function (units) {
@@ -952,10 +952,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     courseEdit.pointsCalculate = $scope.pointsCalculate;
 
 
-
     //$scope.eqvalBadges;
-  /*  $scope.listOdTrueBadge= $scope.eqvalBadges()
-    console.log($scope.listOdTrueBadge)*/
+    /*  $scope.listOdTrueBadge= $scope.eqvalBadges()
+     console.log($scope.listOdTrueBadge)*/
 
 
     /*************icon of the lessons***************/
@@ -1053,17 +1052,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.editionType = {};
     $scope.editionType.type = false;
+    $scope.percentComplete = 0;
+    $scope.nullProg = function () {
+        $scope.userUploadProgress.progress = {'width': 0 + '%'};
+        $scope.percentComplete = 0;
+    };
     $scope.showProfileEdition = function (bool) {
         setTimeout(function () {
             $scope.editionType.type = !$scope.editionType.type;
             $scope.$apply();
-
-            /*$("#inputUser").onchange(function(event){
-             console.log(event)
-             })*/
-            var inputUser = $("#inputUser")
-
+            var inputUser = $("#inputUser");
+            $scope.userUploadProgress = {};
             inputUser.bind("change", function (event) {
+
                 var file = event.currentTarget.files[0];
                 var formData = new FormData();
                 formData.append("userfile", file);
@@ -1076,6 +1077,15 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     photoDropZone.html("uploaded");
 
                 }, false);
+                xhr.addEventListener('progress', function (event) {
+                    if (event.lengthComputable) {
+                        var percentComplete = event.loaded / event.total;
+                        $scope.percentComplete = percentComplete * 100;
+                        $scope.userUploadProgress.progress = {'width': percentComplete + 100 + '%'}
+
+                    } else {
+                    }
+                });
                 xhr.open("POST", "/user/upload", true);
                 xhr.send(formData);
             });
@@ -1085,7 +1095,13 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 photoDropZone.addClass('error');
             }
             var photoArea = document.getElementById("photoDropZone");
+
+
             photoArea.ondragover = function () {
+                $scope.userUploadProgress.progress = {'width': 0 + '%'};
+                $scope.percentComplete = 0;
+                photoDropZone.html("drag your photo here, format must be jpg/png");
+                photoDropZone.removeClass('drop');
                 photoDropZone.addClass('hover');
                 return false;
             };
@@ -1094,6 +1110,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 return false;
             };
             photoArea.ondrop = function (event) {
+
                 event.preventDefault();
                 photoDropZone.removeClass('hover');
                 photoDropZone.addClass('drop');
@@ -1101,11 +1118,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 var formData = new FormData();
                 formData.append("userfile", file);
                 var xhr = new XMLHttpRequest();
+                xhr.addEventListener('progress', function (event) {
+
+                    if (event.lengthComputable) {
+                        var percentComplete = event.loaded / event.total;
+                        $scope.percentComplete = percentComplete * 100;
+                        $scope.userUploadProgress.progress = {'width': percentComplete + 100 + '%'}
+                    } else {
+                    }
+                });
                 xhr.addEventListener('load', function () {
                     courseEdit.reqUser();
                     courseEdit.reqPosts();
                     courseEdit.reqUsers();
-                    // console.log("Sdaasdsd")
                     photoDropZone.html("uploaded");
 
                 }, false);
@@ -1157,8 +1182,15 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $scope.saveNewQuestion = saveNewQuestion;
         $scope.user = user;
         $scope.text = {};
+        $scope.consolkaQuest = function () {
+
+            var formData = new FormData();
+            formData.append("postFile", $("#questInputFile")[0].files[0]);
+            console.log(formData);
+            $scope.formData = formData;
+        };
         $scope.ok = function () {
-            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id);
+            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id, undefined, $scope.formData);
             $modalInstance.close();
             // post()
         };
@@ -1181,20 +1213,33 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 },
                 user: function () {
                     return    courseEdit.userdata;
+                },
+                uploadPostImg: function () {
+                    return $scope.uploadPostImg
                 }
             }
         });
 
     };
 
-    var ModalInstanceCtrlPost = function ($scope, $modalInstance, $modal, saveNewPost, user) {
+    var ModalInstanceCtrlPost = function ($scope, $modalInstance, $modal, saveNewPost, user, uploadPostImg) {
         //console.log("scope",$scope)
         $scope.user = user;
+        //   $scope.uploadPostImg=uploadPostImg('postInputFile');
+
+        $scope.consolka = function () {
+            console.log("gooood", event)
+            console.log($("#postInputFile")[0].files[0])
+            var formData = new FormData();
+            formData.append("postFile", $("#postInputFile")[0].files[0]);
+            console.log(formData);
+            $scope.formData = formData;
+        }
         //console.log($scope.user)
         $scope.saveNewPost = saveNewPost;
         $scope.text = {};
         $scope.ok = function () {
-            $scope.saveNewPost($scope.text.content, $scope.user._id);
+            $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData);
             $modalInstance.close();
         };
 
@@ -1247,35 +1292,72 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
         };
     };
+    /**************upload post/question foto**************************/
+    $scope.uploadPostImg = function (div) {
+        console.log(div);
+        var inputPost = $("#" + div);
+        console.log(inputPost)
+        inputPost.bind("change", function (event) {
+
+            var file = event.currentTarget.files[0];
+            var formData = new FormData();
+
+            formData.append("postFile", file);
+
+
+        });
+
+    };
+
 
     /************************save post new**************************/
 
 
 
-    $scope.saveNewPost = function (content, creator) {
+    $scope.saveNewPost = function (content, creator, fileUpload) {
         courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
         //var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
         var newPost = {content: content, creator: creator};
         $http.post('/post/new', newPost).success(function (data) {
-            courseEdit.reqPosts();
-            $state.go('posts').then(function () {
-                $location.url("/post/all?type=allposts");
+            console.log(data.data)
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', function () {
+                courseEdit.reqPosts();
+                $state.go('posts').then(function () {
+                    $location.url("/post/all?type=allposts");
 
-            });
+                })
+            }, false);
+
+            xhr.open("POST", "/posts/upload", true);
+            xhr.setRequestHeader("postId", data.data.postId);
+            xhr.send(fileUpload);
         });
     };
 
     courseEdit.saveNewPost = $scope.saveNewPost;
 
 
-    $scope.saveNewQuestion = function (title, content, creator, unit) {
+    $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload) {
         //console.log("save new question")
         courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
-       // console.log(content)
+        // console.log(content)
         var newQuestion = {title: title, content: content, creator: creator, unit: unit, typePost: "question"};
         $http.post('/post/new', newQuestion).success(function (data) {
+            console.log(data.data)
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', function () {
+                courseEdit.reqPosts();
+                $state.go('posts').then(function () {
+                    $location.url("/post/all?type=allposts");
 
-            courseEdit.reqPosts();
+                });
+            }, false);
+
+            xhr.open("POST", "/posts/upload", true);
+            xhr.setRequestHeader("postId", data.data.postId);
+            xhr.send(fileUpload);
+
         });
 
     };

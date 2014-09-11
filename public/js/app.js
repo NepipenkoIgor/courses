@@ -13,6 +13,66 @@ app.service('courseEdit',function($http){
 });
 
 
+/*app.factory('Users', function($http) {
+    return {
+        login : function(data) {
+            return $http.post('/api/login', data);
+        },
+        signup : function(data) {
+            return $http.post('/api/signup', data);
+        },
+        userinfo : function() {
+            return $http.get('/user');
+        }
+    };
+});
+
+app.constant('Config', {
+    tokenName: 'token',
+    tokenPrefix: '4Igor'
+});
+
+// Add Token as Auth Header
+app.config(['$httpProvider', 'Config', function($httpProvider, Config) {
+    $httpProvider.interceptors.push(['$q', function($q) {
+        return {
+            request: function(httpConfig) {
+                if (localStorage.getItem([Config.tokenPrefix, Config.tokenName].join('_'))) {
+                    httpConfig.headers.Authorization = 'Bearer ' + localStorage.getItem([Config.tokenPrefix, Config.tokenName].join('_'));
+                }
+                return httpConfig;
+            },
+            responseError: function(response) {
+                if (response.status === 401) {
+                    localStorage.removeItem([Config.tokenPrefix, Config.tokenName].join('_'));
+                }
+                return $q.reject(response);
+            }
+        };
+    }]);
+}]);*/
+
+
+app.factory('Auth', function ($rootScope, $window, Config) {
+    return {
+        check : function () {
+            var token = [Config.tokenPrefix, Config.tokenName].join('_');
+            return Boolean($window.localStorage[token]);
+        },
+        clearToken : function () {
+            var token = [Config.tokenPrefix, Config.tokenName].join('_');
+            delete $window.localStorage[token];
+        },
+        setToken : function (data) {
+            var token = data[Config.tokenName];
+            var namespace = [Config.tokenPrefix, Config.tokenName].join('_');
+            $window.localStorage[namespace] = token;
+        }
+    };
+});
+
+
+
 app.run(function($rootScope,$location,courseEdit){});
 
 

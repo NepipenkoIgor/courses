@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
 var Notify = mongoose.model('Notify');
+var fs=require('fs')
 function dataReg(data) {
     var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
     var newDataDate = data.getDate();
@@ -19,8 +20,7 @@ function router(app, hasUser, io) {
 
 
         Posts.count(function (err, count) {
-            console.log("doc in base", count);
-            console.log(req.body)
+
             var Post = new Posts;
             Post.id = count;
             Post.title = req.body.title;
@@ -30,30 +30,34 @@ function router(app, hasUser, io) {
             Post.lesson = req.body.unit;
             Post.typePost = req.body.typePost || "";
             Post.postId = Date.now();
-            /*if(req.body.tags){
 
-             var tags=req.body.tags.split(",");
-             var resTags=[];
-             for(var i=0;i<tags.length;i++){
-             console.log(tags[i]);
-             if(resTags.indexOf(tags[i])===(-1)&&tags[i]!==""){
-             resTags.push(tags[i]);
-             }
-             }
-             }
-             Post.tags=resTags||null;*/
             Post.tags = req.body.tags;
             // console.log("postNew", postNew);
             Post.save(function (err, post) {
                 console.log("good new post");
                 res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
-                //res.redirect("/#/post/all");
+
             });
 
         });
 
 
     });
+
+    app.post('/posts/upload', hasUser, function (req, res) {
+
+        fs.createReadStream(req.files.postFile.path)
+            .pipe(fs.createWriteStream("public/img/posts/" + req.files.postFile.originalFilename))
+            .on('finish', function () {
+                Posts.update({postId: req.headers.postid}, {img: "img/posts/" + req.files.postFile.originalFilename}, function (num) {
+                    res.json({a:"B"})
+
+                });
+            });
+
+    });
+
+
     app.get('/posts', hasUser, function (req, res) {
         Posts.find(function (err, posts) {
             res.json(posts);

@@ -1,6 +1,8 @@
 app.controller('profile', function ($scope, $state, $http, $sce, $location, courseEdit) {
     'user strict';
-
+/*console.log(Users.userinfo().then(function(data){
+    console.log(data)
+}))*/
     $scope.reqUser = function (cb, badge) {
         $http.get('/user').success(function (data) {
 

@@ -41,7 +41,7 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
 </div>
 
 <!--
-<div ui-view="Main" class="content ng-scope"><img gravatar-src="'igornepipenko@gmail.com'" gravatar-size="150" class="ng-scope" src="https://secure.gravatar.com/avatar/0733b20f447fe87ca56dff983adb45db?size=150&amp;default=mm">
+<div ui-view="Main" class="content ng-scope"><img gravatar-src="'igornepipenko@gmail.com'" gravatar-size="150" class="ng-scope" src="https://secure.gravatar.com/user/0733b20f447fe87ca56dff983adb45db?size=150&amp;default=mm">
 -->
 
 
@@ -75,10 +75,10 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
                         <span class="title"> Email:</span>
                         <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
                     </div>
-                    <div class="userInput">
+                   <!-- <div class="userInput">
                         <span class="title">User password: </span>
                         <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
-                    </div>
+                    </div>-->
                     <div class="userInput">
                         <span class="title">User firstname: </span>
                         <span editable-text="userdata.firstname" >{{userdata.firstname || 'empty' }}</span>
@@ -125,9 +125,17 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
 
                 <div class="form-group" action="/user/upload" type="multipart" enctype="multipart/form-data" method="post" >
 <p>browse photo,format must be jpg/png</p>
-                    <input type="file" id="inputUser" style="color:#ffffff" >
+                    <input type="file" id="inputUser" style="color:#ffffff" ng-click="nullProg()">
                     <!--<button type="submit" class="btn vtn-primary"> upload</button>-->
                 </div>
+            <!--    <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="userUploadProgress.progress">
+                        <span class="sr-only">60% Complete</span>
+                    </div>
+                </div>-->
+
+                <progressbar animate="false" value="percentComplete" type="success"><b>{{percentComplete}}%/100%</b></progressbar>
+
             </div>
         </div>
 

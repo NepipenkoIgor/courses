@@ -9,6 +9,23 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = mongoose.model('Users');
 
+
+var bcrypt = require('bcrypt-nodejs');
+var jwt   = require('jwt-simple');
+var moment  = require('moment');
+
+function createToken(req, user) {
+    var payload = {
+        iss: req.hostname,
+        sub: user._id,
+        iat: moment().valueOf(),
+        exp: moment().add(14, 'days').valueOf()
+    };
+    return jwt.encode(payload, TheSecret);
+}
+
+
+
 function session(app) {
 var config=app.get('config');
     passport.serializeUser(function (user, done) {
@@ -37,17 +54,24 @@ var config=app.get('config');
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
         function (req, email, password, done) {
-            User.findOne({ 'email': email }, function (err, user) {
+            User.findOne({ 'email': email }).select('+password').exec(function (err, user) {
                 if (err) {
                     return done(err);
                 }
                 if (!user) {
                     return done(null, false);
                 }
-                if (user.password !== password) {
+
+                /*if (user.password !== password) {
                     return done(null, false);
-                }
-                return done(null, user);
+                }*/
+                user.validatePassword(req.body.password, function(err, isMatch) {
+                    if (!isMatch) {
+                        return done(null, false);
+                    }
+                    return done(null, user);
+                });
+
             });
         }));
 
@@ -65,7 +89,7 @@ var config=app.get('config');
                newUser.email = req.body.email;
                var date = new Date();
                newUser.lid = date.getTime();
-               newUser.password = req.body.password;
+               newUser.password =  newUser.generateHash(req.body.password);
                newUser.dataReg = dataReg(newData);
                newUser.regCode = req.body.code;
                var firstLater=req.body.firstname.split("");
@@ -103,7 +127,7 @@ var config=app.get('config');
                         newUser.email = email;
                         var date = new Date();
                         newUser.lid = date.getTime();
-                        newUser.password = password;
+                        newUser.password = newUser.generateHash(req.user.password);
                         newUser.position = true;
                         newUser.dataReg = dataReg(newData);
                         var firstLater=req.body.firstname.split("");

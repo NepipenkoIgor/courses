@@ -9,6 +9,7 @@ var postSchema=new Schema({
     creator:String,
     postId:Number,
     created:String,
+    img:String,
     lesson:Number,
     votes:[
         {creator:String},
