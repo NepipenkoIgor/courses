@@ -57,7 +57,7 @@ if(!req.files.postFile){
             .pipe(fs.createWriteStream("public/img/posts/" + req.files.postFile.originalFilename))
             .on('finish', function () {
                 Posts.update({postId: req.headers.postid}, {img: "img/posts/" + req.files.postFile.originalFilename}, function (num) {
-                    res.json({a:"B"})
+                    res.json({a:"B"});
 
                 });
             });
