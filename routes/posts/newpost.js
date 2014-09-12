@@ -49,6 +49,10 @@ if(!req.files.postFile){
     res.json({a:"B"})
     return;
 }
+        if(req.files.userfile.size===0||type!=="image/png"&&type!=="image/jpeg"){
+            res.json({});
+            return;
+        }
         fs.createReadStream(req.files.postFile.path)
             .pipe(fs.createWriteStream("public/img/posts/" + req.files.postFile.originalFilename))
             .on('finish', function () {

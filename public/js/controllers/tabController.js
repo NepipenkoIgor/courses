@@ -1312,10 +1312,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.saveNewPost = function (content, creator, fileUpload,tags) {
-        //console.log(tags)
+        $(".postLoad").show();
         var tagsObj=[]
         for(var i=0;i<tags.length;i++){
-            tagsObj.push(tags[i].text)
+            tagsObj.push(tags[i].text);
         }
         courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
         //var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
@@ -1326,6 +1326,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             xhr.addEventListener('load', function () {
                 courseEdit.reqPosts();
                 $state.go('posts').then(function () {
+                    $(".postLoad").hide();
                     $location.url("/post/all?type=allposts");
 
                 });
@@ -1341,6 +1342,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload,tags) {
+        $(".postLoad").show();
         var tagsObj = [];
         if ($state.current.name === 'unit') {
             tagsObj.push($location.$$url.split("/")[5]);
@@ -1357,9 +1359,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             xhr.addEventListener('load', function () {
                 courseEdit.reqPosts();
                 if ($state.current.name === 'unit') {
+                    $(".postLoad").hide();
                     return;
                 }
                 $state.go('posts').then(function () {
+                    $(".postLoad").hide();
                     $location.url("/post/all?type=allposts");
 
                 });
