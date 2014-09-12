@@ -102,7 +102,7 @@ width: 1000px;
 margin-left: 13px;
 }
 .tag{
-    background-color: crimson;
+    background-color: #AA5454;
     text-decoration: none;
     color:white;
     margin: 3px 1px;
@@ -1591,4 +1591,8 @@ div.designori div.yellow {
   width: 30px!important;
     height: 30px!important;
 
+}
+.tags-item {
+    background: none!important;
+    background-color: #AA5454!important;
 }

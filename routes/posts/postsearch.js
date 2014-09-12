@@ -59,7 +59,7 @@ function router(app, hasUser) {
         }
         if (req.body.type === 'tags') {
            Posts.find({"tags":req.body.tag},function(err,data){
-                //console.log("UNWINDDDDDD",data);
+                console.log("UNWINDDDDDD",data);
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
         }

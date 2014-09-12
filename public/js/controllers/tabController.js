@@ -1081,7 +1081,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     if (event.lengthComputable) {
                         var percentComplete = event.loaded / event.total;
                         $scope.percentComplete = percentComplete * 100;
-                        $scope.userUploadProgress.progress = {'width': percentComplete + 100 + '%'}
+                        $scope.userUploadProgress.progress = {'width': percentComplete + 100 + '%'};
 
                     } else {
                     }
@@ -1090,7 +1090,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 xhr.send(formData);
             });
             var photoDropZone = $('#photoDropZone');
-            if (typeof(window.FileReader) == 'undefined') {
+            if (typeof(window.FileReader) === 'undefined') {
                 photoDropZone.text('Не поддерживается браузером!');
                 photoDropZone.addClass('error');
             }
@@ -1123,7 +1123,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     if (event.lengthComputable) {
                         var percentComplete = event.loaded / event.total;
                         $scope.percentComplete = percentComplete * 100;
-                        $scope.userUploadProgress.progress = {'width': percentComplete + 100 + '%'}
+                        $scope.userUploadProgress.progress = {'width': percentComplete + 100 + '%'};
                     } else {
                     }
                 });
@@ -1182,6 +1182,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $scope.saveNewQuestion = saveNewQuestion;
         $scope.user = user;
         $scope.text = {};
+        $scope.tag={};
         $scope.consolkaQuest = function () {
 
             var formData = new FormData();
@@ -1190,7 +1191,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             $scope.formData = formData;
         };
         $scope.ok = function () {
-            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id, undefined, $scope.formData);
+            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id, undefined, $scope.formData,$scope.tag.tags);
             $modalInstance.close();
             // post()
         };
@@ -1223,23 +1224,21 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
     var ModalInstanceCtrlPost = function ($scope, $modalInstance, $modal, saveNewPost, user, uploadPostImg) {
-        //console.log("scope",$scope)
-        $scope.user = user;
-        //   $scope.uploadPostImg=uploadPostImg('postInputFile');
 
+        $scope.user = user;
+
+        $scope.tag={};
         $scope.consolka = function () {
-            console.log("gooood", event)
-            console.log($("#postInputFile")[0].files[0])
             var formData = new FormData();
             formData.append("postFile", $("#postInputFile")[0].files[0]);
-            console.log(formData);
+
             $scope.formData = formData;
-        }
+        };
         //console.log($scope.user)
         $scope.saveNewPost = saveNewPost;
         $scope.text = {};
         $scope.ok = function () {
-            $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData);
+            $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData,$scope.tag.tags);
             $modalInstance.close();
         };
 
@@ -1294,9 +1293,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
     /**************upload post/question foto**************************/
     $scope.uploadPostImg = function (div) {
-        console.log(div);
         var inputPost = $("#" + div);
-        console.log(inputPost)
         inputPost.bind("change", function (event) {
 
             var file = event.currentTarget.files[0];
@@ -1314,19 +1311,24 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
 
-    $scope.saveNewPost = function (content, creator, fileUpload) {
+    $scope.saveNewPost = function (content, creator, fileUpload,tags) {
+        //console.log(tags)
+        var tagsObj=[]
+        for(var i=0;i<tags.length;i++){
+            tagsObj.push(tags[i].text)
+        }
         courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
         //var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
-        var newPost = {content: content, creator: creator};
+        var newPost = {content: content, creator: creator,tags:tagsObj};
         $http.post('/post/new', newPost).success(function (data) {
-            console.log(data.data)
+
             var xhr = new XMLHttpRequest();
             xhr.addEventListener('load', function () {
                 courseEdit.reqPosts();
                 $state.go('posts').then(function () {
                     $location.url("/post/all?type=allposts");
 
-                })
+                });
             }, false);
 
             xhr.open("POST", "/posts/upload", true);
@@ -1338,16 +1340,25 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     courseEdit.saveNewPost = $scope.saveNewPost;
 
 
-    $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload) {
-        //console.log("save new question")
+    $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload,tags) {
+        var tagsObj = [];
+        if ($state.current.name === 'unit') {
+            tagsObj.push($location.$$url.split("/")[5]);
+            tagsObj.push(tags);
+        }
+        for(var i=0;i<tags.length;i++){
+            tagsObj.push(tags[i].text);
+        }
         courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
-        // console.log(content)
-        var newQuestion = {title: title, content: content, creator: creator, unit: unit, typePost: "question"};
+
+        var newQuestion = {title: title, content: content, creator: creator, unit: unit, typePost: "question",tags:tagsObj};
         $http.post('/post/new', newQuestion).success(function (data) {
-            console.log(data.data)
             var xhr = new XMLHttpRequest();
             xhr.addEventListener('load', function () {
                 courseEdit.reqPosts();
+                if ($state.current.name === 'unit') {
+                    return;
+                }
                 $state.go('posts').then(function () {
                     $location.url("/post/all?type=allposts");
 
@@ -1361,6 +1372,5 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         });
 
     };
-
 
 });

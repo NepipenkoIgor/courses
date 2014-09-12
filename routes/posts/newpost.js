@@ -45,7 +45,10 @@ function router(app, hasUser, io) {
     });
 
     app.post('/posts/upload', hasUser, function (req, res) {
-
+if(!req.files.postFile){
+    res.json({a:"B"})
+    return;
+}
         fs.createReadStream(req.files.postFile.path)
             .pipe(fs.createWriteStream("public/img/posts/" + req.files.postFile.originalFilename))
             .on('finish', function () {

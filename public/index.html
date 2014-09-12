@@ -380,6 +380,9 @@
                         <label for="exampleInputFile">Add an image</label>
                         <input type="file" id="postInputFile" ng-model="file" onchange="angular.element(this).scope().consolka()">
                     </div>
+                    <tags-input ng-model="tag.tags" placeholder="(type tag and press enter)" class="tagsInput">
+
+                    </tags-input>
                 </form>
             </div>
             <div class="modal-footer ng-scope">
@@ -410,6 +413,9 @@
                     <div class="form-group">
                         <label for="exampleInputFile" >Add an image</label>
                         <input type="file" id="questInputFile" onchange="angular.element(this).scope().consolkaQuest()">
+                        <tags-input ng-model="tag.tags" placeholder="(type tag and press enter)" class="tagsInput">
+
+                        </tags-input>
                     </div>
                 </form>
             </div>

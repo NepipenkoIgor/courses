@@ -5,7 +5,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     'user strict';
 
     /****************config post**********************/
-    $scope.triggerBool=true;
+    $scope.triggerBool = true;
     $scope.comment = "";
     $scope.postdata = [];
     function reqPosts() {
@@ -129,10 +129,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         });
 
     }
-    courseEdit.reqPosts=reqPosts;
 
-    $scope.triggerView=function(bool){
-        $scope.triggerBool=bool;
+    courseEdit.reqPosts = reqPosts;
+
+    $scope.triggerView = function (bool) {
+        $scope.triggerBool = bool;
     };
 
 
@@ -169,8 +170,8 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     searchObj.creator = $scope.userNowView._id;
                     courseEdit.searchPosts(searchObj);
 
-                    $scope.viewBadgeOfUser=function(user){
-                        $scope.profileBadge=courseEdit.eqvalBadges(user);
+                    $scope.viewBadgeOfUser = function (user) {
+                        $scope.profileBadge = courseEdit.eqvalBadges(user);
 
                     };
                 }
@@ -210,10 +211,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             for (var i = 0; i < $scope.postdata.length; i++) {
                 if ($scope.postdata[i]._id === id) {
 
-                    $scope.postdata.splice(i, 1);
+                    var remove = $scope.postdata.splice(i, 1);
 
-                    var id = {"_id": id};
-                    $http.post('/post/delete', id).success(function () {
+                    var obj = {"_id": id, img: remove[0].img};
+
+                    $http.post('/post/delete', obj).success(function () {
 
                         reqPosts();
                         reqUsers();
@@ -243,8 +245,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     /********save post**********/
     $scope.tags = [];
-
-
 
 
     function dataReg(data) {
@@ -298,9 +298,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
 
     $scope.updateComment = function (post) {
-       // console.log(post)
+        // console.log(post)
         $http.post("/comment/update", post).success(function (data) {
-           // console.log(data)
+            // console.log(data)
         });
     };
 
@@ -392,7 +392,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     $scope.$apply();
                     $(".postLoad").hide();
                 }, 4);
-               // console.log($scope.postdata)
+                // console.log($scope.postdata)
                 if ($scope.postdata.length === 0) {
                     if (data.type === "myposts") {
                         $scope.postTitle = "user has made no posts and questions";
@@ -467,11 +467,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         document.getElementById("question").checked = true;
         $scope.typeCheck = false;
     };
-    $http.get("/user").success(function (user) {
-        $scope.user = user;
+    $http.get("/units").success(function (list) {
+        $scope.list = list;
 
-        $http.get("/units").success(function (list) {
+        $http.get("/user").success(function (user) {
             //  console.log(list);
+            $scope.user = user;
             var progressCanvas = document.getElementById("progreesCanvas");
             if (progressCanvas) {
 
@@ -485,7 +486,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
                 courseEdit.totalPointsOfAllCourse();
 
-                var attitude = courseEdit.pointsCalculate($scope.user.progress) / courseEdit.totalPointsOfAllCourse(list);
+                var attitude = courseEdit.pointsCalculate($scope.user.progress) / courseEdit.totalPointsOfAllCourse($scope.list);
                 // console.log(attitude)
                 if (isNaN(attitude)) {
                     attitude = 0;
@@ -504,8 +505,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     rotation = arcle - 0.5 * Math.PI;
                 }
 
-                //  console.log("rotation",rotation)
-                //console.log(arcle);
                 progressContext.beginPath();
 
                 if (arcle > 6.28) {
@@ -566,15 +565,15 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         //console.log(id, $scope.postUsersdata);
         for (var i = 0; i < $scope.postUsersdata.length; i++) {
 
-       if($scope.postUsersdata[i]._id===id){
+            if ($scope.postUsersdata[i]._id === id) {
 
-            $state.go('editprofile',({username:$scope.postUsersdata[i].username}));
-       }
+                $state.go('editprofile', ({username: $scope.postUsersdata[i].username}));
+            }
         }
 
     };
-    $scope.postType=function(type){
-        if(type==="question"){
+    $scope.postType = function (type) {
+        if (type === "question") {
             return {
                 'margin-bottom': '15px',
                 'border-top': '5px solid #C03F3F'
@@ -585,9 +584,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             'border-top': '5px solid #3FA6C0'
         };
     };
-    $scope.answerTrigger=function(type){
+    $scope.answerTrigger = function (type) {
         //console.log(type)
-        if(type==="question"){
+        if (type === "question") {
             return true;
         }
         return false;
