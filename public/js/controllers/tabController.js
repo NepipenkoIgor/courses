@@ -990,14 +990,19 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     var socket = io();
     socket.on("notify", function (data) {
-        if (data.notify && data.creatorOfPost === courseEdit.userdata._id) {
-            notifymass.push(data);
-            $scope.$apply();
+        /*if (data.notify && data.creatorOfPost === courseEdit.userdata._id) {
+            courseEdit.reqUser(function(){
+                notifymass.push(data);
+               // $scope.$apply();
+            },true);
             return;
-        }
+        }*/
         if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id && data.creatorComment !== data.creatorOfPost) {
-            notifymass.push(data);
-            $scope.$apply();
+            $scope.httpUsersList(function(){
+                notifymass.push(data);
+                //$scope.$apply();
+            },true);
+            return;
         }
         socket.emit('my other event', { my: 'data' });
     });
@@ -1018,13 +1023,14 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
         }
     };
-    $scope.httpUsersList = function () {
+    $scope.httpUsersList = function (cb) {
         $http.get('/users').success(function (data) {
             $scope.listOfUsers = data;
+            cb&&cb();
         });
     };
     $scope.httpUsersList();
-    $scope.howIsThis = function (id) {
+    $scope.whoIsThis = function (id) {
 
         if ($scope.listOfUsers) {
             for (var i = 0; i < $scope.listOfUsers.length; i++) {

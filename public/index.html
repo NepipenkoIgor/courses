@@ -127,7 +127,7 @@
                     </ul>
                 </div>
                 <a class="list-group-item" ng-repeat="notify in notification" ng-click="clickNotify(notify)">
-                    <h4 class="list-group-item-heading">{{howIsThis(notify.creatorComment).firstname+" "+howIsThis(notify.creatorComment).lastname}}</h4>
+                    <h4 class="list-group-item-heading">{{whoIsThis(notify.creatorComment).firstname+" "+whoIsThis(notify.creatorComment).lastname}}</h4>
                     <p class="list-group-item-text">{{notify.type}}</p>
                 </a>
                 <a class="notify_viewall" ng-if="notification.length>2">
