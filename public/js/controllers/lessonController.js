@@ -3,7 +3,7 @@
  */
 app.controller('lessonController', function ($scope, $http, $stateParams, $state, $sce, $location, courseEdit) {
 
-    $("#blockwindow").hide();
+    $(".postLoad").hide();
 
     /*************init of lesson config*********************/
 
@@ -77,7 +77,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
     /***save course***/
 
     $scope.saveCourse = function (action) {
-        $("#blockwindow").show();
+        $(".postLoad").show();
         $scope.disabled = true;
         var data = [
             {action: action},
@@ -99,7 +99,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
                 init();
                 courseEdit.initTab();
             }
-            $("#blockwindow").hide();
+            $(".postLoad").hide();
             for(var l=0;l<$scope.arrMapPoint.length;l++){
                 $scope.arrMapPoint[l].remove();
             }

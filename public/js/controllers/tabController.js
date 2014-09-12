@@ -1,25 +1,21 @@
 /**
  * Created by igor on 7/1/14.
  */
+
+
 app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, $timeout, $modal, $log, courseEdit) {
     'user strict';
+
+
+
     $("#blockwindow").hide();
-    /**/
     $scope.userNowView = {};
     $scope.positionInCourse = {};
     $scope.progress = {};
     $(".postLoad").hide();
 
 
-    $scope.user_progress = {
-        label: 50,
-        percentage: 0.5
-    };
-    /*********** develop badge config*-*****************/
-
-
-
-    courseEdit.listOfBadges = $scope.listOfBadges;
+   // courseEdit.listOfBadges = $scope.listOfBadges;
 
     /*********** initial tab*-*****************/
     function initTab() {
@@ -86,7 +82,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
 
             ];
-            courseEdit.listOfBadges = $scope.listOfBadges
+            courseEdit.listOfBadges = $scope.listOfBadges;
             $scope.listOfCourses = courses;
             courseEdit.listOfCourses = $scope.listOfCourses;
             if (typeof $scope.listOfCourses !== 'string') {
@@ -105,9 +101,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }
             $scope.eqvalBadges = function (user) {
                 if (courseEdit.userdata) {
-                    var user = user || courseEdit.userdata
+                    var user = user || courseEdit.userdata;
                     if (user.badges && courseEdit.listOfBadges) {
-                        var trueBadge = []
+                        var trueBadge = [];
                         for (var i = 0; i < user.badges.length; i++) {
                             for (var j = 0; j < courseEdit.listOfBadges.length; j++) {
                                 if (user.badges[i] === courseEdit.listOfBadges[j].badgeId) {
@@ -177,9 +173,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                 var unitUrl = url[5].split(".");
                                 $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
                             }
-                            if (url[5] && url[1] === 'complete') {
-                                // console.log("dsdasdasdsd");
-                            }
+
                         }
                     }
                 }
@@ -952,10 +946,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     courseEdit.pointsCalculate = $scope.pointsCalculate;
 
 
-    //$scope.eqvalBadges;
-    /*  $scope.listOdTrueBadge= $scope.eqvalBadges()
-     console.log($scope.listOdTrueBadge)*/
-
 
     /*************icon of the lessons***************/
     $scope.faUnitClass = function (type) {
@@ -984,10 +974,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     var notifymass = [];
     $http.get("/user/notify").success(function (data) {
-        //console.log(data)
+
         if (typeof data !== 'string') {
             for (var i = 0; i < data.data.length; i++) {
-                //  console.log(data.data[i].user === courseEdit.userdata._id)
+
                 if (data.data[i].user === courseEdit.userdata._id) {
                     notifymass = data.data[i].content;
                     $scope.notification = notifymass;
@@ -1001,7 +991,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     var socket = io();
     socket.on("notify", function (data) {
         if (data.notify && data.creatorOfPost === courseEdit.userdata._id) {
-            //console.log("notify",data.creatorComment);
             notifymass.push(data);
             $scope.$apply();
             return;
@@ -1031,9 +1020,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
     $scope.httpUsersList = function () {
         $http.get('/users').success(function (data) {
-
             $scope.listOfUsers = data;
-            // console.log("$scope.listOfUsers",$scope.listOfUsers)
         });
     };
     $scope.httpUsersList();
@@ -1145,7 +1132,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     };
-
+/*****************controll open user menu********************/
     $scope.menuOpen = false;
     $scope.foo = 'www';
 
@@ -1187,7 +1174,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
             var formData = new FormData();
             formData.append("postFile", $("#questInputFile")[0].files[0]);
-            console.log(formData);
+
             $scope.formData = formData;
         };
         $scope.ok = function () {
@@ -1326,7 +1313,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             xhr.addEventListener('load', function () {
                 courseEdit.reqPosts();
                 $state.go('posts').then(function () {
-                    $(".postLoad").hide();
+                    //$(".postLoad").hide();
                     $location.url("/post/all?type=allposts");
 
                 });
@@ -1363,7 +1350,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     return;
                 }
                 $state.go('posts').then(function () {
-                    $(".postLoad").hide();
                     $location.url("/post/all?type=allposts");
 
                 });

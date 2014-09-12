@@ -8,6 +8,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     $scope.triggerBool = true;
     $scope.comment = "";
     $scope.postdata = [];
+
+
+    /*********************req init*****************************/
+
+
     function reqPosts() {
         $http.get('/posts').success(function (data) {
 
@@ -63,7 +68,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 if (count === 100) {
                     courseEdit.userHasBadge(courseEdit.listOfBadges[8], courseEdit.userdata);
                 }
-                // console.log("count",count);
+
                 return count;
             };
             $scope.countUserComments();
@@ -243,7 +248,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     };
 
-    /********save post**********/
+    /********add comment**********/
+
+
     $scope.tags = [];
 
 
@@ -298,9 +305,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
 
     $scope.updateComment = function (post) {
-        // console.log(post)
+
         $http.post("/comment/update", post).success(function (data) {
-            // console.log(data)
+
         });
     };
 
@@ -338,6 +345,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
     /****************logic of likes*******************/
 
+
     $scope.like = function (userId, arrayLikes, postId, post) {
         if (arrayLikes.indexOf(userId) === (-1)) {
             arrayLikes.push(userId);
@@ -367,22 +375,22 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             likes.splice(likes.indexOf(user), 1);
             $scope.updateCommentLikes(post, post.comments[index].creator, user, false);
         }
-
-        //  console.log(index, likes, userId, post)
     };
 
     $scope.updateCommentLikes = function (post, user, usersHowLike, cillLike) {
-        console.log(post, user, usersHowLike, cillLike)
-        //var date = {_id: postId, likes: likes, userHowLike: userId, post: post, likesNum: likes.length};
+
         $http.post('/commentlikes', [post, user, usersHowLike, cillLike]).success(function (num) {
         });
     };
 
 
+    /***********************search post******************************/
+
+
     $scope.searchPosts = function (searchObj) {
         $(".postLoad").show();
         $http.post('/post/search', searchObj).success(function (data) {
-            //$scope.triggerBool=true;
+
             if ($location.$$path.split("/")[1] === 'profile') {
                 $scope.postdata = data.data;
 
@@ -392,21 +400,21 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     $scope.$apply();
                     $(".postLoad").hide();
                 }, 4);
-                // console.log($scope.postdata)
+
                 if ($scope.postdata.length === 0) {
                     if (data.type === "myposts") {
                         $scope.postTitle = "user has made no posts and questions";
-                        // $scope.$apply();
+
                         return;
                     }
                     if (data.type === "myquestions") {
                         $scope.postTitle = "user has asked no questions";
-                        //$scope.$apply();
+
                         return;
                     }
                     if (data.type === "onlyposts") {
                         $scope.postTitle = "user has made no posts";
-                        // $scope.$apply();
+
                         return;
                     }
                 }
@@ -419,7 +427,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
                 $scope.page = $scope.postdata.length / 10;
                 $scope.scrolling = 800;
-                //  console.log($scope.postdata.length);
+
                 $scope.down = false;
                 $scope.remove = $scope.postdata.splice(10, $scope.postdata.length);
 
@@ -467,11 +475,17 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         document.getElementById("question").checked = true;
         $scope.typeCheck = false;
     };
+
+
+
+    /********************progress count view***************************/
+
+
     $http.get("/units").success(function (list) {
         $scope.list = list;
 
         $http.get("/user").success(function (user) {
-            //  console.log(list);
+
             $scope.user = user;
             var progressCanvas = document.getElementById("progreesCanvas");
             if (progressCanvas) {
@@ -487,7 +501,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 courseEdit.totalPointsOfAllCourse();
 
                 var attitude = courseEdit.pointsCalculate($scope.user.progress) / courseEdit.totalPointsOfAllCourse($scope.list);
-                // console.log(attitude)
+
                 if (isNaN(attitude)) {
                     attitude = 0;
                 }
@@ -496,7 +510,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 }
                 var progressProcent = Math.round(attitude * 100);
                 var arcle = attitude * 2 * Math.PI;
-                // console.log("arcle",arcle)
+
                 var rotation;
                 if (arcle < 0.5) {
                     rotation = 1.5 * Math.PI + arcle;
@@ -536,6 +550,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         });
     });
 
+
+    /*********************scrolling post***************************/
+
+
     $scope.scrolling = 800;
 
     window.onscroll = function (event) {
@@ -562,7 +580,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     };
 
     $scope.postProfileGo = function (id) {
-        //console.log(id, $scope.postUsersdata);
+
         for (var i = 0; i < $scope.postUsersdata.length; i++) {
 
             if ($scope.postUsersdata[i]._id === id) {
@@ -585,7 +603,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         };
     };
     $scope.answerTrigger = function (type) {
-        //console.log(type)
+
         if (type === "question") {
             return true;
         }

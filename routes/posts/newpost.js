@@ -111,7 +111,7 @@ if(!req.files.postFile){
         console.log("ASDASD",req.body);
         Posts.update({_id: req.body._id}, {$set: {likes: req.body.likes, likesNum: req.body.likesNum}}, function (err, num) {
             if (req.body.post) {
-                if (req.body.creator === req.body.userHowLike) {
+                if (req.body.post.creator === req.body.userHowLike) {
                     res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
                     return;
                 }
