@@ -48,7 +48,7 @@ function router(app, hasUser, io) {
 if(!req.files.postFile){
     res.json({a:"B"})
     return;
-}
+}var type=req.files.postFile.type;
         if(req.files.postFile.size===0 || type !== "image/png" && type !== "image/jpeg"){
             res.json({});
             return;
