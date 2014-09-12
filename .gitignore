@@ -5,7 +5,7 @@ npm-debug.log
 *.ipr
 *.iws
 *.iml
-//*.png
+*.png
 *.jpg
 .idea
 .DS_Store

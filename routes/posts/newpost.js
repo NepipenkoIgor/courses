@@ -49,7 +49,7 @@ if(!req.files.postFile){
     res.json({a:"B"})
     return;
 }
-        if(req.files.userfile.size===0||type!=="image/png"&&type!=="image/jpeg"){
+        if(req.files.postFile.size===0 || type !== "image/png" && type !== "image/jpeg"){
             res.json({});
             return;
         }
