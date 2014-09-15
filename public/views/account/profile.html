@@ -1,37 +1,41 @@
-<div class="profile" >
+<div class="profile">
     <div class="banner"></div>
     <img ng-src="{{userImgAvatar(userNowView.avatar)}}" class="avatar">
+
     <div class="bar">
         <div>
 
 
-            <h1 ng-style="styleName(userNowView._id,userdata._id)"><div class="profEdit" style="height: 40px;display: inline-block;cursor: pointer;">
-                <a style="display: inline-block; padding: 10px 20px;display: inline-block;
+            <h1 ng-style="styleName(userNowView._id,userdata._id)">
+                <div class="profEdit" style="height: 40px;display: inline-block;cursor: pointer;">
+                    <a style="display: inline-block; padding: 10px 20px;display: inline-block;
 padding: 11px 20px 9px;
 line-height: 1;
 font-size: 16px;
-vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click="showProfileEdition(editionType.type)" ng-if="userNowView._id===userdata._id" >
-                    <i style="font-size: 20px;line-height: 1;" class="fa fa-pencil-square-o" > </i>
-                </a>
-            </div>
-                {{userNowView.firstname}} {{userNowView.lastname}}</h1>
+vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click="showProfileEdition(editionType.type)"
+                       ng-if="userNowView._id===userdata._id">
+                        <i style="font-size: 20px;line-height: 1;" class="fa fa-pencil-square-o"> </i>
+                    </a>
+                </div>
+                {{userNowView.firstname}} {{userNowView.lastname}}
+            </h1>
             <ul>
                 <li style="cursor: pointer" ng-click="[typeSearch('My Posts',userNowView),triggerView(true)]">
-                    <a  tooltip-placement="bottom" tooltip="Posts and Questions"  >
+                    <a tooltip-placement="bottom" tooltip="Posts and Questions">
                         @{{userNowView.username}}
                     </a></li>
-                <li  style="cursor: pointer" ng-click="[typeSearch('Only Posts',userNowView),triggerView(true)]">
-                    <a  tooltip-placement="bottom" tooltip="Posts"  >
-                        <i class="fa fa-pencil" > {{countUserPost(userNowView._id)}}</i>
+                <li style="cursor: pointer" ng-click="[typeSearch('Only Posts',userNowView),triggerView(true)]">
+                    <a tooltip-placement="bottom" tooltip="Posts">
+                        <i class="fa fa-pencil"> {{countUserPost(userNowView._id)}}</i>
                     </a>
                 </li>
                 <li ng-click="[typeSearch('My Questions',userNowView),triggerView(true)]" style="cursor: pointer">
-                    <a  tooltip-placement="bottom" tooltip="Questions"  >
+                    <a tooltip-placement="bottom" tooltip="Questions">
                         <i class="fa fa-question"> {{countUserQuestion(userNowView._id)}}</i>
                     </a>
                 </li>
-                <li   ng-click="[viewBadgeOfUser(userNowView),triggerView(false)]" style="cursor: pointer">
-                    <a  tooltip-placement="bottom" tooltip="Achievement"  >
+                <li ng-click="[viewBadgeOfUser(userNowView),triggerView(false)]" style="cursor: pointer">
+                    <a tooltip-placement="bottom" tooltip="Achievement">
                         <i class="fa fa-check-circle"> </i>
                     </a>
                 </li>
@@ -45,7 +49,7 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
 -->
 
 
-    <div class="container " style="text-align: left" ng-if="editionType.type">
+<div class="container " style="text-align: left" ng-if="editionType.type" ng-cloak>
     <!--    <div class="userInput">
             <span class="title" >User Email: </span>
             <a href="#" editable-text="userdata.email" onaftersave="postProfile(userdata)">{{ userdata.email || 'empty' }}</a>
@@ -66,99 +70,126 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
             <span class="title">User phone: </span>
             <a href="#" editable-text="userdata.phone" onaftersave="postProfile(userdata)">{{ userdata.phone || 'empty' }}</a>
         </div>-->
-        <div class="row">
-            <div class="col-md-7">
+    <div class="row" class="profileBox">
+        <div class="col-md-7">
 
-                <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)" style="font-size: x-large">
+            <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)"
+                  style="font-size: x-large">
 
-                    <div class="userInput">
-                        <span class="title"> Email:</span>
-                        <span editable-text="userdata.email" >{{ userdata.email || 'empty' }}</span>
-                    </div>
-                   <!-- <div class="userInput">
-                        <span class="title">User password: </span>
-                        <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
-                    </div>-->
-                    <div class="userInput">
-                        <span class="title">User firstname: </span>
-                        <span editable-text="userdata.firstname" >{{userdata.firstname || 'empty' }}</span>
-                    </div>
-                    <div class="userInput">
-                        <span class="title">User lastname: </span>
-                        <span editable-text="userdata.lastname" >{{ userdata.lastname|| 'empty' }}</span>
-                    </div >
-                    <div class="userInput">
-                        <span class="title">Phone: </span>
-                        <span editable-text="userdata.phone" >{{ userdata.phone|| 'empty' }}</span>
-                    </div>
+                <div class="userInput">
+                    <span class="title"> Email:</span>
+                    <span editable-text="userdata.email">{{ userdata.email || 'empty' }}</span>
+                </div>
+                <!-- <div class="userInput">
+                     <span class="title">User password: </span>
+                     <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
+                 </div>-->
+                <div class="userInput">
+                    <span class="title">User firstname: </span>
+                    <span editable-text="userdata.firstname">{{userdata.firstname || 'empty' }}</span>
+                </div>
+                <div class="userInput">
+                    <span class="title">User lastname: </span>
+                    <span editable-text="userdata.lastname">{{ userdata.lastname|| 'empty' }}</span>
+                </div>
+                <div class="userInput">
+                    <span class="title">Phone: </span>
+                    <span editable-text="userdata.phone">{{ userdata.phone|| 'empty' }}</span>
+                </div>
 
 
-                    <div class="buttons">
+                <div class="buttons">
 
-                        <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
-                                ng-show="!editableForm.$visible" ng-if="userdata">
-                            Edit
-                        </button>
+                    <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
+                            ng-show="!editableForm.$visible" ng-if="userdata">
+                        Edit
+                    </button>
 
       <span ng-show="editableForm.$visible">
-        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="showProfileEdition()" >
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting"
+                ng-click="showProfileEdition()">
             Save
         </button>
-        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="[editableForm.$cancel(),showProfileEdition()]">
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting"
+                ng-click="[editableForm.$cancel(),showProfileEdition()]">
             Cancel
         </button>
       </span>
-                    </div>
-                </form>
-
-            </div>
-            <div class="col-md-5">
-
-                <form action="/user/upload" >
-
-                    <div id="photoDropZone" >
-                        drag your photo here, format must be jpg/png
-                    </div>
-
-                    <!--  <button type="submit"></button>-->
-                </form>
-
-                <div class="form-group" action="/user/upload" type="multipart" enctype="multipart/form-data" method="post" >
-<p>browse photo,format must be jpg/png</p>
-                    <input type="file" id="inputUser" style="color:#ffffff" ng-click="nullProg()">
-                    <!--<button type="submit" class="btn vtn-primary"> upload</button>-->
                 </div>
-            <!--    <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="userUploadProgress.progress">
-                        <span class="sr-only">60% Complete</span>
-                    </div>
-                </div>-->
+            </form>
 
-                <progressbar animate="false" value="percentComplete" type="success"><b>{{percentComplete}}%/100%</b></progressbar>
+        </div>
+        <div class="col-md-5">
+
+            <!--<form action="/user/upload">
+
+                <div id="photoDropZone">
+                    drag your photo here, format must be jpg/png
+                </div>
+
+                &lt;!&ndash;  <button type="submit"></button>&ndash;&gt;
+            </form>
+
+            <div class="form-group" action="/user/upload" type="multipart" enctype="multipart/form-data" method="post">
+                <p>browse photo,format must be jpg/png</p>
+                <input type="file" id="inputUser" style="color:#ffffff" ng-click="nullProg()">
+                &lt;!&ndash;<button type="submit" class="btn vtn-primary"> upload</button>&ndash;&gt;
+            </div>
+
+
+            <progressbar animate="false" value="percentComplete" type="success"><b>{{percentComplete}}%/100%</b>
+            </progressbar>-->
+
+
+            <div class="avatar_upload">
+                <div  class="photoDropZone" ng-if="uploadTrusy===0" ng-cloak>
+                    <i class="fa fa-cloud-upload"></i>
+                    <h5><strong>Drag here</strong><br> to upload</h5>
+
+                    <p>*.png, *.jpg, *.gif</p>
+                    <label for="inputUser" class="btn btn-primary btn-sm" >browse for file...</label>
+                    <input type="file" class="btn btn-primary btn-sm" id="inputUser" style="display: none">
+                </div >
+                <div  class="avatar_upload_ready photoDropZone" ng-if="uploadTrusy===1||uploadTrusy===2">
+                    <img id="uploadPreview" ng-if="uploadTrusy===1||uploadTrusy===2">
+                    <p ng-if="uploadTrusy===1">Use this file?</p>
+                    <p ng-if="uploadTrusy===2">Upload.....</p>
+                    <div ng-if="uploadTrusy===2" animate="false" class="progress-bar" role="progressbar"  aria-valuemin="0" aria-valuemax="100" ng-style="userUploadProgress.progress">
+                        <span class="sr-only"></span>
+                    </div>
+                    <button ng-if="uploadTrusy===1" class="btn btn-success btn-sm" ng-click="uplodUserAvatar()"><i class="fa fa-check"></i></button>
+                    <button  ng-if="uploadTrusy===1" class="btn btn-danger" ng-click="cancelUserAvatar()"><i class="fa fa-times"></i></button>
+                </div>
 
             </div>
+
         </div>
-
-
 
 
 
 
     </div>
 
-   <!--</div>-->
+
+
+
+</div>
+
+<!--</div>-->
 
 <h1 style="text-align: center;color:red">{{postTitle}}</h1>
 <div deckgrid source="postdata"
      cardTemplate="/views/templates/deckgrid-post.html" style=""
-     class="deckgrid1" ng-if="userdata" ng-show="triggerBool" ></div>
+     class="deckgrid1" ng-if="userdata" ng-show="triggerBool"></div>
 
 
 <div class="row acheive row-centered" ng-show="!triggerBool">
     <h3 class="ng-binding" ng-show=" profileBadge.length===0" style="color: red">No achievements yet</h3>
-    <div class="col-md-2 abadge col-centered ng-scope" ng-repeat="badge in profileBadge" >
-        <img ng-src="{{badge.img}}" tooltip="{{badge.name}}" tooltip-placement="top" class="ng-scope" >
-        <h3 class="ng-binding" >{{badge.description}}</h3>
+
+    <div class="col-md-2 abadge col-centered ng-scope" ng-repeat="badge in profileBadge">
+        <img ng-src="{{badge.img}}" tooltip="{{badge.name}}" tooltip-placement="top" class="ng-scope">
+
+        <h3 class="ng-binding">{{badge.description}}</h3>
 
     </div>
 

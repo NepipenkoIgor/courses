@@ -69,7 +69,7 @@ body{
     top: 8px;
     left: 8px;
     position: absolute;
-    background: url('http://www.servimg.com/u/f60/15/20/71/92/user10.png') center;
+   /* background: url('http://www.servimg.com/u/f60/15/20/71/92/user10.png') center;*/
     background-size:34px;
     border-radius: 34px;
 }

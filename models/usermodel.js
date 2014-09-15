@@ -19,7 +19,7 @@ var userSchema=new Schema({
   lastname:String,
   birth:Date,
   dataReg:String,
-  email:{type: String, select: false },
+  email:String,
   phone:String,
   position:Boolean,
   settings:Boolean,

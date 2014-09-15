@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="stylesheets/fontello.css">
     <link rel="stylesheet" href="stylesheets/animation.css">
     <link rel="stylesheet" href="stylesheets/all.css" type="text/css"/>
+    <link rel="stylesheet" href="stylesheets/jquery.fancybox.css" type="text/css"/>
     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
@@ -38,6 +39,7 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
    <script src="javascripts/jslayot/ace.js" type="text/javascript" charset="utf-8"></script>
     <!---->
+    <script src="javascripts/jquery.fancybox.js"></script>
     <!--<script  src="javascripts/angular.min.js"></script>-->
 
    <!-- <script  src="javascripts/angular.min.js"></script>-->
@@ -378,7 +380,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Add an image</label>
-                        <input type="file" id="postInputFile" ng-model="file" onchange="angular.element(this).scope().consolka()">
+                        <input type="file" id="postInputFile" ng-model="file" onchange="angular.element(this).scope().consolka()" multiple>
                     </div>
                     <tags-input ng-model="tag.tags" placeholder="(type tag and press enter)" class="tagsInput">
 
@@ -412,7 +414,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile" >Add an image</label>
-                        <input type="file" id="questInputFile" onchange="angular.element(this).scope().consolkaQuest()">
+                        <input type="file" id="questInputFile" onchange="angular.element(this).scope().consolkaQuest()" multiple>
                         <tags-input ng-model="tag.tags" placeholder="(type tag and press enter)" class="tagsInput">
 
                         </tags-input>

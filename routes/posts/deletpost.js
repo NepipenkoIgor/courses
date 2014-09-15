@@ -13,7 +13,7 @@ function router(app, hasUser) {
                     fs.unlink(old,function(err){
                         res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
                     })
-                    return
+                    return;
                 }
                 res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
                 console.log(" post delete");

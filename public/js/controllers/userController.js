@@ -70,12 +70,12 @@ app.controller('profile', function ($scope, $state, $http, $sce, $location, cour
         });
     };
     $scope.userImgAvatar = function (img) {
-        img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
+        img = img || 'img/user.jpg';
 
         return $sce.trustAsResourceUrl(img);
     };
     $scope.userAvatar = function (img) {
-        img = img || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
+        img = img || 'img/user.jpg';
         var background = "url('" + img + "') center";
         var obj = {'background': background};
         return obj;

@@ -19,6 +19,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             //      console.log("postdata",data);
             $scope.postdata = data;//.reverse();
             courseEdit.postdata = $scope.postdata;
+            $(".fancybox").fancybox();
             var loc = $location.$$path.split("/");
             if ($location.$$path === "/post/all") {
                 var searchObj = {};
@@ -194,7 +195,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                         var userPostAvatar = $scope.postUsersdata[i].avatar;
                     }
                 }
-                var url = userPostAvatar || 'http://karalmik.com/wp-content/uploads/2013/03/29-150x150.jpg';
+                var url = userPostAvatar || 'img/user.jpg';
 
                 return $sce.trustAsResourceUrl(url);
             };
@@ -445,6 +446,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     $scope.postdata.splice($scope.postdata.length - 1, 1);
                     $scope.$apply();
                     $(".postLoad").hide();
+                    $(".fancybox").fancybox();
                 }, 4);
                 return;
             }
@@ -608,6 +610,34 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             return true;
         }
         return false;
+    };
+
+    $scope.fafaLikes=function(type){
+        if(type==="question"){
+            return "fa fa-arrow-circle-up";
+        }
+        return "fa fa-plus";
+    };
+    $scope.answerInputval;
+    $scope.showAnswerInput=function(id){
+        console.log($scope.answerInputval===id)
+        if($scope.answerInputval===id){
+            $scope.answerInputval=undefined;
+            return
+        }
+            $scope.answerInputval=id;
+            return;
+
+    };
+    $scope.answerInput=function(id){
+
+        if(id===$scope.answerInputval){
+            return true;
+        }
+        return false;
+    };
+    $scope.answerInputClose=function(){
+        $scope.answerInputval=undefined;
     };
 });
 

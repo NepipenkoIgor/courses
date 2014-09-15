@@ -10,7 +10,7 @@ function router(app,hasUser) {
        console.log(req.files,'req.body',req.user);
        // console.log(req.files)
         var type=req.files.userfile.type;
-        if(req.files.userfile.size===0||type!=="image/png"&&type!=="image/jpeg"){
+        if(req.files.userfile.size===0||!(type !== "image/png" || type !== "image/jpeg" || type !== "image/gif")){
             res.json({});
             return;
         }
