@@ -1255,7 +1255,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $scope.text = {};
         $scope.ok = function () {
             $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData, $scope.tag.tags);
-            $modalInstance.close();
+           $modalInstance.close();
         };
 
         $scope.cancel = function () {
@@ -1374,9 +1374,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $http.post('/post/new', newPost).success(function (data) {
             var id = data.data.postId;
             var count = 0;
-            var files = $("#postInputFile")[0].files;
-            postImgUpload(files, id, count);
-
+            if($("#postInputFile")[0]) {
+                var files = $("#postInputFile")[0].files;
+                postImgUpload(files, id, count);
+            }
         });
 
 
