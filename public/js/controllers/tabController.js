@@ -1129,33 +1129,35 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         document.getElementById("uploadPreview").src = oFREvent.target.result;
                     };
 
-                }
+                    $scope.uplodUserAvatar = function () {
+                        $scope.uploadTrusy = 2;
+                        var formData = new FormData();
+                        formData.append("userfile", file);
+                        var xhr = new XMLHttpRequest();
+                        xhr.addEventListener('progress', function (event) {
 
-                $scope.uplodUserAvatar = function () {
-                    $scope.uploadTrusy = 2;
-                    var formData = new FormData();
-                    formData.append("userfile", file);
-                    var xhr = new XMLHttpRequest();
-                    xhr.addEventListener('progress', function (event) {
+                            if (event.lengthComputable) {
+                                var percentComplete = event.loaded / event.total;
+                                $scope.percentComplete = percentComplete * 100;
+                                $scope.userUploadProgress.progress = {'width': percentComplete + 90 + '%'};
+                            }
+                        });
+                        xhr.addEventListener('load', function () {
+                            courseEdit.reqUser();
+                            courseEdit.reqPosts();
+                            courseEdit.reqUsers();
 
-                        if (event.lengthComputable) {
-                            var percentComplete = event.loaded / event.total;
-                            $scope.percentComplete = percentComplete * 100;
-                            $scope.userUploadProgress.progress = {'width': percentComplete + 90 + '%'};
-                        }
-                    });
-                    xhr.addEventListener('load', function () {
-                        courseEdit.reqUser();
-                        courseEdit.reqPosts();
-                        courseEdit.reqUsers();
+                        }, false);
+                        xhr.open("POST", "/user/upload", true);
+                        xhr.send(formData);
+                    };
 
-                    }, false);
-                    xhr.open("POST", "/user/upload", true);
-                    xhr.send(formData);
                 };
 
+
+
             }
-            ;
+
 
 
         }, 25);
