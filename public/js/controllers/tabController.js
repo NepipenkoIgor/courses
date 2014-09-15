@@ -1208,7 +1208,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             $scope.formData = formData;
         };
         $scope.ok = function () {
-            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id, undefined, $scope.formData, $scope.tag.tags);
+            var files = $("#questInputFile")[0].files;
+            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id, undefined, $scope.formData, $scope.tag.tags,files);
             $modalInstance.close();
             // post()
         };
@@ -1386,7 +1387,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     courseEdit.saveNewPost = $scope.saveNewPost;
 
 
-    $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload, tags) {
+    $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload, tags,files) {
         $(".postLoad").show();
         var tagsObj = [];
         if ($state.current.name === 'unit') {
@@ -1436,7 +1437,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
             var id = data.data.postId;
             var count = 0;
-            var files = $("#questInputFile")[0].files;
+
             questImgUpload(files, id, count);
 
         });
