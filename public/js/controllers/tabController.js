@@ -1254,7 +1254,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $scope.saveNewPost = saveNewPost;
         $scope.text = {};
         $scope.ok = function () {
-            $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData, $scope.tag.tags);
+            var files = $("#postInputFile")[0].files;
+            $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData, $scope.tag.tags,files);
            $modalInstance.close();
         };
 
@@ -1327,7 +1328,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
 
-    $scope.saveNewPost = function (content, creator, fileUpload, tags) {
+    $scope.saveNewPost = function (content, creator, fileUpload, tags,files) {
+        console.log(files)
         $(".postLoad").show();
         var tagsObj = []
         for (var i = 0; i < tags.length; i++) {
@@ -1374,10 +1376,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $http.post('/post/new', newPost).success(function (data) {
             var id = data.data.postId;
             var count = 0;
-            if($("#postInputFile")[0]) {
-                var files = $("#postInputFile")[0].files;
                 postImgUpload(files, id, count);
-            }
+
         });
 
 
