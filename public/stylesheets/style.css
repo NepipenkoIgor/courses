@@ -1661,3 +1661,15 @@ div.designori div.yellow {
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
 }
+
+
+
+.uncheckAnswer{
+    color: #D5D5D5;
+}
+
+
+.vote{
+    color:#27A1A5;
+    cursor:pointer;
+}

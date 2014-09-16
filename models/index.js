@@ -7,6 +7,7 @@ function model(app) {
     var Subject =require('./subjectmodel');
     var Badges =require('./badgesmodel');
     var Notify =require('./notify');
+    var Answer =require('./answermodel');
   /*var  authConfig = require('./auth');
   app.set('authConfig',authConfig);
   app.set('User',User);*/

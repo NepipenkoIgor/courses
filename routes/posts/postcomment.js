@@ -4,10 +4,17 @@
 var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
 var Notify = mongoose.model('Notify');
+var Answers = mongoose.model('Answers');
 
 function router(app, hasUser,io) {
     app.post('/comment/new', hasUser, function (req, res) {
-        Posts.update({_id: req.body._id}, {$set: {comments: req.body.comments}}, function(err, num) {
+        var istanceShem;
+        if(req.body.action==="answer"){
+            istanceShem=Answers;
+        }else{
+            istanceShem=Posts;
+        }
+        istanceShem.update({_id: req.body._id}, {$set: {comments: req.body.comments}}, function(err, num) {
             if (req.body.creator === req.body.creatorComment) {
                 res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
                 return;
@@ -41,11 +48,16 @@ function router(app, hasUser,io) {
 
 
     app.post('/comment/update', hasUser, function (req, res) {
-        //console.log(req.body);
-        Posts.update({_id: req.body._id}, {$set: {comments: req.body.comments}}, function(err, num) {
+        var istanceShem;
+        if(req.body[1]==="answer"){
+            istanceShem=Answers;
+        }else{
+            istanceShem=Posts;
+        }
+        istanceShem.update({_id: req.body[0]._id}, {$set: {comments: req.body[0].comments}}, function(err, num) {
             res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
         });
-    })
+    });
 
 
 

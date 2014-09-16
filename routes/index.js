@@ -66,6 +66,7 @@ function router(app,io) {
     var subject = require('./courses/subject')(app,isAdmin,hasUser);
   var logout=require('./account/logout')(app);
     var notify=require('./notify/notify')(app,hasUser);
+    var answer=require('./posts/newanswer')(app,hasUser);
 }
 
 module.exports = router;

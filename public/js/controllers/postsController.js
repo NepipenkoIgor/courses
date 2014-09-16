@@ -16,6 +16,49 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     function reqPosts() {
         $http.get('/posts').success(function (data) {
 
+
+            $http.get("/answers").success(function (data) {
+                $scope.answerObj = data.data;
+                function sortArr(a, b) {
+
+                    if (a.voteNum < b.voteNum) {
+                        return 1;
+                    }
+                    if (a.voteNum > b.voteNum) {
+                        return -1;
+                    }
+                    return 0;
+                }
+
+                $scope.postsAnswer = function (card) {
+                    var answerObj = [];
+                    var trueItem;
+                    for (var i = 0; i < $scope.answerObj.length; i++) {
+                        if (card._id === $scope.answerObj[i].postId) {
+                            if (!$scope.answerObj[i].voteNum) {
+                                $scope.answerObj[i].voteNum = 0;
+                            }
+
+                            if ($scope.answerObj[i].corectAnswer) {
+                                trueItem = $scope.answerObj[i]
+
+                                continue;
+                            }
+                            answerObj.push($scope.answerObj[i]);
+                        }
+                    }
+                    //console.log(answerObj)
+                    answerObj = answerObj.sort(sortArr);
+                    // console.log(answerObj)
+                    if (trueItem) {
+                        answerObj.unshift(trueItem);
+                    }
+                    // console.log("answerObj",answerObj)
+                    return answerObj;
+                };
+
+
+            });
             //      console.log("postdata",data);
             $scope.postdata = data;//.reverse();
             courseEdit.postdata = $scope.postdata;
@@ -263,7 +306,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         return newDataDate + " " + newDataMonth + " " + newDataYear;
     }
 
-    $scope.addComment = function (idPost, creator, card) {
+    $scope.addComment = function (idPost, creator, card, action) {
 
 
         if (card._id === idPost && this.comment !== "") {
@@ -271,7 +314,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             var newDate = new Date();
             card.comments.push({content: this.comment, creator: creator, postId: date, dataReg: dataReg(newDate), likes: []});
 
-            var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost};
+            var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost, action: action};
             $http.post('/comment/new', data).success(function () {
                 if ($location.$$path.split("/")[1] === 'profile') {
                     //$scope.postdata = data.data;
@@ -305,9 +348,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
 
 
-    $scope.updateComment = function (post) {
+    $scope.updateComment = function (post, action) {
 
-        $http.post("/comment/update", post).success(function (data) {
+        $http.post("/comment/update", [post, action]).success(function (data) {
 
         });
     };
@@ -367,20 +410,20 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             console.log("num", num)
         });
     };
-    $scope.commentLike = function (index, user, likes, userId, post) {
+    $scope.commentLike = function (index, user, likes, userId, post, action) {
         var likes = post.comments[index].likes;
         if (likes.indexOf(user) == (-1)) {
             likes.push(user);
-            $scope.updateCommentLikes(post, post.comments[index].creator, user, true);
+            $scope.updateCommentLikes(post, post.comments[index].creator, user, true, action);
         } else {
             likes.splice(likes.indexOf(user), 1);
-            $scope.updateCommentLikes(post, post.comments[index].creator, user, false);
+            $scope.updateCommentLikes(post, post.comments[index].creator, user, false, action);
         }
     };
 
-    $scope.updateCommentLikes = function (post, user, usersHowLike, cillLike) {
+    $scope.updateCommentLikes = function (post, user, usersHowLike, cillLike, action) {
 
-        $http.post('/commentlikes', [post, user, usersHowLike, cillLike]).success(function (num) {
+        $http.post('/commentlikes', [post, user, usersHowLike, cillLike, action]).success(function (num) {
         });
     };
 
@@ -477,7 +520,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         document.getElementById("question").checked = true;
         $scope.typeCheck = false;
     };
-
 
 
     /********************progress count view***************************/
@@ -612,32 +654,142 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         return false;
     };
 
-    $scope.fafaLikes=function(type){
-        if(type==="question"){
+    $scope.fafaLikes = function (type) {
+        if (type === "question") {
             return "fa fa-arrow-circle-up";
         }
         return "fa fa-plus";
     };
     $scope.answerInputval;
-    $scope.showAnswerInput=function(id){
-        console.log($scope.answerInputval===id)
-        if($scope.answerInputval===id){
-            $scope.answerInputval=undefined;
-            return
-        }
-            $scope.answerInputval=id;
+    $scope.showAnswerInput = function (id) {
+        if ($scope.answerInputval === id) {
+            $scope.answerInputval = undefined;
             return;
+        }
+        $scope.answerInputval = id;
+        return;
 
     };
-    $scope.answerInput=function(id){
+    $scope.answerInput = function (id) {
 
-        if(id===$scope.answerInputval){
+        if (id === $scope.answerInputval) {
             return true;
         }
         return false;
     };
-    $scope.answerInputClose=function(){
-        $scope.answerInputval=undefined;
+    $scope.answerInputClose = function () {
+        $scope.answerInputval = undefined;
     };
+
+    $scope.answer = {};
+    $scope.newAnswer = function (userAnswer, card) {
+
+        var dataObj = {creatorAnswer: userAnswer, postAnswered: card._id, content: $scope.answer.content}
+        $http.post("/answer/new", dataObj).success(function (data) {
+
+            $scope.answerInputClose();
+            courseEdit.reqPosts();
+            $state.go('posts').then(function () {
+                //$(".postLoad").hide();
+                $location.url("/post/all?type=allposts");
+
+            });
+        });
+    };
+
+
+    $scope.checkWriteAnswer = function (answer, creator, userWhoCheck, answers) {
+        if (creator !== userWhoCheck) {
+            return;
+        }
+        for (var i = 0; i < answers.length; i++) {
+            if (answers[i].corectAnswer === true) {
+                return;
+            }
+        }
+        var answerObj = {answerChecked: answer._id}
+        $http.post("/answer/check", answerObj).success(function (data) {
+            courseEdit.reqPosts();
+            $state.go('posts').then(function () {
+                //$(".postLoad").hide();
+                $location.url("/post/all?type=allposts");
+
+            });
+        });
+    };
+
+    $scope.isChecked = function (answer, element) {
+        if (answer.corectAnswer && element) {
+            return {"color": "#49D726"};
+        }
+        if (answer.corectAnswer) {
+            return {"border-top": "3px solid #49D726"};
+        }
+        return {};
+    };
+
+    $scope.numVote = function (answer) {
+        var vote = 0;
+        if (answer.voteNum) {
+            vote += answer.voteNum;
+        }
+
+        return vote
+    };
+
+
+    $scope.voteUpdate = function (voteObj) {
+        $http.post("/answer/vote", voteObj).success(function (data) {
+            courseEdit.reqPosts();
+            $state.go('posts').then(function () {
+                //$(".postLoad").hide();
+                $location.url("/post/all?type=allposts");
+
+            });
+        });
+    };
+
+    $scope.voteUp = function (answer, whoVote) {
+        if (answer.votes.indexOf(whoVote) !== (-1)) {
+            return;
+        }
+        var voteObj = {answerId: answer._id, whoVote: whoVote, action: "up"};
+        $scope.voteUpdate(voteObj);
+    };
+    $scope.voteDown = function (answer, whoVote) {
+        if (answer.votes.indexOf(whoVote) !== (-1)) {
+            return;
+        }
+        var voteObj = {answerId: answer._id, whoVote: whoVote, action: "down"};
+        $scope.voteUpdate(voteObj);
+    };
+
+    $scope.dontVote = function (answer, whoVote) {
+        if (answer.votes.indexOf(whoVote) !== (-1)) {
+            return {"color": "#D5D5D5"};
+        }
+        return {};
+    };
+
+    $scope.change = {};
+
+    $scope.answerCommentsShow = function (answer) {
+        // console.log($scope.change.answerNowComment===answer._id);
+        if ($scope.change.answerNowComment === answer._id) {
+
+            $scope.change.answerNowComment = undefined;
+            return;
+        }
+        // $scope.answerNowComment=undefined;
+        $scope.change.answerNowComment = answer._id;
+    };
+
+    $scope.whatAnswerCommentShow = function (answer) {
+        if (answer._id === $scope.change.answerNowComment) {
+            return true;
+        }
+        return false;
+    };
+
 });
 

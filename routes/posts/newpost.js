@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
 var Notify = mongoose.model('Notify');
+var Answers = mongoose.model('Answers');
 var fs = require('fs')
 function dataReg(data) {
     var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -75,9 +76,13 @@ function router(app, hasUser, io) {
         });
     });
     app.post('/commentlikes', hasUser, function (req, res) {
-
-        console.log(req.body)
-        Posts.update({_id: req.body[0]._id}, {$set: {comments: req.body[0].comments}}, function (err, num) {
+        var istanceShem;
+        if(req.body[4]==="answer"){
+            istanceShem=Answers;
+        }else{
+            istanceShem=Posts;
+        }
+        istanceShem.update({_id: req.body[0]._id}, {$set: {comments: req.body[0].comments}}, function (err, num) {
             if (req.body[3]) {
                 if (req.body[1] === req.body[2]) {
                     res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
@@ -107,7 +112,7 @@ function router(app, hasUser, io) {
 
             }
 
-        })
+        });
 
 
     })
