@@ -955,6 +955,7 @@ width: 100%;
     padding: 0;
     color: #666;
 }
+.answer-heder .avatar,
 .a-postcard .avatar {
     position: absolute;
     top: -10px;
@@ -965,6 +966,10 @@ width: 100%;
     margin: 0;
     padding: 0;
     -webkit-filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.75));
+}
+.answer-heder .avatar{
+    top: -10px!important;
+    left: -10px!important;
 }
 .a-postcard .date {
     position: absolute;
@@ -1389,7 +1394,7 @@ padding: 0 5px 0 0!important;
     color: #555;
     font-size: 18px;
     text-align: center;
-    */
+    */answer-heder
 /*style="border: 1px solid red;width: 200px;"*//*
 
     background: transparent;

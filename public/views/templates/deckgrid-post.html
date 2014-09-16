@@ -50,10 +50,10 @@
 
 
 
-    <div class="header answer-heder comments" ng-if="mother.answerInput(card._id)" style="height: auto;overflow: hidden;">
+    <div class="header answer-heder comments" ng-if="mother.answerInput(card._id)" style="height: auto;display: inline-block;width: 100%;vertical-align: top;">
 
         <img ng-src="{{mother.postAvatar(card.creator)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
-        <div class="col-md-12" style="margin-bottom: 10px;overflow:hidden">
+        <div class="col-md-12" style="padding: 0;overflow:hidden">
             <textarea class="msd-elastic" name="answer" placeholder="The answer is...." rows="4" ng-model="mother.answer.content" style="min-height: 50px; margin-bottom: 5px;"></textarea>
             <div class="btn-group" style="display: block">
                 <button class="btn btn-primary" ng-click="[mother.newAnswer(mother.userdata._id,card)]" >Answer</button>
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-<div ng-repeat="answer in mother.postsAnswer(card)">
+<div ng-repeat="answer in mother.postsAnswer(card)" ng-if="mother.answerInput(card._id)">
     <div class="header answer-heder" ng-style="mother.isChecked(answer)">
 
         <img ng-src="{{mother.postAvatar(answer.creator)}}" class="avatar" ng-click="mother.postProfileGo(answer.creator)" style="cursor: pointer">
@@ -109,7 +109,7 @@
     </div>
     <div class="commentsCom" ng-repeat="comment in answer.comments" style="overflow: hidden" ng-show="mother.whatAnswerCommentShow(answer)">
         <!--<span class="close" ng-click="mother.deleteComment(comment,card._id, card)" ng-if="mother.ifThisIsAvtor(mother.userdata,comment.creator)">X</span>-->
-        <div class="row commentHeader">
+        <div class="row commentHeader" style="margin: 0">
             <div class="col-md-2 col-xs-2">
                 <img ng-src="{{mother.postAvatar(comment.creator)}}" style="float:none;cursor:pointer" ng-click="mother.postProfileGo(comment.creator)">
             </div>
@@ -157,7 +157,7 @@
     </div>
     <div class="commentsCom" ng-repeat="comment in card.comments" style="overflow: hidden" ng-show="commenting">
         <!--<span class="close" ng-click="mother.deleteComment(comment,card._id, card)" ng-if="mother.ifThisIsAvtor(mother.userdata,comment.creator)">X</span>-->
-        <div class="row commentHeader">
+        <div class="row commentHeader" style="margin: 0">
 <div class="col-md-2 col-xs-2">
     <img ng-src="{{mother.postAvatar(comment.creator)}}" style="float:none;cursor:pointer" ng-click="mother.postProfileGo(comment.creator)">
 </div>
