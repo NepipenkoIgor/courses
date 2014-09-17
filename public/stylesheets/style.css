@@ -1163,7 +1163,7 @@ padding: 0 5px 0 0!important;
     z-index: 90;
 }
 .bar div {
-    position: relative;
+   /* position: relative;*/
 }
 .bar h1 {
     font-size: 28px;
@@ -1203,8 +1203,8 @@ padding: 0 5px 0 0!important;
     color: #fff;
 }
 .bar .tooltip.bottom{
-    top:0!important;
-    left:0!important;
+   /* top:0!important;
+    left:0!important;*/
 }
 .bar h1 .profEdit .tooltip{
     position: absolute;
@@ -1394,7 +1394,7 @@ padding: 0 5px 0 0!important;
     color: #555;
     font-size: 18px;
     text-align: center;
-    */answer-heder
+    *//*answer-heder*/
 /*style="border: 1px solid red;width: 200px;"*//*
 
     background: transparent;
@@ -1677,4 +1677,7 @@ div.designori div.yellow {
 .vote{
     color:#27A1A5;
     cursor:pointer;
+}
+.answerInputParent input{
+    width: 100%!important;
 }

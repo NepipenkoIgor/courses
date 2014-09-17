@@ -306,13 +306,14 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         return newDataDate + " " + newDataMonth + " " + newDataYear;
     }
 
+    $scope.comment={}
     $scope.addComment = function (idPost, creator, card, action) {
-
-
+console.log($scope.comment[action])
+        var comment=$scope.comment[action];
         if (card._id === idPost && this.comment !== "") {
             var date = Date.now();
             var newDate = new Date();
-            card.comments.push({content: this.comment, creator: creator, postId: date, dataReg: dataReg(newDate), likes: []});
+            card.comments.push({content: comment, creator: creator, postId: date, dataReg: dataReg(newDate), likes: []});
 
             var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost, action: action};
             $http.post('/comment/new', data).success(function () {
@@ -322,7 +323,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 }
                 reqPosts();
                 reqUsers();
-
+                $scope.comment[action]=undefined;
             });
         }
     };
@@ -661,27 +662,34 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         return "fa fa-plus";
     };
     $scope.answerInputval;
+
     $scope.showAnswerInput = function (id) {
         if ($scope.answerInputval === id) {
+            $scope.answer.content=undefined;
             $scope.answerInputval = undefined;
             return;
         }
+        $scope.answer.content=undefined;
         $scope.answerInputval = id;
         return;
 
     };
+
+    $scope.answer = {};
     $scope.answerInput = function (id) {
 
         if (id === $scope.answerInputval) {
+
             return true;
         }
         return false;
     };
     $scope.answerInputClose = function () {
+        $scope.answer.content=undefined;
         $scope.answerInputval = undefined;
     };
 
-    $scope.answer = {};
+
     $scope.newAnswer = function (userAnswer, card) {
 
         var dataObj = {creatorAnswer: userAnswer, postAnswered: card._id, content: $scope.answer.content}
@@ -776,11 +784,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     $scope.answerCommentsShow = function (answer) {
         // console.log($scope.change.answerNowComment===answer._id);
         if ($scope.change.answerNowComment === answer._id) {
-
+            $scope.comment.answer=undefined;
             $scope.change.answerNowComment = undefined;
             return;
         }
-        // $scope.answerNowComment=undefined;
+        $scope.comment.answer=undefined;
         $scope.change.answerNowComment = answer._id;
     };
 
@@ -789,6 +797,32 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
             return true;
         }
         return false;
+    };
+
+
+    $scope.postCommentsShow = function (answer) {
+        // console.log($scope.change.answerNowComment===answer._id);
+        if ($scope.change.postNowComment === answer._id) {
+            $scope.comment.posts=undefined;
+            $scope.change.postNowComment = undefined;
+            return;
+        }
+        $scope.comment.posts=undefined;
+        $scope.change.postNowComment = answer._id;
+    };
+
+    $scope.whatPostCommentShow = function (answer) {
+        if (answer._id === $scope.change.postNowComment) {
+            //$scope.comment.posts=undefined;
+            return true;
+        }
+        //$scope.comment.posts=undefined;
+        return false;
+    };
+    $scope.commentsInputClose = function () {
+        $scope.comment.posts=undefined;
+        $scope.change.postNowComment = undefined;
+        return;
     };
 
 });

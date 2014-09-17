@@ -34,12 +34,12 @@
       <!--  <li class="col-md-4 col-xs-4"><a href="" ng-click="mother.like(mother.userdata._id,card.likes,card._id,card)"
                                          ng-if="card.typePost==='question'"><i class="fa fa-arrow-circle-up"></i> {{card.likes.length}}</a></li>-->
         <li class="col-md-4 col-xs-4">
-            <a href="" ng-click="commenting = !commenting" style="display: inline-block;">
+            <a href="" ng-click="mother.postCommentsShow(card)" style="display: inline-block;">
                 <span style="float: left;margin-right: 5px;" ng-show="card.comments.length>0">{{card.comments.length}}</span>
-                <div ng-hide="commenting" class="" style="float: left">
+                <div ng-hide="mother.whatPostCommentShow(card)" class="" style="float: left">
                     <i class="fa fa-comments" style="margin-right: 5px"></i><i class="fa fa-caret-down"></i>
                 </div>
-                <div ng-show="commenting" class="ng-hide" style="float:left">
+                <div ng-show="mother.whatPostCommentShow(card)" class="ng-hide" style="float:left">
                     <i class="fa fa-comments" style="margin-right: 5px"></i><i class="fa fa-caret-up"></i>
                 </div>
             </a>
@@ -54,7 +54,7 @@
 
         <img ng-src="{{mother.postAvatar(card.creator)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
         <div class="col-md-12" style="padding: 0;overflow:hidden">
-            <textarea class="msd-elastic" name="answer" placeholder="The answer is...." rows="4" ng-model="mother.answer.content" style="min-height: 50px; margin-bottom: 5px;"></textarea>
+            <textarea class="msd-elastic" name="answer" placeholder="The answer is...."  ng-model="mother.answer.content" style="min-height: 50px; margin-bottom: 5px;"></textarea>
             <div class="btn-group" style="display: block">
                 <button class="btn btn-primary" ng-click="[mother.newAnswer(mother.userdata._id,card)]" >Answer</button>
                 <button class="btn btn-danger" ng-click="mother.answerInputClose()">Cancel</button>
@@ -62,12 +62,17 @@
         </div>
     </div>
 
-<div ng-repeat="answer in mother.postsAnswer(card)" ng-if="mother.answerInput(card._id)">
+<div ng-repeat="answer in mother.postsAnswer(card)" ng-if="mother.answerTrigger(card.typePost)">
     <div class="header answer-heder" ng-style="mother.isChecked(answer)">
 
         <img ng-src="{{mother.postAvatar(answer.creator)}}" class="avatar" ng-click="mother.postProfileGo(answer.creator)" style="cursor: pointer">
-        <p class="author ng-binding" ng-click="mother.postProfileGo(answer.creator)" style="cursor: pointer">{{answer.getCreator(card.creator)}}</p>
-        <p class="date ng-binding">{{card.created}}</p>
+        <p class="author ng-binding" ng-click="mother.postProfileGo(answer.creator)" style="cursor: pointer">{{mother.getCreator(answer.creator)}}</p>
+
+
+
+
+        <p class="date ng-binding"> <a   style="margin-right: 10px;font-size: 16px;cursor: pointer" ng-if="mother.ifThisIsAvtor(mother.userdata,answer.creator)"
+                                        ng-click="textBtnFormAnswer.$show()"><i class="fa fa-pencil"></i></a>{{card.created}}</p>
     </div>
   <!--  <h1 class="title ng-binding">{{card.title}}</h1>-->
     <div class="row" >
@@ -77,10 +82,12 @@
             <div style="text-align: center">{{mother.numVote(answer)}}</div>
             <div style="text-align: center" ng-click="mother.voteDown(answer,mother.userdata._id)"><i class="fa fa-chevron-down vote" ng-style="mother.dontVote(answer,mother.userdata._id)"></i></div>
         </div>
-        <div class="col-md-10" style="padding: 0">
-            <p class="content ng-binding">{{answer.content}}</p>
+        <div class="col-md-10 answerInputParent" style="padding: 0">
+            <p class="content ng-binding" editable-text="answer.content" e-form="textBtnFormAnswer"
+               onaftersave="mother.updateComment(answer,'answerNotComment')">{{answer.content}}</p>
         </div>
         </div>
+
     </div>
     <ul class="footer" style="padding-bottom: 40px " >
         <li class="col-md-4 col-xs-4"><a href="" ng-click="mother.checkWriteAnswer(answer,card.creator,mother.userdata._id,mother.postsAnswer(card))" ><i class="fa fa-check uncheckAnswer" style="font-size: 30px;"
@@ -101,7 +108,7 @@
 
     <div class="comments " ng-show="mother.whatAnswerCommentShow(answer)" style="overflow: hidden;">
         <img ng-src="{{mother.postAvatar(mother.userdata._id)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
-        <textarea class="msd-elastic"  placeholder="Comments..." rows="4" ng-model="mother.comment" style="min-height: 50px; margin-bottom: 5px;"></textarea>
+        <textarea class="msd-elastic"  placeholder="Comments..."  ng-model="mother.comment.answer" style="min-height: 50px; margin-bottom: 5px;"></textarea>
         <div class="btn-group" style="display: block">
             <button class="btn btn-primary" ng-click="[mother.addComment(answer._id,mother.userdata._id,answer,'answer'),mother.answerCommentsShow(answer)]" >Comment</button>
             <button class="btn btn-danger" ng-click="mother.answerCommentsShow(answer)">Cancel</button>
@@ -147,15 +154,15 @@
 
 
 
-    <div class="comments ng-hide" ng-show="commenting" style="overflow: hidden;">
+    <div class="comments ng-hide" ng-show="mother.whatPostCommentShow(card)" style="overflow: hidden;">
         <img ng-src="{{mother.postAvatar(mother.userdata._id)}}" class="avatar" ng-click="mother.postProfileGo(mother.userdata._id)" style="cursor: pointer">
-        <textarea class="msd-elastic" name="comment" placeholder="Comments..." rows="4" ng-model="mother.comment" style="min-height: 50px; margin-bottom: 5px;"></textarea>
+        <textarea class="msd-elastic"  placeholder="Comments..."  ng-model="mother.comment.posts" style="min-height: 50px; margin-bottom: 5px;"></textarea>
         <div class="btn-group" style="display: block">
-            <button class="btn btn-primary" ng-click="[mother.addComment(card._id,mother.userdata._id,card),commenting = !commenting,mother.comment='']" ng-model="comment">Comment</button>
-            <button class="btn btn-danger" ng-click="commenting = !commenting">Cancel</button>
+            <button class="btn btn-primary" ng-click="[mother.addComment(card._id,mother.userdata._id,card,'posts')]" >Comment</button>
+            <button class="btn btn-danger" ng-click="mother.commentsInputClose()">Cancel</button>
         </div>
     </div>
-    <div class="commentsCom" ng-repeat="comment in card.comments" style="overflow: hidden" ng-show="commenting">
+    <div class="commentsCom" ng-repeat="comment in card.comments" style="overflow: hidden" ng-show="mother.whatPostCommentShow(card)">
         <!--<span class="close" ng-click="mother.deleteComment(comment,card._id, card)" ng-if="mother.ifThisIsAvtor(mother.userdata,comment.creator)">X</span>-->
         <div class="row commentHeader" style="margin: 0">
 <div class="col-md-2 col-xs-2">
