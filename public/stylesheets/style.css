@@ -1681,3 +1681,58 @@ div.designori div.yellow {
 .answerInputParent input{
     width: 100%!important;
 }
+
+
+
+.login_form {
+    margin: 50px;
+    margin: 0 auto;
+    margin-top: 10%;
+    font-size: 20px;
+    width: 400px;
+}
+.login_form .footer {
+    text-align: center;
+}
+.login_form .footer .or {
+    margin-top: 10px;
+}
+.login_form .checkbox {
+    margin-left: 11px;
+    width: 119px;
+    font-size: 16px;
+}
+.login_form .remember-me {
+    float: right;
+    margin-top: -30px;
+    font-size: 16px;
+}
+.register_form {
+     width: auto;
+ }
+.col-centered {
+      display: inline-block;
+      float: none!important;
+      margin-right: -4px;
+  }
+  .row.row-centered{
+      clear: both;
+  }
+.row.row-centered .btn{
+    background-color: #b15315;
+}
+.passwordValidation span{
+    top: 2px!important;
+}
+.row.row-centered span{
+    top: 32px!important;
+}
+
+.searchIcon+.tooltip .tooltip-arrow{
+    border-left-color: #4E5D6C!important;
+}
+.searchIcon+.tooltip .tooltip-inner{
+    background-color: #4E5D6C;
+line-height: 74px;
+    padding: 0 20px;
+}

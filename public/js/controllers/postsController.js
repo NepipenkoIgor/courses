@@ -256,7 +256,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
 
     $scope.deletePost = function (id) {
-        if (confirm("you really want to delete?????")) {
+        if (confirm("Are you sure you wish to delete this?")) {
             for (var i = 0; i < $scope.postdata.length; i++) {
                 if ($scope.postdata[i]._id === id) {
 
@@ -275,21 +275,22 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         }
 
     };
-    $scope.deleteComment = function (comment, id, card) {
-        for (var j = 0; j < card.comments.length; j++) {
+    $scope.deleteComment = function (comment, id, card,action) {
+        if (confirm("Are you sure you wish to delete this?")) {
+            for (var j = 0; j < card.comments.length; j++) {
 
-            if (card.comments[j].postId === comment.postId) {
+                if (card.comments[j].postId === comment.postId) {
 
-                var commentt = card.comments.splice(j, 1);
-                var data = {"_id": id, "comments": card.comments};
+                    var commentt = card.comments.splice(j, 1);
+                    var data = {"_id": id, "comments": card.comments,action:action};
 
-                $http.post('/comment/new', data).success(function () {
-                    reqPosts();
-                    reqUsers();
-                });
+                    $http.post('/comment/new', data).success(function () {
+                        reqPosts();
+                        reqUsers();
+                    });
+                }
             }
         }
-
     };
 
     /********add comment**********/
@@ -355,7 +356,11 @@ console.log($scope.comment[action])
 
         });
     };
+    $scope.updateCard=function(post){
+        $http.post("/post/update", post).success(function (data) {
 
+        });
+    }
 
     /******************logic differences of posts**********************/
     $scope.getCreator = function (id) {
@@ -469,7 +474,7 @@ console.log($scope.comment[action])
 
                 $scope.postdata = data.data;
                 $location.url("/post/all?type=" + data.type);
-
+               // $scope.chengedSearchIcon=data.type;
                 $scope.page = $scope.postdata.length / 10;
                 $scope.scrolling = 800;
 
@@ -824,6 +829,13 @@ console.log($scope.comment[action])
         $scope.change.postNowComment = undefined;
         return;
     };
+
+    $scope.sendFlagMail=function(post,content){
+        $http.post("/notify/send/mail",[post,content]).success(function(){
+
+        })
+    }
+
 
 });
 

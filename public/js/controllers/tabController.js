@@ -828,7 +828,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     /************************************COMMUNITY and FILTERS***********************************************/
 
     $scope.goToCommunity = function () {
-
+        $scope.chengedSearchIcon="Everything"
         $state.go('posts').then(function () {
 
             $location.url("/post/all?type=allposts");
@@ -871,7 +871,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
 
-    $scope.searchType = ['All Posts', 'My Posts', 'My Questions', 'Only Questions', 'Popular'];
+    $scope.searchType = ['Everything', 'My Posts', 'My Questions', 'All Questions', 'Popular'];
     $scope.search = {
         type: "All Posts"
     };
@@ -883,11 +883,53 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     };
 
+    $scope.clickSearchIcon=function(type){
+       $scope.chengedSearchIcon=type;
+    }
+    $scope.colorOfIcon=function(type){
+        if($scope.chengedSearchIcon===type){
+            return {"color":"#A5A044"}
+        }
+        return {}
+    }
+
+    $scope.serachIcon=function(typeData){
+        var iconObj = {};
+        typeData = typeData || $scope.search.type;
+        switch (typeData) {
+            case 'Everything':
+                iconObj.first = 'fa fa-users fa-stack-1x';
+                iconObj.second = 'fa fa-square-o fa-stack-1x';
+                break;
+            case 'My Posts':
+                iconObj.first = 'fa fa-user fa-stack-1x';
+                iconObj.second = 'fa fa-circle-o fa-stack-1x';
+                break;
+            case 'My Questions':
+                iconObj.first = 'fa fa-users fa-stack-1x';
+                iconObj.second = 'fa fa-circle-o fa-stack-1x';
+                break;
+            case 'All Questions':
+                iconObj.first = 'fa fa-question fa-stack-1x';
+                iconObj.second = 'fa fa-square-o fa-stack-1x';
+                break;
+            case 'Only Posts':
+                iconObj.first = 'fa fa-users fa-stack-1x';
+                iconObj.second = 'fa fa-square-o fa-stack-1x';
+                break;
+            case 'Popular':
+                iconObj.first = 'fa fa-list fa-stack-1x';
+                iconObj.second = 'fa  fa-square-o fa-stack-1x';
+                break;
+        }
+        return iconObj;
+    }
+
     $scope.postFilter = function (user, typeData) {
         var searchObj = {};
         typeData = typeData || $scope.search.type;
         switch (typeData) {
-            case 'All Posts':
+            case 'Everything':
                 searchObj.type = 'allposts';
                 break;
             case 'My Posts':
@@ -899,7 +941,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 searchObj.creator = user._id;
                 searchObj.typePost = "question";
                 break;
-            case 'Only Questions':
+            case 'All Questions':
                 searchObj.type = 'questions';
                 searchObj.typePost = "question";
                 break;

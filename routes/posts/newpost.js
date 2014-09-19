@@ -151,5 +151,12 @@ function router(app, hasUser, io) {
     });
 
 
+    app.post("/post/update",function(req,res){
+
+        Posts.update({_id:req.body._id},{content:req.body.content},function(err,num){
+            console.log(num);
+        });
+    });
+
 }
 module.exports = router;

@@ -1,37 +1,93 @@
+<div class="login_form register_form" ng-controller="validateController">
+    <h1 style="text-align:center;">course name</h1>
+    <div class="row row-centered">
+        <form action="/signup" method="post"    id="formsign" >
+        <div class="col-md-2 col-centered">
+            <h3>Register</h3>
+            <!-- ngRepeat: alert in alerts -->
 
+                <div class="form-group has-success has-feedback">
+                    <label>Email</label>
+                    <div class="passwordValidation" style="position: relative">
+                    <label class="control-label" for="email">{{name.email}}</label>
+                    <input type="text" class="form-control" name="email" id="email" ng-keyup="validMail($event,'email')"  placeholder="Email Address">
+                    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                        </div>
+                    <div class="passwordValidation" style="position: relative">
+                        <!--<label class="control-label" for="email">{{name.email}}</label>-->
+                        <!--<input type="text" class="form-control" name="email"  ng-keyup="validMail($event,'email')"  placeholder="Email Address again">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" style="top:2px!important;"></span>-->
+                       </div>
+                </div>
+                <div class="form-group has-success has-feedback">
 
+                    <label>Password</label>
+                    <div class="passwordValidation" style="position: relative">
 
-<!--<div class="login_cont ng-scope" ng-controller="validateController" >
-    <form action="/signup" method="post"    id="formsign">
-        <h2 class="form-heading">Please Sign Up</h2>
-        <div class="form-fields">
-            <input type="text" class="form-control" name="firstname" id="firstname" ng-keyup="validName($event,'firstname')"  placeholder="Firstname" >
-            <div class="alert alert-danger alertMessage" role="alert" id="alertFirstName">{{name.firstname}}</div>
+                        <label class="control-label" for="password">{{name.password}}</label>
+                        <input type="password" class="form-control" name="password" id="password" ng-keyup="validPassword($event,'password')"  placeholder="Password">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" style="top:32px!important;"></span>
+                    </div>
+                    <!--<label class="control-label" for="comfpassword">{{name.comfpassword}}</label>-->
+                    <div class="passwordValidation" style="position: relative">
+                        <input type="password" class="form-control" name="comfpassword" id="comfpassword" ng-keyup="comfPassword($event,'comfpassword')"  placeholder="Password again">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" style="top:2px!important;"></span>
+                    </div>
+                </div>
 
-            <input type="text" class="form-control" name="lastname" id="lastname" ng-keyup="validName($event,'lastname')"  placeholder="Lastname">
-            <div class="alert alert-danger alertMessage" role="alert" id="alertLastName">{{name.lastname}}</div>
-
-            <input type="text" class="form-control" name="email" id="email" ng-keyup="validMail($event,'email')"  placeholder="Email">
-            <div class="alert alert-danger alertMessage" role="alert" id="alertEmail">{{name.email}}</div>
-
-            <input type="password" class="form-control" name="password" id="password" ng-keyup="validPassword($event,'password')"  placeholder="Password">
-            <div class="alert alert-danger alertMessage" role="alert" id="alertPassword">{{name.password}}</div>
-
-            <input type="password" class="form-control" name="comfpassword" id="comfpassword" ng-keyup="comfPassword($event,'comfpassword')"  placeholder="Password confirm">
-            <div class="alert alert-danger alertMessage" role="alert" id="alertComfPassword">{{name.comfpassword}}</div>
-
-            <input type="text" class="form-control" name="code" id="code" placeholder="Registration code" ng-keyup="validCode($event,'code')">
-            <div class="alert alert-danger alertMessage" role="alert" id="alertCode">{{name.code}}</div>
-            <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
+                <div class="password_meter">
+                    strength meter, red to green
+                </div>
+           </div>
+        <div class="col-md-2 col-centered">
+            <div class="form-group">
+                <div class="form-group has-success has-feedback">
+                    <label>First name</label>
+                    <label class="control-label" for="firstname">{{name.firstname}}</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" ng-keyup="validName($event,'firstname')"  placeholder="John">
+                    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+                <div class="form-group has-success has-feedback">
+                    <label>Last name</label>
+                    <label class="control-label" for="lastname">{{name.lastname}}</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" ng-keyup="validName($event,'lastname')"  placeholder="Doe">
+                    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+                <div class="form-group has-success has-feedback">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="907-">
+                </div>
+                <div class="form-group has-success has-feedback">
+                    <label>Register Code</label>
+                    <label class="control-label" for="code">{{name.code}}</label>
+                    <input type="text" class="form-control" name="code" id="code" placeholder="Registration code" ng-keyup="validCode($event,'code')" >
+                    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                </div>
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit"  id="submitSignUp" ng-click="nullSubmit()">
-            <span ng-show="!loading" class="">Sign Up</span>
-        </button>
+        <div class="row row-centered">
+            <div class="col-md-4 col-centered">
+                <button class="btn btn-lg btn-primary btn-block" type="submit"  id="submitSignUp" ng-click="nullSubmit()">
+                    <span ng-show="!loading" class="">Sign Up</span>
+                </button>
+            </div>
+        </div>
+        </form>
+        <div class="footer">
+            <p class="or">or</p>
+            <p>
+                <a href="#/login"  style="color: #df691a">Login here</a>
+            </p>
+        </div>
+    </div>
+</div>
 
-    </form>
-    <p style="text-align: center;">Already signed up? <a href="#/login">Login</a></p>
-</div>-->
 
+
+
+
+
+<!--
 <div class="login_cont ng-scope" ng-controller="validateController" >
     <form action="/signup" method="post"    id="formsign">
 <div class="form-group has-success has-feedback">
@@ -80,16 +136,4 @@
 
     </form>
     <p style="text-align: center;">Already signed up? <a href="#/login">Login</a></p>
-
-<!--<div class="form-group has-warning has-feedback">
-    <label class="control-label" for="inputWarning2">Input with warning</label>
-    <input type="text" class="form-control" id="inputWarning2">
-    <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-</div>
-
-<div class="form-group has-error has-feedback">
-    <label class="control-label" for="inputError2">Input with error</label>
-    <input type="text" class="form-control" id="inputError2">
-    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
 </div>-->
-</div>

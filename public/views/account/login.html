@@ -27,7 +27,35 @@
     </div>-->
 
 
+<div ng-hide="forgotView" class="">
+    <div class="login_form">
+        <h1 style="text-align:center;">course name</h1>
+        <h3>Login</h3>
+        <!-- ngRepeat: alert in alerts -->
+        <form action="/login" method="post" class="ng-pristine ng-invalid ng-invalid-required">
+            <input  class="form-control ng-pristine ng-invalid ng-invalid-required" name="email"  type="text" placeholder="Email Address"  autofocus="">
+            <input type="password" class="form-control ng-pristine ng-invalid ng-invalid-required" name="password" placeholder="Password" >
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"  class="ng-pristine ng-valid"> Remember me
+            </label>
+            <label class="remember-me ">
+                <a href="" ng-click="forgotView=1" style="color: #df691a">Forgot password?</a>
+            </label>
+            <button class="btn btn-primary btn-block" type="submit" style="background-color: #df691a">Login</button>
+        </form>
+        <div class="footer">
+            <p class="or">or</p>
+            <p>
+                <a href="#/signup" ng-click="loginView=0" style="color: #df691a">Register here</a>
+            </p>
+        </div>
+    </div>
+</div>
 
+
+
+
+<!--
     <div class="login_cont ng-scope">
         <form class="form ng-pristine ng-valid" action="/login" method="post">
             <h2 class="form-heading">Please Log In</h2>
@@ -39,9 +67,9 @@
                 <span ng-show="!loading" class="">Log In</span>
 
             </button>
-            <!--<div ng-show="error" class="alert alert-danger ng-binding ng-hide"></div>-->
+
         </form>
 
         <p style="text-align: center;"><a href="#/reset-password">Forgot your password?</a></p>
         <p style="text-align: center;"><a href="#/signup">Signup</a></p>
-    </div>
+    </div>-->
