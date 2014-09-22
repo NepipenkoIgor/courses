@@ -413,7 +413,7 @@ console.log($scope.comment[action])
     $scope.updateLikes = function (postId, likes, userId, post) {
         var date = {_id: postId, likes: likes, userHowLike: userId, post: post, likesNum: likes.length};
         $http.post('/postslikes', date).success(function (num) {
-            console.log("num", num)
+           // console.log("num", num)
         });
     };
     $scope.commentLike = function (index, user, likes, userId, post, action) {

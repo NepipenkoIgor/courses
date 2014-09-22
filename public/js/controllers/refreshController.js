@@ -6,7 +6,8 @@ app.controller("refreshController",function($scope,$http,$location,$state,$state
 
     if ($state.current.name==='login'||
         $state.current.name==='signup'||
-        $state.current.name==='signupadmin'){
+        $state.current.name==='signupadmin'||
+        $state.current.name==='forgot'){
         if (courseEdit.userdata) {
             $state.go("dashboard");
           //  return;
@@ -16,7 +17,8 @@ app.controller("refreshController",function($scope,$http,$location,$state,$state
     if (!courseEdit.userdata) {
        // console.log($state.current.name)
         if ($state.current.name!=='signup'&&
-            $state.current.name!=='signupadmin') {
+            $state.current.name!=='signupadmin'&&
+            $state.current.name!=='forgot') {
             $location.url("/login");
         }
     }

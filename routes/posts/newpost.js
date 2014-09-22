@@ -5,7 +5,9 @@ var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
 var Notify = mongoose.model('Notify');
 var Answers = mongoose.model('Answers');
-var fs = require('fs')
+var fs = require('fs');
+var easyimg = require('easyimage');
+
 function dataReg(data) {
     var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
     var newDataDate = data.getDate();
@@ -44,7 +46,7 @@ function router(app, hasUser, io) {
 
 
     });
-    var count = 0
+    //var count = 0
     app.post('/posts/upload', hasUser, function (req, res) {
 
         if (!req.files.postFile) {
@@ -59,12 +61,30 @@ function router(app, hasUser, io) {
         fs.createReadStream(req.files.postFile.path)
             .pipe(fs.createWriteStream("public/img/posts/" + req.files.postFile.originalFilename))
             .on('finish', function () {
-                Posts.update({postId: req.headers.postid}, {$push: {img: "img/posts/" + req.files.postFile.originalFilename}}, function (err,num) {
-                    console.log("!!!!!!!!",count,err,num)
-                    count++
-                    res.json({a: "B"});
+               // Posts.update({postId: req.headers.postid}, {$push: {img: "img/posts/" + req.files.postFile.originalFilename}}, function (err,num) {
+                   // console.log("!!!!!!!!",err,num)
+                    //count++
+                    //res.json({a: "B"});
+                    easyimg.resize({
+                        src:"public/img/posts/" + req.files.postFile.originalFilename, dst:"public/img/posts/thumbnail/" + req.files.postFile.originalFilename,
+                        width:55, height:55
+                    }).then(
+                        function(image) {
+                            console.log("image",image)
+                            console.log('Resized and cropped: ' + image.width + ' x ' + image.height);
+                            Posts.update({postId: req.headers.postid}, {$push: {img:["img/posts/thumbnail/" + req.files.postFile.originalFilename,
+                                    "img/posts/" + req.files.postFile.originalFilename]}}, function (err,num) {
+                                res.json({a: "B"});
+                            });
+                        },
+                        function (err) {
+                            console.log(err);
+                        }
+                    );
+
+                    //
                     return;
-                });
+                //});
             });
 
     });

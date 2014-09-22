@@ -25,7 +25,7 @@
 
 
     <div style="text-align: center;">
-        <a  ng-repeat="im in card.img" class="fancybox" rel="group" href="{{im}}"><img  ng-src="{{im}}" class="img" style=""></a>
+        <a  ng-repeat="im in card.img" class="fancybox" rel="group" href="{{im[1]}}"><img  ng-src="{{im[0]}}" class="img" style=""></a>
     </div>
 
     <div class="tagConteiner">

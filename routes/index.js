@@ -56,6 +56,7 @@ function router(app,io) {
   var facebook = require('./account/facebook')(app);
   var twitter = require('./account/twitter')(app);
   var local = require('./account/local')(app,hasAccess);
+    var forgot = require('./account/forgot')(app,hasAccess);
   var user = require('./account/user')(app,hasUser);
   var main = require('./account/main')(app,hasUser);
   var autorization=require('./account/autorization')(app,hasAccess);

@@ -1374,7 +1374,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.saveNewPost = function (content, creator, fileUpload, tags,files) {
-        console.log(files)
+        //console.log(files)
         $(".postLoad").show();
         var tagsObj = []
         for (var i = 0; i < tags.length; i++) {

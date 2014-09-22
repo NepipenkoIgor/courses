@@ -16,6 +16,8 @@ var userSchema=new Schema({
   userlevel:Number,
   firstname:String,
   avatar:String,
+    resetPasswordToken:String,
+    resetPasswordExpires:Number,
   lastname:String,
   birth:Date,
   dataReg:String,

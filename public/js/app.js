@@ -90,6 +90,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "views/account/login.html",
             controller:"refreshController"
         })
+        .state('forgot', {
+            url: "/forgot",
+            templateUrl: "views/account/forgot.html",
+            controller:"refreshController"
+        })
         .state('signup', {
             url: "/signup",
             templateUrl: "views/account/signup.html",
