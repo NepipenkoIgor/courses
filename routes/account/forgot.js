@@ -78,7 +78,7 @@ function route(app){
                '<div class="login_form" style="color:#ffffff;position:absolute;left: 0;top:0;right: 0;bottom: 0;height:159px;width: 400px;text-align: center;margin: auto  ">'+
                     '<h3>Reset password</h3>'+
                     '<form action="/reset/'+req.params.token+'" method="post" class="ng-pristine ng-invalid ng-invalid-required">'+
-                        '<input  class="form-control ng-pristine ng-invalid ng-invalid-required" name="password"  type="text" placeholder="New password"  autofocus=""'+
+                        '<input  class="form-control ng-pristine ng-invalid ng-invalid-required" name="password"  type="password" placeholder="New password"  autofocus=""'+
                 'style="width:100%;color: #1f2f3f;padding: 8px 16px;font-size: 15px;">'+
                 '<input  class="form-control ng-pristine ng-invalid ng-invalid-required" name="id"  type="hidden"   >'+
                             '<button class="btn btn-primary btn-block" type="submit"'+

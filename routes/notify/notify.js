@@ -37,9 +37,9 @@ function router(app, hasUser) {
                     pass: '07041986'
                 }
             });
-            var ahref = "codequestacademy.herokuapp.com/#/post/all?type=notifypost&post=" + req.body[0]._id;
+            var ahref = "localhost:4000/#/post/all?type=notifypost&post=" + req.body[0]._id;
             http://localhost:4000/#/post/all?type=notifypost&post=541c17d764f6efc20b8a1565
-            var tagUrl = '<a href="' + "http://codequestacademy.herokuapp.com/#/post/all?type=notifypost&post=" + req.body[0]._id + '">' + ahref + '</a>'
+            var tagUrl = '<a href="' + "http://localhost:4000/#/post/all?type=notifypost&post=" + req.body[0]._id + '">' + ahref + '</a>'
             var mailOptions = {
                 from: 'codequestacademy@gmail.com', // sender address
                 to: admins.join(), // list of receivers

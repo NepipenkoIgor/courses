@@ -18,7 +18,12 @@ require('./routes')(app,io);
 require('./controller')(app);
 
 
-
+app.use(function(req,res,next){
+    res.status(404)
+    var render='<body style="background-color:#1F2F3F "><h1 style="color:#ffffff;position:absolute;left: 0;top:0;right: 0;bottom: 0;height:37px;text-align: center;margin: auto 0 ">' +
+        'Sorry<br>This page is not found</h1></body>'
+    res.end(render);
+});
 
 
 

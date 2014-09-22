@@ -9,7 +9,15 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     $scope.comment = "";
     $scope.postdata = [];
 
-
+    if (!courseEdit.userdata) {
+        // console.log($state.current.name)
+        if ($state.current.name!=='signup'&&
+            $state.current.name!=='signupadmin'&&
+            $state.current.name!=='forgot') {
+            $location.url("/login");
+        }
+        return;
+    }
     /*********************req init*****************************/
 
 
@@ -19,6 +27,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
 
             $http.get("/answers").success(function (data) {
                 $scope.answerObj = data.data;
+
                 function sortArr(a, b) {
 
                     if (a.voteNum < b.voteNum) {
@@ -58,6 +67,66 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 };
 
 
+
+                $scope.countUserAnswers = function () {
+                    var count = 0;
+
+                    if ($scope.answerObj !== undefined) {
+                        for (var i = 0; i < $scope.answerObj.length; i++) {
+                            if ($scope.answerObj[i].creator === courseEdit.userdata._id ) {
+
+                                count++;
+                            }
+                        }
+                    }
+                    if (count === 50) {
+
+                        courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
+                    }
+                    if (count === 100) {
+                        courseEdit.userHasBadge(courseEdit.listOfBadges[5], courseEdit.userdata);
+                    }
+                    return count;
+                };
+                $scope.countUserAnswers();
+
+                $scope.countUserComments = function () {
+                    var count = 0;
+                    if ($scope.postdata !== undefined) {
+                        for (var i = 0; i < courseEdit.postdata.length; i++) {
+                            for (var j = 0; j < courseEdit.postdata[i].comments.length; j++) {
+                                if (courseEdit.postdata[i].comments[j] !== 0) {
+                                    if (courseEdit.postdata[i].comments[j].creator === courseEdit.userdata._id) {
+                                        count++;
+                                    }
+                                }
+                            }
+                        }
+                        if($scope.answerObj!==undefined){
+                            for (var i = 0; i < $scope.answerObj.length; i++) {
+                                for (var j = 0; j < $scope.answerObj[i].comments.length; j++) {
+                                    if ($scope.answerObj[i].comments[j] !== 0) {
+                                        if ($scope.answerObj[i].comments[j].creator === courseEdit.userdata._id) {
+                                            count++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    if (count === 50) {
+                        courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata);
+                    }
+                    if (count === 100) {
+                        courseEdit.userHasBadge(courseEdit.listOfBadges[8], courseEdit.userdata);
+                    }
+
+                    return count;
+                };
+                $scope.countUserComments();
+
+
             });
             //      console.log("postdata",data);
             $scope.postdata = data;//.reverse();
@@ -90,55 +159,15 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                     case 'popular':
                         searchObj.type = 'popular';
                         break;
+                    case 'tags':
+                        searchObj.type = 'allposts';
+                        break;
                 }
                 courseEdit.searchPosts(searchObj);
             }
-            $scope.countUserComments = function () {
-                var count = 0;
-                if ($scope.postdata !== undefined) {
-                    for (var i = 0; i < courseEdit.postdata.length; i++) {
-                        for (var j = 0; j < courseEdit.postdata[i].comments.length; j++) {
-                            if (courseEdit.postdata[i].comments[j] !== 0) {
-                                if (courseEdit.postdata[i].comments[j].creator === courseEdit.userdata._id && courseEdit.postdata[i].typePost !== "question") {
-                                    count++;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (count === 50) {
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[3], courseEdit.userdata);
-                }
-                if (count === 100) {
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[8], courseEdit.userdata);
-                }
 
-                return count;
-            };
-            $scope.countUserComments();
-            $scope.countUserAnswers = function () {
-                var count = 0;
-                if ($scope.postdata !== undefined) {
-                    for (var i = 0; i < courseEdit.postdata.length; i++) {
-                        for (var j = 0; j < courseEdit.postdata[i].comments.length; j++) {
-                            if (courseEdit.postdata[i].comments[j] !== 0) {
-                                if (courseEdit.postdata[i].comments[j].creator === courseEdit.userdata._id && courseEdit.postdata[i].typePost === "question") {
-                                    count++;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (count === 50) {
-                    courseEdit.userHasBadge(courseEdit.listOfBadges[2], courseEdit.userdata);
-                }
-                if (count === 100) {
-                    // courseEdit.userHasBadge(courseEdit.listOfBadges[9], courseEdit.userdata);
-                }
-                // console.log("count",count);
-                return count;
-            };
-            $scope.countUserAnswers();
+
+
             $scope.countUserPost = function (id) {
                 var count = 0;
                 if ($scope.postdata !== undefined) {
