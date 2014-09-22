@@ -96,7 +96,10 @@ function route(app){
                 res.redirect('/#/forgot');
                 return;
             }
-
+            if(req.body.password.length===0){
+                res.redirect('/#/forgot');
+                return;
+            }
             data[0].password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
             data[0].resetPasswordToken = undefined;
             data[0].resetPasswordExpires = undefined;

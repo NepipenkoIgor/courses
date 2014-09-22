@@ -16,6 +16,7 @@ function router(app, hasUser) {
                 console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if(req.body.type === 'popular'){
             Posts.find({}).sort({likesNum:-1}).lean().exec(function (err, data) {
@@ -24,12 +25,14 @@ function router(app, hasUser) {
                 //data=data;
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if (req.body.type === 'myposts') {
             Posts.find({creator: req.body.creator}).sort({postId:-1}).exec(function (err, data) {
                 //console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if (req.body.type === 'onlyposts') {
             Posts.find({creator: req.body.creator}, function (err, data) {
@@ -44,30 +47,35 @@ function router(app, hasUser) {
 
                 res.json({success: !err, msg: [], data: postMass,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if (req.body.type === 'myquestions') {
             Posts.find({creator: req.body.creator,typePost:req.body.typePost}, function (err, data) {
                 //console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if (req.body.type === 'questions') {
             Posts.find({typePost:req.body.typePost}, function (err, data) {
                // console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if (req.body.type === 'tags') {
            Posts.find({"tags":req.body.tag},function(err,data){
                 console.log("UNWINDDDDDD",data);
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if (req.body.type === 'notifypost') {
             Posts.find({_id:req.body.post},function(err,data){
                 //console.log("UNWINDDDDDD",data);
                 res.json({success: !err, msg: [], data: data,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
         if (req.body.type === 'text') {
 
@@ -100,8 +108,16 @@ function router(app, hasUser) {
                 }
                 res.json({success: !err, msg: [], data: resData,type:req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return
         }
+        Posts.find({}).sort({postId:-1}).exec(function (err, data) {
+            //console.log("searchData", data)
+            console.log("searchData", data)
+            res.json({success: !err, msg: [], data: data,type:"allposts", error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+        });
     });
+
+
   app.get('/post/all', hasUser, function (req, res) {
       var urlMass=req.url.split("?");
       if(urlMass[1]){
