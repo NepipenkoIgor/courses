@@ -118,6 +118,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('posts', {
             url: "/post/all",
             templateUrl: "postall.html",
+            resolve:{
+                promiseUser:  function($http){
+                    return $http.get('/user')
+
+                }
+            },
             controller:"posts"
         }).state('adminlab', {
             url: "/adminlab",
@@ -142,10 +148,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller:"refreshController"
         }).state('dashboard', {
             url: "/dashboard",
+            resolve:{
+                promiseUser:  function($http){
+                    return $http.get('/user')
+
+                }
+            },
             templateUrl: "views/main/welcome.html",
             controller: 'posts'
         }).state('editprofile', {
             url: "/profile/:username",
+            resolve:{
+                promiseUser:  function($http){
+                    return $http.get('/user')
+
+                }
+            },
             templateUrl: "views/account/profile.html",
             controller: 'posts'
         }).state('course', {

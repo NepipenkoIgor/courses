@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http, $sce, $state, $location, courseEdit) {
+app.controller('posts', function ($scope, $http, $sce, $state, $location, courseEdit,promiseUser) {
     'user strict';
 
     /****************config post**********************/
@@ -9,7 +9,8 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     $scope.comment = "";
     $scope.postdata = [];
 
-    if (!courseEdit.userdata) {
+    console.log("promiseUser",typeof promiseUser.data)
+   if (typeof promiseUser.data==="string") {
         // console.log($state.current.name)
         if ($state.current.name!=='signup'&&
             $state.current.name!=='signupadmin'&&
