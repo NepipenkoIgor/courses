@@ -32,11 +32,11 @@ function route(app){
                             pass: '07041986'
                         }
                     });
-                    var ahref = "localhost:4000/reset/" +  data[0].resetPasswordToken;
+                    var ahref = "codequestacademy.herokuapp.com/reset/" +  data[0].resetPasswordToken;
                     var message='You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                         'Please click on the following link, or paste this into your browser to complete the process:\n\n';
                     var message2='If you did not request this, please ignore this email and your password will remain unchanged.\n';
-                    var tagUrl = '<a href="' + "http://localhost:4000/reset/" +  data[0].resetPasswordToken + '">' + ahref + '</a>'
+                    var tagUrl = '<a href="' + "http://codequestacademy.herokuapp.com/reset/" +  data[0].resetPasswordToken + '">' + ahref + '</a>'
                     var mailOptions = {
                         from: 'codequestacademy@gmail.com', // sender address
                         to: req.body.email, // list of receivers
