@@ -1,10 +1,17 @@
 <div ng-hide="forgotView" class="">
     <div class="login_form">
+        <h1 style="text-align:center;">course name</h1>
         <h3>Forgot password</h3>
         <!-- ngRepeat: alert in alerts -->
         <form action="/forgot" method="post" class="ng-pristine ng-invalid ng-invalid-required">
             <input  class="form-control ng-pristine ng-invalid ng-invalid-required" name="email"  type="text" placeholder="Email Address"  autofocus="">
-            <button class="btn btn-primary btn-block" type="submit" style="background-color: #df691a">Reset password</button>
+            <button class="btn btn-primary btn-block" type="submit" style="background-color: #df691a">Reset</button>
         </form>
+        <div class="footer">
+            <p class="or">or</p>
+            <p>
+                <a href="#/signup" ng-click="loginView=0" style="color: #df691a">Register here</a>
+            </p>
+        </div>
     </div>
 </div>

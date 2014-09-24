@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
 
 
-function router(app, hasUser) {
+function router(app, hasUser, hasAccess) {
     //'use strict'
     app.post('/post/search', hasUser, function (req, res) {
         console.log(req.body)

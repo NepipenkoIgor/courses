@@ -72,6 +72,11 @@ body{
    /* background: url('http://www.servimg.com/u/f60/15/20/71/92/user10.png') center;*/
     background-size:34px;
     border-radius: 34px;
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    -moz-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    -ms-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    -o-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
 }
 
 .notify .dropdown-menu {

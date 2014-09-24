@@ -71,6 +71,10 @@
 
     <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
 
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>-->
+   <!-- <script src="http://pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>-->
+
+
     <!--<script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
     <script src="javascripts/jslayot/theme-chaos.js"></script>
     <style id="ace-chaos">.ace-chaos .ace_gutter {
@@ -290,8 +294,8 @@
         <div class="user_controls">
             <ul>
                 <li class="notify_icon">
-                    <i class="fa fa-bell icon"></i>
-
+                    <i class="fa fa-bell icon" ng-show="notification.length>0"></i>
+                    <i class="fa fa-bell-o icon" ng-show="notification.length===0"></i>
                     <div class="notify_num progress-bar-danger" ng-show="notification.length>0">
                         <p>{{notification.length}}</p>
                     </div>
@@ -340,7 +344,7 @@
     <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
         <ul class="main_menu">
             <!--goToCourse() add ng-click to page multicourse-->
-            <li ng-click="courseNowChange(listOfCourses[0]._id)" tooltip-placement="top" tooltip="Courses"
+            <li ng-click="courseNowChange(listOfCourses[0]._id)" tooltip-placement="top" tooltip="Course"
                 class="btn-default" data-original-title="Course Work"><i class="fa fa-book"></i></li>
             <li ng-click="goToCommunity()" tooltip-placement="top" tooltip="Community" class="btn-default"
                 data-original-title="Community"><i class="fa fa-users"></i></li>

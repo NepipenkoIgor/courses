@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http, $sce, $state, $location, courseEdit,promiseUser) {
+app.controller('posts', function ($scope, $http, $sce, $state, $location, courseEdit, promiseUser) {
     'user strict';
 
     /****************config post**********************/
@@ -9,12 +9,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
     $scope.comment = "";
     $scope.postdata = [];
 
-    console.log("promiseUser",typeof promiseUser.data)
-   if (typeof promiseUser.data==="string") {
+    //console.log("promiseUser", typeof promiseUser.data)
+    if (typeof promiseUser.data === "string") {
         // console.log($state.current.name)
-        if ($state.current.name!=='signup'&&
-            $state.current.name!=='signupadmin'&&
-            $state.current.name!=='forgot') {
+        if ($state.current.name !== 'signup' &&
+            $state.current.name !== 'signupadmin' &&
+            $state.current.name !== 'forgot') {
             $location.url("/login");
         }
         return;
@@ -68,13 +68,12 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 };
 
 
-
                 $scope.countUserAnswers = function () {
                     var count = 0;
 
                     if ($scope.answerObj !== undefined) {
                         for (var i = 0; i < $scope.answerObj.length; i++) {
-                            if ($scope.answerObj[i].creator === courseEdit.userdata._id ) {
+                            if ($scope.answerObj[i].creator === courseEdit.userdata._id) {
 
                                 count++;
                             }
@@ -103,7 +102,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                                 }
                             }
                         }
-                        if($scope.answerObj!==undefined){
+                        if ($scope.answerObj !== undefined) {
                             for (var i = 0; i < $scope.answerObj.length; i++) {
                                 for (var j = 0; j < $scope.answerObj[i].comments.length; j++) {
                                     if ($scope.answerObj[i].comments[j] !== 0) {
@@ -166,7 +165,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
                 }
                 courseEdit.searchPosts(searchObj);
             }
-
 
 
             $scope.countUserPost = function (id) {
@@ -305,14 +303,14 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         }
 
     };
-    $scope.deleteComment = function (comment, id, card,action) {
+    $scope.deleteComment = function (comment, id, card, action) {
         if (confirm("Are you sure you wish to delete this?")) {
             for (var j = 0; j < card.comments.length; j++) {
 
                 if (card.comments[j].postId === comment.postId) {
 
                     var commentt = card.comments.splice(j, 1);
-                    var data = {"_id": id, "comments": card.comments,action:action};
+                    var data = {"_id": id, "comments": card.comments, action: action};
 
                     $http.post('/comment/new', data).success(function () {
                         reqPosts();
@@ -337,10 +335,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, course
         return newDataDate + " " + newDataMonth + " " + newDataYear;
     }
 
-    $scope.comment={}
+    $scope.comment = {}
     $scope.addComment = function (idPost, creator, card, action) {
-console.log($scope.comment[action])
-        var comment=$scope.comment[action];
+        //console.log($scope.comment[action])
+        var comment = $scope.comment[action];
         if (card._id === idPost && this.comment !== "") {
             var date = Date.now();
             var newDate = new Date();
@@ -354,7 +352,7 @@ console.log($scope.comment[action])
                 }
                 reqPosts();
                 reqUsers();
-                $scope.comment[action]=undefined;
+                $scope.comment[action] = undefined;
             });
         }
     };
@@ -386,7 +384,7 @@ console.log($scope.comment[action])
 
         });
     };
-    $scope.updateCard=function(post){
+    $scope.updateCard = function (post) {
         $http.post("/post/update", post).success(function (data) {
 
         });
@@ -443,7 +441,7 @@ console.log($scope.comment[action])
     $scope.updateLikes = function (postId, likes, userId, post) {
         var date = {_id: postId, likes: likes, userHowLike: userId, post: post, likesNum: likes.length};
         $http.post('/postslikes', date).success(function (num) {
-           // console.log("num", num)
+            // console.log("num", num)
         });
     };
     $scope.commentLike = function (index, user, likes, userId, post, action) {
@@ -504,7 +502,7 @@ console.log($scope.comment[action])
 
                 $scope.postdata = data.data;
                 $location.url("/post/all?type=" + data.type);
-               // $scope.chengedSearchIcon=data.type;
+                // $scope.chengedSearchIcon=data.type;
                 $scope.page = $scope.postdata.length / 10;
                 $scope.scrolling = 800;
 
@@ -700,11 +698,11 @@ console.log($scope.comment[action])
 
     $scope.showAnswerInput = function (id) {
         if ($scope.answerInputval === id) {
-            $scope.answer.content=undefined;
+            $scope.answer.content = undefined;
             $scope.answerInputval = undefined;
             return;
         }
-        $scope.answer.content=undefined;
+        $scope.answer.content = undefined;
         $scope.answerInputval = id;
         return;
 
@@ -720,7 +718,7 @@ console.log($scope.comment[action])
         return false;
     };
     $scope.answerInputClose = function () {
-        $scope.answer.content=undefined;
+        $scope.answer.content = undefined;
         $scope.answerInputval = undefined;
     };
 
@@ -819,11 +817,11 @@ console.log($scope.comment[action])
     $scope.answerCommentsShow = function (answer) {
         // console.log($scope.change.answerNowComment===answer._id);
         if ($scope.change.answerNowComment === answer._id) {
-            $scope.comment.answer=undefined;
+            $scope.comment.answer = undefined;
             $scope.change.answerNowComment = undefined;
             return;
         }
-        $scope.comment.answer=undefined;
+        $scope.comment.answer = undefined;
         $scope.change.answerNowComment = answer._id;
     };
 
@@ -838,11 +836,11 @@ console.log($scope.comment[action])
     $scope.postCommentsShow = function (answer) {
         // console.log($scope.change.answerNowComment===answer._id);
         if ($scope.change.postNowComment === answer._id) {
-            $scope.comment.posts=undefined;
+            $scope.comment.posts = undefined;
             $scope.change.postNowComment = undefined;
             return;
         }
-        $scope.comment.posts=undefined;
+        $scope.comment.posts = undefined;
         $scope.change.postNowComment = answer._id;
     };
 
@@ -855,16 +853,36 @@ console.log($scope.comment[action])
         return false;
     };
     $scope.commentsInputClose = function () {
-        $scope.comment.posts=undefined;
+        $scope.comment.posts = undefined;
         $scope.change.postNowComment = undefined;
         return;
     };
 
-    $scope.sendFlagMail=function(post,content){
-        $http.post("/notify/send/mail",[post,content]).success(function(){
+    $scope.sendFlagMail = function (post, content) {
+        $http.post("/notify/send/mail", [post, content]).success(function () {
 
-        })
-    }
+        });
+    };
+
+    $scope.borderCommentRadius = function (card, index, answer, type) {
+        if ($scope.postsAnswer) {
+            if (card.typePost === "question" && $scope.postsAnswer(card).length === 0) {
+                return {"border-radius": "0 0 25px 25px"};
+            }
+
+        }
+
+        if (answer && (answer.length - 1) === index) {
+            return {"border-radius": "0 0 25px 25px"};
+        }
+        if (type) {
+            return
+        }
+        if (card.typePost !== "question") {
+            return {"border-radius": "0 0 25px 25px"};
+        }
+        return;
+    };
 
 
 });

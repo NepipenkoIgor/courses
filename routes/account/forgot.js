@@ -50,9 +50,31 @@ function route(app){
                             console.log(error);
                         } else {
                             console.log('Message sent: ' + info.response);
-                            var mail=req.body.email.split("@")
-                            var render='<body style="background-color:#1F2F3F "><h1 style="color:#ffffff;position:absolute;left: 0;top:0;right: 0;bottom: 0;height:37px;text-align: center;margin: auto 0 ">' +
-                                'Message sent on your mail<br><a href="http://'+mail[1]+'">go to my mail page</a></h1></body>'
+                            var mail=req.body.email.split("@");
+                           /*'<body style="background-color:#1F2F3F "><h1 style="color:#ffffff;position:absolute;left: 0;top:0;right: 0;bottom: 0;height:37px;text-align: center;margin: auto 0 ">' +
+                                'Message sent on your mail<br><a href="http://'+mail[1]+'">go to my mail page</a></h1></body>'*/
+
+                            var render=  '<head>'+
+                                "<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>"+
+                                ' <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">'+
+                                '<link rel="stylesheet" href="/stylesheets/style.css">'+
+                                '</head><body style="background-color:#1F2F3F;font-family: Lato!important;"><div class="login_form">'+
+                                '<h1 style="text-align:center;color:#fff">course name</h1>'+
+                                '<h3 style="color:#fff">Forgot password</h3>'+
+                                '<form class="ng-pristine ng-invalid ng-invalid-required">'+
+                                '<a class="btn btn-primary btn-block" style="border:2px solid #df691a;background: transparent;padding:10px;font-size:24px;color:#df691a"'+
+                                'href="http://'+mail[1]+'">You will receive an email shortly</a>'+
+                                '</form>'+
+                                '<div class="footer">'+
+                                '<p class="or" style="color:#fff">or</p>'+
+                                '<p>'+
+                                '<a href="#/signup" ng-click="loginView=0" style="color: #df691a">Register here</a>'+
+                                '</p>'+
+                                '</div>'+
+                                '</div></body>';
+
+
+
                             res.end(render);
                         }
                     });
@@ -74,7 +96,7 @@ function route(app){
                 res.redirect('/#/forgot');
                 return;
             }
-            var render='<body style="background-color:#1F2F3F "><div ng-hide="forgotView" class="">'+
+            /* var render='<body style="background-color:#1F2F3F "><div ng-hide="forgotView" class="">'+
                '<div class="login_form" style="color:#ffffff;position:absolute;left: 0;top:0;right: 0;bottom: 0;height:159px;width: 400px;text-align: center;margin: auto  ">'+
                     '<h3>Reset password</h3>'+
                     '<form action="/reset/'+req.params.token+'" method="post" class="ng-pristine ng-invalid ng-invalid-required">'+
@@ -85,10 +107,23 @@ function route(app){
                 'style="background-color: #df691a;width:100%;border: none;padding: 15px;color:#fff;cursor:pointer">Update Password</button>'+
                         '</form>'+
                     '</div>'+
-                '</div></body>';
+                '</div></body>';*/
+
+            var render= '<head>'+
+                "<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>"+
+                ' <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">'+
+                '<link rel="stylesheet" href="/stylesheets/style.css">'+
+                '</head><body style="background-color:#1F2F3F;font-family: Lato!important;"> <div class="login_form">'+
+                '<h1 style="text-align:center;">course name</h1>'+
+                '<h3>Login</h3>'+
+                '<form action="/reset/'+req.params.token+'" method="post" class="ng-pristine ng-invalid ng-invalid-required">'+
+                '<input type="password" class="form-control ng-pristine ng-invalid ng-invalid-required" name="password" placeholder="New Password" >'+
+                '<button class="btn btn-primary btn-block" type="submit" style="background-color: #df691a;border:none;border-radius: 0">Reset password</button>'+
+                '</form>'+
+                '</div>'
            res.end(render);
-        })
-    })
+        });
+    });
 
     app.post('/reset/:token',function(req,res){
         Users.find({resetPasswordToken: req.params.token,resetPasswordExpires: { $gt: Date.now()}},function(err,data){
@@ -111,9 +146,9 @@ function route(app){
 
             });
 
-        })
+        });
 
-    })
+    });
 }
 
 module.exports=route;

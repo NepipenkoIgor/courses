@@ -404,6 +404,7 @@ margin-left: 100px;
     border-radius: 50%;
     width: 34px;
     height: 34px;
+
 }
 
 .login_cont {
@@ -939,6 +940,8 @@ width: 100%;
     background: #fff;
     box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
     margin-bottom: 150px;
+    border-radius: 25px;
+
 }
 .a-postcard .contain {
 }
@@ -1000,6 +1003,11 @@ width: 100%;
     width: 55px;
     height: 55px;
     border-radius: 15px;
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    -moz-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    -ms-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    -o-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.75));
 }
 .footer {
     list-style-type: none;
@@ -1014,6 +1022,7 @@ width: 100%;
 .comments {
     position: relative;
     background: #d8d8d8;
+
 }
 .comments .avatar {
     top: 5px;
@@ -1045,6 +1054,18 @@ overflow: hidden;
     right: 0;
     top: 0;
 }
+
+.closeA{
+float:right;
+    display: none;
+}
+.closeA i{
+  font-size: 14px;
+    margin: 5px;
+}
+.close:hover .closeA {
+    display: block;
+}
 .commentsCom img {
     margin: 0 0 0 5px;
     /*width: 15%;
@@ -1071,7 +1092,7 @@ padding: 0 5px 0 0!important;
 }
 .deckgrid1{
     overflow: hidden;
-    width: 935px;
+    /*width: 935px;*/
     margin: 0 auto;
 }
 .deckgrid1[deckgrid]::before {
@@ -1480,10 +1501,14 @@ padding: 0 5px 0 0!important;
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+   /* right: 0;*/
     bottom: 0;
-    background-color: rgba(0,0,0,.4);
-    z-index: 9999;
+    /*background-color: rgba(0,0,0,.4);
+    z-index: 9999;*/
+    right: 110px;
+    background-color: #1f2f3f;
+    z-index: 101;
+
 }
 
 div.designori {

@@ -906,7 +906,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 iconObj.second = 'fa fa-circle-o fa-stack-1x';
                 break;
             case 'My Questions':
-                iconObj.first = 'fa fa-users fa-stack-1x';
+                iconObj.first = 'fa fa-question fa-stack-1x';
                 iconObj.second = 'fa fa-circle-o fa-stack-1x';
                 break;
             case 'All Questions':
@@ -1436,7 +1436,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         var tagsObj = [];
         if ($state.current.name === 'unit') {
             tagsObj.push($location.$$url.split("/")[5]);
-            tagsObj.push(tags);
+            //tagsObj.push(tags[i].text);
         }
         for (var i = 0; i < tags.length; i++) {
             tagsObj.push(tags[i].text);

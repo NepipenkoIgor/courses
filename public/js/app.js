@@ -1,7 +1,7 @@
 /**
  * Created by igor on 7/1/14.
  */
-var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate','akoenig.deckgrid','monospaced.elastic','ngTagsInput','infinite-scroll']);
+var app = angular.module("academy", ['ui.router','ui.bootstrap','ui.ace','xeditable','ngAnimate','akoenig.deckgrid','monospaced.elastic','ngTagsInput','infinite-scroll'/*,'hljs'*/]);
 app.run(function(editableOptions) {
     'use strict';
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -10,6 +10,17 @@ app.service('courseEdit',function($http){
     'use strict';
     var courseEditService={};
  return courseEditService;
+});
+app.service("httpAuth", function($location) {
+    return {
+        response: function(response) {
+            if(response.status == 403) {
+                $location.url("/login");
+            } else {
+                return response;
+            }
+        }
+    };
 });
 
 
@@ -76,9 +87,12 @@ app.factory('Auth', function ($rootScope, $window, Config) {
 app.run(function($rootScope,$location,courseEdit){});
 
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 'use strict';
-   $urlRouterProvider.when('/', '/login');
+
+   $httpProvider.interceptors.push("httpAuth");
+
+   $urlRouterProvider.when('/', '/dashboard');
     //$urlRouterProvider.when('/', '/welcome');
     // For any unmatched url, send to /route1
     $urlRouterProvider.otherwise("/");

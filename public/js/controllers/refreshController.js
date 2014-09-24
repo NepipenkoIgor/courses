@@ -3,7 +3,7 @@
  */
 app.controller("refreshController",function($scope,$http,$location,$state,$stateParams,courseEdit) {
 
-
+/*
     if ($state.current.name==='login'||
         $state.current.name==='signup'||
         $state.current.name==='signupadmin'||
@@ -26,7 +26,7 @@ app.controller("refreshController",function($scope,$http,$location,$state,$state
         if (!courseEdit.userdata.position) {
             $location.url("/dashboard");
         }
-    }
+    }*/
 
 
     /*if($state.current.name==="unit"){
