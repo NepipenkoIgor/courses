@@ -114,11 +114,9 @@ function route(app){
                 ' <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">'+
                 '<link rel="stylesheet" href="/stylesheets/style.css">'+
                 '</head><body style="background-color:#1F2F3F;font-family: Lato!important;"> <div class="login_form">'+
-                '<h1 style="text-align:center;">course name</h1>'+
-                '<h3>Login</h3>'+
                 '<form action="/reset/'+req.params.token+'" method="post" class="ng-pristine ng-invalid ng-invalid-required">'+
-                '<input type="password" class="form-control ng-pristine ng-invalid ng-invalid-required" name="password" placeholder="New Password" >'+
-                '<button class="btn btn-primary btn-block" type="submit" style="background-color: #df691a;border:none;border-radius: 0">Reset password</button>'+
+                '<input type="password" class="form-control ng-pristine ng-invalid ng-invalid-required" name="password" placeholder="New Password" style="padding: 0;border-radius: 0">'+
+                '<button class="btn btn-primary btn-block" type="submit" style="background-color: #df691a;border:none;border-radius: 0;padding: 10px">Set new password</button>'+
                 '</form>'+
                 '</div>'
            res.end(render);
