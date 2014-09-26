@@ -71,6 +71,9 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
             <a href="#" editable-text="userdata.phone" onaftersave="postProfile(userdata)">{{ userdata.phone || 'empty' }}</a>
         </div>-->
     <div class="row" class="profileBox">
+
+        <h1 class="settingsPass" ng-click="openNewPass('myModalNewPass.html')"><i class="fa fa-cogs"></i> Settings</h1>
+
         <div class="col-md-7">
 
             <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)"

@@ -5,6 +5,10 @@ var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
 var Badges=mongoose.model('Badges');
 var fs =require('fs');
+
+
+
+
 function router(app,hasUser) {
     app.post('/user/upload',hasUser,function (req, res) {
        console.log(req.files,'req.body',req.user);

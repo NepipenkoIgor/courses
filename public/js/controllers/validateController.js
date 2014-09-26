@@ -9,14 +9,9 @@ app.controller('validateController', function ($scope, $http) {
     var notextnum = /[^\w\-]/;
     var num = /\d/;
     var validmail = /([\w\-]{1,20}\.)*([\w\-]{1,20})\@([\w\-]{1,20}\.)*([\w\-]{1,20})\.([a-z]{2,5})$/;
-//console.log("iam vupoln")
+
     $("#submitSignUp").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
-   /* $("#alertFirstName").hide();
-    $("#alertLastName").hide();
-    $("#alertEmail").hide();
-    $("#alertPassword").hide();
-    $("#alertComfPassword").hide();
-    $("#alertCode").hide();*/
+
     $("#formsign div").removeClass("has-success");
     $("#formsign span").removeClass("glyphicon-remove");
 

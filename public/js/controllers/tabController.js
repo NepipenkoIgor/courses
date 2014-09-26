@@ -1128,7 +1128,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                 courseEdit.reqUser();
                                 courseEdit.reqPosts();
                                 courseEdit.reqUsers();
-
+                                $scope.showProfileEdition(false)
 
                             }, false);
                             xhr.open("POST", "/user/upload", true);
@@ -1188,6 +1188,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                             courseEdit.reqUser();
                             courseEdit.reqPosts();
                             courseEdit.reqUsers();
+                            $scope.showProfileEdition(false)
 
                         }, false);
                         xhr.open("POST", "/user/upload", true);

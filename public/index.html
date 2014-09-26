@@ -4,6 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Academy</title>
+
+
+
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
 
@@ -25,7 +28,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <!-- <script  src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+    <!--<script>hljs.initHighlightingOnLoad();</script>-->
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
 
@@ -50,6 +55,12 @@
     <script src="javascripts/angular-deckgrid.js"></script>
     <script src="javascripts/ng-flow-standalone.min.js"></script>
     <script src="javascripts/elastic.js"></script>
+   <!-- <script src="javascripts/angular-sanitize.js"></script>-->
+    <script src="javascripts/showdown.js"></script>
+    <script src="javascripts/markdown.js"></script>
+    <script src="javascripts/markdownConvertor.js"></script>
+    <script src="javascripts/markdownSanitizer.js"></script>
+
     <!--  <script src="javascripts/provider.js"></script>-->
     <!--  <script src="javascripts/flow.js"></script>-->
     <!--<script src="javascripts/angular-animate.min.js"></script>-->
@@ -262,7 +273,7 @@
 </head>
 <script src="javascripts/jslayot/layout.js"></script>
 
-<body ng-app="academy" ng-controller="profile">
+<body ng-app="academyQuest" ng-controller="profile">
 <div ng-controller="maintab" style="height: 100%">
 <div class="sidemenu darker-bg" ng-if="userdata">
 <div class="menu_cont">
@@ -379,64 +390,7 @@
   <i ng-class="serachIcon(type).second" style="font-size: 45px;" ng-style="colorOfIcon(type)"></i>
 </span></a>
 </div>
-<!--  <div ng-if="!ifCommunity()" style="margin: 20px 8px;" ng-repeat="type in searchType">
-      <a class="btn " ng-click="typeSearch(type,userdata)" >{{type}}</a>
-  </div >-->
-<!-- <div ng-if="!ifCommunity()" style="margin: 20px 8px;">
-     <a class="btn btn-success" ng-click="postFilter(userdata)">apply filter</a>
- </div >-->
 
-
-<!--<div class="course_menu" ng-if="ifCommunity()">
-
-<ul class="section_menu">
-
-    <li data-original-title="" title="">
-        <h4>Courses:</h4>
-      &lt;!&ndash;  <h4><b>S4 Title</b></h4>&ndash;&gt;
-                <h4 style="color:green">{{courseNowChanged.title}}</h4>
-                <div class="course_sub_menu">
-                    <h5><b>list of courses</b></h5>
-                    <ul>
-                      <li data-original-title="" title="" ng-repeat="course in listOfCourses" ng-click="courseNowChange(course._id)">
-                          <i class="fa fa-pencil"></i>
-                          {{course.title}}
-                      </li>
-
-                    </ul>
-                </div>
-            </li>
-
-        </ul>
-
-        </div>
-
-        <div class="course_menu" ng-if="ifCommunity()">
-
-            <ul class="section_menu">
-
-                <li data-original-title="" title="">
-
-
-                        <h4 >Modules:</h4>
-                        <h4 style="color:yellow">{{moduleNowChanged.title}}</h4>
-
-                    <div class="course_sub_menu">
-                        <h5><b>list of modules</b></h5>
-                        <ul>
-                            <li data-original-title="" title="" ng-repeat="module in courseNowChanged.modules"
-                                ng-click="moduleNowChange(module._id)">
-                                <i class="fa fa-pencil"></i>
-                                {{module.title}}
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-
-            </ul>
-
-        </div>-->
 
 
 <!--- Course menu --->
@@ -640,6 +594,46 @@
 
 
 </div>
+
+
+<div>
+    <script type="text/ng-template" id="myModalNewPass.html">
+        <div class="col-md-3 col-md-offset-1">
+            <div class="well" style="width: 500px;">
+                <h3>Change password</h3>
+                <form action="/set/new/password" method="post" id="ChangePasswordForm" class="ng-dirty ng-valid-parse ng-submitted ng-invalid ng-invalid-required">
+                    <div class="form-group has-success has-feedback">
+
+                    <label>Existing password</label>
+                        <label class="control-label" for="oldPassword">{{name.oldPassword}}</label>
+                    <input type="password" class="form-control" ng-keyup="validOldPass($event,'oldPassword')" id="oldPassword" name="oldPassword" placeholder="Existing password"  autofocus="">
+                        <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
+                    </div>
+                    <div class="form-group has-success has-feedback">
+                        <label>New password</label>
+                        <label class="control-label" for="password">{{name.password}}</label>
+                    <input type="password" class="form-control " ng-keyup="validPassword($event,'password')" id="password" name="password" placeholder="New password" >
+                    <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
+                        </div>
+                        <div class="form-group has-success has-feedback">
+                            <label>New password comfirm</label>
+                            <label class="control-label" for="comfpassword">{{name.comfpassword}}</label>
+                    <input type="password" class="form-control " ng-keyup="comfPassword($event,'comfpassword')" id="comfpassword" name="comfpassword" placeholder="New password again" >
+                    <span class="glyphicon  form-control-feedback" style="top:28px!important;"></span>
+                        </div>
+                    <input type="hidden" name="email" ng-value="email" >
+                    <button class="btn btn-block button-bad button-bad disabled"  id="submitNewPass" type="submit" style="background-color: #DF691A">Change Password</button>
+                </form>
+
+                    <!-- ngMessage: password -->
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+</div>
+
 
 
 </body>
