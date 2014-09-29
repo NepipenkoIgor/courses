@@ -64,23 +64,7 @@ app.config(['$httpProvider', 'Config', function($httpProvider, Config) {
 }]);*/
 
 
-app.factory('Auth', function ($rootScope, $window, Config) {
-    return {
-        check : function () {
-            var token = [Config.tokenPrefix, Config.tokenName].join('_');
-            return Boolean($window.localStorage[token]);
-        },
-        clearToken : function () {
-            var token = [Config.tokenPrefix, Config.tokenName].join('_');
-            delete $window.localStorage[token];
-        },
-        setToken : function (data) {
-            var token = data[Config.tokenName];
-            var namespace = [Config.tokenPrefix, Config.tokenName].join('_');
-            $window.localStorage[namespace] = token;
-        }
-    };
-});
+
 
 
 

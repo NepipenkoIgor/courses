@@ -3,7 +3,7 @@
  */
 app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal,$sce,courseEdit, promiseUser) {
     'user strict';
-
+   $(".postLoad").show();
     /****************config post**********************/
     $scope.triggerBool = true;
     $scope.comment = "";
