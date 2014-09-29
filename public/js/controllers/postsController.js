@@ -351,14 +351,13 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
     $scope.comment = {}
     $scope.addComment = function (idPost, creator, card, action) {
-        //console.log($scope.comment[action])
         var comment = $scope.comment[action];
         if (card._id === idPost && this.comment !== "") {
             var date = Date.now();
             var newDate = new Date();
             card.comments.push({content: comment, creator: creator, postId: date, dataReg: dataReg(newDate), likes: []});
 
-            var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost, action: action};
+            var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost, action: action,parentAnswerId:card.postId};
             $http.post('/comment/new', data).success(function () {
                 if ($location.$$path.split("/")[1] === 'profile') {
                     //$scope.postdata = data.data;

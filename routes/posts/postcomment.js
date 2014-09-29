@@ -9,8 +9,11 @@ var Answers = mongoose.model('Answers');
 function router(app, hasUser, io) {
     app.post('/comment/new', hasUser, function (req, res) {
         var istanceShem;
+        var kindPost;
         if (req.body.action === "answer") {
             istanceShem = Answers;
+            kindPost="answer";
+            console.log("a!!!!!!!!!!!!!!!!!!!!",req.body)
         } else {
             istanceShem = Posts;
         }
@@ -24,6 +27,12 @@ function router(app, hasUser, io) {
                 notify = {notifyId: Date.now(), type: "comment your post", creatorOfPost: req.body.creator, postId: req.body._id, creatorComment: req.body.creatorComment};
                 if (req.body.typePost === "question") {
                     notify.type = "comment your question";
+
+                }
+                if (kindPost==="answer") {
+                    notify.type = "comment your answer";
+                    notify.postId=req.body.parentAnswerId;
+                    console.log(notify)
                 }
                 if (data.length > 0) {
                     Notify.update({user: req.body.creator}, {$push: {content: notify}}, function (num) {

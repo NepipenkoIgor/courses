@@ -1055,6 +1055,7 @@ console.log($state)
                 $http.post("/notify/delete", [notify, $scope.notification]).success(function () {
                     $state.go('refresh').then(function () {
                         $state.go('posts').then(function () {
+                            console.log($scope.number)
                             $location.url("/post/all?type=notifypost&post=" + $scope.number);
 
                         });
