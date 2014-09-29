@@ -1078,15 +1078,19 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
   $scope.transformContent=function(content){
       if(content){
           var converter = new Markdown.Converter();
-          if(!$('code').hasClass('hljs')){
+
+          if($('code')){
               $('code').each(function(i, block) {
-                  hljs.configure({
-                      useBR: true,
-                      languages:['xml','javascript']
-                  });
-                  hljs.highlightBlock(block);
+                  //console.log(i,)
+                 if(!$(block).hasClass('hljs')) {
+                      hljs.configure({
+                          useBR: true,
+                          languages: ['xml', 'javascript']
+                      });
+                      hljs.highlightBlock(block);
+                  }
               });
-          }
+         }
           var markdown = Markdown.getSanitizingConverter();
           var  text=markdown.makeHtml(content);
           return $sce.trustAsHtml(text);
