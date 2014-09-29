@@ -64,5 +64,12 @@ function router(app, hasUser) {
         });
     });
 
+    app.post("/answer/delete",function(req,res){
+        console.log(req.body)
+        Answers.remove({_id:req.body.id},function(err,num){
+            res.json({data:num});
+        });
+    })
+
 }
 module.exports = router

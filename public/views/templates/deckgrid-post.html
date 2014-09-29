@@ -36,7 +36,7 @@
         <a class="tag" ng-repeat="tag in card.tags" ng-click="mother.searchByTag(tag)" style="cursor:pointer;font-size: x-small">{{tag}}</a>
     </div>
 
-<button class="answered" style="" ng-if="mother.answerTrigger(card.typePost)" ng-click="mother.showAnswerInput(card._id)">Answer</button>
+<button class="answered" style="" ng-if="mother.answerTrigger(card.typePost)" ng-click="mother.showAnswerInput(card._id)" >Answer</button>
 
     <ul class="footer">
         <li class="col-md-4 col-xs-4"><a href="" ng-click="mother.like(mother.userdata._id,card.likes,card._id,card)"><i ng-class="mother.fafaLikes(card.typePost)"></i> {{card.likes.length}}</a></li>
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div class="comments ng-hide" ng-show="mother.whatPostCommentShow(card)" style="overflow: hidden;" ng-style="mother.borderCommentRadius(card)">
+    <div class="comments ng-hide" ng-show="mother.whatPostCommentShow(card)" style="overflow: hidden;" ng-style="mother.borderCommentRadius(card,null,null,'commentPostButton')">
         <div>
         <img ng-src="{{mother.postAvatar(mother.userdata._id)}}" class="avatar" ng-click="mother.postProfileGo(mother.userdata._id)" style="cursor: pointer">
         </div>
@@ -110,13 +110,13 @@
 
 
 
-    <div class="header answer-heder comments" ng-if="mother.answerInput(card._id)" style="height: auto;display: inline-block;width: 100%;vertical-align: top;">
+    <div class="header answer-heder comments" ng-if="mother.answerInput(card._id)" style="height: auto;display: inline-block;width: 100%;vertical-align: top;" ng-style="mother.borderCommentRadius(card)">
 
         <img ng-src="{{mother.postAvatar(card.creator)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
         <div class="col-md-12" style="padding: 0;overflow:hidden">
             <textarea class="msd-elastic" name="answer" placeholder="The answer is...."  ng-model="mother.answer.content" style="min-height: 50px; margin-bottom: 5px;"></textarea>
             <div class="btn-group" style="display: block">
-                <button class="btn btn-primary" ng-click="[mother.newAnswer(mother.userdata._id,card)]" >Answer</button>
+                <button class="btn btn-primary" ng-click="[mother.newAnswer(mother.userdata._id,card)]"  ng-style="mother.borderCommentRadius(card,null,null,'button')">Answer</button>
                 <button class="btn btn-danger" ng-click="mother.answerInputClose()">Cancel</button>
             </div>
         </div>
@@ -131,7 +131,11 @@
 
 
 
-        <p class="date ng-binding"> <a   style="margin-right: 10px;font-size: 16px;cursor: pointer" ng-if="mother.ifThisIsAvtor(mother.userdata,answer.creator)"
+        <p class="date ng-binding">
+            <a   style="margin-right: 10px;font-size: 16px;cursor: pointer" ng-if="mother.ifThisIsAvtor(mother.userdata,answer.creator)"
+                                        ng-click="mother.deleteAnswer(answer)"><i class="fa fa-trash-o fa-fw"></i></i></a>
+
+            <a   style="margin-right: 10px;font-size: 16px;cursor: pointer" ng-if="mother.ifThisIsAvtor(mother.userdata,answer.creator)"
                                         ng-click="textBtnFormAnswer.$show()"><i class="fa fa-pencil"></i></a>{{card.created}}</p>
     </div>
   <!--  <h1 class="title ng-binding">{{card.title}}</h1>-->

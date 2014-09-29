@@ -321,6 +321,17 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         }
     };
 
+
+    $scope.deleteAnswer=function(card) {
+        //console.log(card._id)
+        if (confirm("Are you sure you wish to delete this?")) {
+            var data = {id:card._id}
+            $http.post('/answer/delete', data).success(function () {
+                reqPosts();
+                reqUsers();
+            });
+        }
+    };
     /********add comment**********/
 
 
@@ -865,19 +876,35 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     };
 
     $scope.borderCommentRadius = function (card, index, answer, type) {
+       /* if($scope.showAnswerInput(card._id)){
+            return {"border-radius": "0 0 0 0"};
+        }*/
+ /*       if (answer && (answer.length - 1) === index) {
+            return {"border-radius": "0 0 25px 25px"};
+        }*/
+     /*   console.log($scope.showAnswerInput(card._id));*/
+
         if ($scope.postsAnswer) {
+
             if (card.typePost === "question" && $scope.postsAnswer(card).length === 0) {
+                if(type==="button"){
+                    return {"border-bottom-left-radius": "25px"};
+                }
+                if($scope.answerInputval===card._id&&type==="commentPostButton"){
+                    return {"border-radius": "0 0 0 0"};
+                }
                 return {"border-radius": "0 0 25px 25px"};
             }
+
 
         }
 
         if (answer && (answer.length - 1) === index) {
             return {"border-radius": "0 0 25px 25px"};
         }
-        if (type) {
-            return
-        }
+       /* if (type) {
+            return;
+        }*/
         if (card.typePost !== "question") {
             return {"border-radius": "0 0 25px 25px"};
         }
@@ -1060,9 +1087,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
                   hljs.highlightBlock(block);
               });
           }
-
-          //var converter = new Showdown.converter();
-          //console.log(converter.makeHtml(content));
           var markdown = Markdown.getSanitizingConverter();
           var  text=markdown.makeHtml(content);
           return $sce.trustAsHtml(text);

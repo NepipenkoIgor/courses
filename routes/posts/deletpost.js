@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose');
 var Posts = mongoose.model('Posts');
+var Answers = mongoose.model('Answers');
 var fs = require('fs');
 function router(app, hasUser) {
     'use strict'
@@ -29,7 +30,10 @@ function router(app, hasUser) {
 
                 deleteImg(req.body.img, i, res);
             }
-            res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            Answers.remove({"postId": req.body._id},function(){
+                res.json({success: !err, msg: [], data: post, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+            });
+
             //console.log(" post delete");
 
         });
