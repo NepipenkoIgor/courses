@@ -39,7 +39,8 @@ function router(app, hasUser) {
             });
             var ahref = "codequestacademy.herokuapp.com/#/post/all?type=notifypost&post=" + req.body[0]._id;
             http://localhost:4000/#/post/all?type=notifypost&post=541c17d764f6efc20b8a1565
-            var tagUrl = '<a href="' + "http://codequestacademy.herokuapp.com/#/post/all?type=notifypost&post=" + req.body[0]._id + '">' + ahref + '</a>'
+           /* var tagUrl = '<a href="' + "http://localhost:4000/#/post/all?type=notifypost&post=" + req.body[0]._id + '">' + ahref + '</a>';*/
+                var tagUrl = '<a href="' + "http://codequestacademy.herokuapp.com/redirect/from/mail/"+ req.body[0]._id+'">' + ahref + '</a>'
             var mailOptions = {
                 from: 'codequestacademy@gmail.com', // sender address
                 to: admins.join(), // list of receivers
@@ -60,6 +61,16 @@ function router(app, hasUser) {
         });
     });
 
-
+        app.get("/redirect/from/mail/:id",function(req,res){
+            console.log(req.session);
+            var id=req.url.split("/")[4]
+            if(req.session.passport.user){
+                res.redirect('/#/post/all?type=notifypost&post='+id);
+                return;
+            }
+            req.session.notify=id;
+            console.log("***!*!*!*!*!*!*!*!*!*!",req.session)
+            res.redirect('/#/login');
+        })
 }
 module.exports = router;

@@ -5,7 +5,7 @@
 
 app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, $timeout, $modal, $log, courseEdit) {
     'user strict';
-
+console.log($state)
 
     $("#blockwindow").hide();
     $scope.userNowView = {};
