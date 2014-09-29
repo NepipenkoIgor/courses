@@ -3,7 +3,10 @@
  */
 app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal,$sce,courseEdit, promiseUser) {
     'user strict';
-   $(".postLoad").show();
+    if($state.current.name==="posts"||$state.current.name==="editprofile"){
+        $(".postLoad").show();
+    }
+
     /****************config post**********************/
     $scope.triggerBool = true;
     $scope.comment = "";
