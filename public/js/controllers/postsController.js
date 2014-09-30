@@ -1100,5 +1100,34 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
     };
 
+
+    $scope.opened={};
+    $scope.initDate=Date.now()
+    $scope.formatDate = 'dd-MMMM-yyyy';
+    $scope.openDate = function($event,position) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened[position] = true;
+    };
+
+
+    $scope.onChengeDate=function(){
+      /*  $scope.toggleMin();
+        $scope.toggleMax();*/
+        $scope.minDate=$scope.dtAfter;
+        $scope.maxDate=$scope.dtBefore;
+        console.log( $scope.minDate,$scope.maxDate);
+        if($scope.dtAfter&&$scope.dtBefore){
+
+            $scope.searchPosts({type:"date",dateAfter:$scope.dtAfter,dateBefore:$scope.dtBefore});
+        }
+    };
+ /*   $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : $scope.dtAfter;
+    };
+    $scope.toggleMax = function() {
+        $scope.maxDate = $scope.maxDate ? null : $scope.dtBefore;
+    };*/
 });
 

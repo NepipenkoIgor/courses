@@ -5,7 +5,7 @@
 
 app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, $timeout, $modal, $log, courseEdit) {
     'user strict';
-console.log($state)
+
 
     $("#blockwindow").hide();
     $scope.userNowView = {};
@@ -828,7 +828,7 @@ console.log($state)
     /************************************COMMUNITY and FILTERS***********************************************/
 
     $scope.goToCommunity = function () {
-        $scope.chengedSearchIcon="Everything"
+        $scope.chengedSearchIcon = "Everything"
         $state.go('posts').then(function () {
 
             $location.url("/post/all?type=allposts");
@@ -883,17 +883,17 @@ console.log($state)
 
     };
 
-    $scope.clickSearchIcon=function(type){
-       $scope.chengedSearchIcon=type;
+    $scope.clickSearchIcon = function (type) {
+        $scope.chengedSearchIcon = type;
     }
-    $scope.colorOfIcon=function(type){
-        if($scope.chengedSearchIcon===type){
-            return {"color":"#A5A044"}
+    $scope.colorOfIcon = function (type) {
+        if ($scope.chengedSearchIcon === type) {
+            return {"color": "#A5A044"};
         }
-        return {}
-    }
+        return {};
+    };
 
-    $scope.serachIcon=function(typeData){
+    $scope.serachIcon = function (typeData) {
         var iconObj = {};
         typeData = typeData || $scope.search.type;
         switch (typeData) {
@@ -923,7 +923,7 @@ console.log($state)
                 break;
         }
         return iconObj;
-    }
+    };
 
     $scope.postFilter = function (user, typeData) {
         var searchObj = {};
@@ -1108,7 +1108,7 @@ console.log($state)
                     setTimeout(function () {
                         var reader = new FileReader();
                         var file = event.currentTarget.files[0];
-                        reader.readAsDataURL(event.currentTarget.files[0])
+                        reader.readAsDataURL(event.currentTarget.files[0]);
                         reader.onload = function (oFREvent) {
                             document.getElementById("uploadPreview").src = oFREvent.target.result;
                         };
@@ -1129,7 +1129,7 @@ console.log($state)
                                 courseEdit.reqUser();
                                 courseEdit.reqPosts();
                                 courseEdit.reqUsers();
-                                $scope.showProfileEdition(false)
+                                $scope.showProfileEdition(false);
 
                             }, false);
                             xhr.open("POST", "/user/upload", true);
@@ -1199,9 +1199,7 @@ console.log($state)
                 };
 
 
-
             }
-
 
 
         }, 25);
@@ -1226,7 +1224,7 @@ console.log($state)
     /***********************open question modal***************************/
 
     $scope.openQuestionModal = function () {
-        //$modalInstance.dismiss('cancel');
+
         var modalInstanceQuestion = $modal.open({
             templateUrl: "myModalContentQuestion.html",
             controller: ModalInstanceCtrlQuestion,
@@ -1255,7 +1253,7 @@ console.log($state)
         };
         $scope.ok = function () {
             var files = $("#questInputFile")[0].files;
-            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id, undefined, $scope.formData, $scope.tag.tags,files);
+            $scope.saveNewQuestion($scope.text.title, $scope.text.content, $scope.user._id, undefined, $scope.formData, $scope.tag.tags, files);
             $modalInstance.close();
             // post()
         };
@@ -1302,8 +1300,8 @@ console.log($state)
         $scope.text = {};
         $scope.ok = function () {
             var files = $("#postInputFile")[0].files;
-            $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData, $scope.tag.tags,files);
-           $modalInstance.close();
+            $scope.saveNewPost($scope.text.content, $scope.user._id, $scope.formData, $scope.tag.tags, files);
+            $modalInstance.close();
         };
 
         $scope.cancel = function () {
@@ -1375,7 +1373,7 @@ console.log($state)
 
 
 
-    $scope.saveNewPost = function (content, creator, fileUpload, tags,files) {
+    $scope.saveNewPost = function (content, creator, fileUpload, tags, files) {
         //console.log(files)
         $(".postLoad").show();
         var tagsObj = []
@@ -1384,10 +1382,6 @@ console.log($state)
         }
         courseEdit.userHasBadge(courseEdit.listOfBadges[0], courseEdit.userdata);
 
-
-       // console.log($("#postInputFile")[0].files)
-
-        //var newPost = {title: $scope.title, content: $scope.content, tags: $scope.tags, creator: creator};
         var newPost = {content: content, creator: creator, tags: tagsObj};
 
         function postImgUpload(files, postId, count) {
@@ -1402,7 +1396,7 @@ console.log($state)
                     count++
                     if (count <= files.length - 1) {
 
-                        postImgUpload(files, postId, count)
+                        postImgUpload(files, postId, count);
                     } else {
                         courseEdit.reqPosts();
                         $state.go('posts').then(function () {
@@ -1423,7 +1417,7 @@ console.log($state)
         $http.post('/post/new', newPost).success(function (data) {
             var id = data.data.postId;
             var count = 0;
-                postImgUpload(files, id, count);
+            postImgUpload(files, id, count);
 
         });
 
@@ -1433,7 +1427,7 @@ console.log($state)
     courseEdit.saveNewPost = $scope.saveNewPost;
 
 
-    $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload, tags,files) {
+    $scope.saveNewQuestion = function (title, content, creator, unit, fileUpload, tags, files) {
         $(".postLoad").show();
         var tagsObj = [];
         if ($state.current.name === 'unit') {
@@ -1455,10 +1449,10 @@ console.log($state)
             xhr.addEventListener('readystatechange', function () {
 
                 if (xhr.readyState === 4) {
-                    count++
+                    count++;
                     if (count <= files.length - 1) {
 
-                        questImgUpload(files, postId, count)
+                        questImgUpload(files, postId, count);
                     } else {
                         courseEdit.reqPosts();
                         if ($state.current.name === 'unit') {

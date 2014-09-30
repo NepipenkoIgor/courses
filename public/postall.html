@@ -1,8 +1,45 @@
+<div class="row">
+    <div class="col-md-8">
 <div  style="overflow: hidden;margin: 20px 8px;">
     <input type="text" placeholder="Search" class="form-control" style="" ng-model="textOfSearch.text">
     <button class="btn btn-default" style="width: 100%;" type="button" ng-click="textSearch()">Go!</button>
 </div>
+ </div>
+    <div class="col-md-2">
+<h4>Filter by date:</h4>
+<div class="row">
+    <div class="col-md-10">
+        <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{formatDate}}" ng-model="dtAfter" ng-change="onChengeDate()"
+                   is-open="opened.After" min-date="" max-date="maxDate" datepicker-options="dateOptions"
+                   date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="After"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDate($event,'After')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+        </p>
+    </div>
+    <div class="col-md-1">
+        <h4>to</h4>
+    </div>
+</div>
+</div>
+        <div class="col-md-2">
+    <div class="row" style="margin-top: 41px">
+        <div class="col-md-10">
+            <p class="input-group">
+                <input type="text" class="form-control" datepicker-popup="{{formatDate}}" ng-model="dtBefore" ng-change="onChengeDate()"
+                       is-open="opened.Before" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Before"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDate($event,'Before')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
 
+</div>
+
+   </div>
 <!--<div infinite-scroll="myPagingFunction()" infinite-scroll-distance="0">-->
     <div deckgrid source="postdata"
          ng-if="postdata.length"

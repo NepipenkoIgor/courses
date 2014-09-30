@@ -16,6 +16,7 @@ var postSchema=new Schema({
         {creator:String},
         {vote:Number}
     ],
+    trueData:Number,
     favorites:String,
     typePost:String,
     content:{type:String,index: true},
