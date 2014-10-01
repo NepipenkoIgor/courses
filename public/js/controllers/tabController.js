@@ -182,9 +182,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     /*************method of change course module section unit****************/
-    $scope.saveCurrentUnit = function (unit, specialId, courseId, moduleId, title,position) {
+    $scope.saveCurrentUnit = function (unit, specialId, courseId, moduleId, title, position) {
         //console.log(unit, specialId, courseId, moduleId);
-        var data = {id: courseEdit.userdata._id, unit: unit, specialId: specialId, courseId: courseId, moduleId: moduleId, title: title,position:position};
+        var data = {id: courseEdit.userdata._id, unit: unit, specialId: specialId, courseId: courseId, moduleId: moduleId, title: title, position: position};
         $http.post("/curentlesson", data).success(function (data) {
 
         });
@@ -192,8 +192,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.watchCurentUnit = function () {
         courseEdit.reqUser(function () {
-           // console.log(courseEdit.userdata.currentLesson);
-            if(courseEdit.userdata.currentLesson) {
+            // console.log(courseEdit.userdata.currentLesson);
+            if (courseEdit.userdata.currentLesson) {
                 $scope.currentLesson = parseInt(courseEdit.userdata.currentLesson.unit);
                 $scope.currentSection = parseInt(courseEdit.userdata.currentLesson.specialId);
                 $scope.currentCourse = courseEdit.userdata.currentLesson.courseId;
@@ -213,8 +213,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         });
     };
 
-    $scope.showNotifyOfCurrentUnit=function(){
-        if(courseEdit.userdata.currentLesson) {
+    $scope.showNotifyOfCurrentUnit = function () {
+        if (courseEdit.userdata.currentLesson) {
 
             if (courseEdit.userdata.progress.indexOf(parseInt(courseEdit.userdata.currentLesson.unit)) === (-1)) {
                 return true;
@@ -308,8 +308,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     courseEdit.moduleNowChange = $scope.moduleNowChange;
 
 
-
-
     $scope.unitNowChange = function (id, specialId) {
 
         if ($scope.dangerSection) {
@@ -359,7 +357,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
 
 
-
                 courseEdit.unitNowChanged = $scope.unitNowChanged;
 
                 $state.go('unit', {
@@ -389,25 +386,32 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         }
                         //console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
 
-                        $scope.checkQuiz = function () {
-                            for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
+                        $scope.changeRadio = function (num) {
+                            $scope.answerCheck = num;
+                        };
+                        $scope.checkQuiz = function (num) {
 
-                                if (answerObj[i].answer !== $scope.unitNowChanged.lims[0].content[0].quiz[i].answer) {
+                            for (var i = 0; i < answerObj.length; i++) {
 
-                                    return;
+                                if (answerObj[i].answer !== true) {
+                                    continue;
                                 }
+                                if ($scope.answerCheck === i) {
+                                    // console.log("yes yes yes")
+                                    $scope.saveProgress($scope.unitNowChanged.unitId);
+                                }
+
                             }
-                            //courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
-                            $scope.saveProgress($scope.unitNowChanged.unitId);
+
                         };
                     }
                     if ($scope.unitNowChanged.lims[0].typeLim === "static") {
                         $scope.saveProgress($scope.unitNowChanged.unitId);
                         //console.log('vupolnil');
                     }
-                    if($state.current.name!=="course"){
-                        $scope.saveCurrentUnit(id,specialId,$scope.courseNowChanged._id,$scope.moduleNowChanged._id,$scope.unitNowChanged.title,
-                                $scope.positionInCourse.module+"."+$scope.positionInCourse.section+"."+$scope.positionInCourse.unit);
+                    if ($state.current.name !== "course") {
+                        $scope.saveCurrentUnit(id, specialId, $scope.courseNowChanged._id, $scope.moduleNowChanged._id, $scope.unitNowChanged.title,
+                                $scope.positionInCourse.module + "." + $scope.positionInCourse.section + "." + $scope.positionInCourse.unit);
                     }
                 });
                 refresh();
@@ -1035,7 +1039,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         var count = 0;
         if ($scope.listOfUnits !== undefined) {
             for (var i = 0; i < $scope.listOfUnits.length; i++) {
-                if (userProgresArr&&userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)) {
+                if (userProgresArr && userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)) {
                     count = count + $scope.listOfUnits[i].lims[0].points;
                 }
             }

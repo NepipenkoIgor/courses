@@ -24,8 +24,8 @@
             <div style="" >
                 <h3 style="color:white">{{ unitNowChanged.lims[0].content[0].description}}</h3>
                 <div ng-repeat="quiz in unitNowChanged.lims[0].content[0].quiz" style="margin-left: 30px;margin-top: 15px;margin-bottom: 15px">
-                    <input type="checkbox" ng-model="quiz.answer" ng-change="quizCheck()" style="float: left;width: 20px; height: 20px;margin-right: 10px;">
-                    <div>
+                    <input type="radio"  name="answers"  style="float: left;width: 20px; height: 20px;margin-right: 10px;" ng-click="changeRadio($index)">
+                    <div><!--ng-model="quiz.answer" ng-change="quizCheck()"-->
                         <p style="color:white">{{ quiz.title || 'empty quiz' }}</p>
                     </div>
                 </div>
