@@ -358,10 +358,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     }
                 }
 
-                if($state.current.name!=="course"){
-                    $scope.saveCurrentUnit(id,specialId,$scope.courseNowChanged._id,$scope.moduleNowChanged._id,$scope.unitNowChanged.title,
-                            $scope.positionInCourse.module+"."+$scope.positionInCourse.section+"."+$scope.positionInCourse.unit);
-                }
+
 
                 courseEdit.unitNowChanged = $scope.unitNowChanged;
 
@@ -407,6 +404,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     if ($scope.unitNowChanged.lims[0].typeLim === "static") {
                         $scope.saveProgress($scope.unitNowChanged.unitId);
                         //console.log('vupolnil');
+                    }
+                    if($state.current.name!=="course"){
+                        $scope.saveCurrentUnit(id,specialId,$scope.courseNowChanged._id,$scope.moduleNowChanged._id,$scope.unitNowChanged.title,
+                                $scope.positionInCourse.module+"."+$scope.positionInCourse.section+"."+$scope.positionInCourse.unit);
                     }
                 });
                 refresh();

@@ -7,7 +7,7 @@ var Posts = mongoose.model('Posts');
 
 function router(app, hasUser, hasAccess) {
     'use strict'
-    app.get("/formate",function(req,res){
+   /* app.get("/formate",function(req,res){
         Posts.find({}, function (err, data) {
             for (var i = 0; i < data.length; i++) {
                 Posts.update({_id:data[i]._id},{created:Date(data[i].created)},function(err,num){
@@ -15,7 +15,7 @@ function router(app, hasUser, hasAccess) {
                 })
             }
         })
-    })
+    })*/
 
     app.post('/post/search', hasUser, function (req, res) {
         console.log(req.body)
@@ -31,13 +31,12 @@ function router(app, hasUser, hasAccess) {
                     var postDate = Date.parse(data[i].created);
 
                     if ((after <= postDate) && (postDate<=before)) {
-                        //console.log(((after <= postDate) && (before >= postDate))||(after===postDate)||(before===postDate))
-                        //console.log(data[i])
+
                         searchDateObj.push(data[i]);
                         someDate.push(postDate)
                     }
                 }
-               // console.log(searchDateObj)
+
                 res.json({success: !err, msg: [], data: searchDateObj, type: req.body.type, someDate:someDate,error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
             return;

@@ -1113,11 +1113,10 @@ console.log(data.someDate)
 
 
     $scope.onChengeDate=function(){
-      /*  $scope.toggleMin();
-        $scope.toggleMax();*/
+
         $scope.minDate=$scope.dtAfter;
         $scope.maxDate=$scope.dtBefore;
-        console.log( Date.parse($scope.minDate),Date.parse($scope.maxDate));
+       // console.log( Date.parse($scope.minDate),Date.parse($scope.maxDate));
         if($scope.dtAfter&&$scope.dtBefore){
 
             $scope.searchPosts({type:"date",dateAfter:$scope.dtAfter,dateBefore:$scope.dtBefore});
