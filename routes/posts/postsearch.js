@@ -12,19 +12,22 @@ function router(app, hasUser, hasAccess) {
         if (req.body.type === 'date') {
             Posts.find({}, function (err, data) {
                 //console.log("searchData", data)
+
                 var searchDateObj = [];
                 var after = Date.parse(req.body.dateAfter);
                 var before = Date.parse(req.body.dateBefore);
+                var someDate=[after,before];
                 for (var i = 0; i < data.length; i++) {
                     var postDate = Date.parse(data[i].created);
-                    if ((after <= postDate) && (before >= postDate)) {
+                    someDate.push(postDate)
+                    if ((after <= postDate) && (postDate<=before)) {
                         //console.log(((after <= postDate) && (before >= postDate))||(after===postDate)||(before===postDate))
                         //console.log(data[i])
                         searchDateObj.push(data[i]);
                     }
                 }
                // console.log(searchDateObj)
-                res.json({success: !err, msg: [], data: searchDateObj, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+                res.json({success: !err, msg: [], data: searchDateObj, type: req.body.type, someDate:someDate,error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
             return;
         }

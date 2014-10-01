@@ -482,7 +482,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         $(".postLoad").show();
         $http.post('/post/search', searchObj).success(function (data) {
 
-
+console.log(data.someDate)
             if ($location.$$path.split("/")[1] === 'profile') {
                 $scope.postdata = data.data;
 
@@ -884,13 +884,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     };
 
     $scope.borderCommentRadius = function (card, index, answer, type) {
-       /* if($scope.showAnswerInput(card._id)){
-            return {"border-radius": "0 0 0 0"};
-        }*/
- /*       if (answer && (answer.length - 1) === index) {
-            return {"border-radius": "0 0 25px 25px"};
-        }*/
-     /*   console.log($scope.showAnswerInput(card._id));*/
+
 
         if ($scope.postsAnswer) {
 
@@ -1123,7 +1117,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         $scope.toggleMax();*/
         $scope.minDate=$scope.dtAfter;
         $scope.maxDate=$scope.dtBefore;
-        console.log( $scope.minDate,$scope.maxDate);
+        console.log( Date.parse($scope.minDate),Date.parse($scope.maxDate));
         if($scope.dtAfter&&$scope.dtBefore){
 
             $scope.searchPosts({type:"date",dateAfter:$scope.dtAfter,dateBefore:$scope.dtBefore});

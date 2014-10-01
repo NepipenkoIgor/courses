@@ -35,7 +35,7 @@ var mongoose =require('mongoose');
 
 var mongoUri = process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
-    'mongodb://igor:igorpass@ds041177.mongolab.com:41177/valorkin_test_mdb';
+    'mongodb://localhost/test';
 mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('open', function () {
