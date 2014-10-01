@@ -17,7 +17,9 @@ function router(app, hasUser, hasAccess) {
                 var before = Date.parse(req.body.dateBefore);
                 for (var i = 0; i < data.length; i++) {
                     var postDate = Date.parse(data[i].created);
-                    if (((after <= postDate) && (before >= postDate))||((after===postDate)&&(before===postDate))) {
+                    if (((after <= postDate) && (before >= postDate))||(after===postDate)||(before===postDate)) {
+                        //console.log(((after <= postDate) && (before >= postDate))||(after===postDate)||(before===postDate))
+                        //console.log(data[i])
                         searchDateObj.push(data[i]);
                     }
                 }
