@@ -214,14 +214,14 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
     $scope.showNotifyOfCurrentUnit = function () {
-        if (courseEdit.userdata.currentLesson) {
+        if (courseEdit.userdata&&courseEdit.userdata.currentLesson) {
 
             if (courseEdit.userdata.progress.indexOf(parseInt(courseEdit.userdata.currentLesson.unit)) === (-1)) {
                 return true;
             }
             return false;
         }
-        return false
+        return false;
     }
 
     $scope.courseNowChange = function (id, cb) {
@@ -397,10 +397,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                     continue;
                                 }
                                 if ($scope.answerCheck === i) {
-                                    // console.log("yes yes yes")
+                                     console.log("yes yes yes")
                                     $scope.saveProgress($scope.unitNowChanged.unitId);
+                                    return;
                                 }
-
+                                console.log("no")
                             }
 
                         };
