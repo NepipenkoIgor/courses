@@ -920,7 +920,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 return false;
             case "popular":
                 return false;
-
+            case "date":
+                return false;
         }
         return true;
 

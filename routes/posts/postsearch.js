@@ -6,7 +6,7 @@ var Posts = mongoose.model('Posts');
 
 
 function router(app, hasUser, hasAccess) {
-    //'use strict'
+    'use strict'
     app.post('/post/search', hasUser, function (req, res) {
         console.log(req.body)
         if (req.body.type === 'date') {
@@ -18,12 +18,13 @@ function router(app, hasUser, hasAccess) {
                 for (var i = 0; i < data.length; i++) {
                     var postDate = Date.parse(data[i].created);
                     if (after <= postDate && before >= postDate) {
-                        searchDateObj.push(data[i])
+                        searchDateObj.push(data[i]);
                     }
                 }
                // console.log(searchDateObj)
                 res.json({success: !err, msg: [], data: searchDateObj, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
+            return;
         }
         if (req.body.type === 'allposts') {
             Posts.find({}).sort({postId: -1}).exec(function (err, data) {
@@ -31,7 +32,7 @@ function router(app, hasUser, hasAccess) {
                 console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
-            return
+            return;
         }
         if (req.body.type === 'popular') {
             Posts.find({}).sort({likesNum: -1}).lean().exec(function (err, data) {
@@ -40,14 +41,14 @@ function router(app, hasUser, hasAccess) {
                 //data=data;
                 res.json({success: !err, msg: [], data: data, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
-            return
+            return;
         }
         if (req.body.type === 'myposts') {
             Posts.find({creator: req.body.creator}).sort({postId: -1}).exec(function (err, data) {
                 //console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
-            return
+            return;
         }
         if (req.body.type === 'onlyposts') {
             Posts.find({creator: req.body.creator}, function (err, data) {
@@ -62,7 +63,7 @@ function router(app, hasUser, hasAccess) {
 
                 res.json({success: !err, msg: [], data: postMass, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
-            return
+            return;
         }
         if (req.body.type === 'myquestions') {
             Posts.find({creator: req.body.creator, typePost: req.body.typePost}, function (err, data) {
@@ -76,7 +77,7 @@ function router(app, hasUser, hasAccess) {
                 // console.log("searchData", data)
                 res.json({success: !err, msg: [], data: data, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
-            return
+            return;
         }
         if (req.body.type === 'tags') {
             Posts.find({"tags": req.body.tag}, function (err, data) {
@@ -90,7 +91,7 @@ function router(app, hasUser, hasAccess) {
                 //console.log("UNWINDDDDDD",data);
                 res.json({success: !err, msg: [], data: data, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
-            return
+            return;
         }
         if (req.body.type === 'text') {
 
