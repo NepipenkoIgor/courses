@@ -5,13 +5,13 @@ var mongoose = require('mongoose');
 var Answers = mongoose.model('Answers');
 var Notify = mongoose.model('Notify');
 var fs = require('fs')
-function dataReg(data) {
+/*function dataReg(data) {
     var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
     var newDataDate = data.getDate();
     var newDataMonth = monthNames[data.getMonth()];
     var newDataYear = data.getFullYear();
     return newDataDate + " " + newDataMonth + " " + newDataYear;
-}
+}*/
 function router(app, hasUser) {
 
     app.post("/answer/new", hasUser, function (req, res) {
@@ -21,7 +21,7 @@ function router(app, hasUser) {
         Answer.creator = req.body.creatorAnswer;
         Answer.postId = req.body.postAnswered;
         Answer.content = req.body.content;
-        Answer.created = dataReg(newData);
+        Answer.created = newData;
         Answer.save(function (err, num) {
             console.log("goood")
             res.json({data: num});

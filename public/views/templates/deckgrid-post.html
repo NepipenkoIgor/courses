@@ -17,7 +17,7 @@
 
         <img ng-src="{{mother.postAvatar(card.creator)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
         <p class="author ng-binding" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">{{mother.getCreator(card.creator)}}</p>
-        <p class="date ng-binding">{{card.created}}</p>
+        <p class="date ng-binding">{{mother.dataReg(card.created)}}</p>
     </div>
     <h1 class="title ng-binding" >{{card.title}}</h1>
 
@@ -66,7 +66,7 @@
             </div>
             <div class="col-md-7 col-xs-7">
                 <h5 style="color:red;cursor: pointer" ng-click="mother.postProfileGo(card.creator)">{{mother.getCreator(comment.creator)}}</h5>
-                <p class="content" style="font-size: 10px;color: #aaa" >{{comment.dataReg}}</p>
+                <p class="content" style="font-size: 10px;color: #aaa" >{{mother.dataReg(comment.dataReg)}}</p>
             </div>
             <div class="col-md-3 col-xs-3">
                 <ul class="footer1" style="padding: 0;margin-left: -24px;font-size: 12px">
@@ -136,7 +136,7 @@
                                         ng-click="mother.deleteAnswer(answer)"><i class="fa fa-trash-o fa-fw"></i></i></a>
 
             <a   style="margin-right: 10px;font-size: 16px;cursor: pointer" ng-if="mother.ifThisIsAvtor(mother.userdata,answer.creator)"
-                                        ng-click="textBtnFormAnswer.$show()"><i class="fa fa-pencil"></i></a>{{card.created}}</p>
+                                        ng-click="textBtnFormAnswer.$show()"><i class="fa fa-pencil"></i></a>{{mother.dataReg(card.created)}}</p>
     </div>
   <!--  <h1 class="title ng-binding">{{card.title}}</h1>-->
     <div class="row" >
@@ -179,7 +179,7 @@
             </div>
             <div class="col-md-7 col-xs-7">
                 <h5 style="color:red;cursor: pointer" ng-click="mother.postProfileGo(card.creator)">{{mother.getCreator(comment.creator)}}</h5>
-                <p class="content" style="font-size: 10px;color: #aaa" >{{comment.dataReg}}</p>
+                <p class="content" style="font-size: 10px;color: #aaa" >{{mother.dataReg(comment.dataReg)}}</p>
             </div>
             <div class="col-md-3 col-xs-3">
                 <ul class="footer1" style="padding: 0;margin-left: -24px;font-size: 12px">

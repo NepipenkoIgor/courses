@@ -7,6 +7,16 @@ var Posts = mongoose.model('Posts');
 
 function router(app, hasUser, hasAccess) {
     'use strict'
+    app.get("/formate",function(req,res){
+        Posts.find({}, function (err, data) {
+            for (var i = 0; i < data.length; i++) {
+                Posts.update({_id:data[i]._id},{created:Date(data[i].created)},function(err,num){
+
+                })
+            }
+        })
+    })
+
     app.post('/post/search', hasUser, function (req, res) {
         console.log(req.body)
         if (req.body.type === 'date') {

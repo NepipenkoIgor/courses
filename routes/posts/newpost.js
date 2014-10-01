@@ -8,13 +8,13 @@ var Answers = mongoose.model('Answers');
 var fs = require('fs');
 var easyimg = require('easyimage');
 
-function dataReg(data) {
+/*function dataReg(data) {
     var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
     var newDataDate = data.getDate();
     var newDataMonth = monthNames[data.getMonth()];
     var newDataYear = data.getFullYear();
     return newDataDate + " " + newDataMonth + " " + newDataYear;
-}
+}*/
 function router(app, hasUser, io) {
     'use strict'
     app.post('/post/new', hasUser, function (req, res) {
@@ -29,7 +29,7 @@ function router(app, hasUser, io) {
             Post.title = req.body.title;
             Post.content = req.body.content;
             Post.creator = req.body.creator;
-            Post.created = dataReg(newData);
+            Post.created = newData;
             Post.lesson = req.body.unit;
             Post.typePost = req.body.typePost || "";
             Post.postId = Date.now();

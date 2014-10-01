@@ -355,7 +355,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         if (card._id === idPost && this.comment !== "") {
             var date = Date.now();
             var newDate = new Date();
-            card.comments.push({content: comment, creator: creator, postId: date, dataReg: dataReg(newDate), likes: []});
+            card.comments.push({content: comment, creator: creator, postId: date, dataReg: newDate, likes: []});
 
             var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost, action: action,parentAnswerId:card.postId};
             $http.post('/comment/new', data).success(function () {
@@ -1129,5 +1129,13 @@ console.log(data.someDate)
     $scope.toggleMax = function() {
         $scope.maxDate = $scope.maxDate ? null : $scope.dtBefore;
     };*/
+    $scope.dataReg=function (data) {
+        var data=new Date(data)
+        var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        var newDataDate = data.getDate();
+        var newDataMonth = monthNames[data.getMonth()];
+        var newDataYear = data.getFullYear();
+        return newDataDate + " " + newDataMonth + " " + newDataYear;
+    }
 });
 
