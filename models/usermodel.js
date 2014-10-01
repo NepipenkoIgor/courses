@@ -15,6 +15,7 @@ var userSchema=new Schema({
   password:{ type: String, select: false },
   userlevel:Number,
   firstname:String,
+    currentLesson:Object,
   avatar:String,
     resetPasswordToken:String,
     resetPasswordExpires:Number,

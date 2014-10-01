@@ -13,6 +13,7 @@
         <p class="ng-binding">{{courseNowChanged.description}}</p>
     </div>
 
+
     <div class="map" style="width: 900px;height: 600px;position: absolute; left: 0;top:10px;right: 0;margin: 0 auto;" >
         <canvas id="canvasMap" style="width: 900px;height: 600px;"></canvas>
         <ul>
@@ -29,5 +30,9 @@
         </ul>
 
     </div>
-
+    <div class="lessonContinue" ng-show="showNotifyOfCurrentUnit()">
+        <p>Currently working on .....</p>
+        <p>Lesson {{currentUnitPosition}} - {{currentUnitTitle}}</p>
+        <a class="btn btn-primary" ng-click="goToCurrentUnit()">Continue</a>
+    </div>
 </div>

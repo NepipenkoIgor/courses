@@ -148,11 +148,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
             /**************some rout logic***********************/
 
-            /*  if (!courseEdit.userdata) {
-             if ($location.$$path.split("/")[1] !== "/signup" || $location.$$path.split("/")[1] !== "/signup/admin") {
-             $location.url("/login");
-             }
-             }*/
             if (courseEdit.userdata) {
                 if ($location.$$path.split("/")[1] === 'adminlab' && courseEdit.userdata) {
                     if (!courseEdit.userdata.position) {
@@ -187,12 +182,50 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     /*************method of change course module section unit****************/
+    $scope.saveCurrentUnit = function (unit, specialId, courseId, moduleId, title,position) {
+        //console.log(unit, specialId, courseId, moduleId);
+        var data = {id: courseEdit.userdata._id, unit: unit, specialId: specialId, courseId: courseId, moduleId: moduleId, title: title,position:position};
+        $http.post("/curentlesson", data).success(function (data) {
 
+        });
+    };
 
+    $scope.watchCurentUnit = function () {
+        courseEdit.reqUser(function () {
+           // console.log(courseEdit.userdata.currentLesson);
+            if(courseEdit.userdata.currentLesson) {
+                $scope.currentLesson = parseInt(courseEdit.userdata.currentLesson.unit);
+                $scope.currentSection = parseInt(courseEdit.userdata.currentLesson.specialId);
+                $scope.currentCourse = courseEdit.userdata.currentLesson.courseId;
+                $scope.currentModule = courseEdit.userdata.currentLesson.moduleId;
+                //console.log($scope.currentModule)
+                $scope.currentUnitTitle = courseEdit.userdata.currentLesson.title;
+                $scope.currentUnitPosition = courseEdit.userdata.currentLesson.position;
+            }
+        });
+    };
+    $scope.goToCurrentUnit = function () {
+        // console.log($scope.currentModule)
+        $scope.courseNowChange($scope.currentCourse, function () {
+            $scope.moduleNowChange($scope.currentModule, function () {
+                $scope.unitNowChange($scope.currentLesson, $scope.currentSection)
+            });
+        });
+    };
 
+    $scope.showNotifyOfCurrentUnit=function(){
+        if(courseEdit.userdata.currentLesson) {
 
-    $scope.courseNowChange = function (id) {
+            if (courseEdit.userdata.progress.indexOf(parseInt(courseEdit.userdata.currentLesson.unit)) === (-1)) {
+                return true;
+            }
+            return false;
+        }
+        return false
+    }
 
+    $scope.courseNowChange = function (id, cb) {
+        $scope.watchCurentUnit();
         $scope.dangerModule = [];
         $scope.dangerUnit = {};
         $scope.dangerSection = [];
@@ -203,6 +236,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     $scope.positionInCourse.course = i + 1;
                     $scope.background = {'background-image': 'url(' + $scope.courseNowChanged.img + ')'};
                     $scope.moduleNowChanged = "";
+                    if (cb) {
+                        cb();
+                        return;
+                    }
                     $state.go('course', {courseTitle: $scope.positionInCourse.course}).then(function () {
                         var drawingCanvas = document.getElementById('canvasMap');
                         var point = [];
@@ -243,7 +280,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     };
     courseEdit.courseNowChange = $scope.courseNowChange;
-    $scope.moduleNowChange = function (id) {
+
+
+    $scope.moduleNowChange = function (id, cb) {
 
         if ($scope.dangerModule.indexOf(id) > 0) {
             alert("you must complete the previous module");
@@ -254,15 +293,25 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 $scope.moduleNowChanged = $scope.courseNowChanged.modules[i];
 
                 $scope.positionInCourse.module = i + 1;
-                $state.go("modules", {courseTitle: $scope.positionInCourse.course, moduleTitle: $scope.positionInCourse.module});
                 $scope.dangerUnit = {};
                 $scope.dangerSection = [];
+                if (cb) {
+                    cb();
+                    return;
+                }
+                $state.go("modules", {courseTitle: $scope.positionInCourse.course, moduleTitle: $scope.positionInCourse.module});
+
             }
         }
 
     };
     courseEdit.moduleNowChange = $scope.moduleNowChange;
+
+
+
+
     $scope.unitNowChange = function (id, specialId) {
+
         if ($scope.dangerSection) {
             if ($scope.dangerSection.indexOf(specialId) > 0) {
                 alert("you must complete the previous section");
@@ -275,6 +324,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 return;
             }
         }
+
 
         $scope.addQuestionFlag = false;
         $scope.progress.red = {};
@@ -307,6 +357,12 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
                     }
                 }
+
+                if($state.current.name!=="course"){
+                    $scope.saveCurrentUnit(id,specialId,$scope.courseNowChanged._id,$scope.moduleNowChanged._id,$scope.unitNowChanged.title,
+                            $scope.positionInCourse.module+"."+$scope.positionInCourse.section+"."+$scope.positionInCourse.unit);
+                }
+
                 courseEdit.unitNowChanged = $scope.unitNowChanged;
 
                 $state.go('unit', {
@@ -613,6 +669,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     };
+
 
     $scope.stateNow = function () {
 
@@ -976,7 +1033,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         var count = 0;
         if ($scope.listOfUnits !== undefined) {
             for (var i = 0; i < $scope.listOfUnits.length; i++) {
-                if (userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)) {
+                if (userProgresArr&&userProgresArr.indexOf($scope.listOfUnits[i].unitId) !== (-1)) {
                     count = count + $scope.listOfUnits[i].lims[0].points;
                 }
             }

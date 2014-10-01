@@ -186,6 +186,10 @@ var type=req.files.fileimg.type;
         }
 
     });
+
+
+
+
 }
 
 module.exports = router;

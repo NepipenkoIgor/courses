@@ -75,11 +75,20 @@ function router(app,hasUser) {
     });
 
     app.post('/badgeuser',hasUser ,function (req, res) {
-        console.log(req.body);
+        //console.log(req.body);
         Users.update({_id:req.body[0]},{$push:{badges:req.body[1]}},function(err,num){
             res.json(num);
-        })
+        });
 
+    });
+
+
+    app.post("/curentlesson",function(req,res){
+        //console.log(req.body)
+        Users.update({_id:req.body.id},{currentLesson:{unit:req.body.unit,specialId:req.body.specialId,courseId:req.body.courseId,moduleId:req.body.moduleId,
+        title:req.body.title,position:req.body.position}},function(err,num){
+            res.json(num);
+        });
     });
 
 }

@@ -20,7 +20,7 @@ function router(app, hasUser, io) {
     app.post('/post/new', hasUser, function (req, res) {
         console.log(req.body);
         var newData = new Date();
-var dateNow=Date.parse(newData-655555)
+
 
         Posts.count(function (err, count) {
 
@@ -30,7 +30,6 @@ var dateNow=Date.parse(newData-655555)
             Post.content = req.body.content;
             Post.creator = req.body.creator;
             Post.created = dataReg(newData);
-           /* Post.trueData=dateNow;*/
             Post.lesson = req.body.unit;
             Post.typePost = req.body.typePost || "";
             Post.postId = Date.now();
