@@ -214,7 +214,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
     $scope.showNotifyOfCurrentUnit = function () {
-        if (courseEdit.userdata&&courseEdit.userdata.currentLesson) {
+        if (courseEdit.userdata && courseEdit.userdata.currentLesson) {
 
             if (courseEdit.userdata.progress.indexOf(parseInt(courseEdit.userdata.currentLesson.unit)) === (-1)) {
                 return true;
@@ -376,16 +376,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     }, 1);
                     if ($scope.unitNowChanged.lims[0].typeLim === "quiz") {
 
-                        var answerObj = [];
-                        // _.extend(answerObj,$scope.unitNowChanged.lims[0].content[0].quiz);
-                       /* for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
-                            var obj = {};
-                            _.extend(obj, $scope.unitNowChanged.lims[0].content[0].quiz[i]);
-                            answerObj.push(obj);
-                            $scope.unitNowChanged.lims[0].content[0].quiz[i].answer = "";
-                        }*/
-                        //console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
-
                         $scope.changeRadio = function (num) {
                             $scope.answerCheck = num;
                         };
@@ -397,11 +387,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                     continue;
                                 }
                                 if ($scope.answerCheck === i) {
-                                     console.log("yes yes yes")
+                                    //console.log("yes yes yes")
                                     $scope.saveProgress($scope.unitNowChanged.unitId);
                                     return;
                                 }
-                                console.log("no")
+                               // console.log("no")
                             }
 
                         };
@@ -891,7 +881,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     /************************************COMMUNITY and FILTERS***********************************************/
 
     $scope.goToCommunity = function () {
-        $scope.chengedSearchIcon = "Everything"
+        $scope.chengedSearchIcon = "Everything";
         $state.go('posts').then(function () {
 
             $location.url("/post/all?type=allposts");
@@ -934,6 +924,12 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     };
 
+    $scope.ifCourse = function () {
+        if ($location.$$url.split("/")[1] !== "courses") {
+            return false;
+        }
+        return true;
+    };
 
     $scope.searchType = ['Everything', 'My Posts', 'My Questions', 'All Questions', 'Popular'];
     $scope.search = {
@@ -949,7 +945,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.clickSearchIcon = function (type) {
         $scope.chengedSearchIcon = type;
-    }
+    };
     $scope.colorOfIcon = function (type) {
         if ($scope.chengedSearchIcon === type) {
             return {"color": "#A5A044"};
@@ -1119,7 +1115,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 $http.post("/notify/delete", [notify, $scope.notification]).success(function () {
                     $state.go('refresh').then(function () {
                         $state.go('posts').then(function () {
-                            console.log($scope.number)
+
                             $location.url("/post/all?type=notifypost&post=" + $scope.number);
 
                         });
@@ -1253,7 +1249,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                             courseEdit.reqUser();
                             courseEdit.reqPosts();
                             courseEdit.reqUsers();
-                            $scope.showProfileEdition(false)
+                            $scope.showProfileEdition(false);
 
                         }, false);
                         xhr.open("POST", "/user/upload", true);
@@ -1457,7 +1453,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
                 if (xhr.readyState === 4) {
-                    count++
+                    count++;
                     if (count <= files.length - 1) {
 
                         postImgUpload(files, postId, count);

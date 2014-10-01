@@ -24,7 +24,6 @@ app.controller('validateController', function ($scope, $http) {
         }
     });
     $scope.trueValidate=function(){
-        console.log(!!$scope.firstname&&!!$scope.lastname&&!!$scope.email&&!!$scope.password&&!!$scope.comfpassword&&!!$scope.code)
     if(!!$scope.firstname&&!!$scope.lastname&&!!$scope.email&&!!$scope.password&&!!$scope.comfpassword&&!!$scope.code){
         $("#submitSignUp").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
         return;

@@ -328,7 +328,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     $scope.deleteAnswer=function(card) {
         //console.log(card._id)
         if (confirm("Are you sure you wish to delete this?")) {
-            var data = {id:card._id}
+            var data = {id:card._id};
             $http.post('/answer/delete', data).success(function () {
                 reqPosts();
                 reqUsers();
@@ -349,7 +349,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         return newDataDate + " " + newDataMonth + " " + newDataYear;
     }
 
-    $scope.comment = {}
+    $scope.comment = {};
     $scope.addComment = function (idPost, creator, card, action) {
         var comment = $scope.comment[action];
         if (card._id === idPost && this.comment !== "") {
@@ -401,7 +401,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         $http.post("/post/update", post).success(function (data) {
 
         });
-    }
+    };
 
     /******************logic differences of posts**********************/
     $scope.getCreator = function (id) {
@@ -459,7 +459,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     };
     $scope.commentLike = function (index, user, likes, userId, post, action) {
         var likes = post.comments[index].likes;
-        if (likes.indexOf(user) == (-1)) {
+        if (likes.indexOf(user) === (-1)) {
             likes.push(user);
             $scope.updateCommentLikes(post, post.comments[index].creator, user, true, action);
         } else {
@@ -482,7 +482,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         $(".postLoad").show();
         $http.post('/post/search', searchObj).success(function (data) {
 
-console.log(data.someDate)
             if ($location.$$path.split("/")[1] === 'profile') {
                 $scope.postdata = data.data;
 
@@ -767,7 +766,7 @@ console.log(data.someDate)
                 return;
             }
         }
-        var answerObj = {answerChecked: answer._id}
+        var answerObj = {answerChecked: answer._id};
         $http.post("/answer/check", answerObj).success(function (data) {
             courseEdit.reqPosts();
             $state.go('posts').then(function () {
@@ -1129,12 +1128,12 @@ console.log(data.someDate)
         $scope.maxDate = $scope.maxDate ? null : $scope.dtBefore;
     };*/
     $scope.dataReg=function (data) {
-        var data=new Date(data)
+        var data=new Date(data);
         var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
         var newDataDate = data.getDate();
         var newDataMonth = monthNames[data.getMonth()];
         var newDataYear = data.getFullYear();
         return newDataDate + " " + newDataMonth + " " + newDataYear;
-    }
+    };
 });
 
