@@ -378,12 +378,12 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
                         var answerObj = [];
                         // _.extend(answerObj,$scope.unitNowChanged.lims[0].content[0].quiz);
-                        for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
+                       /* for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
                             var obj = {};
                             _.extend(obj, $scope.unitNowChanged.lims[0].content[0].quiz[i]);
                             answerObj.push(obj);
                             $scope.unitNowChanged.lims[0].content[0].quiz[i].answer = "";
-                        }
+                        }*/
                         //console.log(answerObj, $scope.unitNowChanged.lims[0].content[0].quiz)
 
                         $scope.changeRadio = function (num) {
@@ -391,9 +391,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         };
                         $scope.checkQuiz = function (num) {
 
-                            for (var i = 0; i < answerObj.length; i++) {
+                            for (var i = 0; i < $scope.unitNowChanged.lims[0].content[0].quiz.length; i++) {
 
-                                if (answerObj[i].answer !== true) {
+                                if ($scope.unitNowChanged.lims[0].content[0].quiz[i].answer !== true) {
                                     continue;
                                 }
                                 if ($scope.answerCheck === i) {
