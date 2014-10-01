@@ -482,6 +482,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         $(".postLoad").show();
         $http.post('/post/search', searchObj).success(function (data) {
 
+
             if ($location.$$path.split("/")[1] === 'profile') {
                 $scope.postdata = data.data;
 
@@ -515,6 +516,11 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
                 $scope.postdata = data.data;
                 $location.url("/post/all?type=" + data.type);
+
+                if($location.$$url.split("?")[1].split("=")[1]!=="date"){
+                    $scope.dtAfter=undefined;
+                    $scope.dtBefore=undefined;
+                }
                 // $scope.chengedSearchIcon=data.type;
                 $scope.page = $scope.postdata.length / 10;
                 $scope.scrolling = 800;
