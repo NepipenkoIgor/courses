@@ -31,11 +31,11 @@ function router(app, hasAccess) {
 
 
     app.post('/true/oldpass', function (req, res) {
-        console.log(req.body.pass);
+        console.log("!!!!!!!!!!!!!!!!!!!",req.body.pass);
         Users.find({email: req.body.email}).select('+password').exec(function (err, data) {
-            console.log(data)
+            console.log("!!!!!!!!!!!!!!!!!!!**********",data)
             data[0].validatePassword(req.body.pass, function (err, isMatch) {
-                console.log(isMatch)
+                console.log("!!!!!!!!!!!!!!!!!!!**********",isMatch)
                 if (!isMatch) {
                     res.json({success: false});
                 }
@@ -50,7 +50,7 @@ function router(app, hasAccess) {
         console.log(num);
             Users.find({email: req.body.email},function(err,data){
                 console.log(data)
-                res.redirect("/#/profile/"+data[0].username);
+                res.redirect("/#/settings");
             });
         });
 

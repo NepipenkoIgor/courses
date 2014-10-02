@@ -1071,32 +1071,27 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
     /******************************notify logic**************************************************/
-
     var notifymass = [];
     $http.get("/user/notify").success(function (data) {
+        $http.get('/user').success(function (dataUser) {
+           // console.log(dataUser)
+            if (typeof data !== 'string'&& typeof dataUser !== 'string') {
+                for (var i = 0; i < data.data.length; i++) {
 
-        if (typeof data !== 'string') {
-            for (var i = 0; i < data.data.length; i++) {
-
-                if (data.data[i].user === courseEdit.userdata._id) {
-                    notifymass = data.data[i].content;
-                    $scope.notification = notifymass;
-                    return;
+                    if (dataUser && (data.data[i].user === dataUser._id)) {
+                        notifymass = data.data[i].content;
+                        $scope.notification = notifymass;
+                        return;
+                    }
                 }
+                $scope.notification = notifymass;
             }
-            $scope.notification = notifymass;
-        }
+        });
     });
 
     var socket = io();
     socket.on("notify", function (data) {
-        /*if (data.notify && data.creatorOfPost === courseEdit.userdata._id) {
-         courseEdit.reqUser(function(){
-         notifymass.push(data);
-         // $scope.$apply();
-         },true);
-         return;
-         }*/
+
         if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id && data.creatorComment !== data.creatorOfPost) {
             $scope.httpUsersList(function () {
                 notifymass.push(data);

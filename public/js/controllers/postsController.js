@@ -914,7 +914,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
 
 
-    $scope.openNewPass = function (size) {
+/*    $scope.openNewPass = function (size) {
 
         var modalInstance = $modal.open({
             templateUrl: 'myModalNewPass.html',
@@ -1067,7 +1067,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
             // $modalInstance.dismiss('cancel');
 
         };
-    };
+    };*/
     function escapeHtml(unsafe) {
         return unsafe
             .replace(/&amp/g, "&;")

@@ -1,0 +1,89 @@
+
+
+<div class="row">
+<div class="col-md-5">
+
+<div class="well" style="width: 500px;">
+    <h3>Change password</h3>
+    <form action="/set/new/password" method="post" id="ChangePasswordForm" class="ng-dirty ng-valid-parse ng-submitted ng-invalid ng-invalid-required">
+        <div class="form-group has-success has-feedback">
+
+            <label>Existing password</label>
+            <label class="control-label" for="oldPassword">{{name.oldPassword}}</label>
+            <input type="password" class="form-control" ng-keyup="validOldPass($event,'oldPassword')" id="oldPassword" name="oldPassword" placeholder="Existing password"  autofocus="">
+            <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <label>New password</label>
+            <label class="control-label" for="password">{{name.password}}</label>
+            <input type="password" class="form-control " ng-keyup="validPassword($event,'password')" id="password" name="password" placeholder="New password" >
+            <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <label>New password comfirm</label>
+            <label class="control-label" for="comfpassword">{{name.comfpassword}}</label>
+            <input type="password" class="form-control " ng-keyup="comfPassword($event,'comfpassword')" id="comfpassword" name="comfpassword" placeholder="New password again" >
+            <span class="glyphicon  form-control-feedback" style="top:28px!important;"></span>
+        </div>
+        <input type="hidden" name="email" ng-value="email" >
+        <button class="btn btn-block button-bad button-bad disabled"  id="submitNewPass" type="submit" style="background-color: #DF691A">Change Password</button>
+    </form>
+
+    <!-- ngMessage: password -->
+</div>
+
+
+    </div>
+
+
+
+<div class="col-md-7">
+
+    <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)"
+          style="font-size: x-large">
+
+        <div class="userInput">
+            <span class="title"> Email:</span>
+            <span editable-text="userdata.email">{{ userdata.email || 'empty' }}</span>
+        </div>
+        <!-- <div class="userInput">
+             <span class="title">User password: </span>
+             <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
+         </div>-->
+        <div class="userInput">
+            <span class="title">Firstname: </span>
+            <span editable-text="userdata.firstname">{{userdata.firstname || 'empty' }}</span>
+        </div>
+        <div class="userInput">
+            <span class="title">Lastname: </span>
+            <span editable-text="userdata.lastname">{{ userdata.lastname|| 'empty' }}</span>
+        </div>
+        <div class="userInput">
+            <span class="title">Phone: </span>
+            <span editable-text="userdata.phone">{{ userdata.phone|| 'empty' }}</span>
+        </div>
+
+
+        <div class="buttons">
+
+            <button type="button" class="btn btn-default" ng-click="editableForm.$show()"
+                    ng-show="!editableForm.$visible" ng-if="userdata">
+                Edit
+            </button>
+
+      <span ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting"
+                ng-click="showProfileEdition()">
+            Save
+        </button>
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting"
+                ng-click="[editableForm.$cancel(),showProfileEdition()]">
+            Cancel
+        </button>
+      </span>
+        </div>
+    </form>
+
+</div>
+
+</div>

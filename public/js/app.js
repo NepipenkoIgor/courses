@@ -97,6 +97,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             url: "/signup",
             templateUrl: "views/account/signup.html",
             controller:"refreshController"
+        }).state('settings', {
+            url: "/settings",
+            templateUrl: "views/account/settings.html",
+            controller:"settings"
         })
         .state('signupadmin', {
             url: "/signup/admin",
