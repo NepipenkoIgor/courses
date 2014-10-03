@@ -90,6 +90,14 @@ function router(app,hasUser) {
             res.json(num);
         });
     });
+    app.post("/delete/oldunit",function(req,res){
+        //console.log(req.body)
+        Users.update({_id:req.body[0].id},{progress:req.body[1]},function(err,num){
+            res.json(num);
+        });
+    });
+
+
 
 }
 module.exports=router;

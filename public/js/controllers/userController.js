@@ -1,8 +1,8 @@
 app.controller('profile', function ($scope, $state, $http, $sce, $location, courseEdit) {
     'user strict';
-/*console.log(Users.userinfo().then(function(data){
-    console.log(data)
-}))*/
+    /*console.log(Users.userinfo().then(function(data){
+     console.log(data)
+     }))*/
     $scope.reqUser = function (cb, badge) {
         $http.get('/user').success(function (data) {
 
@@ -48,8 +48,10 @@ app.controller('profile', function ($scope, $state, $http, $sce, $location, cour
             if (typeof $scope.userdata === 'string') {
                 $scope.userdata = false;
                 courseEdit.userdata = $scope.userdata;
+
             }
 
+            $scope.checkExistUnit();
             if (badge) {
                 cb()
                 return;
@@ -62,6 +64,37 @@ app.controller('profile', function ($scope, $state, $http, $sce, $location, cour
 
     $scope.reqUser();
     courseEdit.reqUser = $scope.reqUser;
+
+
+    $scope.checkExistUnit = function () {
+        $http.get("/units").success(function (units) {
+            var send = false
+            if ($scope.userdata) {
+                var massOfUnits = [];
+                for (var i = 0; i < units.length; i++) {
+                    massOfUnits.push(units[i].unitId)
+                }
+                for (var j = 0; j < $scope.userdata.progress.length; j++) {
+                    if (massOfUnits.indexOf($scope.userdata.progress[j]) === (-1)) {
+                        $scope.userdata.progress.splice(j, 1);
+                        send = true;
+                    }
+                }
+                if (send) {
+                    $http.post("/delete/oldunit", [$scope.userdata._id, $scope.userdata.progress]).success(function () {
+                        //console.log( $scope.userdata.progress)
+                        //console.log( massOfUnits)
+                    });
+                }
+
+
+            }
+        });
+
+
+    }
+    $scope.checkExistUnit();
+
 
     $scope.postProfile = function (data) {
         $http.post('/main', data).success(function (data) {

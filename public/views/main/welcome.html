@@ -70,7 +70,7 @@
 <div deckgrid source="listOfBadges" cardTemplate="views/templates/deckgrid-card.html" class="deckgrid" ng-if="userdata" ></div>-->
 
 
-<div class="general_cont dashboard ng-scope">
+<div class="general_cont dashboard ng-scope" ng-if="userdata">
     <div class="banner2">
         <h1 class="ng-binding">Welcome <!-- ngIf: !first_visit --><span ng-if="!first_visit" class="ng-scope">back </span>{{userdata.username}}</h1>
     </div>

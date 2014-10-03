@@ -22,7 +22,7 @@ app.controller("settings",function($scope,$http,courseEdit){
     });
 
     $scope.trueValidate=function(){
-       
+
         if(!!$scope.oldPassword&&!!$scope.password&&!!$scope.comfpassword){
             $("#submitNewPass").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
             return;
