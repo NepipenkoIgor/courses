@@ -50,7 +50,36 @@ app.controller('profile', function ($scope, $state, $http, $sce, $location, cour
                 courseEdit.userdata = $scope.userdata;
 
             }
+            $scope.checkExistUnit = function () {
+                $http.get("/units").success(function (units) {
+                    var send = false
+                    if ($scope.userdata) {
+                        var massOfUnits = [];
+                        for (var i = 0; i < units.length; i++) {
+                            massOfUnits.push(units[i].unitId)
+                        }
+                        //console.log(massOfUnits)
+                        for (var j = 0; j <= $scope.userdata.progress.length; j++) {
+                            if (massOfUnits.indexOf($scope.userdata.progress[j]) === (-1)) {
+                              //  console.log(massOfUnits.indexOf($scope.userdata.progress[j]),$scope.userdata.progress.splice(j, 1))
+                                $scope.userdata.progress.splice(j,1);
+                                send = true;
+                            }
+                        }
+                        if (send) {
+                            //console.log($scope.userdata.progress.splice(0,1))
+                            $http.post("/delete/oldunit", [$scope.userdata._id, $scope.userdata.progress]).success(function () {
+                                console.log( $scope.userdata.progress)
+                                console.log( massOfUnits)
+                            });
+                        }
 
+
+                    }
+                });
+
+
+            };
             $scope.checkExistUnit();
             if (badge) {
                 cb()
@@ -66,34 +95,8 @@ app.controller('profile', function ($scope, $state, $http, $sce, $location, cour
     courseEdit.reqUser = $scope.reqUser;
 
 
-    $scope.checkExistUnit = function () {
-        $http.get("/units").success(function (units) {
-            var send = false
-            if ($scope.userdata) {
-                var massOfUnits = [];
-                for (var i = 0; i < units.length; i++) {
-                    massOfUnits.push(units[i].unitId)
-                }
-                for (var j = 0; j < $scope.userdata.progress.length; j++) {
-                    if (massOfUnits.indexOf($scope.userdata.progress[j]) === (-1)) {
-                        $scope.userdata.progress.splice(j, 1);
-                        send = true;
-                    }
-                }
-                if (send) {
-                    $http.post("/delete/oldunit", [$scope.userdata._id, $scope.userdata.progress]).success(function () {
-                        //console.log( $scope.userdata.progress)
-                        //console.log( massOfUnits)
-                    });
-                }
 
-
-            }
-        });
-
-
-    }
-    $scope.checkExistUnit();
+    //$scope.checkExistUnit();
 
 
     $scope.postProfile = function (data) {
