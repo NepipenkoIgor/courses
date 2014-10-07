@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="stylesheets/all.css" type="text/css"/>
     <link rel="stylesheet" href="stylesheets/jquery.fancybox.css" type="text/css"/>
     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.4/toaster.css" rel="stylesheet" />
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
 
@@ -46,6 +47,9 @@
     <!---->
     <script src="javascripts/jquery.fancybox.js"></script>
     <!--<script  src="javascripts/angular.min.js"></script>-->
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.4/toaster.js"></script>
+
 
     <!-- <script  src="javascripts/angular.min.js"></script>-->
     <script src="javascripts/ui-ace.min.js"></script>
@@ -336,7 +340,7 @@
             <p class="list-group-item-text">{{notify.type}}</p>
         </a>
         <a class="notify_viewall" ng-if="notification.length>2">
-            <p>view all</p>
+            <p ng-click="clearNotify(userdata._id)">clear all</p>
         </a>
     </div>
 </div>
@@ -474,7 +478,7 @@
 <div class="check-element animate-show a-card" ng-controller="badgeController"
      ng-show="false" style="opacity: 1;cursor: pointer" ng-click="hideBadge()">
     <!-- <span style="cursor: pointer" ><h1>X</h1></span> for animation ng-show="showBadges"-->
-    <img ng-src="{{imgBadge}}">
+
 
     <p style="color:black">{{desc}}</p>
 </div>
@@ -485,6 +489,20 @@
         </div>
     </div>
 </div>
+<div ng-controller="badgeController" style="width: 100px;height: 50px">
+   <button ng-click="pop()" style="width: 100px;height: 50px">Show a Toaster</button>
+    <toaster-container toaster-options="{'time-out': 5000, 'close-button':true}"  style="position: absolute!important;right: 120px;margin-top: 50px"></toaster-container>
+</div>
+
+<script type="text/ng-template" id="badge.html">
+    <div style="text-align: center;padding: 25px 10px;background-color: white;color:grey" ng-controller="badgeController">
+<h2>{{desc}}</h2>
+        <img ng-src="{{imgBadge}}" style="width: 150px">
+    </div>
+
+
+</script>
+
 
 
 <div id="blockwindow"></div>

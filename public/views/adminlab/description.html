@@ -1,21 +1,31 @@
+<div style="position: fixed" class="col-md-6">
+
 
 <div ng-if="userdata.position">
-    <h3>Description of {{course.title}}</h3>
+    <h3>Description of course: <p>{{course.title}}</p></h3>
     <a href="#" editable-textarea="course.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
         <pre>{{ course.description || 'no description' }}</pre>
     </a>
 </div>
 
+    <div ng-if="userdata.position">
+        <h3>Description of module: <p>{{moduleNow.title}}</p></h3>
+        <a href="#" editable-textarea="moduleNow.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
+            <pre>{{ moduleNow.description || 'no description' }}</pre>
+        </a>
+    </div>
+
 <div ng-if="userdata.position">
-    <h3>Description of {{sectionNow.title}}</h3>
+    <h3>Description of secion: <p>{{sectionNow.title}}</p></h3>
     <a href="#" editable-textarea="sectionNow.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
         <pre>{{ sectionNow.description || 'no description' }}</pre>
     </a>
 </div>
 
-<div ng-if="userdata.position">
-    <h3>Description of {{moduleNow.title}}</h3>
-    <a href="#" editable-textarea="moduleNow.description" e-rows="7" e-cols="40" onaftersave="saveCourse()">
-        <pre>{{ moduleNow.description || 'no description' }}</pre>
-    </a>
+    <div class="row" ng-if="userdata.position">
+        <div class="col-md-12">
+            <a class="btn btn-success"  ui-sref="adminlab.lesson.module">Return to map edition</a>
+        </div>
+    </div>
+
 </div>

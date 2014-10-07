@@ -92,7 +92,7 @@ function router(app,hasUser) {
     });
     app.post("/delete/oldunit",function(req,res){
         console.log("!!!!!",req.body)
-        Users.update({_id:req.body[0]},{progress:req.body[1]},function(err,num){
+        Users.update({_id:req.body[0]},{progress:req.body[1],currentLesson:req.body[2]},function(err,num){
             res.json(num);
         });
     });

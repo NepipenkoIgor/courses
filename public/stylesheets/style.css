@@ -1166,6 +1166,7 @@ padding: 0 5px 0 0!important;
     width: 100%;
     height:250px;
     z-index: 89;
+    background-size: cover;
 }
 .profile .avatar {
     position: absolute;
@@ -1240,6 +1241,12 @@ padding: 0 5px 0 0!important;
     top:100% !important;
     left:0!important;
 
+}
+
+.editProfi>div>label{
+    font-size: 24px;
+    padding-top:0!important ;
+    padding-right: 0!important;
 }
 .editProfi>div{
     margin-top: 20px;
@@ -1775,9 +1782,9 @@ line-height: 74px;
 .settingsPass{
     cursor: pointer;
 }
-.settingsPass:hover{
+/*.settingsPass:hover{
    color:#404D5B;
-}
+}*/
 
 
 .settings h3 {
@@ -1838,4 +1845,24 @@ code {
 }
 .lessonContinue a{
     width:200px ;
+}
+
+body>div>div>#toast-container .toast-info {
+    /*background-color: grey!important;*/
+    background-image: none!important;
+    padding: 0;
+    width: 223px;
+    text-align: center;
+    background-color: white!important;
+}
+
+body>div>div>#toast-container .toast-success {
+    /*background-color: grey!important;*/
+    background-image: none!important;
+    padding: 20px 30px;
+    width: 223px;
+    text-align: left;
+    background-color: gainsboro!important;
+    color:grey;
+    font-size: 30px;
 }

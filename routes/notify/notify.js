@@ -21,7 +21,13 @@ function router(app, hasUser) {
         });
 
     });
+    app.post('/notify/delet/all', hasUser, function (req, res) {
+        console.log("!!!!!!!!!!!!!!!!!",req.body);
+        Notify.remove({user: req.body.id},function (err, num) {
+            res.json({data: num});
+        });
 
+    });
     app.post("/notify/send/mail", hasUser, function (req, res) {
         //console.log(req.body)
         Users.find({position: true}, function (err, mass) {

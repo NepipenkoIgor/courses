@@ -59,18 +59,23 @@ app.controller('profile', function ($scope, $state, $http, $sce, $location, cour
                             massOfUnits.push(units[i].unitId)
                         }
                         //console.log(massOfUnits)
-                        for (var j = 0; j <= $scope.userdata.progress.length; j++) {
+                        for (var j = 0; j < $scope.userdata.progress.length; j++) {
                             if (massOfUnits.indexOf($scope.userdata.progress[j]) === (-1)) {
                               //  console.log(massOfUnits.indexOf($scope.userdata.progress[j]),$scope.userdata.progress.splice(j, 1))
                                 $scope.userdata.progress.splice(j,1);
+                                j--;
                                 send = true;
                             }
                         }
+                        if($scope.userdata.currentLesson&&massOfUnits.indexOf($scope.userdata.currentLesson.unit) === (-1)){
+                            $scope.userdata.currentLesson={}
+                            send = true;
+                        }
                         if (send) {
                             //console.log($scope.userdata.progress.splice(0,1))
-                            $http.post("/delete/oldunit", [$scope.userdata._id, $scope.userdata.progress]).success(function () {
-                                console.log( $scope.userdata.progress)
-                                console.log( massOfUnits)
+                            $http.post("/delete/oldunit", [$scope.userdata._id, $scope.userdata.progress,$scope.userdata.currentLesson]).success(function () {
+                                //console.log( $scope.userdata.progress)
+                                //console.log( massOfUnits);
                             });
                         }
 

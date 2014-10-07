@@ -239,6 +239,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
 
                     }
+                    $scope.userCountBadge=function(){
+                       return $scope.userNowView.badges.length;
+                    };
+                   // $scope.userCountBadge($scope.userNowView._id);
                     if (!init) {
 
                         $state.go('404');
@@ -273,6 +277,8 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
                 return $sce.trustAsResourceUrl(url);
             };
+
+
         });
 
     }

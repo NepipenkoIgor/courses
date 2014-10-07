@@ -1,55 +1,45 @@
 
 
-<div class="row">
-<div class="col-md-5">
+<div class="row" style="padding-left: 50px">
+<!--<div class="col-md-5">-->
 
-<div class="well" style="width: 500px;">
-    <h3>Change password</h3>
-    <form action="/set/new/password" method="post" id="ChangePasswordForm" class="ng-dirty ng-valid-parse ng-submitted ng-invalid ng-invalid-required">
-        <div class="form-group has-success has-feedback">
-
-            <label>Existing password</label>
-            <label class="control-label" for="oldPassword">{{name.oldPassword}}</label>
-            <input type="password" class="form-control" ng-keyup="validOldPass($event,'oldPassword')" id="oldPassword" name="oldPassword" placeholder="Existing password"  autofocus="">
-            <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
-        </div>
-        <div class="form-group has-success has-feedback">
-            <label>New password</label>
-            <label class="control-label" for="password">{{name.password}}</label>
-            <input type="password" class="form-control " ng-keyup="validPassword($event,'password')" id="password" name="password" placeholder="New password" >
-            <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
-        </div>
-        <div class="form-group has-success has-feedback">
-            <label>New password comfirm</label>
-            <label class="control-label" for="comfpassword">{{name.comfpassword}}</label>
-            <input type="password" class="form-control " ng-keyup="comfPassword($event,'comfpassword')" id="comfpassword" name="comfpassword" placeholder="New password again" >
-            <span class="glyphicon  form-control-feedback" style="top:28px!important;"></span>
-        </div>
-        <input type="hidden" name="email" ng-value="email" >
-        <button class="btn btn-block button-bad button-bad disabled"  id="submitNewPass" type="submit" style="background-color: #DF691A">Change Password</button>
-    </form>
-
-    <!-- ngMessage: password -->
-</div>
+    <h1 class="settingsPass" ><i class="fa fa-cogs"></i> Settings</h1>
 
 
+
+    <div class="col-md-3 col-md-offset-1" style="margin-right: 200px" >
+        <h3>Account Info</h3>
+        <form role="form" class="ng-pristine  ng-submitted" action="/main" method="POST">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control"  name="email" placeholder="{{userdata.email}}">
+            </div>
+            <div class="form-group">
+                <label>First name</label>
+                <input type="text" class="form-control"  name="firstname" placeholder="{{userdata.firstname}}">
+            </div>
+            <div class="form-group">
+                <label>Last name</label>
+                <input type="text" class="form-control" name="lastname" placeholder="{{userdata.lastname}}">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control" name="phone" placeholder="{{userdata.phone}}">
+            </div>
+            <input type="hidden" name="_id" ng-value="userdata._id"/>
+            <button type="submit" class="btn btn-default">Update</button>
+        </form>
     </div>
 
 
 
-<div class="col-md-7">
-
-    <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)"
+   <!-- <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)"
           style="font-size: x-large">
 
         <div class="userInput">
             <span class="title"> Email:</span>
             <span editable-text="userdata.email">{{ userdata.email || 'empty' }}</span>
         </div>
-        <!-- <div class="userInput">
-             <span class="title">User password: </span>
-             <span editable-text="userdata.password" >{{ userdata.password || 'empty' }}</span>
-         </div>-->
         <div class="userInput">
             <span class="title">Firstname: </span>
             <span editable-text="userdata.firstname">{{userdata.firstname || 'empty' }}</span>
@@ -82,8 +72,39 @@
         </button>
       </span>
         </div>
-    </form>
+    </form>-->
 
+<!--    </div>-->
+
+
+
+<div class="col-md-3">
+    <div class="well" style="width: 500px;">
+    <h3>Change password</h3>
+    <form action="/set/new/password" method="post" id="ChangePasswordForm" class="ng-dirty ng-valid-parse ng-submitted ng-invalid ng-invalid-required">
+        <div class="form-group has-success has-feedback">
+
+            <label>Existing password</label>
+            <label class="control-label" for="oldPassword">{{name.oldPassword}}</label>
+            <input type="password" class="form-control" ng-keyup="validOldPass($event,'oldPassword')" id="oldPassword" name="oldPassword" placeholder="Existing password"  autofocus="">
+            <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <label>New password</label>
+            <label class="control-label" for="password">{{name.password}}</label>
+            <input type="password" class="form-control " ng-keyup="validPassword($event,'password')" id="password" name="password" placeholder="New password" >
+            <span class="glyphicon  form-control-feedback" style="top: 26px!important;"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <label>New password comfirm</label>
+            <label class="control-label" for="comfpassword">{{name.comfpassword}}</label>
+            <input type="password" class="form-control " ng-keyup="comfPassword($event,'comfpassword')" id="comfpassword" name="comfpassword" placeholder="New password again" >
+            <span class="glyphicon  form-control-feedback" style="top:28px!important;"></span>
+        </div>
+        <input type="hidden" name="email" ng-value="email" >
+        <button class="btn btn-block button-bad button-bad disabled"  id="submitNewPass" type="submit" style="background-color: #DF691A">Change Password</button>
+    </form>
+    </div>
 </div>
 
 </div>

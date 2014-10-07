@@ -1,4 +1,5 @@
-<div class="row" ng-if="userdata.position">
+<div style="position: fixed" class="col-md-6">
+<div class="row" ng-if="userdata.position" >
     <div class="col-md-12">
         <h1>Lesson Title : {{unitNow.title}}</h1>
 
@@ -52,13 +53,13 @@
                         </button>
                     </div>
                 </div>
-                <button class="btn btn-success" style="" ng-click="saveQuiz()">Add quiz</button>
+                <button class="btn btn-success" style="margin: 20px;" ng-click="saveQuiz()" >Add quiz</button>
             </div>
         </div>
         <div ng-switch-when="static" style="padding-bottom: 50px">
             <div ui-ace="{
             onLoad: aceLoaded
-            }"></div>
+            }" style="background-color: ghostwhite;"></div>
 
 
             <button class="btn btn-success" style="" ng-click="saveStatic()">Add static</button>
@@ -76,9 +77,9 @@
 </div>
 <div class="row" ng-if="userdata.position">
     <div class="col-md-12">
-        coments/ask
+        <a class="btn btn-success"  ui-sref="adminlab.lesson.module">Return to map edition</a>
     </div>
 </div>
 
-
+</div>
 

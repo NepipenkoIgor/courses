@@ -5,12 +5,12 @@
                 <div class="col-md-5"></div>
                     <div class="col-md-2">
                         <div class="socialLink">
-                            <a href="https://www.facebook.com/"><i class="fa fa-facebook-square fa-3x"></i></a>
-                            <a href="https://twitter.com/"> <i class="fa fa-twitter-square  fa-3x"></i></a>
+                            <a href="https://www.facebook.com/" ng-if="userdata.facebook"><i class="fa fa-facebook-square fa-3x"></i></a>
+                            <a href="https://twitter.com/" ng-if="userdata.twitter"> <i class="fa fa-twitter-square  fa-3x"></i></a>
                             <!--<a href="http://www.google.com"><i class="fa fa-google-plus-square fa-3x"></i></a>-->
-                            <a href="https://www.tumblr.com/"><i class="fa fa-tumblr-square fa-3x"></i></a>
-                            <a href="https://www.pinterest.com/"><i class="fa fa-pinterest-square fa-3x"></i></a>
-                            <a href="https://www.linkedin.com/"><i class="fa fa-linkedin-square fa-3x"></i></a>
+                            <a href="https://www.tumblr.com/" ng-if="userdata.tumblr"><i class="fa fa-tumblr-square fa-3x"></i></a>
+                            <a href="https://www.pinterest.com/" ng-if="userdata.pinterest"><i class="fa fa-pinterest-square fa-3x"></i></a>
+                            <a href="https://www.linkedin.com/" ng-if="userdata.linkedIn"><i class="fa fa-linkedin-square fa-3x"></i></a>
                         </div>
 
                     </div>
@@ -53,7 +53,7 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
                 </li>
                 <li ng-click="[viewBadgeOfUser(userNowView),triggerView(false)]" style="cursor: pointer">
                     <a tooltip-placement="bottom" tooltip="Achievement">
-                        <i class="fa fa-check-circle"> </i>
+                        <i class="fa fa-check-circle"> {{userCountBadge()}}</i>
                     </a>
                 </li>
             </ul>
@@ -70,30 +70,82 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
 
     <div class="row" class="profileBox">
 
-        <!--<h1 class="settingsPass" ng-click="openNewPass('myModalNewPass.html')"><i class="fa fa-cogs"></i> Settings</h1>-->
+        <!---->
 
         <div class="col-md-7">
+
+
+            <form  class="editProfi form-horizontal" action="/main" method="POST" >
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Facebook:</label>
+                    <div class="col-sm-7">
+                    <input type="email" class="form-control"  name="facebook" placeholder="{{userdata.facebook}}">
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Twitter:</label>
+                    <div class="col-sm-7">
+                    <input type="text" class="form-control"  name="twitter" placeholder="{{userdata.twitter}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Tumblr:</label>
+                    <div class="col-sm-7">
+                    <input type="text" class="form-control" name="tumblr" placeholder="{{userdata.tumblr}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Pinterest:</label>
+                    <div class="col-sm-7">
+                    <input type="text" class="form-control" name="pinterest" placeholder="{{userdata.pinterest}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">LinkedIn:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" name="linkedIn" placeholder="{{userdata.linkedIn}}">
+                    </div>
+                </div>
+                <input type="hidden" name="_id" ng-value="userdata._id"/>
+                <input type="hidden" name="profile" ng-value="userdata.username"/>
+                <div class="buttons">
+                <span>
+                <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting"
+                        ng-click="showProfileEdition()">
+                    Save
+                </button>
+                <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting"
+                        ng-click="[editableForm.$cancel(),showProfileEdition()]">
+                    Cancel
+                </button>
+                </span>
+        </div>
+            </form>
+
 
 <!--            <form class="editProfi" editable-form name="editableForm" onaftersave="postProfile(userdata)"
                   style="font-size: x-large">
 
                 <div class="userInput">
-                    <span class="title"> Email:</span>
+                    <span class="title"> Facebook:</span>
                     <span editable-text="userdata.email">{{ userdata.email || 'empty' }}</span>
                 </div>
                 <div class="userInput">
-                    <span class="title">User firstname: </span>
+                    <span class="title">Twitter: </span>
                     <span editable-text="userdata.firstname">{{userdata.firstname || 'empty' }}</span>
                 </div>
                 <div class="userInput">
-                    <span class="title">User lastname: </span>
+                    <span class="title">Tumblr: </span>
                     <span editable-text="userdata.lastname">{{ userdata.lastname|| 'empty' }}</span>
                 </div>
                 <div class="userInput">
-                    <span class="title">Phone: </span>
+                    <span class="title">Pinterest: </span>
                     <span editable-text="userdata.phone">{{ userdata.phone|| 'empty' }}</span>
                 </div>
-
+                <div class="userInput">
+                    <span class="title">Linkedln: </span>
+                    <span editable-text="userdata.phone">{{ userdata.phone|| 'empty' }}</span>
+                </div>
 
                 <div class="buttons">
 
@@ -102,7 +154,7 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
                         Edit
                     </button>
 
-      <span ng-show="editableForm.$visible">
+      <span >
         <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting"
                 ng-click="showProfileEdition()">
             Save

@@ -3,7 +3,7 @@
  */
 
 
-app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, $timeout, $modal, $log, courseEdit) {
+app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, $timeout, $modal, $log, courseEdit,toaster) {
     'user strict';
 
 
@@ -99,6 +99,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
             }
             $scope.eqvalBadges = function (user) {
+               // $scope.countBadge
                 if (courseEdit.userdata) {
                     var user = user || courseEdit.userdata;
                     if (user.badges && courseEdit.listOfBadges) {
@@ -184,7 +185,15 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     /*************method of change course module section unit****************/
     $scope.saveCurrentUnit = function (unit, specialId, courseId, moduleId, title, position) {
         //console.log(unit, specialId, courseId, moduleId);
-        var data = {id: courseEdit.userdata._id, unit: unit, specialId: specialId, courseId: courseId, moduleId: moduleId, title: title, position: position};
+        var data = {
+            id: courseEdit.userdata._id,
+            unit: unit,
+            specialId: specialId,
+            courseId: courseId,
+            moduleId: moduleId,
+            title: title,
+            position: position
+        };
         $http.post("/curentlesson", data).success(function (data) {
 
         });
@@ -299,7 +308,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     cb();
                     return;
                 }
-                $state.go("modules", {courseTitle: $scope.positionInCourse.course, moduleTitle: $scope.positionInCourse.module});
+                $state.go("modules", {
+                    courseTitle: $scope.positionInCourse.course,
+                    moduleTitle: $scope.positionInCourse.module
+                });
 
             }
         }
@@ -369,8 +381,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                         if ($scope.unitNowChanged.lims[0].typeLim === "video") {
                             var url = $scope.unitNowChanged.lims[0].content[0];
                             url = "http:" + url + "?enablejsapi=1&playerapiid=ytplayer";
-                            var params = { allowScriptAccess: "always", wmode: "transparent"};
-                            var atts = { id: "myytplayer" };
+                            var params = {allowScriptAccess: "always", wmode: "transparent"};
+                            var atts = {id: "myytplayer"};
                             swfobject.embedSWF(url, "lessonVideoPlayer", "425", "356", "8", null, null, params, atts);
                         }
                     }, 1);
@@ -391,7 +403,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                                     $scope.saveProgress($scope.unitNowChanged.unitId);
                                     return;
                                 }
-                               // console.log("no")
+                                // console.log("no")
                             }
 
                         };
@@ -402,7 +414,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     }
                     if ($state.current.name !== "course") {
                         $scope.saveCurrentUnit(id, specialId, $scope.courseNowChanged._id, $scope.moduleNowChanged._id, $scope.unitNowChanged.title,
-                                $scope.positionInCourse.module + "." + $scope.positionInCourse.section + "." + $scope.positionInCourse.unit);
+                            $scope.positionInCourse.module + "." + $scope.positionInCourse.section + "." + $scope.positionInCourse.unit);
                     }
                 });
                 refresh();
@@ -458,7 +470,18 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
         return totalPoints;
     };
+    $scope.popPoints = function(points){
+         toaster.pop('success', "+"+points)
+        //toaster.pop("users",null, "points.html", null, 'template');
+    };
     $scope.saveProgress = function (unitId) {
+        for(var i=0;i<$scope.listOfUnits.length;i++){
+            if($scope.listOfUnits[i].unitId===unitId){
+
+                $scope.popPoints($scope.listOfUnits[i].lims[0].points)
+            }
+        }
+
         if (!courseEdit.userdata) {
             return;
         }
@@ -1071,24 +1094,26 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     };
 
     /******************************notify logic**************************************************/
-    var notifymass = [];
-    $http.get("/user/notify").success(function (data) {
-        $http.get('/user').success(function (dataUser) {
-           // console.log(dataUser)
-            if (typeof data !== 'string'&& typeof dataUser !== 'string') {
-                for (var i = 0; i < data.data.length; i++) {
+    $scope.getFromAllNotify = function () {
+        var notifymass = [];
+        $http.get("/user/notify").success(function (data) {
+            $http.get('/user').success(function (dataUser) {
+                // console.log(dataUser)
+                if (typeof data !== 'string' && typeof dataUser !== 'string') {
+                    for (var i = 0; i < data.data.length; i++) {
 
-                    if (dataUser && (data.data[i].user === dataUser._id)) {
-                        notifymass = data.data[i].content;
-                        $scope.notification = notifymass;
-                        return;
+                        if (dataUser && (data.data[i].user === dataUser._id)) {
+                            notifymass = data.data[i].content;
+                            $scope.notification = notifymass;
+                            return;
+                        }
                     }
+                    $scope.notification = notifymass;
                 }
-                $scope.notification = notifymass;
-            }
+            });
         });
-    });
-
+    };
+    $scope.getFromAllNotify();
     var socket = io();
     socket.on("notify", function (data) {
 
@@ -1099,7 +1124,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             }, true);
             return;
         }
-        socket.emit('my other event', { my: 'data' });
+        socket.emit('my other event', {my: 'data'});
     });
 
     $scope.clickNotify = function (notify) {
@@ -1135,6 +1160,14 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
             }
         }
+    };
+
+
+    $scope.clearNotify = function (id) {
+
+        $http.post("/notify/delet/all", {id: id}).success(function (data) {
+            $scope.getFromAllNotify();
+        });
     };
 
     /**************************Profile edition******************************************/
@@ -1285,10 +1318,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             controller: ModalInstanceCtrlQuestion,
             resolve: {
                 saveNewQuestion: function () {
-                    return    $scope.saveNewQuestion;
+                    return $scope.saveNewQuestion;
                 },
                 user: function () {
-                    return    courseEdit.userdata;
+                    return courseEdit.userdata;
                 }
             }
         });
@@ -1327,10 +1360,10 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             controller: ModalInstanceCtrlPost,
             resolve: {
                 saveNewPost: function () {
-                    return    $scope.saveNewPost;
+                    return $scope.saveNewPost;
                 },
                 user: function () {
-                    return    courseEdit.userdata;
+                    return courseEdit.userdata;
                 },
                 uploadPostImg: function () {
                     return $scope.uploadPostImg
@@ -1378,7 +1411,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     return $scope.openPostModal;
                 },
                 openQuestionModal: function () {
-                    return  $scope.openQuestionModal;
+                    return $scope.openQuestionModal;
                 }
 
             }
@@ -1494,7 +1527,14 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
         courseEdit.userHasBadge(courseEdit.listOfBadges[1], courseEdit.userdata);
 
-        var newQuestion = {title: title, content: content, creator: creator, unit: unit, typePost: "question", tags: tagsObj};
+        var newQuestion = {
+            title: title,
+            content: content,
+            creator: creator,
+            unit: unit,
+            typePost: "question",
+            tags: tagsObj
+        };
 
         function questImgUpload(files, postId, count) {
 
@@ -1538,5 +1578,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         });
 
     };
+
+
+
 
 });
