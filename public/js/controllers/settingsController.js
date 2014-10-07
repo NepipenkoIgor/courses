@@ -1,9 +1,8 @@
 /**
  * Created by igor on 10/2/14.
  */
-app.controller("settings",function($scope,$http,courseEdit){
+app.controller("settings",function($scope,$http){
 
-    $scope.email=courseEdit.userdata.email;
     $scope.name = {};
     var text = /[a-zA-Z]/;
     var textCaps = /[A-Z]/;
