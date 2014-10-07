@@ -1,8 +1,9 @@
 /**
  * Created by igor on 10/2/14.
  */
-app.controller("settings",function($scope,$http){
+app.controller("settings",function($scope,$http,courseEdit){
 
+    //$scope.email=courseEdit.userdata.email;
     $scope.name = {};
     var text = /[a-zA-Z]/;
     var textCaps = /[A-Z]/;
@@ -32,7 +33,7 @@ app.controller("settings",function($scope,$http){
 
 
     var reqPass = function (data,event,name) {
-        $http.post("/true/oldpass", {"pass": data,email:$scope.email}).success(function (promisedate) {
+        $http.post("/true/oldpass", {"pass": data,email:courseEdit.userdata.email}).success(function (promisedate) {
            // console.log(promisedate)
             if (promisedate.success === true) {
                 $(event.currentTarget).parent().removeClass("has-error").addClass("has-success");
