@@ -75,35 +75,35 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
         <div class="col-md-7">
 
 
-            <form  class="editProfi form-horizontal" action="/main" method="POST" >
+            <form  class="editProfi form-horizontal"  >
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Facebook:</label>
                     <div class="col-sm-7">
-                    <input type="email" class="form-control"  name="facebook" placeholder="{{userdata.facebook}}">
+                    <input type="text" class="form-control"  name="facebook" ng-model="userdata.facebook" placeholder="{{userdata.facebook}}">
                         </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Twitter:</label>
                     <div class="col-sm-7">
-                    <input type="text" class="form-control"  name="twitter" placeholder="{{userdata.twitter}}">
+                    <input type="text" class="form-control"  name="twitter"  ng-model="userdata.twitter" placeholder="{{userdata.twitter}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Tumblr:</label>
                     <div class="col-sm-7">
-                    <input type="text" class="form-control" name="tumblr" placeholder="{{userdata.tumblr}}">
+                    <input type="text" class="form-control" name="tumblr" ng-model="userdata.tumblr"  placeholder="{{userdata.tumblr}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Pinterest:</label>
                     <div class="col-sm-7">
-                    <input type="text" class="form-control" name="pinterest" placeholder="{{userdata.pinterest}}">
+                    <input type="text" class="form-control" name="pinterest" ng-model="userdata.pinterest"  placeholder="{{userdata.pinterest}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">LinkedIn:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" name="linkedIn" placeholder="{{userdata.linkedIn}}">
+                        <input type="text" class="form-control" name="linkedIn"  ng-model="userdata.linkedIn" placeholder="{{userdata.linkedIn}}">
                     </div>
                 </div>
                 <input type="hidden" name="_id" ng-value="userdata._id"/>
@@ -111,7 +111,7 @@ vertical-align: top;" tooltip-placement="bottom" tooltip="Edit Profile" ng-click
                 <div class="buttons">
                 <span>
                 <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting"
-                        ng-click="showProfileEdition()">
+                        ng-click="[showProfileEdition(),sendSocialInfo()]">
                     Save
                 </button>
                 <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting"

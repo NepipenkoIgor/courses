@@ -1127,12 +1127,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
             $scope.searchPosts({type:"date",dateAfter:$scope.dtAfter,dateBefore:$scope.dtBefore});
         }
     };
- /*   $scope.toggleMin = function() {
-        $scope.minDate = $scope.minDate ? null : $scope.dtAfter;
-    };
-    $scope.toggleMax = function() {
-        $scope.maxDate = $scope.maxDate ? null : $scope.dtBefore;
-    };*/
+
     $scope.dataReg=function (data) {
         var data=new Date(data);
         var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -1141,5 +1136,16 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         var newDataYear = data.getFullYear();
         return newDataDate + " " + newDataMonth + " " + newDataYear;
     };
+
+
+    $scope.sendSocialInfo=function(){
+        var data={facebook:$scope.userdata.facebook,twitter:$scope.userdata.twitter,tumblr:$scope.userdata.tumblr,pinterest:$scope.userdata.pinterest,
+            linkedIn:$scope.userdata.linkedIn,_id:$scope.userdata._id,profile:$scope.userdata.username};
+        //console.log(data)
+        $http.post("/main",data).success(function(){
+
+        })
+    };
+
 });
 

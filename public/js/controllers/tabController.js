@@ -3,7 +3,7 @@
  */
 
 
-app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, $timeout, $modal, $log, courseEdit,toaster) {
+app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $location, $window, $timeout, $modal, $log, courseEdit, toaster) {
     'user strict';
 
 
@@ -99,7 +99,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }
             }
             $scope.eqvalBadges = function (user) {
-               // $scope.countBadge
+                // $scope.countBadge
                 if (courseEdit.userdata) {
                     var user = user || courseEdit.userdata;
                     if (user.badges && courseEdit.listOfBadges) {
@@ -470,13 +470,12 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
         return totalPoints;
     };
-    $scope.popPoints = function(points){
-         toaster.pop('success', "+"+points)
-        //toaster.pop("users",null, "points.html", null, 'template');
+    $scope.popPoints = function (points) {
+        toaster.pop('warning', "+" + points)
     };
     $scope.saveProgress = function (unitId) {
-        for(var i=0;i<$scope.listOfUnits.length;i++){
-            if($scope.listOfUnits[i].unitId===unitId){
+        for (var i = 0; i < $scope.listOfUnits.length; i++) {
+            if ($scope.listOfUnits[i].unitId === unitId) {
 
                 $scope.popPoints($scope.listOfUnits[i].lims[0].points)
             }
@@ -1116,16 +1115,25 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     $scope.getFromAllNotify();
     var socket = io();
     socket.on("notify", function (data) {
-
+        //notifymass=[];
         if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id && data.creatorComment !== data.creatorOfPost) {
             $scope.httpUsersList(function () {
-                notifymass.push(data);
+                console.log(data)
+                $scope.notification.push(data);
                 //$scope.$apply();
             }, true);
             return;
         }
         socket.emit('my other event', {my: 'data'});
     });
+    socket.on("success", function (data) {
+        $scope.popSuccess = function (data) {
+            toaster.pop('success', data.text)
+        };
+        $scope.popSuccess(data);
+        //  console.log("sdasdasdasdasd")
+    });
+
 
     $scope.clickNotify = function (notify) {
         for (var i = 0; i < $scope.notification.length; i++) {
@@ -1308,7 +1316,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         $scope.$apply();
     }, 100);
 
-
+    $scope.closeMenuNotify = function () {
+        $("#menuUser").removeClass("open")
+    }
     /***********************open question modal***************************/
 
     $scope.openQuestionModal = function () {
@@ -1578,8 +1588,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         });
 
     };
-
-
 
 
 });

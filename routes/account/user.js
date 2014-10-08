@@ -9,7 +9,7 @@ var fs =require('fs');
 
 
 
-function router(app,hasUser) {
+function router(app,hasUser,io) {
     app.post('/user/upload',hasUser,function (req, res) {
        console.log(req.files,'req.body',req.user);
        // console.log(req.files)
@@ -28,6 +28,7 @@ function router(app,hasUser) {
                         Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (num) {
                            // res.redirect("/#/profile/" + req.user.username);
                             res.json({a:"B"})
+                            io.sockets.emit("success", {"text":"user avatar is update"});
                         });
                     });
             });
@@ -39,6 +40,7 @@ function router(app,hasUser) {
                 Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (num) {
                     res.json({a:"B"})
                     //res.json({a:"B"});
+                    io.sockets.emit("success", {"text":"user avatar is update"});
                 });
             });
     });

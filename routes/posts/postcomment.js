@@ -24,13 +24,13 @@ function router(app, hasUser, io) {
             }
             Notify.find({user: req.body.creator}, function (err, data) {
                 var notify;
-                notify = {notifyId: Date.now(), type: "comment your post", creatorOfPost: req.body.creator, postId: req.body._id, creatorComment: req.body.creatorComment};
+                notify = {notifyId: Date.now(), type: "commented on your post", creatorOfPost: req.body.creator, postId: req.body._id, creatorComment: req.body.creatorComment};
                 if (req.body.typePost === "question") {
                     notify.type = "comment your question";
 
                 }
                 if (kindPost==="answer") {
-                    notify.type = "comment your answer";
+                    notify.type = "commented on your answer";
                     notify.postId=req.body.parentAnswerId;
                     console.log(notify)
                 }

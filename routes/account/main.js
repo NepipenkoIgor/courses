@@ -4,7 +4,7 @@
 
 var mongoose = require('mongoose');
 var User = mongoose.model('Users');
-function router(app, hasUser) {
+function router(app, hasUser, io) {
 
   app.post('/main', hasUser, function (req, res) {
     console.log(req.body);
@@ -22,9 +22,13 @@ function router(app, hasUser) {
       //res.json({success: !err, msg: [], data: user, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
         if(req.body.profile){
             res.redirect("/#/profile/"+req.body.profile);
+            io.sockets.emit("success", {"text":"social info is update"});
             return;
         }
-        res.redirect("/#/settings");
+
+        //res.redirect("/#/settings?success=true");
+        io.sockets.emit("success", {"text":"acount info is update"});
+        //res.end()
     });
 
 

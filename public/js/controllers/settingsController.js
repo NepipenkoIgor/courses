@@ -1,9 +1,8 @@
 /**
  * Created by igor on 10/2/14.
  */
-app.controller("settings",function($scope,$http,courseEdit){
+app.controller("settings", function ($scope, $http, $state, $location, courseEdit) {
 
-    //$scope.email=courseEdit.userdata.email;
     $scope.name = {};
     var text = /[a-zA-Z]/;
     var textCaps = /[A-Z]/;
@@ -11,19 +10,19 @@ app.controller("settings",function($scope,$http,courseEdit){
     var num = /\d/;
     var validmail = /([\w\-]{1,20}\.)*([\w\-]{1,20})\@([\w\-]{1,20}\.)*([\w\-]{1,20})\.([a-z]{2,5})$/;
 
-    $("#ChangePasswordForm").keypress(function(event){
-        if(event.keyCode===13){
-             if(!!$scope.oldPassword&&!!$scope.password&&!!$scope.comfpassword){
-             return;
-             }
+    $("#ChangePasswordForm").keypress(function (event) {
+        if (event.keyCode === 13) {
+            if (!!$scope.oldPassword && !!$scope.password && !!$scope.comfpassword) {
+                return;
+            }
             event.preventDefault();
-          //  console.log(event.keyCode)
+            //  console.log(event.keyCode)
         }
     });
 
-    $scope.trueValidate=function(){
+    $scope.trueValidate = function () {
 
-        if(!!$scope.oldPassword&&!!$scope.password&&!!$scope.comfpassword){
+        if (!!$scope.oldPassword && !!$scope.password && !!$scope.comfpassword) {
             $("#submitNewPass").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
             return;
         }
@@ -32,14 +31,14 @@ app.controller("settings",function($scope,$http,courseEdit){
     };
 
 
-    var reqPass = function (data,event,name) {
-        $http.post("/true/oldpass", {"pass": data,email:courseEdit.userdata.email}).success(function (promisedate) {
-           // console.log(promisedate)
+    var reqPass = function (data, event, name) {
+        $http.post("/true/oldpass", {"pass": data, email: courseEdit.userdata.email}).success(function (promisedate) {
+            // console.log(promisedate)
             if (promisedate.success === true) {
                 $(event.currentTarget).parent().removeClass("has-error").addClass("has-success");
                 $(event.currentTarget).next().removeClass("glyphicon-remove").addClass("glyphicon-ok");
                 $scope.name[name] = "success validation";
-                $scope.oldPassword=true;
+                $scope.oldPassword = true;
                 $scope.trueValidate();
                 return;
             }
@@ -47,16 +46,15 @@ app.controller("settings",function($scope,$http,courseEdit){
             $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
             $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $scope.name[name] = "this password not true";
-            $scope.oldPassword=false;
+            $scope.oldPassword = false;
             $scope.trueValidate();
             return;
         });
     };
     var deferredCode = _.debounce(reqPass, 300);
-    $scope.validOldPass=function(event,name){
-        deferredCode(event.currentTarget.value,event,name);
+    $scope.validOldPass = function (event, name) {
+        deferredCode(event.currentTarget.value, event, name);
     };
-
 
 
     $scope.validPassword = function (event, name) {
@@ -66,7 +64,7 @@ app.controller("settings",function($scope,$http,courseEdit){
             $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
             $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $scope.name[name] = "password can not be zero length";
-            $scope.password=false;
+            $scope.password = false;
             $scope.trueValidate();
 
         }
@@ -75,7 +73,7 @@ app.controller("settings",function($scope,$http,courseEdit){
             $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
             $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $scope.name[name] = "password can only contain letters and numbers";
-            $scope.password=false;
+            $scope.password = false;
             $scope.trueValidate();
             return;
         }
@@ -85,7 +83,7 @@ app.controller("settings",function($scope,$http,courseEdit){
             $(event.currentTarget).next().removeClass("glyphicon-remove").addClass("glyphicon-ok");
             $scope.name[name] = "success validation";
             $scope.value = event.currentTarget.value;
-            $scope.password=true;
+            $scope.password = true;
             $scope.trueValidate();
             //console.log($scope.value)
             return;
@@ -95,7 +93,7 @@ app.controller("settings",function($scope,$http,courseEdit){
             $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
             $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $scope.name[name] = "password can't only contain letters ,add numbers";
-            $scope.password=false;
+            $scope.password = false;
             $scope.trueValidate();
             return;
         }
@@ -104,7 +102,7 @@ app.controller("settings",function($scope,$http,courseEdit){
             $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
             $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $scope.name[name] = "password can't only contain numbers ,add letters";
-            $scope.password=false;
+            $scope.password = false;
             $scope.trueValidate();
             return;
         }
@@ -115,7 +113,7 @@ app.controller("settings",function($scope,$http,courseEdit){
             $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
             $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $scope.name[name] = "password fields do not match";
-            $scope.comfpassword=false;
+            $scope.comfpassword = false;
             $scope.trueValidate();
             return;
         }
@@ -123,10 +121,22 @@ app.controller("settings",function($scope,$http,courseEdit){
         $(event.currentTarget).parent().removeClass("has-error").addClass("has-success");
         $(event.currentTarget).next().removeClass("glyphicon-remove").addClass("glyphicon-ok");
         $scope.name[name] = "success validation";
-        $scope.comfpassword=true;
+        $scope.comfpassword = true;
         $scope.trueValidate();
         return;
     };
 
+    $scope.sendAcoutInfo = function () {
+        var data = {
+            email: $scope.userdata.email,
+            firstname: $scope.userdata.firstname,
+            lastname: $scope.userdata.lastname,
+            phone: $scope.userdata.phone,
+            _id: $scope.userdata._id
+        };
+        //console.log(data)
+        $http.post("/main", data).success(function () {
 
+        });
+    };
 });

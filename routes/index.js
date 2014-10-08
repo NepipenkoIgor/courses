@@ -42,23 +42,6 @@ function router(app, io) {
 
         res.status(403).end();
 
-        /*res.redirect("/#/login");*/
-        /*  if (!req.headers.authorization) {
-         res.redirect("/#/login");
-         return
-         }
-
-         var token = req.headers.authorization.split(' ')[1];
-         var payload = jwt.decode(token, TheSecret);
-
-         if (payload.exp <= Date.now()) {
-         return res.status(401).send({
-         message: 'Token has expired'
-         });
-         }
-
-         req.user = payload.sub;
-         return next();*/
 
     }
 
@@ -68,8 +51,8 @@ function router(app, io) {
     var twitter = require('./account/twitter')(app);
     var local = require('./account/local')(app, hasAccess);
     var forgot = require('./account/forgot')(app, hasAccess);
-    var user = require('./account/user')(app, hasUser);
-    var main = require('./account/main')(app, hasUser);
+    var user = require('./account/user')(app, hasUser,io);
+    var main = require('./account/main')(app, hasUser,io);
     var autorization = require('./account/autorization')(app, hasAccess);
     var newPost = require('./posts/newpost')(app, hasUser, io);
     var deletePost = require('./posts/deletpost')(app, hasUser);

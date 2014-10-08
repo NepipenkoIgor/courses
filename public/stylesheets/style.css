@@ -1856,7 +1856,7 @@ body>div>div>#toast-container .toast-info {
     background-color: white!important;
 }
 
-body>div>div>#toast-container .toast-success {
+body>div>div>#toast-container .toast-warning {
     /*background-color: grey!important;*/
     background-image: none!important;
     padding: 20px 30px;
@@ -1865,4 +1865,11 @@ body>div>div>#toast-container .toast-success {
     background-color: gainsboro!important;
     color:grey;
     font-size: 30px;
+}
+.userToster{
+    position: fixed!important;
+    right: 120px!important;
+    bottom:0!important;
+    margin-top: 50px!important;
+    top:inherit!important;
 }

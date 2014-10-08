@@ -340,7 +340,7 @@
             <p class="list-group-item-text">{{notify.type}}</p>
         </a>
         <a class="notify_viewall" ng-if="notification.length>2">
-            <p ng-click="clearNotify(userdata._id)">clear all</p>
+            <p ng-click="[clearNotify(userdata._id),closeMenuNotify()]">clear all</p>
         </a>
     </div>
 </div>
@@ -489,15 +489,15 @@
         </div>
     </div>
 </div>
-<div ng-controller="badgeController" style="width: 100px;height: 50px">
-   <!--<button ng-click="pop()" style="width: 100px;height: 50px">Show a Toaster</button>-->
-    <toaster-container toaster-options="{'time-out': 5000, 'close-button':true}"  style="position: absolute!important;right: 120px;margin-top: 50px"></toaster-container>
+<div ng-controller="badgeController">
+  <!-- <button ng-click="pop()" style="width: 100px;height: 50px">Show a Toaster</button>-->
+    <toaster-container class="userToster" toaster-options="{'time-out': 3000, 'close-button':true}"  ></toaster-container>
 </div>
 
 <script type="text/ng-template" id="badge.html">
     <div style="text-align: center;padding: 25px 10px;background-color: white;color:grey" >
 <h2>{{desc}}</h2>
-        <img ng-src="{{imgBadge}}" style="width: 150px">
+        <img ng-src="{{imgBadge}}" style="width: 75px">
     </div>
 
 
