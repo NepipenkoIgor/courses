@@ -25,9 +25,14 @@ function router(app,hasUser,io) {
                 fs.createReadStream(req.files.userfile.path)
                     .pipe(fs.createWriteStream("public/img/user/avatar/" + req.files.userfile.originalFilename))
                     .on('finish', function () {
-                        Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (num) {
+                        Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (err,num) {
                            // res.redirect("/#/profile/" + req.user.username);
-                            res.json({a:"B"})
+                            if(err){
+                                io.sockets.emit("error", {"text":"is not update"});
+                                res.json({success:false})
+                                return;
+                            }
+                            res.json({success:true})
                             io.sockets.emit("success", {"text":"user avatar is update"});
                         });
                     });
@@ -37,9 +42,14 @@ function router(app,hasUser,io) {
         fs.createReadStream(req.files.userfile.path)
             .pipe(fs.createWriteStream("public/img/user/avatar/" + req.files.userfile.originalFilename))
             .on('finish', function () {
-                Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (num) {
-                    res.json({a:"B"})
-                    //res.json({a:"B"});
+                Users.update({_id: req.user._id}, {avatar: "img/user/avatar/" + req.files.userfile.originalFilename}, function (err,num) {
+                    if(err){
+                        io.sockets.emit("error", {"text":"is not update"});
+                        res.json({success:false})
+                        return;
+                    }
+                    res.json({success:true})
+
                     io.sockets.emit("success", {"text":"user avatar is update"});
                 });
             });

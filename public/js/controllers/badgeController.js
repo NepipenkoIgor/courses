@@ -8,7 +8,7 @@ app.controller("badgeController",function($scope,$http,courseEdit,toaster){
 
         $scope.desc=badge.description;
 
-        console.log(badge,$scope.desc,$scope.imgBadge)
+       // console.log(badge,$scope.desc,$scope.imgBadge)
      if(user.badges.indexOf(badge.badgeId)===(-1)){
          $http.post('/badgeuser', [user._id,badge.badgeId]).success(function (data) {
              //console.log("save badges");

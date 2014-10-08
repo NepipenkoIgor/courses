@@ -7,6 +7,24 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         $(".postLoad").show();
     }
 
+    var socket = io();
+    socket.on("postUpdate", function (data) {
+       //console.log(data.id)
+        if(data.action==="answer"){
+            for(var j=0;j<$scope.answerObj.length;j++){
+                if($scope.answerObj[j]._id===data.id){
+                    $scope.answerObj[j].comments=data.comments
+                }
+            }
+            return;
+        }
+        for(var i=0;i<$scope.postdata.length;i++){
+            if($scope.postdata[i]._id===data.id){
+                $scope.postdata[i].comments=data.comments
+            }
+        }
+    });
+
     /****************config post**********************/
     $scope.triggerBool = true;
     $scope.comment = "";

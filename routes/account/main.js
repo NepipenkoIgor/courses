@@ -19,16 +19,23 @@ function router(app, hasUser, io) {
 
       }
     User.update({_id: id}, obj, function (err, user) {
+if(err){
+    res.json({"succes":false})
+    io.sockets.emit("error", {"text":"is not update"});
+    return;
+}
       //res.json({success: !err, msg: [], data: user, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
         if(req.body.profile){
-            res.redirect("/#/profile/"+req.body.profile);
+            //res.redirect("/#/profile/"+req.body.profile);
+            res.json({"succes":true})
             io.sockets.emit("success", {"text":"social info is update"});
             return;
         }
 
         //res.redirect("/#/settings?success=true");
+        res.json({"succes":true})
         io.sockets.emit("success", {"text":"acount info is update"});
-        //res.end()
+
     });
 
 

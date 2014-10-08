@@ -13,11 +13,14 @@ function router(app, hasUser, io) {
         if (req.body.action === "answer") {
             istanceShem = Answers;
             kindPost="answer";
-            console.log("a!!!!!!!!!!!!!!!!!!!!",req.body)
+           // console.log("a!!!!!!!!!!!!!!!!!!!!",req.body)
         } else {
             istanceShem = Posts;
         }
         istanceShem.update({_id: req.body._id}, {$set: {comments: req.body.comments}}, function (err, num) {
+
+            io.sockets.emit("postUpdate", {"id":req.body._id,comments:req.body.comments,action:req.body.action});
+
             if (req.body.creator === req.body.creatorComment) {
                 res.json({success: !err, msg: [], data: num, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
                 return;

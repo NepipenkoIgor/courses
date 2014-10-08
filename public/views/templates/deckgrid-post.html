@@ -112,7 +112,7 @@
 
     <div class="header answer-heder comments" ng-if="mother.answerInput(card._id)" style="height: auto;display: inline-block;width: 100%;vertical-align: top;" ng-style="mother.borderCommentRadius(card)">
 
-        <img ng-src="{{mother.postAvatar(card.creator)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
+        <img ng-src="{{mother.postAvatar(mother.userdata._id)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
         <div class="col-md-12" style="padding: 0;overflow:hidden">
             <textarea class="msd-elastic" name="answer" placeholder="The answer is...."  ng-model="mother.answer.content" style="min-height: 50px; margin-bottom: 5px;"></textarea>
             <div class="btn-group" style="display: block">

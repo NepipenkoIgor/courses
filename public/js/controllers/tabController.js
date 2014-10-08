@@ -1118,7 +1118,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         //notifymass=[];
         if (data.hasOwnProperty("type") && data.creatorOfPost === courseEdit.userdata._id && data.creatorComment !== data.creatorOfPost) {
             $scope.httpUsersList(function () {
-                console.log(data)
+
                 $scope.notification.push(data);
                 //$scope.$apply();
             }, true);
@@ -1131,6 +1131,13 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             toaster.pop('success', data.text)
         };
         $scope.popSuccess(data);
+        //  console.log("sdasdasdasdasd")
+    });
+    socket.on("error", function (data) {
+        $scope.popError = function (data) {
+            toaster.pop('error', data.text)
+        };
+        $scope.popError(data);
         //  console.log("sdasdasdasdasd")
     });
 
