@@ -1,26 +1,26 @@
 /**
  * Created by igor on 7/2/14.
  */
-app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal,$sce,courseEdit, promiseUser) {
+app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal, $sce, courseEdit, promiseUser) {
     'user strict';
-    if($state.current.name==="posts"||$state.current.name==="editprofile"){
+    if ($state.current.name === "posts" || $state.current.name === "editprofile") {
         $(".postLoad").show();
     }
 
     var socket = io();
     socket.on("postUpdate", function (data) {
-       //console.log(data.id)
-        if(data.action==="answer"){
-            for(var j=0;j<$scope.answerObj.length;j++){
-                if($scope.answerObj[j]._id===data.id){
-                    $scope.answerObj[j].comments=data.comments
+        //console.log(data.id)
+        if (data.action === "answer") {
+            for (var j = 0; j < $scope.answerObj.length; j++) {
+                if ($scope.answerObj[j]._id === data.id) {
+                    $scope.answerObj[j].comments = data.comments
                 }
             }
             return;
         }
-        for(var i=0;i<$scope.postdata.length;i++){
-            if($scope.postdata[i]._id===data.id){
-                $scope.postdata[i].comments=data.comments
+        for (var i = 0; i < $scope.postdata.length; i++) {
+            if ($scope.postdata[i]._id === data.id) {
+                $scope.postdata[i].comments = data.comments
             }
         }
     });
@@ -257,10 +257,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
 
                     }
-                    $scope.userCountBadge=function(){
-                       return $scope.userNowView.badges.length;
+                    $scope.userCountBadge = function () {
+                        return $scope.userNowView.badges.length;
                     };
-                   // $scope.userCountBadge($scope.userNowView._id);
+                    // $scope.userCountBadge($scope.userNowView._id);
                     if (!init) {
 
                         $state.go('404');
@@ -349,10 +349,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     };
 
 
-    $scope.deleteAnswer=function(card) {
+    $scope.deleteAnswer = function (card) {
         //console.log(card._id)
         if (confirm("Are you sure you wish to delete this?")) {
-            var data = {id:card._id};
+            var data = {id: card._id};
             $http.post('/answer/delete', data).success(function () {
                 reqPosts();
                 reqUsers();
@@ -366,7 +366,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
 
     function dataReg(data) {
-        var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var newDataDate = data.getDate();
         var newDataMonth = monthNames[data.getMonth()];
         var newDataYear = data.getFullYear();
@@ -381,7 +381,15 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
             var newDate = new Date();
             card.comments.push({content: comment, creator: creator, postId: date, dataReg: newDate, likes: []});
 
-            var data = {"_id": idPost, "comments": card.comments, creator: card.creator, creatorComment: creator, typePost: card.typePost, action: action,parentAnswerId:card.postId};
+            var data = {
+                "_id": idPost,
+                "comments": card.comments,
+                creator: card.creator,
+                creatorComment: creator,
+                typePost: card.typePost,
+                action: action,
+                parentAnswerId: card.postId
+            };
             $http.post('/comment/new', data).success(function () {
                 if ($location.$$path.split("/")[1] === 'profile') {
                     //$scope.postdata = data.data;
@@ -540,9 +548,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
                 $scope.postdata = data.data;
                 $location.url("/post/all?type=" + data.type);
 
-                if($location.$$url.split("?")[1].split("=")[1]!=="date"){
-                    $scope.dtAfter=undefined;
-                    $scope.dtBefore=undefined;
+                if ($location.$$url.split("?")[1].split("=")[1] !== "date") {
+                    $scope.dtAfter = undefined;
+                    $scope.dtBefore = undefined;
                 }
                 // $scope.chengedSearchIcon=data.type;
                 $scope.page = $scope.postdata.length / 10;
@@ -710,6 +718,9 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         }
 
     };
+
+    /**************community post /answers differnts ,logick views************************/
+
     $scope.postType = function (type) {
         if (type === "question") {
             return {
@@ -912,10 +923,10 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         if ($scope.postsAnswer) {
 
             if (card.typePost === "question" && $scope.postsAnswer(card).length === 0) {
-                if(type==="button"){
+                if (type === "button") {
                     return {"border-bottom-left-radius": "25px"};
                 }
-                if($scope.answerInputval===card._id&&type==="commentPostButton"){
+                if ($scope.answerInputval === card._id && type === "commentPostButton") {
                     return {"border-radius": "0 0 0 0"};
                 }
                 return {"border-radius": "0 0 25px 25px"};
@@ -927,9 +938,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
         if (answer && (answer.length - 1) === index) {
             return {"border-radius": "0 0 25px 25px"};
         }
-       /* if (type) {
-            return;
-        }*/
+
         if (card.typePost !== "question") {
             return {"border-radius": "0 0 25px 25px"};
         }
@@ -938,160 +947,6 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
 
 
-/*    $scope.openNewPass = function (size) {
-
-        var modalInstance = $modal.open({
-            templateUrl: 'myModalNewPass.html',
-            controller: ModalNewPassContrl,
-            size: size,
-            resolve: {
-                email: function () {
-                    return courseEdit.userdata.email;
-                }
-            }
-        });
-
-
-    };
-    var ModalNewPassContrl = function ($scope, $modalInstance,email) {
-        $scope.email=email;
-        $scope.name = {};
-        var text = /[a-zA-Z]/;
-        var textCaps = /[A-Z]/;
-        var notextnum = /[^\w\-]/;
-        var num = /\d/;
-        var validmail = /([\w\-]{1,20}\.)*([\w\-]{1,20})\@([\w\-]{1,20}\.)*([\w\-]{1,20})\.([a-z]{2,5})$/;
-
-        angular.element("#ChangePasswordForm").keypress(function(event){
-            if(event.keyCode===13){
-                if($scope.password&&!!$scope.comfpassword){
-                    return;
-                }
-                event.preventDefault();
-            }
-        });
-
-        $scope.trueValidate=function(){
-            //console.log(!!$scope.firstname&&!!$scope.lastname&&!!$scope.email&&!!$scope.password&&!!$scope.comfpassword&&!!$scope.code)
-            if(!!$scope.oldPassword&&!!$scope.password&&!!$scope.comfpassword){
-                $("#submitNewPass").removeClass("button-bad").removeClass("disabled").addClass("btn-primary");
-                return;
-            }
-            $("#submitNewPass").removeClass("btn-primary").addClass("button-bad").addClass("disabled");
-            return;
-        };
-
-
-        var reqPass = function (data,event,name) {
-            $http.post("/true/oldpass", {"pass": data,email:$scope.email}).success(function (promisedate) {
-                console.log(promisedate)
-                if (promisedate.success === true) {
-                    $(event.currentTarget).parent().removeClass("has-error").addClass("has-success");
-                    $(event.currentTarget).next().removeClass("glyphicon-remove").addClass("glyphicon-ok");
-                    $scope.name[name] = "success validation";
-                    $scope.oldPassword=true;
-                    $scope.trueValidate();
-                    return;
-                }
-                //$(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-                $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
-                $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
-                $scope.name[name] = "this password not true";
-                $scope.oldPassword=false;
-                $scope.trueValidate();
-                return;
-            });
-        };
-        var deferredCode = _.debounce(reqPass, 300);
-        $scope.validOldPass=function(event,name){
-            deferredCode(event.currentTarget.value,event,name);
-        };
-
-
-
-        $scope.validPassword = function (event, name) {
-            //
-            if (event.currentTarget.value.length === 0) {
-                //$(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-                $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
-                $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
-                $scope.name[name] = "password can not be zero length";
-                $scope.password=false;
-                $scope.trueValidate();
-
-            }
-            if (notextnum.test(event.currentTarget.value) === true) {
-                // $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-                $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
-                $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
-                $scope.name[name] = "password can only contain letters and numbers";
-                $scope.password=false;
-                $scope.trueValidate();
-                return;
-            }
-            if ((text.test(event.currentTarget.value) && num.test(event.currentTarget.value)) === true) {
-                //$(event.currentTarget).next().show().removeClass("alert-danger").addClass("alert-success");
-                $(event.currentTarget).parent().removeClass("has-error").addClass("has-success");
-                $(event.currentTarget).next().removeClass("glyphicon-remove").addClass("glyphicon-ok");
-                $scope.name[name] = "success validation";
-                $scope.value = event.currentTarget.value;
-                $scope.password=true;
-                $scope.trueValidate();
-                //console.log($scope.value)
-                return;
-            }
-            if (text.test(event.currentTarget.value) === true) {
-                // $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-                $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
-                $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
-                $scope.name[name] = "password can't only contain letters ,add numbers";
-                $scope.password=false;
-                $scope.trueValidate();
-                return;
-            }
-            if (num.test(event.currentTarget.value) === true) {
-                // $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-                $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
-                $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
-                $scope.name[name] = "password can't only contain numbers ,add letters";
-                $scope.password=false;
-                $scope.trueValidate();
-                return;
-            }
-        };
-        $scope.comfPassword = function (event, name) {
-            if (event.currentTarget.value !== $scope.value || event.currentTarget.value.length === 0) {
-                // $(event.currentTarget).next().show().removeClass("alert-success").addClass("alert-danger");
-                $(event.currentTarget).parent().removeClass("has-success").addClass("has-error");
-                $(event.currentTarget).next().removeClass("glyphicon-ok").addClass("glyphicon-remove");
-                $scope.name[name] = "password fields do not match";
-                $scope.comfpassword=false;
-                $scope.trueValidate();
-                return;
-            }
-            // $(event.currentTarget).next().show().removeClass("alert-danger").addClass("alert-success");
-            $(event.currentTarget).parent().removeClass("has-error").addClass("has-success");
-            $(event.currentTarget).next().removeClass("glyphicon-remove").addClass("glyphicon-ok");
-            $scope.name[name] = "success validation";
-            $scope.comfpassword=true;
-            $scope.trueValidate();
-            return;
-        };
-
-
-        $scope.openPost = function () {
-            $modalInstance.close();
-            $scope.openPostModal();
-            // $modalInstance.dismiss('cancel');
-
-        };
-        $scope.openQuestion = function () {
-            $modalInstance.close();
-            $scope.openQuestionModal();
-            // $modalInstance.dismiss('cancel');
-
-        };
-    };*/
     function escapeHtml(unsafe) {
         return unsafe
             .replace(/&amp/g, "&;")
@@ -1100,34 +955,36 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
             .replace(/&quot;/g, '"')
             .replace(/&#39;/g, "'");
     }
-  $scope.transformContent=function(content){
-      if(content){
-          var converter = new Markdown.Converter();
 
-          if($('code')){
-              $('code').each(function(i, block) {
-                  //console.log(i,)
-                 if(!$(block).hasClass('hljs')) {
-                      hljs.configure({
-                          useBR: true,
-                          languages: ['xml', 'javascript']
-                      });
-                      hljs.highlightBlock(block);
-                  }
-              });
-         }
-          var markdown = Markdown.getSanitizingConverter();
-          var  text=markdown.makeHtml(content);
-          return $sce.trustAsHtml(text);
-      }
+    $scope.transformContent = function (content) {
+        if (content) {
+            var converter = new Markdown.Converter();
+
+            if ($('code')) {
+                $('code').each(function (i, block) {
+                    //console.log(i,)
+                    if (!$(block).hasClass('hljs')) {
+                        hljs.configure({
+                            useBR: true,
+                            languages: ['xml', 'javascript']
+                        });
+                        hljs.highlightBlock(block);
+                    }
+                });
+            }
+            var markdown = Markdown.getSanitizingConverter();
+            var text = markdown.makeHtml(content);
+            return $sce.trustAsHtml(text);
+        }
 
     };
 
+    /****************Date search*****************************/
 
-    $scope.opened={};
-    $scope.initDate=Date.now()
+    $scope.opened = {};
+    $scope.initDate = Date.now()
     $scope.formatDate = 'dd-MMMM-yyyy';
-    $scope.openDate = function($event,position) {
+    $scope.openDate = function ($event, position) {
         $event.preventDefault();
         $event.stopPropagation();
 
@@ -1135,20 +992,20 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     };
 
 
-    $scope.onChengeDate=function(){
+    $scope.onChengeDate = function () {
 
-        $scope.minDate=$scope.dtAfter;
-        $scope.maxDate=$scope.dtBefore;
-       // console.log( Date.parse($scope.minDate),Date.parse($scope.maxDate));
-        if($scope.dtAfter&&$scope.dtBefore){
+        $scope.minDate = $scope.dtAfter;
+        $scope.maxDate = $scope.dtBefore;
+        // console.log( Date.parse($scope.minDate),Date.parse($scope.maxDate));
+        if ($scope.dtAfter && $scope.dtBefore) {
 
-            $scope.searchPosts({type:"date",dateAfter:$scope.dtAfter,dateBefore:$scope.dtBefore});
+            $scope.searchPosts({type: "date", dateAfter: $scope.dtAfter, dateBefore: $scope.dtBefore});
         }
     };
 
-    $scope.dataReg=function (data) {
-        var data=new Date(data);
-        var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+    $scope.dataReg = function (data) {
+        var data = new Date(data);
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var newDataDate = data.getDate();
         var newDataMonth = monthNames[data.getMonth()];
         var newDataYear = data.getFullYear();
@@ -1156,14 +1013,25 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     };
 
 
-    $scope.sendSocialInfo=function(){
-        var data={facebook:$scope.userdata.facebook,twitter:$scope.userdata.twitter,tumblr:$scope.userdata.tumblr,pinterest:$scope.userdata.pinterest,
-            linkedIn:$scope.userdata.linkedIn,_id:$scope.userdata._id,profile:$scope.userdata.username};
-        //console.log(data)
-        $http.post("/main",data).success(function(){
+    /***************social info update**************************/
 
-        })
+    $scope.sendSocialInfo = function () {
+        var data = {
+            facebook: $scope.userdata.facebook,
+            twitter: $scope.userdata.twitter,
+            tumblr: $scope.userdata.tumblr,
+            pinterest: $scope.userdata.pinterest,
+            linkedIn: $scope.userdata.linkedIn,
+            _id: $scope.userdata._id,
+            profile: $scope.userdata.username
+        };
+        //console.log(data)
+        $http.post("/main", data).success(function () {
+
+        });
     };
+
+
 
 });
 

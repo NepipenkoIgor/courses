@@ -14,8 +14,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     $(".postLoad").hide();
 
 
-    // courseEdit.listOfBadges = $scope.listOfBadges;
-
     /*********** initial tab*-*****************/
     function initTab() {
 
@@ -158,19 +156,70 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 var url = $location.$$url;
                 url = url.split("/");
 
-                if (url[1] && url[1] === 'courses') {
+                if (url[1] && url[1] === 'courses' && url[5] !== "complete") {
+
                     if ($scope.listOfCourses[url[2] - 1]) {
                         $scope.courseNowChange($scope.listOfCourses[url[2] - 1]._id);
                         if (url[3]) {
-                            $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 1]._id);
-                            if (url[5]) {
-                                var sectionUrl = url[4].split(".");
-                                var unitUrl = url[5].split(".");
-                                $scope.unitNowChange($scope.showUnitsList($scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId)[unitUrl[2] - 1].unitId, $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId);
-                            }
+                            if ($scope.courseNowChanged.modules[url[3] - 1]) {
 
+                                if ((url[3] - 2) !== (-1)) {
+                                    console.log("next modules")
+                                    $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 2]._id);
+                                    var id = $scope.moduleNowChanged.sections[$scope.moduleNowChanged.sections.length - 1].specialId
+                                    var mass = $scope.showUnitsList(id)
+                                    if (courseEdit.userdata.progress.indexOf(mass[mass.length - 1].unitId) === (-1)) {
+
+                                        $scope.courseNowChange($scope.listOfCourses[url[2] - 1]._id);
+                                        return;
+                                    }
+                                    $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 1]._id);
+                                } else {
+                                    $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 1]._id);
+                                }
+
+                                if (url[5]) {
+                                    var sectionUrl = url[4].split(".");
+                                    var unitUrl = url[5].split(".");
+                                    var sectionNowId = $scope.moduleNowChanged.sections[sectionUrl[1] - 1].specialId;
+                                    var arrUnitsNow = $scope.showUnitsList(sectionNowId);
+
+                                    if ((unitUrl[2] - 2) === (-1)) {
+
+                                        if ((sectionUrl[1] - 2) !== (-1)) {
+                                            var sectionBeforeId = $scope.moduleNowChanged.sections[sectionUrl[1] - 2].specialId;
+                                            var arrUnitBefore = $scope.showUnitsList(sectionBeforeId);
+
+                                            if (courseEdit.userdata.progress.indexOf(arrUnitBefore[arrUnitBefore.length - 1].unitId) === (-1)) {
+
+                                                $scope.unitNowChange(arrUnitBefore[arrUnitBefore.length - 1].unitId, sectionBeforeId);
+                                                return;
+                                            }
+                                        }
+                                        $scope.unitNowChange(arrUnitsNow[unitUrl[2] - 1].unitId, sectionNowId);
+                                    } else {
+
+                                        if ($scope.moduleNowChanged.sections[sectionUrl[1] - 1] && arrUnitsNow[unitUrl[2] - 1]) {
+                                            if (courseEdit.userdata.progress.indexOf(arrUnitsNow[unitUrl[2] - 2].unitId) !== (-1)) {
+                                                $scope.unitNowChange(arrUnitsNow[unitUrl[2] - 1].unitId, sectionNowId);
+                                            } else {
+                                                // $state.go("404");
+                                            }
+                                        } else {
+                                            $state.go("404");
+                                        }
+                                    }
+                                }
+                            } else {
+                                $state.go("404");
+                            }
                         }
+                    } else {
+                        $state.go("404");
                     }
+                }
+                if (url[5] === "complete") {
+                    console.log("asdasdasd")
                 }
             }
         });
@@ -183,6 +232,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     /*************method of change course module section unit****************/
+
+
     $scope.saveCurrentUnit = function (unit, specialId, courseId, moduleId, title, position) {
         //console.log(unit, specialId, courseId, moduleId);
         var data = {
@@ -217,7 +268,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         // console.log($scope.currentModule)
         $scope.courseNowChange($scope.currentCourse, function () {
             $scope.moduleNowChange($scope.currentModule, function () {
-                $scope.unitNowChange($scope.currentLesson, $scope.currentSection)
+                $scope.unitNowChange($scope.currentLesson, $scope.currentSection);
             });
         });
     };
@@ -231,7 +282,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
             return false;
         }
         return false;
-    }
+    };
 
     $scope.courseNowChange = function (id, cb) {
         $scope.watchCurentUnit();
@@ -321,7 +372,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.unitNowChange = function (id, specialId) {
-
+//console.log($scope.dangerSection)
         if ($scope.dangerSection) {
             if ($scope.dangerSection.indexOf(specialId) > 0) {
                 alert("you must complete the previous section");
@@ -410,7 +461,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     }
                     if ($scope.unitNowChanged.lims[0].typeLim === "static") {
                         $scope.saveProgress($scope.unitNowChanged.unitId);
-                        //console.log('vupolnil');
                     }
                     if ($state.current.name !== "course") {
                         $scope.saveCurrentUnit(id, specialId, $scope.courseNowChanged._id, $scope.moduleNowChanged._id, $scope.unitNowChanged.title,
@@ -437,7 +487,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     /*** calculate point and progress****/
 
     $scope.totalPointsOfAllCourse = function (list) {
-        //console.log(list)
+
         var totalPoints = 0;
         if (list) {
             for (var i = 0; i < list.length; i++) {
@@ -471,13 +521,13 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return totalPoints;
     };
     $scope.popPoints = function (points) {
-        toaster.pop('warning', "+" + points)
+        toaster.pop('warning', "+" + points);
     };
     $scope.saveProgress = function (unitId) {
         for (var i = 0; i < $scope.listOfUnits.length; i++) {
             if ($scope.listOfUnits[i].unitId === unitId) {
 
-                $scope.popPoints($scope.listOfUnits[i].lims[0].points)
+                $scope.popPoints($scope.listOfUnits[i].lims[0].points);
             }
         }
 
@@ -528,6 +578,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     /***********mark of complite unit section modules*****************/
+
     $scope.dangerUnit = {};
     $scope.markOfCompleteUnit = function (unitId, sectionId) {
         var unitArr = [];
@@ -640,6 +691,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         return {'color': 'green'};
     };
 
+
     /********logic of complete unit************/
 
 
@@ -745,9 +797,11 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     //*********************************************************
 
     $scope.glued = true;
-    /*CODE QUEST*/
 
-    //**********************ACE********************
+
+    /**************************CODE QUEST*********************************/
+
+        //**********************ACE********************
     $scope.modes = ['html', 'css'];
     $scope.mode = $scope.modes[0];
     $scope.aceOption = {
@@ -818,10 +872,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     $scope.check = function () {
         if (next) {
-            //console.log("next")
             refresh($scope.lessonId + 1);
             return;
-            //$location.path("/lessons/" + ($scope.lessonId + 1));
         }
         function completeLess() {
             $scope.messages.push({text: $scope.lesson.correct, class: 'correct'});
@@ -1135,7 +1187,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     });
     socket.on("error", function (data) {
         $scope.popError = function (data) {
-            toaster.pop('error', data.text)
+            toaster.pop('error', data.text);
         };
         $scope.popError(data);
         //  console.log("sdasdasdasdasd")
@@ -1324,8 +1376,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     }, 100);
 
     $scope.closeMenuNotify = function () {
-        $("#menuUser").removeClass("open")
-    }
+        $("#menuUser").removeClass("open");
+    };
     /***********************open question modal***************************/
 
     $scope.openQuestionModal = function () {
@@ -1479,7 +1531,6 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
 
     $scope.saveNewPost = function (content, creator, fileUpload, tags, files) {
-        //console.log(files)
         $(".postLoad").show();
         var tagsObj = []
         for (var i = 0; i < tags.length; i++) {
@@ -1586,12 +1637,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
         }
 
         $http.post('/post/new', newQuestion).success(function (data) {
-
             var id = data.data.postId;
             var count = 0;
-
             questImgUpload(files, id, count);
-
         });
 
     };

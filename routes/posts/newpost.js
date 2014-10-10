@@ -61,10 +61,7 @@ function router(app, hasUser, io) {
         fs.createReadStream(req.files.postFile.path)
             .pipe(fs.createWriteStream("public/img/posts/" + req.files.postFile.originalFilename))
             .on('finish', function () {
-               // Posts.update({postId: req.headers.postid}, {$push: {img: "img/posts/" + req.files.postFile.originalFilename}}, function (err,num) {
-                   // console.log("!!!!!!!!",err,num)
-                    //count++
-                    //res.json({a: "B"});
+
                     easyimg.resize({
                         src:"public/img/posts/" + req.files.postFile.originalFilename, dst:"public/img/posts/thumbnail/" + req.files.postFile.originalFilename,
                         width:55, height:55
