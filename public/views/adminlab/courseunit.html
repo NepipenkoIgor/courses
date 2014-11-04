@@ -20,13 +20,13 @@
 <div class="row" ng-switch on="typeLim.type" ng-if="userdata.position">
     <div class="col-md-12">
         <div ng-switch-when="video" style="padding-bottom: 50px">
-
+            <button class="btn btn-success" style="" ng-click="saveVideo()">Add video</button>
             <div>
                 <a href="#" editable-text="videoSource">{{ videoSource || 'src of new video' }}</a>
             </div>
             <iframe width="800" height="600" ng-src='{{formatVideoUrl(videoSource)}}' frameborder="0"
                     allowfullscreen></iframe>
-            <button class="btn btn-success" style="" ng-click="saveVideo()">Add video</button>
+            <!--<button class="btn btn-success" style="" ng-click="saveVideo()">Add video</button>-->
         </div>
         <div ng-switch-when="quiz" style="padding-bottom: 50px">
             <div>
@@ -66,10 +66,13 @@
 
         </div>
         <div ng-switch-when="code quest" style="padding-bottom: 50px">
-            code quest
-
-
             <button class="btn btn-success" style="float: right" ng-click="saveCodeQuest()">Add code quest</button>
+                <div>
+                    <a href="#" editable-text="codeSource">{{ codeSource || 'src of new code source' }}</a>
+                </div>
+                <iframe width="800" height="600" ng-src='{{formatSourceUrl(codeSource)}}' frameborder="0"
+                        allowfullscreen></iframe>
+                <!--<button class="btn btn-success" style="" ng-click="saveVideo()">Add video</button>-->
 
         </div>
         <hr>

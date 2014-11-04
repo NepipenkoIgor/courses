@@ -395,6 +395,15 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         $scope.saveCourse();
     };
 
+    $scope.formatSourceUrl = function (url) {
+        $scope.codeSource = url;
+        return $sce.trustAsResourceUrl(url);
+    };
+    $scope.saveCodeQuest=function(){
+        var obj = {typeLim: $scope.typeLim.type, content: $scope.codeSource, points: parseInt($scope.points.count)};
+        $scope.unitNow.lims[0] = obj;
+        $scope.saveCourse();
+    };
     $scope.addQuiz = function (id, position) {
 
         for (var i = 0; i < $scope.quizInEdit[0].quiz.length; i++) {
@@ -476,7 +485,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
         $scope.unitNow.lims[0] = obj;
         $scope.saveCourse();
     };
-    $scope.saveCodeQuest = function () {
+   /* $scope.saveCodeQuest = function () {
         var lessons = {
             levels: [
                 {
@@ -683,7 +692,7 @@ app.controller('lessonController', function ($scope, $http, $stateParams, $state
 
         $scope.unitNow.lims[0] = obj;
         $scope.saveCourse();
-    };
+    };*/
 
 /**********start points*****************/
 

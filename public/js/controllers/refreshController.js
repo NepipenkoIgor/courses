@@ -3,6 +3,6 @@
  */
 app.controller("refreshController",function($scope,$http,$location,$state,$stateParams,courseEdit) {
 
-courseEdit.initTab();
+//courseEdit.initTab();
 
 })

@@ -44,7 +44,7 @@ function router(app, hasUser, hasAccess) {
         if (req.body.type === 'allposts') {
             Posts.find({}).sort({postId: -1}).exec(function (err, data) {
                 //console.log("searchData", data)
-                console.log("searchData", data)
+                console.log("searchData!!!!!!!!!!!", data)
                 res.json({success: !err, msg: [], data: data, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
             return;
@@ -123,21 +123,23 @@ function router(app, hasUser, hasAccess) {
                     strSerch = strSerch + textSearch[i];
                 }
                 var reg = new RegExp(strSerch);
+console.log("!!!!!!!!!!!!!!!!!!!!!!",typeof strSerch,reg)
 
-                var resData = [];
-                for (var i = 0; i < data.length; i++) {
-                    if (reg.test(data[i].content) || reg.test(data[i].title)) {
-                        resData.push(data[i]);
-                        continue;
-                    }
-                    for (var j = 0; j < data[i].comments.length; j++) {
-                        if (reg.test(data[i].comments[j].content)) {
+                    var resData = [];
+                    for (var i = 0; i < data.length; i++) {
+                        if (reg.test(data[i].content) || reg.test(data[i].title)) {
                             resData.push(data[i]);
                             continue;
                         }
+                        for (var j = 0; j < data[i].comments.length; j++) {
+                            if (reg.test(data[i].comments[j].content)) {
+                                resData.push(data[i]);
+                                continue;
+                            }
+                        }
                     }
-                }
-                res.json({success: !err, msg: [], data: resData, type: req.body.type, error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
+
+                res.json({success: !err, msg: [], data: resData, type: req.body.type, search:reg,error: err, action: {type: 'redirect', location: '/url/asdfsdf'}});
             });
             return
         }

@@ -554,7 +554,7 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
                 }
                 // $scope.chengedSearchIcon=data.type;
                 $scope.page = $scope.postdata.length / 10;
-                $scope.scrolling = 800;
+                $scope.scrolling = 50;
 
                 $scope.down = false;
                 $scope.remove = $scope.postdata.splice(10, $scope.postdata.length);
@@ -682,22 +682,25 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
     /*********************scrolling post***************************/
 
 
-    $scope.scrolling = 800;
+    $scope.scrolling = 400;
 
     window.onscroll = function (event) {
+       // console.log($scope.scrolling,window.scrollY,document.getElementsByTagName("body")[0].offsetHeight)
         if ($scope.scrolling < window.scrollY) {
+           // console.log("lowwww")
             if ($scope.down) {
                 return;
             }
 
             var mass = $scope.remove.splice(10, $scope.remove.length);
 
-            $scope.scrolling += 1200;
+            $scope.scrolling += 400;
             $scope.postdata = $scope.postdata.concat($scope.remove);
             $scope.remove = mass;
-            $scope.postdata.push([null]);
+           // $scope.postdata.push([null]);
             setTimeout(function () {
-                $scope.postdata.splice($scope.postdata.length - 1, 1);
+                //console.log($scope.postdata)
+               // $scope.postdata.splice($scope.postdata.length - 1, 1);
                 $scope.$apply();
             }, 4);
             if (mass.length === 0) {
@@ -1033,5 +1036,21 @@ app.controller('posts', function ($scope, $http, $sce, $state, $location, $modal
 
 
 
+}).directive("textSelection",function(){
+    function link(scope,element,attrs){
+        console.log(attrs)
+       setTimeout(function() {
+           var currnetText = element[0].textContent;
+           //console.log(currnetText)
+           var newText='<span style="background-color: orange">'+currnetText+'<span>';
+           console.log(newText)
+            element[0].textContent=newText
+            console.log(element[0].textContent);
+       },1500)
+    }
+    return {
+        restrict: 'E',
+        link:link
+    }
 });
 

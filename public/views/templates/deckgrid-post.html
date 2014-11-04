@@ -17,12 +17,13 @@
 
         <img ng-src="{{mother.postAvatar(card.creator)}}" class="avatar" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">
         <p class="author ng-binding" ng-click="mother.postProfileGo(card.creator)" style="cursor: pointer">{{mother.getCreator(card.creator)}}</p>
-        <p class="date ng-binding">{{mother.dataReg(card.created)}}</p>
+        <p class="date ng-binding">{{mother.dataReg(card.created)}} </p>
+
     </div>
-    <h1 class="title ng-binding" >{{card.title}}</h1>
+    <h1 class="title ng-binding" souce="my-prop">{{card.title}}</h1>
 
     <!--hljs-->
-    <p  class="content ng-binding" editable-textarea="card.content" e-form="textBtnFormMain"  e-rows="7"
+<p  class="content ng-binding" editable-textarea="card.content" e-form="textBtnFormMain"  e-rows="7"
        onaftersave="mother.updateCard(card)" ng-bind-html="mother.transformContent(card.content)"></p>
 
 

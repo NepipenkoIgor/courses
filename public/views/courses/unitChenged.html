@@ -12,13 +12,16 @@
 <div ng-if="checkType('video')" class="video ng-scope">
     <iframe id="best-vid" video-url="video_url" class="ng-isolate-scope" frameborder="0" allowfullscreen="1" title="YouTube video player" width="640" height="390" src="https://www.youtube.com/embed/X-qZ7kcOEa0?enablejsapi=1&amp;origin=http%3A%2F%2Fstudent.iscoding.net"></iframe>
 </div>
-    <div  ng-switch on="unitNowChanged.lims[0].typeLim">
-        <div ng-switch-when="video" class="video">
-            <div class="embed-responsive embed-responsive-16by9" id="videoConteiner">
+    <div  ng-switch on="unitNowChanged.lims[0].typeLim" style="height: calc(100% - 64px);">
+        <div ng-switch-when="video" class="video"  style="height:100%">
+           <!-- <div class="embed-responsive embed-responsive-16by9" id="videoConteiner">
                 <div id="lessonVideoPlayer" class="embed-responsive-item">You need Flash player 8+ and JavaScript enabled to view this video.</div>
-            </div>
+            </div>-->
            <!-- <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
                     ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>-->
+
+            <iframe width="100%" height="100%" ng-src='{{formatVideoUrl(videoUrl)}}' frameborder="0"
+                    allowfullscreen></iframe>
         </div>
         <div ng-switch-when="quiz">
             <div style="" >
@@ -42,7 +45,7 @@
            <!-- <button type="" class="btn btn-success btn" ng-if="unitNowChanged.lims[0].typeLim==='static'"
                     ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>-->
         </div>
-        <div ng-switch-when="code quest">
+       <!-- <div ng-switch-when="code quest">
             <div class="holder">
                 <div class="row center">
                     <ul class="breadcrumbs">
@@ -89,6 +92,10 @@
                     <button type="button" ng-click="check()" ng-init="n=-1" class="btn_red diff" >{{btnText}}</button>
                 </div>
             </div>
+        </div>-->
+        <div ng-switch-when="code quest" style="height:100%"  class="video">
+            <iframe width="100%" height="100%" ng-src='{{formatSourceUrl(codeSource)}}' frameborder="0"
+                    allowfullscreen></iframe>
         </div>
     </div>
     <div  class="nextLesson_Button ng-scope" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='curentactive'">

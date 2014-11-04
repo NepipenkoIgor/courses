@@ -164,7 +164,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                             if ($scope.courseNowChanged.modules[url[3] - 1]) {
 
                                 if ((url[3] - 2) !== (-1)) {
-                                    console.log("next modules")
+                                    //console.log("next modules")
                                     $scope.moduleNowChange($scope.courseNowChanged.modules[url[3] - 2]._id);
                                     var id = $scope.moduleNowChanged.sections[$scope.moduleNowChanged.sections.length - 1].specialId
                                     var mass = $scope.showUnitsList(id)
@@ -431,10 +431,24 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                     setTimeout(function getEl() {
                         if ($scope.unitNowChanged.lims[0].typeLim === "video") {
                             var url = $scope.unitNowChanged.lims[0].content[0];
-                            url = "http:" + url + "?enablejsapi=1&playerapiid=ytplayer";
+                            $scope.videoUrl=url
+
+                            /*url = "http:" + url + "?enablejsapi=1&playerapiid=ytplayer";
                             var params = {allowScriptAccess: "always", wmode: "transparent"};
                             var atts = {id: "myytplayer"};
-                            swfobject.embedSWF(url, "lessonVideoPlayer", "425", "356", "8", null, null, params, atts);
+                            swfobject.embedSWF(url, "lessonVideoPlayer", "425", "356", "8", null, null, params, atts);*/
+                            $scope.formatVideoUrl = function (url) {
+                                return $sce.trustAsResourceUrl(url);
+                            };
+                            $scope.saveProgress($scope.unitNowChanged.unitId);
+                        }
+                        if ($scope.unitNowChanged.lims[0].typeLim === "code quest") {
+                            var url = $scope.unitNowChanged.lims[0].content[0];
+                            $scope.codeSource=url
+                            $scope.formatSourceUrl = function (url) {
+                                return $sce.trustAsResourceUrl(url);
+                            };
+                            $scope.saveProgress($scope.unitNowChanged.unitId);
                         }
                     }, 1);
                     if ($scope.unitNowChanged.lims[0].typeLim === "quiz") {
@@ -767,7 +781,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
 
     /****************video controll and registrate*******************/
 
-    function onYouTubePlayerReady(playerId) {
+    /*function onYouTubePlayerReady(playerId) {
         var ytplayer = document.getElementById("myytplayer");
         ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
     }
@@ -780,7 +794,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
     }
 
     window.onYouTubePlayerReady = onYouTubePlayerReady;
-    window.onytplayerStateChange = onytplayerStateChange;
+    window.onytplayerStateChange = onytplayerStateChange;*/
 
     $scope.trustHtml = function (html) {
         function escapeHtml(unsafe) {
