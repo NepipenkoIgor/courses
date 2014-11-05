@@ -20,8 +20,11 @@
            <!-- <button type="" class="btn btn-success btn" ng-if="markOfCompleteUnit(unitNowChanged.unitId)==='complete'"
                     ng-click="nextUnit(unitNowChanged)" style="margin-top: 10px" >Next unit</button>-->
 
-            <iframe width="100%" height="100%" ng-src='{{formatVideoUrl(videoUrl)}}' frameborder="0"
-                    allowfullscreen></iframe>
+            <!--<iframe width="100%" height="100%" ng-src='{{formatVideoUrl(videoUrl)}}' frameborder="0" class="videoIframe"
+                    allowfullscreen></iframe>-->
+            <video width="100%">
+                <source ng-src='{{formatVideoUrl(videoUrl)}}'>
+            </video>
         </div>
         <div ng-switch-when="quiz">
             <div style="" >

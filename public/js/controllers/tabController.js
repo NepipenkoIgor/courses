@@ -89,8 +89,9 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                             "badgeId": 9 + j,
                             'name': 'Complete Module',
                             'img': 'img/badges/download.png',
-                            'description': 'module ' + (j + 1)
+                            'description': $scope.listOfCourses[i].modules[j].title/*'module ' + (j + 1)*/
                         };
+
                         courseEdit.listOfBadges.push(badge);
 
                     }
@@ -437,8 +438,8 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                             var params = {allowScriptAccess: "always", wmode: "transparent"};
                             var atts = {id: "myytplayer"};
                             swfobject.embedSWF(url, "lessonVideoPlayer", "425", "356", "8", null, null, params, atts);*/
-                            $scope.formatVideoUrl = function (url) {
-                                return $sce.trustAsResourceUrl(url);
+                            $scope.formatVideoUrl = function (urlik) {
+                                return $sce.trustAsResourceUrl(urlik);
                             };
                             $scope.saveProgress($scope.unitNowChanged.unitId);
                         }

@@ -615,7 +615,7 @@ width: 100%;
 
 }
 .lesson_cont .nextButton {
-    top: 50%;
+    top: 85%;
     left: 90%;
     width: 100px;
     height: 100px;
@@ -1870,4 +1870,8 @@ body>div>div>#toast-container .toast-warning {
     bottom:0!important;
     margin-top: 50px!important;
     top:inherit!important;
+}
+
+.videoIframe video {
+    width: 100%!important;
 }
