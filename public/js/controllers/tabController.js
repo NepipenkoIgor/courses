@@ -431,17 +431,16 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                 }).then(function () {
                     setTimeout(function getEl() {
                         if ($scope.unitNowChanged.lims[0].typeLim === "video") {
-                            var url = $scope.unitNowChanged.lims[0].content[0];
-                            $scope.videoUrl=url
-
+                            $scope.videoUrl= $scope.unitNowChanged.lims[0].content[0];
                             /*url = "http:" + url + "?enablejsapi=1&playerapiid=ytplayer";
                             var params = {allowScriptAccess: "always", wmode: "transparent"};
                             var atts = {id: "myytplayer"};
                             swfobject.embedSWF(url, "lessonVideoPlayer", "425", "356", "8", null, null, params, atts);*/
-                            $scope.formatVideoUrl = function (urlik) {
+                           /* $scope.formatVideoUrl = function (urlik) {
                                 return $sce.trustAsResourceUrl(urlik);
-                            };
+                            };*/
                             $scope.saveProgress($scope.unitNowChanged.unitId);
+                            $scope.$apply()
                         }
                         if ($scope.unitNowChanged.lims[0].typeLim === "code quest") {
                             var url = $scope.unitNowChanged.lims[0].content[0];
@@ -451,6 +450,7 @@ app.controller('maintab', function ($scope, $http, $state, $sce, $stateParams, $
                             };
                             $scope.saveProgress($scope.unitNowChanged.unitId);
                         }
+
                     }, 1);
                     if ($scope.unitNowChanged.lims[0].typeLim === "quiz") {
 
